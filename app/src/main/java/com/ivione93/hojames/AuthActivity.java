@@ -118,7 +118,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void goProfile(String email) {
-        Intent profileIntent = new Intent(this, ProfileActivity.class);
+        Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
         startActivity(profileIntent);
 

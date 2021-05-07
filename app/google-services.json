@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "431129962660",
+    "project_id": "hojames-2021",
+    "storage_bucket": "hojames-2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431129962660:android:0dc3a6551867c9627d9e31",
+        "android_client_info": {
+          "package_name": "com.ivione93.hojames"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431129962660-6qp7srs9lm92chna991l6ks91krffr5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRRqVxckG2bsat60CQouVdtGCpz7sedrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "431129962660-6qp7srs9lm92chna991l6ks91krffr5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

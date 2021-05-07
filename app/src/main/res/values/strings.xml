@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Hoja del Mes</string>
+    <string name="prefs_file">com.ivione93.hojames.PREFERENCE_FILE_KEY</string>
+</resources>

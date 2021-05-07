@@ -98,6 +98,15 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_edit_profile) {
+            Intent editProfile = new Intent(getActivity(), EditProfileActivity.class);
+            editProfile.putExtra("email", email);
+            if (photoUrl != null) {
+                editProfile.putExtra("photoUrl", photoUrl.toString());
+            }
+            getContext().startActivity(editProfile);
+            return true;
+        }
         if (item.getItemId() == R.id.menu_log_out) {
             // Borrado datos inicio de sesion
             SharedPreferences.Editor prefs = getActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();

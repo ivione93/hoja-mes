@@ -3,6 +3,7 @@ package com.ivione93.hojames.ui.profile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,20 +16,30 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.AuthActivity;
 import com.ivione93.hojames.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProfileFragment extends Fragment {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    GoogleSignInClient mGoogleSignInClient;
 
+    CircleImageView photoProfile;
     TextView emailTextView;
     TextView licenciaEditText, nombreEditText, birthEditText;
 
     String email;
+    Uri photoUrl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +69,20 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onStart() {
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
+
+        if (account != null) {
+            if (account.getPhotoUrl() != null) {
+                photoUrl = account.getPhotoUrl();
+                Glide.with(getView()).load(account.getPhotoUrl()).into(photoProfile);
+            }
+        }
         db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
@@ -80,6 +105,7 @@ public class ProfileFragment extends Fragment {
             prefs.apply();
 
             FirebaseAuth.getInstance().signOut();
+            mGoogleSignInClient.signOut();
 
             Intent mainIntent = new Intent(getActivity().getApplicationContext(), AuthActivity.class);
             startActivity(mainIntent);
@@ -88,6 +114,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setup(View root, String email) {
+        photoProfile = root.findViewById(R.id.photoProfile);
         emailTextView = root.findViewById(R.id.emailTextView);
 
         licenciaEditText = root.findViewById(R.id.licenciaEditText);

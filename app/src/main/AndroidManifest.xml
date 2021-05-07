@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HojaMes">
         <activity android:name=".ui.profile.NewAthleteActivity"></activity>
-        <activity android:name=".ProfileActivity" />
         <activity android:name=".AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

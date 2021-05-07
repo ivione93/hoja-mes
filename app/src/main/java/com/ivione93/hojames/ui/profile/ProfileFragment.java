@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onStart() {
-        db.collection("users").document(email).get().addOnCompleteListener(task -> {
+        db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {

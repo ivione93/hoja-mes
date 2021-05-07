@@ -10,23 +10,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.AuthActivity;
 import com.ivione93.hojames.R;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ProfileFragment extends Fragment {
 
@@ -34,8 +27,6 @@ public class ProfileFragment extends Fragment {
 
     TextView emailTextView;
     TextView licenciaEditText, nombreEditText, birthEditText;
-
-    Button btnGuardar;
 
     String email;
 
@@ -48,7 +39,7 @@ public class ProfileFragment extends Fragment {
         // Setup
         Bundle bundle = getActivity().getIntent().getExtras();
         email = bundle.getString("email");
-        initReferences(root, email);
+        setup(root, email);
 
         // Guardar datos
         SharedPreferences.Editor prefs = getActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
@@ -96,26 +87,13 @@ public class ProfileFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void initReferences(View root, String email) {
-
+    private void setup(View root, String email) {
         emailTextView = root.findViewById(R.id.emailTextView);
 
         licenciaEditText = root.findViewById(R.id.licenciaEditText);
         nombreEditText = root.findViewById(R.id.nombreEditText);
         birthEditText = root.findViewById(R.id.birthEditText);
 
-        btnGuardar = root.findViewById(R.id.btnGuardar);
-
         emailTextView.setText(email);
-
-        btnGuardar.setOnClickListener(v -> {
-            Map<String,Object> user = new HashMap<>();
-            user.put("email", email);
-            user.put("license", licenciaEditText.getText().toString());
-            user.put("name", nombreEditText.getText().toString());
-            user.put("birth", birthEditText.getText().toString());
-
-            db.collection("users").document(email).set(user);
-        });
     }
 }

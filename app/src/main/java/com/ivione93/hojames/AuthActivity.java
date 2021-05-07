@@ -24,6 +24,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.ivione93.hojames.ui.profile.NewAthleteActivity;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -48,7 +49,7 @@ public class AuthActivity extends AppCompatActivity {
         mFirebaseAnalytics.logEvent("InitScreen", bundle);
 
         // Setup
-        initReferences();
+        setup();
         session();
     }
 
@@ -58,7 +59,7 @@ public class AuthActivity extends AppCompatActivity {
         loginLayout.setVisibility(View.VISIBLE);
     }
 
-    private void initReferences() {
+    private void setup() {
         getSupportActionBar().hide();
 
         loginLayout = findViewById(R.id.loginLayout);
@@ -73,7 +74,7 @@ public class AuthActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailEditText.getText().toString(),
                         passwordEditText.getText().toString()).addOnCompleteListener(it -> {
                     if (it.isSuccessful()) {
-                        goProfile(it.getResult().getUser().getEmail());
+                        goNewAthlete(it.getResult().getUser().getEmail());
                     } else {
                         showAlert();
                     }
@@ -121,7 +122,12 @@ public class AuthActivity extends AppCompatActivity {
         Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
         startActivity(profileIntent);
+    }
 
+    private void goNewAthlete(String email) {
+        Intent newAthlete = new Intent(this, NewAthleteActivity.class);
+        newAthlete.putExtra("email", email);
+        startActivity(newAthlete);
     }
 
     private void showAlert() {
@@ -144,7 +150,7 @@ public class AuthActivity extends AppCompatActivity {
                     AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener(it -> {
                         if (it.isSuccessful()) {
-                            goProfile(account.getEmail());
+                            goNewAthlete(account.getEmail());
                         } else {
                             showAlert();
                         }

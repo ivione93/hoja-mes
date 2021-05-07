@@ -77,13 +77,6 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
-        /*db.collection("users").document(email).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                licenciaEditText.setText(task.getResult().get("license").toString());
-                nombreEditText.setText(task.getResult().get("name").toString() + " " + task.getResult().get("surname").toString());
-                birthEditText.setText(task.getResult().get("birth").toString());
-            }
-        });*/
         super.onStart();
     }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/menu_search_competition"
+        android:title="Search"
+        android:icon="@drawable/ic_search"
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <item android:id="@+id/menu_filter_competition"
+        android:title="Search"
+        android:icon="@drawable/ic_filter"
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/menu_add_competition"
+        android:title="Add"
+        android:icon="@drawable/ic_add"
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+</menu>

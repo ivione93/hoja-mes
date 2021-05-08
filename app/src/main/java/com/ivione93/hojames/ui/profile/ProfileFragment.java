@@ -39,8 +39,7 @@ public class ProfileFragment extends Fragment {
     TextView emailTextView;
     TextView licenciaEditText, nombreEditText, birthEditText;
 
-    String email;
-    String license;
+    String email, license;
     Uri photoUrl;
 
     @Override
@@ -52,21 +51,17 @@ public class ProfileFragment extends Fragment {
         // Setup
         Bundle bundle = getActivity().getIntent().getExtras();
         email = bundle.getString("email");
+        license = bundle.getString("license");
         setup(root, email);
 
         // Guardar datos
         SharedPreferences.Editor prefs = getActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
         prefs.putString("email", email);
+        prefs.putString("license", license);
         prefs.apply();
 
         // Inflate the layout for this fragment
         return root;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.profile_menu, menu);
-        super.onCreateOptionsMenu(menu,inflater);
     }
 
     @Override
@@ -97,6 +92,12 @@ public class ProfileFragment extends Fragment {
             }
         });
         super.onStart();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.profile_menu, menu);
+        super.onCreateOptionsMenu(menu,inflater);
     }
 
     @Override

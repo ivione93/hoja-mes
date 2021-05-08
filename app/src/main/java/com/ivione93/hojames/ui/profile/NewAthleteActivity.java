@@ -30,7 +30,7 @@ public class NewAthleteActivity extends AppCompatActivity {
     ConstraintLayout newAthleteLayout;
     TextView licenciaEditText, nombreEditText, apellidosEditText, birthEditText;
 
-    String email;
+    String email, license;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,8 @@ public class NewAthleteActivity extends AppCompatActivity {
         // Setup
         Bundle bundle = getIntent().getExtras();
         email = bundle.getString("email");
-        setup(email);
+        license = bundle.getString("license");
+        setup();
     }
 
     @Override
@@ -50,7 +51,8 @@ public class NewAthleteActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    goProfile(email);
+                    this.license = task.getResult().get("license").toString();
+                    goProfile(email, license);
                 }
             }
         });
@@ -83,7 +85,7 @@ public class NewAthleteActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setup(String email) {
+    private void setup() {
         newAthleteLayout = findViewById(R.id.newAthleteLayout);
 
         licenciaEditText = findViewById(R.id.licenciaEditText);
@@ -92,9 +94,10 @@ public class NewAthleteActivity extends AppCompatActivity {
         birthEditText = findViewById(R.id.birthEditText);
     }
 
-    private void goProfile(String email) {
+    private void goProfile(String email, String license) {
         Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
+        profileIntent.putExtra("license", license);
         startActivity(profileIntent);
     }
 
@@ -112,9 +115,10 @@ public class NewAthleteActivity extends AppCompatActivity {
             user.put("surname", apellidosEditText.getText().toString());
             user.put("birth", birthEditText.getText().toString());
 
+            this.license = license;
             db.collection("athlete").document(email).set(user);
 
-            goProfile(email);
+            goProfile(email, license);
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos por completar", Toast.LENGTH_LONG);
             toast.show();

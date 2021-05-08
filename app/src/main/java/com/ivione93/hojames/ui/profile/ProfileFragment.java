@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.AuthActivity;
 import com.ivione93.hojames.R;
+import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,6 +40,7 @@ public class ProfileFragment extends Fragment {
     TextView licenciaEditText, nombreEditText, birthEditText;
 
     String email;
+    String license;
     Uri photoUrl;
 
     @Override
@@ -87,6 +89,7 @@ public class ProfileFragment extends Fragment {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
+                    license = task.getResult().get("license").toString();
                     licenciaEditText.setText(task.getResult().get("license").toString());
                     nombreEditText.setText(task.getResult().get("name").toString() + " " + task.getResult().get("surname").toString());
                     birthEditText.setText(task.getResult().get("birth").toString());
@@ -106,6 +109,13 @@ public class ProfileFragment extends Fragment {
             }
             getContext().startActivity(editProfile);
             return true;
+        }
+        if (item.getItemId() == R.id.menu_add_competition_profile) {
+            Intent newCompetition = new Intent(getActivity(), NewCompetitionActivity.class);
+            newCompetition.putExtra("isNew", true);
+            newCompetition.putExtra("email", email);
+            newCompetition.putExtra("license", license);
+            getContext().startActivity(newCompetition);
         }
         if (item.getItemId() == R.id.menu_log_out) {
             // Borrado datos inicio de sesion

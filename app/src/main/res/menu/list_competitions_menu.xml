@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menu_search_competition"
+    <!--<item android:id="@+id/menu_search_competition"
         android:title="Search"
         android:icon="@drawable/ic_search"
         android:iconTint="@color/white"
@@ -13,7 +13,7 @@
         android:title="Search"
         android:icon="@drawable/ic_filter"
         android:iconTint="@color/white"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />-->
 
     <item android:id="@+id/menu_add_competition"
         android:title="Add"

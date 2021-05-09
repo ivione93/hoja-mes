@@ -29,13 +29,14 @@ import com.ivione93.hojames.ui.profile.NewAthleteActivity;
 public class AuthActivity extends AppCompatActivity {
 
     private static int GOOGLE_SIGN_IN = 100;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     ConstraintLayout loginLayout;
     EditText emailEditText, passwordEditText;
     Button btnSignIn, btnSignUp;
     SignInButton btnSignInGoogle;
 
-    private FirebaseAnalytics mFirebaseAnalytics;
+    String email, license;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +50,8 @@ public class AuthActivity extends AppCompatActivity {
         mFirebaseAnalytics.logEvent("InitScreen", bundle);
 
         // Setup
-        setup();
         session();
+        setup();
     }
 
     @Override
@@ -62,7 +63,6 @@ public class AuthActivity extends AppCompatActivity {
     private void setup() {
         getSupportActionBar().hide();
 
-        loginLayout = findViewById(R.id.loginLayout);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         btnSignIn = findViewById(R.id.btnSignIn);
@@ -87,7 +87,7 @@ public class AuthActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(emailEditText.getText().toString(),
                         passwordEditText.getText().toString()).addOnCompleteListener(it -> {
                     if (it.isSuccessful()) {
-                        goProfile(it.getResult().getUser().getEmail());
+                        goProfile(it.getResult().getUser().getEmail(), license);
                     } else {
                         showAlert();
                     }
@@ -109,18 +109,22 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void session() {
-        SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
-        String email = prefs.getString("email", null);
+        loginLayout = findViewById(R.id.loginLayout);
 
-        if (email != null) {
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        email = prefs.getString("email", null);
+        license = prefs.getString("license", null);
+
+        if (email != null && license != null) {
             loginLayout.setVisibility(View.INVISIBLE);
-            goProfile(email);
+            goProfile(email, license);
         }
     }
 
-    private void goProfile(String email) {
+    private void goProfile(String email, String license) {
         Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
+        profileIntent.putExtra("license", license);
         startActivity(profileIntent);
     }
 

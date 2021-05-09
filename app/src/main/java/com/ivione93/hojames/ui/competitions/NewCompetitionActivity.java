@@ -55,6 +55,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             getIntent().putExtra("email", email);
+            getIntent().putExtra("license", license);
             onBackPressed();
             return true;
         }
@@ -118,7 +119,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
 
                 db.collection("competitions").document(id).set(competition);
 
-                goProfile(email);
+                goProfile(email, license);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
                 toast.show();
@@ -129,9 +130,10 @@ public class NewCompetitionActivity extends AppCompatActivity {
         }
     }
 
-    private void goProfile(String email) {
+    private void goProfile(String email, String license) {
         Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
+        profileIntent.putExtra("license", license);
         startActivity(profileIntent);
     }
 

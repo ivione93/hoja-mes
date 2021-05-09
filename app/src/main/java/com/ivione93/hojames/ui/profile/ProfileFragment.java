@@ -21,9 +21,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.AuthActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;
@@ -38,8 +41,8 @@ public class ProfileFragment extends Fragment {
     GoogleSignInClient mGoogleSignInClient;
 
     CircleImageView photoProfile;
-    TextView emailTextView;
-    TextView licenciaEditText, nombreEditText, birthEditText;
+    TextView emailTextView, licenciaEditText, nombreEditText, birthEditText;
+    TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result;
 
     String email, license;
     Uri photoUrl;
@@ -55,6 +58,8 @@ public class ProfileFragment extends Fragment {
         email = bundle.getString("email");
         license = bundle.getString("license");
         setup(root, email);
+
+        getLastCompetition(license);
 
         // Inflate the layout for this fragment
         return root;
@@ -141,11 +146,32 @@ public class ProfileFragment extends Fragment {
     private void setup(View root, String email) {
         photoProfile = root.findViewById(R.id.photoProfile);
         emailTextView = root.findViewById(R.id.emailTextView);
-
+        emailTextView.setText(email);
         licenciaEditText = root.findViewById(R.id.licenciaEditText);
         nombreEditText = root.findViewById(R.id.nombreEditText);
         birthEditText = root.findViewById(R.id.birthEditText);
 
-        emailTextView.setText(email);
+        last_competition_name = root.findViewById(R.id.last_competition_name);
+        last_competition_place = root.findViewById(R.id.last_competition_place);
+        last_competition_date = root.findViewById(R.id.last_competition_date);
+        last_competition_track = root.findViewById(R.id.last_competition_track);
+        last_competition_result = root.findViewById(R.id.last_competition_result);
+    }
+
+    private void getLastCompetition(String license) {
+        db.collection("competitions").whereEqualTo("license", license).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot document = task.getResult();
+                if (document.isEmpty()) {
+                    last_competition_name.setText("No se han encontrado competiciones");
+                } else {
+                    last_competition_name.setText(document.getDocuments().get(0).get("name").toString());
+                    last_competition_place.setText(document.getDocuments().get(0).get("place").toString());
+                    last_competition_date.setText(document.getDocuments().get(0).get("date").toString());
+                    last_competition_track.setText(document.getDocuments().get(0).get("track").toString());
+                    last_competition_result.setText(document.getDocuments().get(0).get("result").toString());
+                }
+            }
+        });
     }
 }

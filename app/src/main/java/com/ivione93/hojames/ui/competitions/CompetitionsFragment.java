@@ -52,7 +52,9 @@ public class CompetitionsFragment extends Fragment {
 
     private void setupRecyclerView(View root) {
         // Query
-        Query query = db.collection("competitions").whereEqualTo("license", license);
+        Query query = db.collection("competitions")
+                .whereEqualTo("license", license)
+                .orderBy("date", Query.Direction.DESCENDING);
 
         // Recycler options
         FirestoreRecyclerOptions<Competition> options = new FirestoreRecyclerOptions.Builder<Competition>()

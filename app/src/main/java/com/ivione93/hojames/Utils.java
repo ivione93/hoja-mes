@@ -1,5 +1,7 @@
 package com.ivione93.hojames;
 
+import com.google.firebase.Timestamp;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
@@ -8,23 +10,28 @@ import java.util.Date;
 
 public class Utils {
 
-    public static String toString(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.format(date);
+    public static boolean validateDateFormat(String sDate) {
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+        formatDate.setLenient(false);
+        try {
+            formatDate.parse(sDate);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
     }
 
-    public static Date toDate(String date)
-    {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Date myDate = null;
-        try {
-            myDate = format.parse(date);
-        }
-        catch (ParseException ex)
-        {
-            System.out.println(ex);
-        }
-        return myDate;
+    public static Timestamp toTimestamp(String date) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date parsedDate = dateFormat.parse(date);
+        Timestamp timestamp = new Timestamp(parsedDate);
+        return timestamp;
+    }
+
+    public static String toString(Timestamp timestamp) {
+        Date date = timestamp.toDate();
+        String formatted = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        return formatted;
     }
 
     public static String calculatePartial(String time, String distance) {
@@ -49,17 +56,6 @@ public class Utils {
         sRitmo = iRitmo + "." + seg;
 
         return sRitmo;
-    }
-
-    public static boolean validateDateFormat(String sDate) {
-        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-        formatDate.setLenient(false);
-        try {
-            formatDate.parse(sDate);
-        } catch (ParseException e) {
-            return false;
-        }
-        return true;
     }
 
 }

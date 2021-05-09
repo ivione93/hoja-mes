@@ -21,14 +21,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.AuthActivity;
 import com.ivione93.hojames.R;
+import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -159,7 +160,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void getLastCompetition(String license) {
-        db.collection("competitions").whereEqualTo("license", license).get().addOnCompleteListener(task -> {
+        db.collection("competitions")
+                .whereEqualTo("license", license)
+                .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot document = task.getResult();
                 if (document.isEmpty()) {
@@ -167,7 +170,7 @@ public class ProfileFragment extends Fragment {
                 } else {
                     last_competition_name.setText(document.getDocuments().get(0).get("name").toString());
                     last_competition_place.setText(document.getDocuments().get(0).get("place").toString());
-                    last_competition_date.setText(document.getDocuments().get(0).get("date").toString());
+                    last_competition_date.setText(Utils.toString((Timestamp) document.getDocuments().get(0).get("date")));
                     last_competition_track.setText(document.getDocuments().get(0).get("track").toString());
                     last_competition_result.setText(document.getDocuments().get(0).get("result").toString());
                 }

@@ -15,6 +15,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.R;
+import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Competition;
 
 public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, AdapterCompetitions.CompetitionViewHolder> {
@@ -31,7 +32,7 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
         holder.place.setText(model.place);
         holder.track.setText(model.track);
         holder.result.setText(model.result);
-        holder.date.setText(model.date);
+        holder.date.setText(Utils.toString(model.date));
 
         holder.ibOptionsCompetition.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(holder.itemView.getContext(), holder.ibOptionsCompetition);

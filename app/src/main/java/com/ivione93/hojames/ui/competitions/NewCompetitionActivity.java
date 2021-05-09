@@ -11,12 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -60,7 +62,11 @@ public class NewCompetitionActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.menu_new_competition) {
-            saveCompetition();
+            try {
+                saveCompetition();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -89,13 +95,13 @@ public class NewCompetitionActivity extends AppCompatActivity {
                     competitionNameText.getEditText().setText(task.getResult().getDocuments().get(0).get("name").toString());
                     trackText.getEditText().setText(task.getResult().getDocuments().get(0).get("track").toString());
                     resultText.getEditText().setText(task.getResult().getDocuments().get(0).get("result").toString());
-                    dateText.setText(task.getResult().getDocuments().get(0).get("date").toString());
+                    dateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date")));
                 }
             }
         });
     }
 
-    private void saveCompetition() {
+    private void saveCompetition() throws ParseException {
         String place = placeText.getEditText().getText().toString();
         String competitionName = competitionNameText.getEditText().getText().toString();
         String track = trackText.getEditText().getText().toString();
@@ -113,7 +119,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
                 competition.put("email", email);
                 competition.put("place", place);
                 competition.put("name", competitionName);
-                competition.put("date", date);
+                competition.put("date", Utils.toTimestamp(date));
                 competition.put("track", track);
                 competition.put("result", result);
 

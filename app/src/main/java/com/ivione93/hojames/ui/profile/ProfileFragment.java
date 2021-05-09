@@ -32,6 +32,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileFragment extends Fragment {
 
+    SharedPreferences.Editor prefs;
+
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     GoogleSignInClient mGoogleSignInClient;
 
@@ -53,12 +55,6 @@ public class ProfileFragment extends Fragment {
         email = bundle.getString("email");
         license = bundle.getString("license");
         setup(root, email);
-
-        // Guardar datos
-        SharedPreferences.Editor prefs = getActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
-        prefs.putString("email", email);
-        prefs.putString("license", license);
-        prefs.apply();
 
         // Inflate the layout for this fragment
         return root;
@@ -88,6 +84,15 @@ public class ProfileFragment extends Fragment {
                     licenciaEditText.setText(task.getResult().get("license").toString());
                     nombreEditText.setText(task.getResult().get("name").toString() + " " + task.getResult().get("surname").toString());
                     birthEditText.setText(task.getResult().get("birth").toString());
+
+                    // Guardar datos
+                    prefs = getActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
+                    prefs.putString("email", email);
+                    prefs.putString("license", license);
+                    prefs.apply();
+
+                    getActivity().getIntent().putExtra("email", email);
+                    getActivity().getIntent().putExtra("license", license);
                 }
             }
         });

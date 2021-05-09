@@ -49,6 +49,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
 
     // multidex
     implementation 'androidx.multidex:multidex:2.0.1'

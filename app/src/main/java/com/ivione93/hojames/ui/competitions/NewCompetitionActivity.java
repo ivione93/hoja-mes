@@ -1,8 +1,5 @@
 package com.ivione93.hojames.ui.competitions;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,8 +7,12 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
@@ -73,11 +74,23 @@ public class NewCompetitionActivity extends AppCompatActivity {
         dateText = findViewById(R.id.dateText);
 
         if (!isNew) {
-            //loadCompetition();
+            loadCompetition();
         }
     }
 
     private void loadCompetition() {
+        db.collection("competitions").whereEqualTo("license", license).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot document = task.getResult();
+                if (!document.isEmpty()) {
+                    placeText.getEditText().setText(task.getResult().getDocuments().get(0).get("place").toString());
+                    competitionNameText.getEditText().setText(task.getResult().getDocuments().get(0).get("name").toString());
+                    trackText.getEditText().setText(task.getResult().getDocuments().get(0).get("track").toString());
+                    resultText.getEditText().setText(task.getResult().getDocuments().get(0).get("result").toString());
+                    dateText.setText(task.getResult().getDocuments().get(0).get("date").toString());
+                }
+            }
+        });
     }
 
     private void saveCompetition() {

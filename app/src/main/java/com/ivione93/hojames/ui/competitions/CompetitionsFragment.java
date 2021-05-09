@@ -81,11 +81,13 @@ public class CompetitionsFragment extends Fragment {
                             case R.id.menu_edit_competition:
                                 Intent newCompetition = new Intent(holder.itemView.getContext(), NewCompetitionActivity.class);
                                 newCompetition.putExtra("isNew", false);
+                                newCompetition.putExtra("idCompetition", model.id);
                                 newCompetition.putExtra("license", model.license);
+                                newCompetition.putExtra("email", email);
                                 holder.itemView.getContext().startActivity(newCompetition);
                                 return true;
                             case R.id.menu_delete_competition:
-                                // delete
+                                db.collection("competitions").document(model.id).delete();
                                 notifyItemRemoved(position);
                                 return true;
                             default:

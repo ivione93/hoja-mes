@@ -19,6 +19,7 @@ import com.ivione93.hojames.Utils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class NewCompetitionActivity extends AppCompatActivity {
 
@@ -27,8 +28,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
     TextInputLayout placeText, competitionNameText, trackText, resultText;
     EditText dateText;
 
-    String email;
-    String license;
+    String email, license, id;
     Boolean isNew;
 
     @Override
@@ -74,12 +74,13 @@ public class NewCompetitionActivity extends AppCompatActivity {
         dateText = findViewById(R.id.dateText);
 
         if (!isNew) {
-            loadCompetition();
+            id = getIntent().getStringExtra("idCompetition");
+            loadCompetition(id);
         }
     }
 
-    private void loadCompetition() {
-        db.collection("competitions").whereEqualTo("license", license).get().addOnCompleteListener(task -> {
+    private void loadCompetition(String id) {
+        db.collection("competitions").whereEqualTo("id", id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 QuerySnapshot document = task.getResult();
                 if (!document.isEmpty()) {
@@ -103,6 +104,10 @@ public class NewCompetitionActivity extends AppCompatActivity {
         if (validateNewCompetition(place, competitionName, track, result, date)) {
             if (Utils.validateDateFormat(date)) {
                 Map<String,Object> competition = new HashMap<>();
+                if (isNew) {
+                    id = UUID.randomUUID().toString();
+                }
+                competition.put("id", id);
                 competition.put("license", license);
                 competition.put("place", place);
                 competition.put("name", competitionName);
@@ -110,7 +115,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
                 competition.put("track", track);
                 competition.put("result", result);
 
-                db.collection("competitions").document().set(competition);
+                db.collection("competitions").document(id).set(competition);
 
                 goProfile(email);
             } else {

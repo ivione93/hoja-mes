@@ -25,8 +25,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.ivione93.hojames.AuthActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
@@ -164,16 +163,19 @@ public class ProfileFragment extends Fragment {
                 .whereEqualTo("license", license)
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                QuerySnapshot document = task.getResult();
-                if (document.isEmpty()) {
-                    last_competition_name.setText("No se han encontrado competiciones");
-                } else {
-                    last_competition_name.setText(document.getDocuments().get(0).get("name").toString());
-                    last_competition_place.setText(document.getDocuments().get(0).get("place").toString());
-                    last_competition_date.setText(Utils.toString((Timestamp) document.getDocuments().get(0).get("date")));
-                    last_competition_track.setText(document.getDocuments().get(0).get("track").toString());
-                    last_competition_result.setText(document.getDocuments().get(0).get("result").toString());
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    if (documentSnapshot.exists()) {
+                        last_competition_name.setText(documentSnapshot.get("name").toString());
+                        last_competition_place.setText(documentSnapshot.get("place").toString());
+                        last_competition_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
+                        last_competition_track.setText(documentSnapshot.get("track").toString());
+                        last_competition_result.setText(documentSnapshot.get("result").toString());
+                    } else {
+                        last_competition_name.setText("No se han encontrado competiciones");
+                    }
                 }
+            } else {
+                last_competition_name.setText("No se han encontrado competiciones");
             }
         });
     }

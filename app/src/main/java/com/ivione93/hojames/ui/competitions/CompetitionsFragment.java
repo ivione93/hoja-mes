@@ -8,17 +8,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -28,11 +25,12 @@ import com.ivione93.hojames.model.Competition;
 public class CompetitionsFragment extends Fragment {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference competitions = db.collection("competitions");
+    private AdapterCompetitions adapterCompetitions;
 
     String email, license;
 
     RecyclerView rvCompetitions;
-    FirestoreRecyclerAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,8 +45,12 @@ public class CompetitionsFragment extends Fragment {
         email = bundle.getString("email");
         license = bundle.getString("license");
 
-        rvCompetitions = root.findViewById(R.id.rvCompetitions);
+        setupRecyclerView(root);
 
+        return root;
+    }
+
+    private void setupRecyclerView(View root) {
         // Query
         Query query = db.collection("competitions").whereEqualTo("license", license);
 
@@ -57,75 +59,18 @@ public class CompetitionsFragment extends Fragment {
                 .setQuery(query, Competition.class)
                 .build();
 
-        adapter = new FirestoreRecyclerAdapter<Competition, CompetitionViewHolder>(options) {
-            @NonNull
-            @Override
-            public CompetitionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_competition, parent, false);
-                return new CompetitionViewHolder(view);
-            }
+        adapterCompetitions = new AdapterCompetitions(options);
 
-            @Override
-            protected void onBindViewHolder(@NonNull CompetitionViewHolder holder, int position, @NonNull Competition model) {
-                holder.name.setText(model.name);
-                holder.place.setText(model.place);
-                holder.track.setText(model.track);
-                holder.result.setText(model.result);
-                holder.date.setText(model.date);
-
-                holder.ibOptionsCompetition.setOnClickListener(v -> {
-                    PopupMenu popup = new PopupMenu(holder.itemView.getContext(), holder.ibOptionsCompetition);
-                    popup.inflate(R.menu.item_competition_menu);
-                    popup.setOnMenuItemClickListener(item -> {
-                        switch (item.getItemId()) {
-                            case R.id.menu_edit_competition:
-                                Intent newCompetition = new Intent(holder.itemView.getContext(), NewCompetitionActivity.class);
-                                newCompetition.putExtra("isNew", false);
-                                newCompetition.putExtra("idCompetition", model.id);
-                                newCompetition.putExtra("license", model.license);
-                                newCompetition.putExtra("email", email);
-                                holder.itemView.getContext().startActivity(newCompetition);
-                                return true;
-                            case R.id.menu_delete_competition:
-                                db.collection("competitions").document(model.id).delete();
-                                notifyItemRemoved(position);
-                                return true;
-                            default:
-                                return false;
-                        }
-                    });
-                    popup.show();
-                });
-            }
-        };
-
+        rvCompetitions = root.findViewById(R.id.rvCompetitions);
         rvCompetitions.setHasFixedSize(true);
         rvCompetitions.setLayoutManager(new LinearLayoutManager(root.getContext()));
-        rvCompetitions.setAdapter(adapter);
-
-        return root;
-    }
-
-    private class CompetitionViewHolder extends RecyclerView.ViewHolder {
-
-        TextView name, place, track, result, date;
-        ImageButton ibOptionsCompetition;
-
-        public CompetitionViewHolder(@NonNull View itemView) {
-            super(itemView);
-            name = itemView.findViewById(R.id.competitionNameText);
-            place = itemView.findViewById(R.id.placeText);
-            track = itemView.findViewById(R.id.surnameText);
-            result = itemView.findViewById(R.id.resultText);
-            date = itemView.findViewById(R.id.dateText);
-            ibOptionsCompetition = itemView.findViewById(R.id.ibOptionsCompetition);
-        }
+        rvCompetitions.setAdapter(adapterCompetitions);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        adapter.startListening();
+        adapterCompetitions.startListening();
         db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
@@ -139,7 +84,7 @@ public class CompetitionsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        adapter.stopListening();
+        adapterCompetitions.stopListening();
     }
 
     @Override

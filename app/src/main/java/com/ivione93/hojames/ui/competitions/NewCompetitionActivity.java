@@ -109,6 +109,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
                 }
                 competition.put("id", id);
                 competition.put("license", license);
+                competition.put("email", email);
                 competition.put("place", place);
                 competition.put("name", competitionName);
                 competition.put("date", date);

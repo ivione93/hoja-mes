@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -37,7 +38,7 @@ public class AuthActivity extends AppCompatActivity {
 
     ConstraintLayout loginLayout;
     EditText emailEditText, passwordEditText;
-    TextView forgotPassword;
+    TextView forgotPassword, createdBy;
     Button btnSignIn, btnSignUp;
     SignInButton btnSignInGoogle;
 
@@ -126,6 +127,15 @@ public class AuthActivity extends AppCompatActivity {
             gClient.signOut();
 
             startActivityForResult(gClient.getSignInIntent(), GOOGLE_SIGN_IN);
+        });
+
+        createdBy = findViewById(R.id.createdBy);
+        createdBy.setOnClickListener(v -> {
+            String url = "https://ivione93.github.io/cv-online/";
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(uri);
+            startActivity(intent);
         });
     }
 

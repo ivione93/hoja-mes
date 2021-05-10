@@ -24,9 +24,15 @@ public class SplashScreenActivity extends AppCompatActivity {
         // Animaciones
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.move_up);
         animation.setDuration(2000);
+        Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.move_left);
+        animation2.setDuration(2000);
 
         TextView splashTitle = findViewById(R.id.splashTitle);
+        TextView splashAuthor = findViewById(R.id.splashAuthor);
+        TextView splashBy = findViewById(R.id.splashBy);
         splashTitle.setAnimation(animation);
+        splashBy.setAnimation(animation2);
+        splashAuthor.setAnimation(animation2);
 
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(getApplicationContext(), AuthActivity.class);

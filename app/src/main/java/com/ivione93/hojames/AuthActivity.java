@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,6 +80,11 @@ public class AuthActivity extends AppCompatActivity {
 
         btnSignUp.setOnClickListener(v -> {
             if (!emailEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
+                String emailUser = emailEditText.getText().toString().trim();
+                if (emailUser.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(emailUser).matches()) {
+                    emailEditText.setError("Correo inválido");
+                    return;
+                }
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailEditText.getText().toString(),
                         passwordEditText.getText().toString()).addOnCompleteListener(it -> {
                     if (it.isSuccessful()) {
@@ -92,6 +98,11 @@ public class AuthActivity extends AppCompatActivity {
 
         btnSignIn.setOnClickListener(v -> {
             if (!emailEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
+                String emailUser = emailEditText.getText().toString().trim();
+                if (emailUser.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(emailUser).matches()) {
+                    emailEditText.setError("Correo inválido");
+                    return;
+                }
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(emailEditText.getText().toString(),
                         passwordEditText.getText().toString()).addOnCompleteListener(it -> {
                     if (it.isSuccessful()) {

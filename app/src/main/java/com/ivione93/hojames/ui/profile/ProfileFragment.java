@@ -80,7 +80,7 @@ public class ProfileFragment extends Fragment {
         if (account != null) {
             if (account.getPhotoUrl() != null) {
                 photoUrl = account.getPhotoUrl();
-                Glide.with(getView()).load(account.getPhotoUrl()).into(photoProfile);
+                Glide.with(getActivity().getApplicationContext()).load(account.getPhotoUrl()).into(photoProfile);
             }
         }
         progressDialog.setMessage("Cargando perfil...");

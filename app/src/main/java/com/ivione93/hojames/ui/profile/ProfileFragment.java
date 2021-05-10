@@ -1,5 +1,6 @@
 package com.ivione93.hojames.ui.profile;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -46,6 +47,8 @@ public class ProfileFragment extends Fragment {
 
     String email, license;
     Uri photoUrl;
+
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -144,6 +147,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setup(View root, String email) {
+        progressDialog = new ProgressDialog(getContext());
         photoProfile = root.findViewById(R.id.photoProfile);
         emailTextView = root.findViewById(R.id.emailTextView);
         emailTextView.setText(email);
@@ -159,10 +163,13 @@ public class ProfileFragment extends Fragment {
     }
 
     private void getLastCompetition(String license) {
+        progressDialog.setMessage("Cargando competiciones...");
+        progressDialog.show();
         db.collection("competitions")
                 .whereEqualTo("license", license)
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                progressDialog.dismiss();
                 for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                     if (documentSnapshot.exists()) {
                         last_competition_name.setText(documentSnapshot.get("name").toString());
@@ -175,6 +182,7 @@ public class ProfileFragment extends Fragment {
                     }
                 }
             } else {
+                progressDialog.dismiss();
                 last_competition_name.setText("No se han encontrado competiciones");
             }
         });

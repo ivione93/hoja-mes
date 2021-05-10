@@ -62,14 +62,13 @@ public class ProfileFragment extends Fragment {
         license = bundle.getString("license");
         setup(root, email);
 
-        getLastCompetition(license);
+        loadProfile();
 
         // Inflate the layout for this fragment
         return root;
     }
 
-    @Override
-    public void onStart() {
+    private void loadProfile() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -93,6 +92,8 @@ public class ProfileFragment extends Fragment {
                     nombreEditText.setText(task.getResult().get("name").toString() + " " + task.getResult().get("surname").toString());
                     birthEditText.setText(task.getResult().get("birth").toString());
 
+                    getLastCompetition(license);
+
                     // Guardar datos
                     prefs = getActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
                     prefs.putString("email", email);
@@ -104,7 +105,6 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
-        super.onStart();
     }
 
     @Override

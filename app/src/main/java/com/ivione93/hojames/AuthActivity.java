@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -33,6 +34,7 @@ public class AuthActivity extends AppCompatActivity {
 
     ConstraintLayout loginLayout;
     EditText emailEditText, passwordEditText;
+    TextView forgotPassword;
     Button btnSignIn, btnSignUp;
     SignInButton btnSignInGoogle;
 
@@ -65,9 +67,15 @@ public class AuthActivity extends AppCompatActivity {
 
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+        forgotPassword = findViewById(R.id.forgotPassword);
         btnSignIn = findViewById(R.id.btnSignIn);
         btnSignUp = findViewById(R.id.btnSignUp);
         btnSignInGoogle = findViewById(R.id.btnSignInGoogle);
+
+        forgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
 
         btnSignUp.setOnClickListener(v -> {
             if (!emailEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
@@ -126,12 +134,14 @@ public class AuthActivity extends AppCompatActivity {
         profileIntent.putExtra("email", email);
         profileIntent.putExtra("license", license);
         startActivity(profileIntent);
+        finish();
     }
 
     private void goNewAthlete(String email) {
         Intent newAthlete = new Intent(this, NewAthleteActivity.class);
         newAthlete.putExtra("email", email);
         startActivity(newAthlete);
+        finish();
     }
 
     private void showAlert() {

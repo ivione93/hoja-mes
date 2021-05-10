@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="Email"
@@ -66,6 +66,19 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:clickable="true"
+        android:text="Recuperar la contraseña"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/passwordText"
+        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
+
     <Button
         android:id="@+id/btnSignIn"
         android:layout_width="0dp"
@@ -73,11 +86,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
+        android:padding="12dp"
         android:text="Entrar"
         android:backgroundTint="@color/colorPrimary"
         app:layout_constraintEnd_toStartOf="@+id/btnSignUp"
         app:layout_constraintStart_toStartOf="@+id/passwordText"
-        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
+        app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
 
     <Button
         android:id="@+id/btnSignUp"
@@ -86,11 +100,12 @@
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="16dp"
+        android:padding="12dp"
         android:text="Registrar"
         android:backgroundTint="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="@+id/passwordText"
         app:layout_constraintStart_toEndOf="@+id/btnSignIn"
-        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
+        app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btnSignInGoogle"

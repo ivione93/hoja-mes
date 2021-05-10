@@ -72,15 +72,7 @@ public class NewAthleteActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.menu_cancel_new_athlete) {
-            // Borrado datos inicio de sesion
-            SharedPreferences.Editor prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
-            prefs.clear();
-            prefs.apply();
-
-            FirebaseAuth.getInstance().getCurrentUser().delete();
-            FirebaseAuth.getInstance().signOut();
-
-            finish();
+            cancelNewAthlete();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -88,13 +80,22 @@ public class NewAthleteActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        cancelNewAthlete();
+    }
+
+    private void cancelNewAthlete() {
+        // Borrado datos inicio de sesion
+        SharedPreferences.Editor prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
+        prefs.clear();
+        prefs.apply();
+
         FirebaseAuth.getInstance().getCurrentUser().delete();
         FirebaseAuth.getInstance().signOut();
-
         finish();
     }
 
     private void setup() {
+
         newAthleteLayout = findViewById(R.id.newAthleteLayout);
 
         licenciaEditText = findViewById(R.id.licenciaEditText);

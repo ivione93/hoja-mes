@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.ivione93.hojames.AuthActivity;
+import com.ivione93.hojames.ui.login.AuthActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;

@@ -1,4 +1,4 @@
-package com.ivione93.hojames;
+package com.ivione93.hojames.ui.login;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -26,6 +26,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.ivione93.hojames.MainActivity;
+import com.ivione93.hojames.R;
 import com.ivione93.hojames.ui.profile.NewAthleteActivity;
 
 public class AuthActivity extends AppCompatActivity {

@@ -11,19 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HojaMes">
-        <activity
-            android:name=".ui.login.AuthActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.login.ForgotPasswordActivity"
-            android:parentActivityName=".ui.login.AuthActivity"
+        <activity
+            android:name=".ui.login.AuthActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.login.ForgotPasswordActivity"
             android:label=""
-            android:screenOrientation="portrait"/>
+            android:parentActivityName=".ui.login.AuthActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.profile.NewAthleteActivity"
             android:screenOrientation="portrait" />

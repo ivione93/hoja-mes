@@ -83,6 +83,8 @@ public class ProfileFragment extends Fragment {
                 Glide.with(getView()).load(account.getPhotoUrl()).into(photoProfile);
             }
         }
+        progressDialog.setMessage("Cargando perfil...");
+        progressDialog.show();
         db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
@@ -103,6 +105,8 @@ public class ProfileFragment extends Fragment {
                     getActivity().getIntent().putExtra("email", email);
                     getActivity().getIntent().putExtra("license", license);
                 }
+            } else {
+                progressDialog.dismiss();
             }
         });
     }
@@ -163,8 +167,6 @@ public class ProfileFragment extends Fragment {
     }
 
     private void getLastCompetition(String license) {
-        progressDialog.setMessage("Cargando competiciones...");
-        progressDialog.show();
         db.collection("competitions")
                 .whereEqualTo("license", license)
                 .get().addOnCompleteListener(task -> {

@@ -27,7 +27,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private void setup() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
 
         emailEditText = findViewById(R.id.emailRecuEditText);
         btnRecuperar = findViewById(R.id.btnRecuperar);

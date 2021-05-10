@@ -85,6 +85,15 @@ public class NewAthleteActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        FirebaseAuth.getInstance().getCurrentUser().delete();
+        FirebaseAuth.getInstance().signOut();
+
+        finish();
+    }
+
     private void setup() {
         newAthleteLayout = findViewById(R.id.newAthleteLayout);
 

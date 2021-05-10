@@ -24,11 +24,12 @@
         </activity>
         <activity
             android:name=".ui.login.ForgotPasswordActivity"
-            android:label=""
+            android:label="@string/title_forgot_password"
             android:parentActivityName=".ui.login.AuthActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.profile.NewAthleteActivity"
+            android:label="@string/title_new_athlete"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
@@ -36,7 +37,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.profile.EditProfileActivity"
-            android:label="Editar perfil"
+            android:label="@string/title_edit_profile"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <activity

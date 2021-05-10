@@ -27,7 +27,7 @@
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:fontFamily="casual"
-        android:text="creado por"
+        android:text="creado por "
         android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/splashAuthor"
         app:layout_constraintTop_toBottomOf="@+id/splashTitle" />

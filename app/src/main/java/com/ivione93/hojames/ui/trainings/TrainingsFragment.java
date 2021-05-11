@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,21 +16,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
+import com.ivione93.hojames.model.Training;
 
 import java.util.Date;
 
 public class TrainingsFragment extends Fragment {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference trainings = db.collection("trainings");
+    private AdapterTrainings adapterTrainings;
 
     CalendarView calendarTrainings;
 
     String email, license;
     String dateSelected = Utils.toString(new Date());
+
+    RecyclerView rvTrainings;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,12 +54,15 @@ public class TrainingsFragment extends Fragment {
         license = bundle.getString("license");
 
         setup(root);
+        setupRecyclerView(root);
 
         return root;
     }
 
     @Override
     public void onStart() {
+        super.onStart();
+        adapterTrainings.startListening();
         db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
@@ -58,7 +71,12 @@ public class TrainingsFragment extends Fragment {
                 }
             }
         });
-        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapterTrainings.stopListening();
     }
 
     @Override
@@ -98,5 +116,23 @@ public class TrainingsFragment extends Fragment {
             }
             //adapterTraining.getFilter().filter(dateSelected);
         });
+    }
+
+    private void setupRecyclerView(View root) {
+        // Query
+        Query query = trainings.whereEqualTo("license", license);
+        //.orderBy("date", Query.Direction.DESCENDING);
+
+        // Recycler options
+        FirestoreRecyclerOptions<Training> options = new FirestoreRecyclerOptions.Builder<Training>()
+                .setQuery(query, Training.class)
+                .build();
+
+        adapterTrainings = new AdapterTrainings(options);
+
+        rvTrainings = root.findViewById(R.id.rvTrainings);
+        rvTrainings.setHasFixedSize(true);
+        rvTrainings.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        rvTrainings.setAdapter(adapterTrainings);
     }
 }

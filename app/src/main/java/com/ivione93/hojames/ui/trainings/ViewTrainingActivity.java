@@ -21,6 +21,7 @@ import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -134,13 +135,17 @@ public class ViewTrainingActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.menu_new_training) {
-            saveTraining();
+            try {
+                saveTraining();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveTraining() {
+    private void saveTraining() throws ParseException {
         String date = trainingDateText.getText().toString();
         String time = trainingTimeText.getEditText().getText().toString();
         String distance = trainingDistanceText.getEditText().getText().toString();
@@ -155,9 +160,9 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 training.put("id", id);
                 training.put("license", license);
                 training.put("email", email);
-                training.put("date", date);
+                training.put("date", Utils.toTimestamp(date));
                 training.put("time", time);
-                training.put("distante", distance);
+                training.put("distance", distance);
                 training.put("partial", partial);
 
                 db.collection("trainings").document(id).set(training);

@@ -47,6 +47,7 @@ public class ProfileFragment extends Fragment {
     CircleImageView photoProfile;
     TextView emailTextView, licenciaEditText, nombreEditText, birthEditText;
     TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result;
+    TextView title_training, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
 
     String email, license;
     String dateSelected = Utils.toString(new Date());
@@ -99,6 +100,7 @@ public class ProfileFragment extends Fragment {
                     birthEditText.setText(task.getResult().get("birth").toString());
 
                     getLastCompetition(license);
+                    getLastTraining(license);
 
                     // Guardar datos
                     prefs = getActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
@@ -175,6 +177,15 @@ public class ProfileFragment extends Fragment {
         last_competition_date = root.findViewById(R.id.last_competition_date);
         last_competition_track = root.findViewById(R.id.last_competition_track);
         last_competition_result = root.findViewById(R.id.last_competition_result);
+
+        title_training = root.findViewById(R.id.title_training);
+        last_training_date = root.findViewById(R.id.last_training_date);
+        title_time = root.findViewById(R.id.title_time);
+        title_distance = root.findViewById(R.id.title_distance);
+        title_partial = root.findViewById(R.id.title_partial);
+        last_training_time = root.findViewById(R.id.last_training_time);
+        last_training_distance = root.findViewById(R.id.last_training_distance);
+        last_training_partial = root.findViewById(R.id.last_training_partial);
     }
 
     private void getLastCompetition(String license) {
@@ -198,6 +209,37 @@ public class ProfileFragment extends Fragment {
                 progressDialog.dismiss();
                 last_competition_name.setText("No se han encontrado competiciones");
             }
+        });
+    }
+
+    private void getLastTraining(String license) {
+        db.collection("trainings")
+                .whereEqualTo("license", license)
+                .get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        progressDialog.dismiss();
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                            if (documentSnapshot.exists()) {
+                                last_training_distance.setText(documentSnapshot.get("distance").toString() + " kms");
+                                last_training_time.setText(documentSnapshot.get("time").toString() + " min");
+                                last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
+                                last_training_partial.setText(documentSnapshot.get("partial").toString() + " /km");
+                            } else {
+                                title_training.setText("No se han encontrado entrenamientos");
+                                title_training.setTextSize(20);
+                                title_time.setText("");
+                                title_distance.setText("");
+                                title_partial.setText("");
+                            }
+                        }
+                    } else {
+                        progressDialog.dismiss();
+                        title_training.setText("No se han encontrado entrenamientos");
+                        title_training.setTextSize(20);
+                        title_time.setText("");
+                        title_distance.setText("");
+                        title_partial.setText("");
+                    }
         });
     }
 }

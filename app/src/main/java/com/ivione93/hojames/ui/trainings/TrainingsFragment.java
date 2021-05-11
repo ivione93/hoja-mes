@@ -72,6 +72,7 @@ public class TrainingsFragment extends Fragment {
         if (item.getItemId() == R.id.menu_add_training) {
             Intent newTraining = new Intent(getActivity(), ViewTrainingActivity.class);
             newTraining.putExtra("license", license);
+            newTraining.putExtra("email", email);
             newTraining.putExtra("dateSelected", dateSelected);
             getContext().startActivity(newTraining);
         }

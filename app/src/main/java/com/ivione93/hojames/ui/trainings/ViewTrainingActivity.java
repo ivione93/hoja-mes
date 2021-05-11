@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,12 +12,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
+import com.ivione93.hojames.Utils;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class ViewTrainingActivity extends AppCompatActivity {
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     TextInputLayout trainingTimeText, trainingDistanceText;
     EditText trainingDateText;
@@ -25,7 +36,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     RecyclerView rvSeries, rvCuestas, rvFartlek;
     TabLayout tabLayout;
 
-    String license, dateSelected;
+    String license, email, dateSelected, id;
     Boolean isNew;
 
     @Override
@@ -36,6 +47,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         license = getIntent().getStringExtra("license");
+        email = getIntent().getStringExtra("email");
         dateSelected = getIntent().getStringExtra("dateSelected");
         isNew = getIntent().getBooleanExtra("isNew", true);
 
@@ -122,9 +134,63 @@ public class ViewTrainingActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.menu_new_training) {
-            //saveTraining();
+            saveTraining();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveTraining() {
+        String date = trainingDateText.getText().toString();
+        String time = trainingTimeText.getEditText().getText().toString();
+        String distance = trainingDistanceText.getEditText().getText().toString();
+
+        if (validateNewTraining(date, time, distance)) {
+            if (Utils.validateDateFormat(date)) {
+                String partial = Utils.calculatePartial(time, distance);
+                Map<String,Object> training = new HashMap<>();
+                if (isNew) {
+                    id = UUID.randomUUID().toString();
+                }
+                training.put("id", id);
+                training.put("license", license);
+                training.put("email", email);
+                training.put("date", date);
+                training.put("time", time);
+                training.put("distante", distance);
+                training.put("partial", partial);
+
+                db.collection("trainings").document(id).set(training);
+
+                goProfile(email, license);
+            } else {
+                Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos por completar", Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    private void goProfile(String email, String license) {
+        Intent profileIntent = new Intent(this, MainActivity.class);
+        profileIntent.putExtra("email", email);
+        profileIntent.putExtra("license", license);
+        startActivity(profileIntent);
+    }
+
+    private boolean validateNewTraining(String date, String time, String distance) {
+        boolean isValid = true;
+        if (date.isEmpty() || date == null) {
+            isValid = false;
+        }
+        if (time.isEmpty() || time == null) {
+            isValid = false;
+        }
+        if (distance.isEmpty() || distance == null) {
+            isValid = false;
+        }
+        return isValid;
     }
 }

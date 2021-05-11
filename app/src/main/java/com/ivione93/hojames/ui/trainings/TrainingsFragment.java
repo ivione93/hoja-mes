@@ -25,6 +25,9 @@ import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Training;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class TrainingsFragment extends Fragment {
@@ -114,7 +117,7 @@ public class TrainingsFragment extends Fragment {
                     dateSelected = dayOfMonth + "/" + month + "/" + year;
                 }
             }
-            //adapterTraining.getFilter().filter(dateSelected);
+            adapterTrainings.getFilter().filter(dateSelected);
         });
     }
 
@@ -133,6 +136,10 @@ public class TrainingsFragment extends Fragment {
         rvTrainings = root.findViewById(R.id.rvTrainings);
         rvTrainings.setHasFixedSize(true);
         rvTrainings.setLayoutManager(new LinearLayoutManager(root.getContext()));
+
+        Date now = Calendar.getInstance().getTime();
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        adapterTrainings.getFilter().filter(format.format(now));
         rvTrainings.setAdapter(adapterTrainings);
     }
 }

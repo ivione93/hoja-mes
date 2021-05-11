@@ -4,27 +4,41 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.firebase.ui.firestore.ObservableSnapshotArray;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Training;
-import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;
 
-public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, AdapterTrainings.TrainingViewHolder> {
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, AdapterTrainings.TrainingViewHolder> implements Filterable {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    private ObservableSnapshotArray<Training> mSnapshots;
+    private List<Training> list;
+
     public AdapterTrainings(@NonNull FirestoreRecyclerOptions<Training> options) {
         super(options);
+        mSnapshots = options.getSnapshots();
+        list = new ArrayList<>(mSnapshots);
     }
 
     @Override
@@ -65,6 +79,45 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_training, parent, false);
         return new AdapterTrainings.TrainingViewHolder(view);
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    private Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (constraint == null || constraint.length() == 0) {
+                results.values = mSnapshots;
+                results.count = mSnapshots.size();
+            } else {
+                List<Training> filteredTrainings = new ArrayList<>();
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Training training : mSnapshots) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    String actualTrainingDate = sdf.format(training.date.toDate());
+                    if (actualTrainingDate.equals(filterPattern)) {
+                        filteredTrainings.add(training);
+                        results.values = filteredTrainings;
+                        results.count = filteredTrainings.size();
+                    }
+                }
+            }
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            if (results.count > 0) {
+                list.addAll((List) results.values);
+            }
+            notifyDataSetChanged();
+        }
+    };
 
     class TrainingViewHolder extends RecyclerView.ViewHolder {
 

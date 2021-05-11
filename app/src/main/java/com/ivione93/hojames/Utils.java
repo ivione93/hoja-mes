@@ -34,6 +34,11 @@ public class Utils {
         return formatted;
     }
 
+    public static String toString(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(date);
+    }
+
     public static String calculatePartial(String time, String distance) {
         String sRitmo;
         BigDecimal bRitmo;

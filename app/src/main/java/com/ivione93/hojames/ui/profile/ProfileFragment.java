@@ -31,6 +31,7 @@ import com.ivione93.hojames.ui.login.AuthActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;
+import com.ivione93.hojames.ui.trainings.ViewTrainingActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -127,6 +128,12 @@ public class ProfileFragment extends Fragment {
             }
             getContext().startActivity(editProfile);
             return true;
+        }
+        if (item.getItemId() == R.id.menu_add_training_profile) {
+            Intent viewTraining = new Intent(getActivity(), ViewTrainingActivity.class);
+            viewTraining.putExtra("license", license);
+            viewTraining.putExtra("email", email);
+            getContext().startActivity(viewTraining);
         }
         if (item.getItemId() == R.id.menu_add_competition_profile) {
             Intent newCompetition = new Intent(getActivity(), NewCompetitionActivity.class);

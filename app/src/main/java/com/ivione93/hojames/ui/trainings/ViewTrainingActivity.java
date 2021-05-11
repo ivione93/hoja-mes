@@ -16,7 +16,9 @@ import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
@@ -102,7 +104,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         if (!isNew) {
             getSupportActionBar().setTitle("Entrenamiento");
-            //loadTraining();
+            id = getIntent().getStringExtra("idTraining");
+            loadTraining(id);
         } else {
             getSupportActionBar().setTitle("Nuevo entrenamiento");
             trainingDateText.setText(dateSelected);
@@ -176,6 +179,19 @@ public class ViewTrainingActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos por completar", Toast.LENGTH_LONG);
             toast.show();
         }
+    }
+
+    private void loadTraining(String id) {
+        db.collection("trainings").whereEqualTo("id", id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot document = task.getResult();
+                if (!document.isEmpty()) {
+                    trainingDateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date")));
+                    trainingTimeText.getEditText().setText(task.getResult().getDocuments().get(0).get("time").toString());
+                    trainingDistanceText.getEditText().setText(task.getResult().getDocuments().get(0).get("distance").toString());
+                }
+            }
+        });
     }
 
     private void goProfile(String email, String license) {

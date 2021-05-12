@@ -3,6 +3,7 @@ package com.ivione93.hojames.ui.trainings;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -16,16 +17,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.dto.SeriesDto;
+import com.ivione93.hojames.model.Series;
+import com.ivione93.hojames.model.Training;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -37,6 +43,8 @@ import java.util.UUID;
 public class ViewTrainingActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference series = db.collection("trainings");
+    private AdapterSeries adapterSeries;
 
     TextInputLayout trainingTimeText, trainingDistanceText;
     EditText trainingDateText;
@@ -63,6 +71,25 @@ public class ViewTrainingActivity extends AppCompatActivity {
         isNew = getIntent().getBooleanExtra("isNew", true);
 
         setup(isNew);
+        setupRecyclerSeries();
+    }
+
+    private void setupRecyclerSeries() {
+        // Query
+        Query query = series.whereEqualTo("license", license);
+                                //.orderBy("date", Query.Direction.DESCENDING);
+
+        // Recycler options
+        FirestoreRecyclerOptions<Series> options = new FirestoreRecyclerOptions.Builder<Series>()
+                .setQuery(query, Series.class)
+                .build();
+
+        adapterSeries = new AdapterSeries(options);
+
+        rvSeries = findViewById(R.id.rvSeries);
+        rvSeries.setHasFixedSize(true);
+        rvSeries.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        rvSeries.setAdapter(adapterSeries);
     }
 
     private void setup(Boolean isNew) {

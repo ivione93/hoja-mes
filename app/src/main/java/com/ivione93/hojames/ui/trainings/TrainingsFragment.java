@@ -37,11 +37,10 @@ public class TrainingsFragment extends Fragment {
     private AdapterTrainings adapterTrainings;
 
     CalendarView calendarTrainings;
+    RecyclerView rvTrainings;
 
     String email, license;
     String dateSelected = Utils.toString(new Date());
-
-    RecyclerView rvTrainings;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

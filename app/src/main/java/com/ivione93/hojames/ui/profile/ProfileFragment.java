@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.ui.login.AuthActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
@@ -48,6 +50,8 @@ public class ProfileFragment extends Fragment {
     TextView emailTextView, licenciaEditText, nombreEditText, birthEditText;
     TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result;
     TextView title_training, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
+    TextView tvIndicadorSeries;
+    ImageView ivIndicadorSeries;
 
     String email, license;
     String dateSelected = Utils.toString(new Date());
@@ -186,6 +190,10 @@ public class ProfileFragment extends Fragment {
         last_training_time = root.findViewById(R.id.last_training_time);
         last_training_distance = root.findViewById(R.id.last_training_distance);
         last_training_partial = root.findViewById(R.id.last_training_partial);
+
+        tvIndicadorSeries = root.findViewById(R.id.tvIndicadorSeries);
+        ivIndicadorSeries = root.findViewById(R.id.ivIndicadorSeries);
+
     }
 
     private void getLastCompetition(String license) {
@@ -224,21 +232,20 @@ public class ProfileFragment extends Fragment {
                                 last_training_time.setText(documentSnapshot.get("time").toString() + " min");
                                 last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
                                 last_training_partial.setText(documentSnapshot.get("partial").toString() + " /km");
-                            } else {
-                                title_training.setText("No se han encontrado entrenamientos");
-                                title_training.setTextSize(20);
-                                title_time.setText("");
-                                title_distance.setText("");
-                                title_partial.setText("");
+
+                                // check series
+                                db.collection("trainings").document(documentSnapshot.get("id").toString())
+                                        .collection("series").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
+                                    if (t.isSuccessful()) {
+                                        QuerySnapshot document = t.getResult();
+                                        if (!document.isEmpty()) {
+                                            tvIndicadorSeries.setVisibility(View.VISIBLE);
+                                            ivIndicadorSeries.setVisibility(View.VISIBLE);
+                                        }
+                                    }
+                                });
                             }
                         }
-                    } else {
-                        progressDialog.dismiss();
-                        title_training.setText("No se han encontrado entrenamientos");
-                        title_training.setTextSize(20);
-                        title_time.setText("");
-                        title_distance.setText("");
-                        title_partial.setText("");
                     }
         });
     }

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -18,7 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.ObservableSnapshotArray;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Training;
@@ -48,6 +53,21 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
         holder.itemTrainingDistance.setText(model.distance + " km");
         holder.itemTrainingPartial.setText(model.partial + " /km");
 
+        // check series
+        db.collection("trainings").document(model.id)
+                .collection("series").whereEqualTo("idTraining", model.id).get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot document = task.getResult();
+                        if (document.isEmpty()) {
+                            holder.tvIndicadorSeries.setVisibility(View.INVISIBLE);
+                            holder.ivIndicadorSeries.setVisibility(View.INVISIBLE);
+                        } else {
+                            holder.tvIndicadorSeries.setVisibility(View.VISIBLE);
+                            holder.ivIndicadorSeries.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+
         holder.ibOptionsTraining.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(holder.itemView.getContext(), holder.ibOptionsTraining);
             popup.inflate(R.menu.item_training_menu);
@@ -76,7 +96,7 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
     @NonNull
     @Override
     public TrainingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_training, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_training_series, parent, false);
         return new AdapterTrainings.TrainingViewHolder(view);
     }
 
@@ -124,6 +144,9 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
         TextView itemTrainingDate, itemTrainingTime, itemTrainingDistance, itemTrainingPartial;
         ImageButton ibOptionsTraining;
 
+        TextView tvIndicadorSeries;
+        ImageView ivIndicadorSeries;
+
         public TrainingViewHolder(@NonNull View itemView) {
             super(itemView);
             itemTrainingDate = itemView.findViewById(R.id.itemTrainingDate);
@@ -131,6 +154,9 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
             itemTrainingDistance = itemView.findViewById(R.id.itemTrainingDistance);
             itemTrainingPartial = itemView.findViewById(R.id.itemTrainingPartial);
             ibOptionsTraining = itemView.findViewById(R.id.ibOptionsTraining);
+
+            tvIndicadorSeries = itemView.findViewById(R.id.tvIndicadorSeries);
+            ivIndicadorSeries = itemView.findViewById(R.id.ivIndicadorSeries);
         }
     }
 }

@@ -1,11 +1,13 @@
 package com.ivione93.hojames.ui.trainings;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,14 +19,18 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
+import com.ivione93.hojames.dto.SeriesDto;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -42,6 +48,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
     String license, email, dateSelected, id;
     Boolean isNew;
 
+    List<SeriesDto> listSeriesDto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +66,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
     }
 
     private void setup(Boolean isNew) {
+        listSeriesDto = new ArrayList<>();
+
         tvListSeries = findViewById(R.id.tvListSeries);
 
         trainingDateText = findViewById(R.id.trainingDateText);
@@ -112,7 +122,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         }
 
         btnAddSeries.setOnClickListener(v -> {
-            //createAddSeriesDialog().show();
+            createAddSeriesDialog().show();
         });
 
         btnAddCuestas.setOnClickListener(v -> {
@@ -169,6 +179,17 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 training.put("partial", partial);
 
                 db.collection("trainings").document(id).set(training);
+                // Añadir series
+                if (!listSeriesDto.isEmpty()) {
+                    for (SeriesDto dto : listSeriesDto) {
+                        Map<String, Object> serie = new HashMap<>();
+                        serie.put("idTraining", id);
+                        serie.put("distance", dto.distance);
+                        serie.put("time", dto.time);
+
+                        db.collection("trainings").document(id).collection("series").document().set(serie);
+                    }
+                }
 
                 goProfile(email, license);
             } else {
@@ -199,6 +220,50 @@ public class ViewTrainingActivity extends AppCompatActivity {
         profileIntent.putExtra("email", email);
         profileIntent.putExtra("license", license);
         startActivity(profileIntent);
+    }
+
+    public AlertDialog createAddSeriesDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_add_series, null);
+
+        builder.setTitle("Añadir serie");
+        builder.setView(v)
+                .setPositiveButton("Añadir", (dialog, which) -> {
+                    addSeries(v);
+                    showSeries();
+                })
+                .setNegativeButton("Cancelar", (dialog, which) -> {
+
+                });
+
+        return builder.create();
+    }
+
+    private void addSeries(View v) {
+        EditText distanceSeries, timeSeries;
+        distanceSeries = v.findViewById(R.id.distance_series);
+        timeSeries = v.findViewById(R.id.time_series);
+
+        String distance = distanceSeries.getText().toString();
+        String time = timeSeries.getText().toString();
+
+        if (distance.equals("") && time.equals("")) {
+            Toast.makeText(v.getContext(), "Campos incompletos", Toast.LENGTH_LONG).show();
+        } else {
+            SeriesDto seriesDto = new SeriesDto(distance, time);
+            listSeriesDto.add(seriesDto);
+        }
+    }
+
+    private void showSeries() {
+        tvListSeries.setVisibility(View.VISIBLE);
+        String txt = "";
+
+        for (SeriesDto dto : listSeriesDto) {
+            txt += "S[" + dto.distance + ", " + dto.time + "] ";
+            tvListSeries.setText(txt);
+        }
     }
 
     private boolean validateNewTraining(String date, String time, String distance) {

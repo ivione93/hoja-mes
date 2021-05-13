@@ -12,17 +12,12 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.OnLifecycleEvent;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.ObservableSnapshotArray;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
@@ -30,7 +25,6 @@ import com.ivione93.hojames.model.Training;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, AdapterTrainings.TrainingViewHolder> implements Filterable {
@@ -54,8 +48,7 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
         holder.itemTrainingPartial.setText(model.partial + " /km");
 
         // check series
-        db.collection("trainings").document(model.id)
-                .collection("series").whereEqualTo("idTraining", model.id).get().addOnCompleteListener(task -> {
+        db.collection("series").whereEqualTo("idTraining", model.id).get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         QuerySnapshot document = task.getResult();
                         if (document.isEmpty()) {

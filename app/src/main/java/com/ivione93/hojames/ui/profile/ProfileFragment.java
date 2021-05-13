@@ -193,7 +193,6 @@ public class ProfileFragment extends Fragment {
 
         tvIndicadorSeries = root.findViewById(R.id.tvIndicadorSeries);
         ivIndicadorSeries = root.findViewById(R.id.ivIndicadorSeries);
-
     }
 
     private void getLastCompetition(String license) {
@@ -234,13 +233,15 @@ public class ProfileFragment extends Fragment {
                                 last_training_partial.setText(documentSnapshot.get("partial").toString() + " /km");
 
                                 // check series
-                                db.collection("trainings").document(documentSnapshot.get("id").toString())
-                                        .collection("series").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
+                                db.collection("series").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
                                     if (t.isSuccessful()) {
                                         QuerySnapshot document = t.getResult();
                                         if (!document.isEmpty()) {
                                             tvIndicadorSeries.setVisibility(View.VISIBLE);
                                             ivIndicadorSeries.setVisibility(View.VISIBLE);
+                                        } else {
+                                            tvIndicadorSeries.setVisibility(View.INVISIBLE);
+                                            ivIndicadorSeries.setVisibility(View.INVISIBLE);
                                         }
                                     }
                                 });

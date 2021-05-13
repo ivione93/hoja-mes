@@ -43,7 +43,7 @@ import java.util.UUID;
 public class ViewTrainingActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference series = db.collection("trainings");
+    private CollectionReference series = db.collection("series");
     private AdapterSeries adapterSeries;
 
     TextInputLayout trainingTimeText, trainingDistanceText;
@@ -76,7 +76,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
     private void setupRecyclerSeries() {
         // Query
-        Query query = series.whereEqualTo("license", license);
+        Query query = series.whereEqualTo("idTraining", id);
                                 //.orderBy("date", Query.Direction.DESCENDING);
 
         // Recycler options
@@ -88,7 +88,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         rvSeries = findViewById(R.id.rvSeries);
         rvSeries.setHasFixedSize(true);
-        rvSeries.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        rvSeries.setLayoutManager(new LinearLayoutManager(this));
         rvSeries.setAdapter(adapterSeries);
     }
 
@@ -209,12 +209,15 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 // Añadir series
                 if (!listSeriesDto.isEmpty()) {
                     for (SeriesDto dto : listSeriesDto) {
+                        String idSerie = UUID.randomUUID().toString();
                         Map<String, Object> serie = new HashMap<>();
-                        serie.put("idTraining", id);
+                        serie.put("id", idSerie);
+                        serie.put("idTraining", training.get("id"));
                         serie.put("distance", dto.distance);
                         serie.put("time", dto.time);
+                        serie.put("date", training.get("date"));
 
-                        db.collection("trainings").document(id).collection("series").document().set(serie);
+                        db.collection("series").document(idSerie).set(serie);
                     }
                 }
 

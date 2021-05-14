@@ -50,8 +50,8 @@ public class ProfileFragment extends Fragment {
     TextView emailTextView, licenciaEditText, nombreEditText, birthEditText;
     TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result;
     TextView title_training, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
-    TextView tvIndicadorSeries;
-    ImageView ivIndicadorSeries;
+    TextView tvIndicadorSeries, tvIndicadorCuestas;
+    ImageView ivIndicadorSeries, ivIndicadorCuestas;
 
     String email, license;
     String dateSelected = Utils.toString(new Date());
@@ -193,6 +193,9 @@ public class ProfileFragment extends Fragment {
 
         tvIndicadorSeries = root.findViewById(R.id.tvIndicadorSeries);
         ivIndicadorSeries = root.findViewById(R.id.ivIndicadorSeries);
+
+        tvIndicadorCuestas = root.findViewById(R.id.tvIndicadorCuestas);
+        ivIndicadorCuestas = root.findViewById(R.id.ivIndicadorCuestas);
     }
 
     private void getLastCompetition(String license) {
@@ -242,6 +245,20 @@ public class ProfileFragment extends Fragment {
                                         } else {
                                             tvIndicadorSeries.setVisibility(View.INVISIBLE);
                                             ivIndicadorSeries.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                });
+
+                                // check cuestas
+                                db.collection("series").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
+                                    if (t.isSuccessful()) {
+                                        QuerySnapshot document = t.getResult();
+                                        if (!document.isEmpty()) {
+                                            tvIndicadorCuestas.setVisibility(View.VISIBLE);
+                                            ivIndicadorCuestas.setVisibility(View.VISIBLE);
+                                        } else {
+                                            tvIndicadorCuestas.setVisibility(View.INVISIBLE);
+                                            ivIndicadorCuestas.setVisibility(View.INVISIBLE);
                                         }
                                     }
                                 });

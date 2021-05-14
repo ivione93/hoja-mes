@@ -28,7 +28,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
+import com.ivione93.hojames.dto.CuestasDto;
 import com.ivione93.hojames.dto.SeriesDto;
+import com.ivione93.hojames.model.Cuestas;
 import com.ivione93.hojames.model.Series;
 
 import java.text.ParseException;
@@ -43,6 +45,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference series = db.collection("series");
     private AdapterSeries adapterSeries;
+    private CollectionReference cuestas = db.collection("cuestas");
+    private AdapterCuestas adapterCuestas;
 
     TextInputLayout trainingTimeText, trainingDistanceText;
     EditText trainingDateText;
@@ -55,6 +59,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     Boolean isNew;
 
     List<SeriesDto> listSeriesDto;
+    List<CuestasDto> listCuestasDto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +75,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         setup(isNew);
         setupRecyclerSeries();
+        setupRecyclerCuestas();
     }
 
     @Override
@@ -100,16 +106,19 @@ public class ViewTrainingActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         adapterSeries.startListening();
+        adapterCuestas.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         adapterSeries.stopListening();
+        adapterCuestas.stopListening();
     }
 
     private void setup(Boolean isNew) {
         listSeriesDto = new ArrayList<>();
+        listCuestasDto = new ArrayList<>();
 
         tvListSeries = findViewById(R.id.tvListSeries);
 
@@ -169,7 +178,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         });
 
         btnAddCuestas.setOnClickListener(v -> {
-            //createAddCuestasDialog().show();
+            createAddCuestasDialog().show();
         });
 
         btnAddFartlek.setOnClickListener(v -> {
@@ -193,6 +202,24 @@ public class ViewTrainingActivity extends AppCompatActivity {
         rvSeries.setHasFixedSize(true);
         rvSeries.setLayoutManager(new LinearLayoutManager(this));
         rvSeries.setAdapter(adapterSeries);
+    }
+
+    private void setupRecyclerCuestas() {
+        // Query
+        Query query = cuestas.whereEqualTo("idTraining", id);
+        //.orderBy("date", Query.Direction.DESCENDING);
+
+        // Recycler options
+        FirestoreRecyclerOptions<Cuestas> options = new FirestoreRecyclerOptions.Builder<Cuestas>()
+                .setQuery(query, Cuestas.class)
+                .build();
+
+        adapterCuestas = new AdapterCuestas(options);
+
+        rvCuestas = findViewById(R.id.rvCuestas);
+        rvCuestas.setHasFixedSize(true);
+        rvCuestas.setLayoutManager(new LinearLayoutManager(this));
+        rvCuestas.setAdapter(adapterCuestas);
     }
 
     private void saveTraining() throws ParseException {
@@ -228,6 +255,20 @@ public class ViewTrainingActivity extends AppCompatActivity {
                         serie.put("date", training.get("date"));
 
                         db.collection("series").document(idSerie).set(serie);
+                    }
+                }
+                // Añadir cuestas
+                if (!listCuestasDto.isEmpty()) {
+                    for (CuestasDto dto : listCuestasDto) {
+                        String idCuesta = UUID.randomUUID().toString();
+                        Map<String, Object> cuesta = new HashMap<>();
+                        cuesta.put("id", idCuesta);
+                        cuesta.put("idTraining", training.get("id"));
+                        cuesta.put("type", dto.type);
+                        cuesta.put("times", dto.times);
+                        cuesta.put("date", training.get("date"));
+
+                        db.collection("cuestas").document(idCuesta).set(cuesta);
                     }
                 }
 
@@ -271,7 +312,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         builder.setView(v)
                 .setPositiveButton("Añadir", (dialog, which) -> {
                     addSeries(v);
-                    showSeries();
+                    showExtras();
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> {
 
@@ -296,12 +337,50 @@ public class ViewTrainingActivity extends AppCompatActivity {
         }
     }
 
-    private void showSeries() {
+    public AlertDialog createAddCuestasDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_add_cuestas, null);
+
+        builder.setTitle("Añadir cuestas");
+        builder.setView(v)
+                .setPositiveButton("Añadir", (dialog, which) -> {
+                    addCuestas(v);
+                    showExtras();
+                })
+                .setNegativeButton("Cancelar", (dialog, which) -> {
+
+                });
+
+        return builder.create();
+    }
+
+    private void addCuestas(View v) {
+        EditText repeticionesCuestas, tipoCuestas;
+        tipoCuestas = v.findViewById(R.id.tipoCuestas);
+        repeticionesCuestas = v.findViewById(R.id.repeticionesCuestas);
+
+        String type = tipoCuestas.getText().toString();
+        String times = repeticionesCuestas.getText().toString();
+
+        if (type.equals("") && times.equals("")) {
+            Toast.makeText(v.getContext(), "Campos incompletos", Toast.LENGTH_LONG).show();
+        } else {
+            CuestasDto cuestasDto = new CuestasDto(type, Integer.parseInt(times));
+            listCuestasDto.add(cuestasDto);
+        }
+    }
+
+    private void showExtras() {
         tvListSeries.setVisibility(View.VISIBLE);
         String txt = "";
 
         for (SeriesDto dto : listSeriesDto) {
             txt += "S[" + dto.distance + ", " + dto.time + "] ";
+            tvListSeries.setText(txt);
+        }
+        for (CuestasDto dto : listCuestasDto) {
+            txt += "C[" + dto.type + ", " + dto.times + "] ";
             tvListSeries.setText(txt);
         }
     }

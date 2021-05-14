@@ -65,6 +65,20 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
                     }
                 });
 
+        // check cuestas
+        db.collection("cuestas").whereEqualTo("idTraining", model.id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot document = task.getResult();
+                if (document.isEmpty()) {
+                    holder.tvIndicadorCuestas.setVisibility(View.INVISIBLE);
+                    holder.ivIndicadorCuestas.setVisibility(View.INVISIBLE);
+                } else {
+                    holder.tvIndicadorCuestas.setVisibility(View.VISIBLE);
+                    holder.ivIndicadorCuestas.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         holder.ibOptionsTraining.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(holder.itemView.getContext(), holder.ibOptionsTraining);
             popup.inflate(R.menu.item_training_menu);
@@ -84,6 +98,13 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
                             if (task.isSuccessful()){
                                 for (DocumentSnapshot doc : task.getResult().getDocuments()) {
                                     db.collection("series").document(doc.getId()).delete();
+                                }
+                            }
+                        });
+                        db.collection("cuestas").whereEqualTo("idTraining", model.id).get().addOnCompleteListener(task -> {
+                            if (task.isSuccessful()){
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    db.collection("cuestas").document(doc.getId()).delete();
                                 }
                             }
                         });
@@ -148,8 +169,8 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
         TextView itemTrainingDate, itemTrainingTime, itemTrainingDistance, itemTrainingPartial;
         ImageButton ibOptionsTraining;
 
-        TextView tvIndicadorSeries;
-        ImageView ivIndicadorSeries;
+        TextView tvIndicadorSeries, tvIndicadorCuestas;
+        ImageView ivIndicadorSeries, ivIndicadorCuestas;
 
         public TrainingViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -161,6 +182,9 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
 
             tvIndicadorSeries = itemView.findViewById(R.id.tvIndicadorSeries);
             ivIndicadorSeries = itemView.findViewById(R.id.ivIndicadorSeries);
+
+            tvIndicadorCuestas = itemView.findViewById(R.id.tvIndicadorCuestas);
+            ivIndicadorCuestas = itemView.findViewById(R.id.ivIndicadorCuestas);
         }
     }
 }

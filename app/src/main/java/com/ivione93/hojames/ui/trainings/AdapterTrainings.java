@@ -17,8 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.ObservableSnapshotArray;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.model.Document;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Training;
@@ -76,6 +80,13 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
                         return true;
                     case R.id.menu_delete_training:
                         db.collection("trainings").document(model.id).delete();
+                        db.collection("series").whereEqualTo("idTraining", model.id).get().addOnCompleteListener(task -> {
+                            if (task.isSuccessful()){
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    db.collection("series").document(doc.getId()).delete();
+                                }
+                            }
+                        });
                         notifyItemRemoved(position);
                         return true;
                     default:

@@ -1,11 +1,5 @@
 package com.ivione93.hojames.ui.trainings;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,12 +11,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,7 +30,6 @@ import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.dto.SeriesDto;
 import com.ivione93.hojames.model.Series;
-import com.ivione93.hojames.model.Training;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -74,22 +72,40 @@ public class ViewTrainingActivity extends AppCompatActivity {
         setupRecyclerSeries();
     }
 
-    private void setupRecyclerSeries() {
-        // Query
-        Query query = series.whereEqualTo("idTraining", id);
-                                //.orderBy("date", Query.Direction.DESCENDING);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.new_training_menu, menu);
+        return true;
+    }
 
-        // Recycler options
-        FirestoreRecyclerOptions<Series> options = new FirestoreRecyclerOptions.Builder<Series>()
-                .setQuery(query, Series.class)
-                .build();
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            getIntent().putExtra("license", license);
+            onBackPressed();
+            return true;
+        }
+        if (item.getItemId() == R.id.menu_new_training) {
+            try {
+                saveTraining();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-        adapterSeries = new AdapterSeries(options);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapterSeries.startListening();
+    }
 
-        rvSeries = findViewById(R.id.rvSeries);
-        rvSeries.setHasFixedSize(true);
-        rvSeries.setLayoutManager(new LinearLayoutManager(this));
-        rvSeries.setAdapter(adapterSeries);
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapterSeries.stopListening();
     }
 
     private void setup(Boolean isNew) {
@@ -161,28 +177,22 @@ public class ViewTrainingActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.new_training_menu, menu);
-        return true;
-    }
+    private void setupRecyclerSeries() {
+        // Query
+        Query query = series.whereEqualTo("idTraining", id);
+        //.orderBy("date", Query.Direction.DESCENDING);
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            getIntent().putExtra("license", license);
-            onBackPressed();
-            return true;
-        }
-        if (item.getItemId() == R.id.menu_new_training) {
-            try {
-                saveTraining();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        // Recycler options
+        FirestoreRecyclerOptions<Series> options = new FirestoreRecyclerOptions.Builder<Series>()
+                .setQuery(query, Series.class)
+                .build();
+
+        adapterSeries = new AdapterSeries(options);
+
+        rvSeries = findViewById(R.id.rvSeries);
+        rvSeries.setHasFixedSize(true);
+        rvSeries.setLayoutManager(new LinearLayoutManager(this));
+        rvSeries.setAdapter(adapterSeries);
     }
 
     private void saveTraining() throws ParseException {

@@ -4,8 +4,7 @@ import com.google.firebase.Timestamp;
 
 public class Series {
 
-    public String idSeries;
-    public String idTraining;
+    public String id;
     public String distance;
     public String time;
     public Timestamp date;

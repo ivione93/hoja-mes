@@ -122,8 +122,8 @@ public class TrainingsFragment extends Fragment {
 
     private void setupRecyclerView(View root) {
         // Query
-        Query query = trainings.whereEqualTo("license", license);
-        //.orderBy("date", Query.Direction.DESCENDING);
+        Query query = trainings.whereEqualTo("license", license)
+            .orderBy("date", Query.Direction.DESCENDING);
 
         // Recycler options
         FirestoreRecyclerOptions<Training> options = new FirestoreRecyclerOptions.Builder<Training>()

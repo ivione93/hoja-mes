@@ -52,8 +52,8 @@ public class CompetitionsFragment extends Fragment {
 
     private void setupRecyclerView(View root) {
         // Query
-        Query query = competitions.whereEqualTo("license", license);
-                //.orderBy("date", Query.Direction.DESCENDING);
+        Query query = competitions.whereEqualTo("license", license)
+                .orderBy("date", Query.Direction.DESCENDING);
 
         // Recycler options
         FirestoreRecyclerOptions<Competition> options = new FirestoreRecyclerOptions.Builder<Competition>()

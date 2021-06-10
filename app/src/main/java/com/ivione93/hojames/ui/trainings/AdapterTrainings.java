@@ -17,12 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.firebase.ui.firestore.ObservableSnapshotArray;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.model.Document;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Training;
@@ -127,42 +124,39 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
 
     @Override
     public Filter getFilter() {
-        return filter;
-    }
-
-    private Filter filter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            FilterResults results = new FilterResults();
-            if (constraint == null || constraint.length() == 0) {
-                results.values = mSnapshots;
-                results.count = mSnapshots.size();
-            } else {
-                List<Training> filteredTrainings = new ArrayList<>();
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (Training training : mSnapshots) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    String actualTrainingDate = sdf.format(training.date.toDate());
-                    if (actualTrainingDate.equals(filterPattern)) {
-                        filteredTrainings.add(training);
-                        results.values = filteredTrainings;
-                        results.count = filteredTrainings.size();
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                FilterResults results = new FilterResults();
+                if (constraint == null || constraint.length() == 0) {
+                    results.values = mSnapshots;
+                    results.count = mSnapshots.size();
+                } else {
+                    String filterPattern = constraint.toString().toLowerCase().trim();
+                    for (Training training : mSnapshots) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        String actualTrainingDate = sdf.format(training.date.toDate());
+                        if (actualTrainingDate.equals(filterPattern)) {
+                            list.add(training);
+                            results.values = list;
+                            results.count = list.size();
+                        }
                     }
                 }
+
+                return results;
             }
 
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            list.clear();
-            if (results.count > 0) {
-                list.addAll((List) results.values);
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                list.clear();
+                if (results.count > 0) {
+                    list.addAll((List) results.values);
+                }
+                notifyDataSetChanged();
             }
-            notifyDataSetChanged();
-        }
-    };
+        };
+    }
 
     class TrainingViewHolder extends RecyclerView.ViewHolder {
 

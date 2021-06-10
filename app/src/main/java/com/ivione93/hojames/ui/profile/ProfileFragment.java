@@ -255,7 +255,7 @@ public class ProfileFragment extends Fragment {
                                 });
 
                                 // check cuestas
-                                db.collection("series").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
+                                db.collection("cuestas").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
                                     if (t.isSuccessful()) {
                                         QuerySnapshot document = t.getResult();
                                         if (!document.isEmpty()) {

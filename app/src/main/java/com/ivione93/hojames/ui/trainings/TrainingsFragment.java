@@ -33,7 +33,6 @@ import java.util.Date;
 public class TrainingsFragment extends Fragment {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference trainings = db.collection("trainings");
     private AdapterTrainings adapterTrainings;
 
     CalendarView calendarTrainings;
@@ -78,7 +77,9 @@ public class TrainingsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        adapterTrainings.stopListening();
+        if (adapterTrainings != null) {
+            adapterTrainings.stopListening();
+        }
     }
 
     @Override
@@ -117,13 +118,16 @@ public class TrainingsFragment extends Fragment {
                 }
             }
             adapterTrainings.getFilter().filter(dateSelected);
+            adapterTrainings.notifyDataSetChanged();
         });
     }
 
     private void setupRecyclerView(View root) {
         // Query
-        Query query = trainings.whereEqualTo("license", license)
-            .orderBy("date", Query.Direction.DESCENDING);
+        Query query = FirebaseFirestore.getInstance()
+                .collection("trainings")
+                .whereEqualTo("license", license)
+                .orderBy("date", Query.Direction.DESCENDING);
 
         // Recycler options
         FirestoreRecyclerOptions<Training> options = new FirestoreRecyclerOptions.Builder<Training>()
@@ -139,6 +143,7 @@ public class TrainingsFragment extends Fragment {
         Date now = Calendar.getInstance().getTime();
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         adapterTrainings.getFilter().filter(format.format(now));
+        adapterTrainings.notifyDataSetChanged();
         rvTrainings.setAdapter(adapterTrainings);
     }
 }

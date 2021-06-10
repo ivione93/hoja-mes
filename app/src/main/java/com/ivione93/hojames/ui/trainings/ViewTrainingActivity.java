@@ -205,8 +205,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
     private void setupRecyclerSeries() {
         // Query
-        Query query = series.whereEqualTo("idTraining", id);
-        //.orderBy("date", Query.Direction.DESCENDING);
+        Query query = series.whereEqualTo("idTraining", id)
+            .orderBy("date", Query.Direction.DESCENDING);
 
         // Recycler options
         FirestoreRecyclerOptions<Series> options = new FirestoreRecyclerOptions.Builder<Series>()
@@ -223,8 +223,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
     private void setupRecyclerCuestas() {
         // Query
-        Query query = cuestas.whereEqualTo("idTraining", id);
-        //.orderBy("date", Query.Direction.DESCENDING);
+        Query query = cuestas.whereEqualTo("idTraining", id)
+            .orderBy("date", Query.Direction.DESCENDING);
 
         // Recycler options
         FirestoreRecyclerOptions<Cuestas> options = new FirestoreRecyclerOptions.Builder<Cuestas>()

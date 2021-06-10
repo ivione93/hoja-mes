@@ -27,6 +27,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.ui.login.AuthActivity;
@@ -201,6 +202,8 @@ public class ProfileFragment extends Fragment {
     private void getLastCompetition(String license) {
         db.collection("competitions")
                 .whereEqualTo("license", license)
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 progressDialog.dismiss();
@@ -225,6 +228,8 @@ public class ProfileFragment extends Fragment {
     private void getLastTraining(String license) {
         db.collection("trainings")
                 .whereEqualTo("license", license)
+                .orderBy("date", Query.Direction.DESCENDING)
+                .limit(1)
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();

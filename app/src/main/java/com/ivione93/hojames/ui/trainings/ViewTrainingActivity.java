@@ -18,12 +18,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
@@ -39,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ViewTrainingActivity extends AppCompatActivity {
 
@@ -98,6 +102,19 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             return true;
+        }
+        if (item.getItemId() == R.id.menu_share_training) {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            String msg = "*Hoja del mes*\n" +
+                    "Entrenamiento " + license + " día " + trainingDateText.getText() + ":\n" +
+                    "- Tiempo: " + trainingTimeText.getEditText().getText().toString() + "\n" +
+                    "- Distancia: " + trainingDistanceText.getEditText().getText().toString();
+            sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
+            sendIntent.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
         }
         return super.onOptionsItemSelected(item);
     }

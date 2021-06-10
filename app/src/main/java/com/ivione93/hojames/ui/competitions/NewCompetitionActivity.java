@@ -81,8 +81,11 @@ public class NewCompetitionActivity extends AppCompatActivity {
         dateText = findViewById(R.id.dateText);
 
         if (!isNew) {
+            getSupportActionBar().setTitle("Competición");
             id = getIntent().getStringExtra("idCompetition");
             loadCompetition(id);
+        } else {
+            getSupportActionBar().setTitle("Nueva competición");
         }
     }
 

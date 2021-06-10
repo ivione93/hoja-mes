@@ -203,7 +203,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         });
 
         btnAddFartlek.setOnClickListener(v -> {
-            //createAddFartlekDialog().show();
+            createAddFartlekDialog().show();
         });
     }
 
@@ -404,6 +404,22 @@ public class ViewTrainingActivity extends AppCompatActivity {
             txt += "C[" + dto.type + ", " + dto.times + "] ";
             tvListSeries.setText(txt);
         }
+    }
+
+    public AlertDialog createAddFartlekDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_add_fartlek, null);
+
+        builder.setTitle("Añadir fartlek");
+        builder.setView(v)
+                /*.setPositiveButton("Añadir", (dialog, which) -> {
+                })*/
+                .setNegativeButton("Aceptar", (dialog, which) -> {
+
+                });
+
+        return builder.create();
     }
 
     private boolean validateNewTraining(String date, String time, String distance) {

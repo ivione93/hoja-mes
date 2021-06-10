@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_share_training"
-        android:title="Share"
+        android:title="Compartir"
         android:icon="@drawable/ic_baseline_share"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/menu_new_training"
-        android:title="New"
+        android:title="Guardar"
         android:icon="@drawable/ic_save"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" />

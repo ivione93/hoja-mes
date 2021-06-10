@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_add_training"
-        android:title="Add"
+        android:title="Nuevo entrenamiento"
         android:icon="@drawable/ic_add"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" />

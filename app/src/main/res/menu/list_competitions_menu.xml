@@ -16,7 +16,7 @@
         app:showAsAction="ifRoom" />-->
 
     <item android:id="@+id/menu_add_competition"
-        android:title="Add"
+        android:title="Nueva competición"
         android:icon="@drawable/ic_add"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom|collapseActionView" />

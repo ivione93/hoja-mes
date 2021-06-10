@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_profile_options"
-        android:title="New"
+        android:title="Opciones"
         android:icon="@drawable/ic_menu"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" >
@@ -19,9 +19,8 @@
     </item>
 
     <item android:id="@+id/menu_log_out"
-        android:title="New"
+        android:title="Cerrar sesión"
         android:icon="@drawable/ic_logout"
-        android:iconTint="#F44336"
         app:showAsAction="ifRoom" />
 
 </menu>

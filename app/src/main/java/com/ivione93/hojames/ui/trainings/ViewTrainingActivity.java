@@ -122,8 +122,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        adapterSeries.startListening();
         adapterCuestas.startListening();
+        adapterSeries.startListening();
     }
 
     @Override
@@ -150,6 +150,10 @@ public class ViewTrainingActivity extends AppCompatActivity {
         rvSeries = findViewById(R.id.rvSeries);
         rvCuestas = findViewById(R.id.rvCuestas);
         rvFartlek = findViewById(R.id.rvFartlek);
+
+        rvSeries.setVisibility(View.VISIBLE);
+        rvCuestas.setVisibility(View.INVISIBLE);
+        rvFartlek.setVisibility(View.INVISIBLE);
 
         tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("Series"));

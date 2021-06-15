@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
@@ -118,7 +120,6 @@ public class TrainingsFragment extends Fragment {
                 }
             }
             adapterTrainings.getFilter().filter(dateSelected);
-            adapterTrainings.notifyDataSetChanged();
         });
     }
 
@@ -143,7 +144,6 @@ public class TrainingsFragment extends Fragment {
         Date now = Calendar.getInstance().getTime();
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         adapterTrainings.getFilter().filter(format.format(now));
-        adapterTrainings.notifyDataSetChanged();
         rvTrainings.setAdapter(adapterTrainings);
     }
 }

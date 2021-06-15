@@ -42,6 +42,11 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
     }
 
     @Override
+    public int getItemCount() {
+        return mSnapshots.size();
+    }
+
+    @Override
     protected void onBindViewHolder(@NonNull AdapterTrainings.TrainingViewHolder holder, int position, @NonNull Training model) {
         holder.itemTrainingDate.setText(Utils.toString(model.date));
         holder.itemTrainingTime.setText(model.time + " min");
@@ -127,22 +132,22 @@ public class AdapterTrainings extends FirestoreRecyclerAdapter<Training, Adapter
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults results = new FilterResults();
+                List<Training> listFiltered = new ArrayList<>();
                 if (constraint == null || constraint.length() == 0) {
-                    results.values = mSnapshots;
-                    results.count = mSnapshots.size();
+                    listFiltered = mSnapshots;
                 } else {
                     String filterPattern = constraint.toString().toLowerCase().trim();
                     for (Training training : mSnapshots) {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         String actualTrainingDate = sdf.format(training.date.toDate());
                         if (actualTrainingDate.equals(filterPattern)) {
-                            list.add(training);
-                            results.values = list;
-                            results.count = list.size();
+                            listFiltered.add(training);
                         }
                     }
                 }
+                FilterResults results = new FilterResults();
+                results.values = listFiltered;
+                results.count = listFiltered.size();
 
                 return results;
             }

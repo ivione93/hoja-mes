@@ -2,13 +2,6 @@ package com.ivione93.hojames.ui.trainings;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,26 +9,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
-import android.widget.Toast;
 
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.CollectionReference;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Training;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class TrainingsFragment extends Fragment {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private AdapterTrainings adapterTrainings;
+
+    private List<Training> listTrainings = new ArrayList<>();
 
     CalendarView calendarTrainings;
     RecyclerView rvTrainings;
@@ -56,16 +56,43 @@ public class TrainingsFragment extends Fragment {
         email = bundle.getString("email");
         license = bundle.getString("license");
 
+        listTrainings.clear();
+        db.collection("trainings")
+                .whereEqualTo("license", license)
+                .orderBy("date", Query.Direction.DESCENDING)
+                .get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                    Training training = documentSnapshot.toObject(Training.class);
+                    listTrainings.add(training);
+                    setupAdaptadorTrainings(root);
+                }
+            } else {
+                setupAdaptadorTrainings(root);
+            }
+        });
+
         setup(root);
-        setupRecyclerView(root);
 
         return root;
+    }
+
+    private void setupAdaptadorTrainings(View root) {
+
+        rvTrainings = root.findViewById(R.id.rvTrainings);
+        rvTrainings.setHasFixedSize(true);
+        adapterTrainings = new AdapterTrainings(listTrainings);
+
+        rvTrainings.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        Date now = Calendar.getInstance().getTime();
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        adapterTrainings.getFilter().filter(format.format(now));
+        rvTrainings.setAdapter(adapterTrainings);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        adapterTrainings.startListening();
         db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
@@ -79,9 +106,6 @@ public class TrainingsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (adapterTrainings != null) {
-            adapterTrainings.stopListening();
-        }
     }
 
     @Override
@@ -121,29 +145,5 @@ public class TrainingsFragment extends Fragment {
             }
             adapterTrainings.getFilter().filter(dateSelected);
         });
-    }
-
-    private void setupRecyclerView(View root) {
-        // Query
-        Query query = FirebaseFirestore.getInstance()
-                .collection("trainings")
-                .whereEqualTo("license", license)
-                .orderBy("date", Query.Direction.DESCENDING);
-
-        // Recycler options
-        FirestoreRecyclerOptions<Training> options = new FirestoreRecyclerOptions.Builder<Training>()
-                .setQuery(query, Training.class)
-                .build();
-
-        adapterTrainings = new AdapterTrainings(options);
-
-        rvTrainings = root.findViewById(R.id.rvTrainings);
-        rvTrainings.setHasFixedSize(true);
-        rvTrainings.setLayoutManager(new LinearLayoutManager(root.getContext()));
-
-        Date now = Calendar.getInstance().getTime();
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        adapterTrainings.getFilter().filter(format.format(now));
-        rvTrainings.setAdapter(adapterTrainings);
     }
 }

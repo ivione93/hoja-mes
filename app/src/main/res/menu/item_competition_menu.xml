@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/menu_edit_competition"
-        android:title="Editar" />
+        android:title="Ver competición" />
     <item android:id="@+id/menu_delete_competition"
         android:title="Eliminar" />
 

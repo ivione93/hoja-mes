@@ -50,6 +50,9 @@ public class NewCompetitionActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.new_competition_menu, menu);
+        if (isNew) {
+            menu.findItem(R.id.menu_share_competition).setVisible(false);
+        }
         return true;
     }
 

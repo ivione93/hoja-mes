@@ -2,14 +2,19 @@ package com.ivione93.hojames.ui.competitions;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,6 +33,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     TextInputLayout placeText, competitionNameText, trackText, resultText;
+    TextInputEditText editTextResult;
     EditText dateText;
 
     String email, license, id;
@@ -95,8 +101,11 @@ public class NewCompetitionActivity extends AppCompatActivity {
         competitionNameText = findViewById(R.id.competitionNameText);
         trackText = findViewById(R.id.surnameText);
         resultText = findViewById(R.id.resultText);
+        editTextResult = findViewById(R.id.editTextResult);
         placeText = findViewById(R.id.placeText);
         dateText = findViewById(R.id.dateText);
+
+        editTextResult.setOnClickListener(v -> selectTimePicker().show());
 
         if (!isNew) {
             getSupportActionBar().setTitle("Competición");
@@ -105,6 +114,60 @@ public class NewCompetitionActivity extends AppCompatActivity {
         } else {
             getSupportActionBar().setTitle("Nueva competición");
         }
+    }
+
+    public AlertDialog selectTimePicker() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.fragment_number_picker, null);
+
+        NumberPicker horas = v.findViewById(R.id.horas);
+        horas.setMinValue(00);
+        horas.setMaxValue(24);
+
+        NumberPicker minutos = v.findViewById(R.id.minutos);
+        minutos.setMinValue(00);
+        minutos.setMaxValue(59);
+
+        NumberPicker segundos = v.findViewById(R.id.segundos);
+        segundos.setMinValue(00);
+        segundos.setMaxValue(59);
+
+        NumberPicker milisegundos = v.findViewById(R.id.milisegundos);
+        milisegundos.setMinValue(00);
+        milisegundos.setMaxValue(99);
+
+        builder.setTitle("Introduce marca");
+        builder.setView(v)
+                .setPositiveButton("Añadir", (dialog, which) -> {
+                    String hours, minutes, seconds, miliseconds;
+                    if (horas.getValue() < 10) {
+                        hours = "0" + horas.getValue();
+                    } else {
+                        hours = "" + horas.getValue();
+                    }
+                    if (minutos.getValue() < 10) {
+                        minutes = "0" + minutos.getValue();
+                    } else {
+                        minutes = "" + minutos.getValue();
+                    }
+                    if (segundos.getValue() < 10) {
+                        seconds = "0" + segundos.getValue();
+                    } else {
+                        seconds = "" + segundos.getValue();
+                    }
+                    if (milisegundos.getValue() < 10) {
+                        miliseconds = "0" + milisegundos.getValue();
+                    } else {
+                        miliseconds = "" + milisegundos.getValue();
+                    }
+                    resultText.getEditText().setText(hours + "h " + minutes + ":" + seconds + "." + miliseconds);
+                })
+                .setNegativeButton("Cancelar", (dialog, which) -> {
+
+                });
+
+        return builder.create();
     }
 
     private void loadCompetition(String id) {

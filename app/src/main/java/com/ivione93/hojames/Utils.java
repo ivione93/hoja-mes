@@ -51,7 +51,7 @@ public class Utils {
         String str = String.valueOf(bRitmo);
         int decNumberInt = Integer.parseInt(str.substring(str.indexOf('.') + 1));
         int sec = (60 * decNumberInt) / 100;
-        String seg = "";
+        String seg;
         if (sec < 10) {
             seg = "0" + sec;
         } else {
@@ -61,6 +61,43 @@ public class Utils {
         sRitmo = iRitmo + "." + seg;
 
         return sRitmo;
+    }
+
+    public static String getFormattedResult(String result) {
+        String formattedResult = "";
+        String splitHour, splitMinutes, splitSecond, splitMiliseconds;
+
+        if (result.equals("AB")) {
+            formattedResult = result;
+        } else {
+            splitHour = result.substring(0, 2);
+            splitMinutes = result.substring(4,6);
+            splitSecond = result.substring(7,9);
+            splitMiliseconds = result.substring(10,12);
+
+            if (splitHour.equals("00")) {
+                if (splitMinutes.equals("00")) {
+                    formattedResult = splitSecond + "." + splitMiliseconds;
+                } else {
+                    formattedResult = splitMinutes + ":" + splitSecond + "." + splitMiliseconds;
+                }
+            } else {
+                if (splitHour.startsWith("0")) {
+                    splitHour = splitHour.substring(1,2);
+                }
+                if (splitMinutes.equals("00") && splitSecond.equals("00") && splitMiliseconds.equals("00")) {
+                    formattedResult = splitHour + "h";
+                } else {
+                    if (splitMiliseconds.equals("00")) {
+                        formattedResult = splitHour + "h " + splitMinutes + ":" + splitSecond;
+                    } else {
+                        formattedResult = splitHour + "h " + splitMinutes + ":" + splitSecond + "." + splitMiliseconds;
+                    }
+                }
+            }
+        }
+
+        return formattedResult;
     }
 
 }

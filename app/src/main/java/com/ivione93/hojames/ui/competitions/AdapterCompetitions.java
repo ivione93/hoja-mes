@@ -31,7 +31,7 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
         holder.name.setText(model.name);
         holder.place.setText(model.place);
         holder.track.setText(model.track);
-        holder.result.setText(model.result);
+        holder.result.setText(Utils.getFormattedResult(model.result));
         holder.date.setText(Utils.toString(model.date));
 
         holder.ibOptionsCompetition.setOnClickListener(v -> {

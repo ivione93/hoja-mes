@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -355,7 +356,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String distance = distanceSeries.getText().toString();
         String time = timeSeries.getText().toString();
 
-        if (distance.equals("") && time.equals("")) {
+        if (distance.equals("") || time.equals("")) {
             Toast.makeText(v.getContext(), "Campos incompletos", Toast.LENGTH_LONG).show();
         } else {
             SeriesDto seriesDto = new SeriesDto(distance, time);

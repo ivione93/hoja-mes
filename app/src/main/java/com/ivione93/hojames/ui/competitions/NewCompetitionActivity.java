@@ -146,14 +146,8 @@ public class NewCompetitionActivity extends AppCompatActivity {
                     CheckBox checkAbandono = v.findViewById(R.id.checkAbandono);
 
                     if (checkAbandono.isChecked()) {
-                        horas.setEnabled(false);
-                        minutos.setEnabled(false);
-                        segundos.setEnabled(false);
                         resultText.getEditText().setText("AB");
                     } else {
-                        horas.setEnabled(true);
-                        minutos.setEnabled(true);
-                        segundos.setEnabled(true);
                         if (horas.getValue() < 10) {
                             hours = "0" + horas.getValue();
                         } else {

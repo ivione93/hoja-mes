@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -257,7 +256,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         if (validateNewTraining(date, time, distance)) {
             if (Utils.validateDateFormat(date)) {
-                String partial = "";//Utils.calculatePartial(time, distance);
+                String partial = Utils.calculatePartial(time, distance);
                 Map<String,Object> training = new HashMap<>();
                 if (isNew) {
                     id = UUID.randomUUID().toString();
@@ -299,7 +298,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
                         db.collection("cuestas").document(idCuesta).set(cuesta);
                     }
                 }
-
                 goProfile(email, license);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
@@ -317,7 +315,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 QuerySnapshot document = task.getResult();
                 if (!document.isEmpty()) {
                     trainingDateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date")));
-                    trainingTimeText.getEditText().setText(Utils.getFormattedTime(task.getResult().getDocuments().get(0).get("time").toString()));
+                    trainingTimeText.getEditText().setText(task.getResult().getDocuments().get(0).get("time").toString());
                     trainingDistanceText.getEditText().setText(task.getResult().getDocuments().get(0).get("distance").toString());
                 }
             }

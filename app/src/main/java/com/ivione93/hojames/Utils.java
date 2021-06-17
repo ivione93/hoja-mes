@@ -42,7 +42,8 @@ public class Utils {
     public static String calculatePartial(String time, String distance) {
         String sRitmo;
         BigDecimal bRitmo;
-        float fTime = Float.parseFloat(time);
+        String formattedTime = convertTime(time);
+        float fTime = Float.parseFloat(formattedTime);
         float fDistance = Float.parseFloat(distance);
         float fRitmo = fTime / fDistance;
         bRitmo = new BigDecimal(fRitmo).setScale(2, RoundingMode.UP);
@@ -61,6 +62,20 @@ public class Utils {
         sRitmo = iRitmo + "." + seg;
 
         return sRitmo;
+    }
+
+    public static String convertTime(String time) {
+        String formattedTime;
+        if (time.startsWith("00")) {
+            formattedTime = time.substring(4).replace(":", ".");
+        } else {
+            Integer hh = Integer.parseInt(time.substring(0,2));
+            Integer mm = Integer.parseInt(time.substring(4,6));
+            Integer min = (hh * 60) + mm;
+            formattedTime = min.toString() + "." + time.substring(7,9);
+        }
+
+        return formattedTime;
     }
 
     public static String getFormattedTime(String result) {

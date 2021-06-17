@@ -42,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class ViewTrainingActivity extends AppCompatActivity {
 
@@ -359,9 +360,18 @@ public class ViewTrainingActivity extends AppCompatActivity {
         if (distance.equals("") || time.equals("")) {
             Toast.makeText(v.getContext(), "Campos incompletos", Toast.LENGTH_LONG).show();
         } else {
-            SeriesDto seriesDto = new SeriesDto(distance, time);
-            listSeriesDto.add(seriesDto);
+            if (validateTimeSeries(time)) {
+                SeriesDto seriesDto = new SeriesDto(distance, time);
+                listSeriesDto.add(seriesDto);
+            } else {
+                Toast.makeText(v.getContext(), "Formato de tiempo incorrecto", Toast.LENGTH_LONG).show();
+            }
         }
+    }
+
+    public boolean validateTimeSeries(String time) {
+        String formatoHora = "\\d{1,2}h|((\\d{1,2}h )?\\d{2}:)?\\d{2}(\\.\\d{1,2})?";
+        return Pattern.matches(formatoHora, time);
     }
 
     public AlertDialog createAddCuestasDialog() {

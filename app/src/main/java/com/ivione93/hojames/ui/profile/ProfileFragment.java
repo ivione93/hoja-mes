@@ -213,7 +213,7 @@ public class ProfileFragment extends Fragment {
                         last_competition_place.setText(documentSnapshot.get("place").toString());
                         last_competition_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
                         last_competition_track.setText(documentSnapshot.get("track").toString());
-                        last_competition_result.setText(documentSnapshot.get("result").toString());
+                        last_competition_result.setText(Utils.getFormattedResult(documentSnapshot.get("result").toString()));
                     } else {
                         last_competition_name.setText("No se han encontrado competiciones");
                     }

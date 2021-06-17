@@ -1,11 +1,13 @@
 package com.ivione93.hojames.ui.competitions;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Toast;
@@ -141,27 +143,39 @@ public class NewCompetitionActivity extends AppCompatActivity {
         builder.setView(v)
                 .setPositiveButton("Añadir", (dialog, which) -> {
                     String hours, minutes, seconds, miliseconds;
-                    if (horas.getValue() < 10) {
-                        hours = "0" + horas.getValue();
+                    CheckBox checkAbandono = v.findViewById(R.id.checkAbandono);
+
+                    if (checkAbandono.isChecked()) {
+                        horas.setEnabled(false);
+                        minutos.setEnabled(false);
+                        segundos.setEnabled(false);
+                        resultText.getEditText().setText("AB");
                     } else {
-                        hours = "" + horas.getValue();
+                        horas.setEnabled(true);
+                        minutos.setEnabled(true);
+                        segundos.setEnabled(true);
+                        if (horas.getValue() < 10) {
+                            hours = "0" + horas.getValue();
+                        } else {
+                            hours = "" + horas.getValue();
+                        }
+                        if (minutos.getValue() < 10) {
+                            minutes = "0" + minutos.getValue();
+                        } else {
+                            minutes = "" + minutos.getValue();
+                        }
+                        if (segundos.getValue() < 10) {
+                            seconds = "0" + segundos.getValue();
+                        } else {
+                            seconds = "" + segundos.getValue();
+                        }
+                        if (milisegundos.getValue() < 10) {
+                            miliseconds = "0" + milisegundos.getValue();
+                        } else {
+                            miliseconds = "" + milisegundos.getValue();
+                        }
+                        resultText.getEditText().setText(hours + "h " + minutes + ":" + seconds + "." + miliseconds);
                     }
-                    if (minutos.getValue() < 10) {
-                        minutes = "0" + minutos.getValue();
-                    } else {
-                        minutes = "" + minutos.getValue();
-                    }
-                    if (segundos.getValue() < 10) {
-                        seconds = "0" + segundos.getValue();
-                    } else {
-                        seconds = "" + segundos.getValue();
-                    }
-                    if (milisegundos.getValue() < 10) {
-                        miliseconds = "0" + milisegundos.getValue();
-                    } else {
-                        miliseconds = "" + milisegundos.getValue();
-                    }
-                    resultText.getEditText().setText(hours + "h " + minutes + ":" + seconds + "." + miliseconds);
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> {
 

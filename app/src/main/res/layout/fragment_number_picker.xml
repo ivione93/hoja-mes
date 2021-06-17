@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,41 +8,43 @@
         android:id="@+id/horas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/minutos"
-        app:layout_constraintEnd_toStartOf="@+id/textViewH"
-        app:layout_constraintTop_toTopOf="@+id/minutos" />
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="h"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/horas"
-        app:layout_constraintEnd_toStartOf="@+id/minutos"
-        app:layout_constraintTop_toTopOf="@+id/horas" />
+        android:layout_marginBottom="8dp"
+        android:text="HH"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/horas"
+        app:layout_constraintEnd_toEndOf="@+id/horas"
+        app:layout_constraintStart_toStartOf="@+id/horas" />
 
     <NumberPicker
         android:id="@+id/minutos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.36"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/horas"
+        app:layout_constraintStart_toEndOf="@+id/horas"
+        app:layout_constraintTop_toTopOf="@+id/horas" />
 
     <TextView
-        android:id="@+id/textViewM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="m"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/horas"
-        app:layout_constraintStart_toEndOf="@+id/minutos"
-        app:layout_constraintTop_toTopOf="@+id/horas" />
+        android:layout_marginBottom="8dp"
+        android:text="mm"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/minutos"
+        app:layout_constraintEnd_toEndOf="@+id/minutos"
+        app:layout_constraintStart_toStartOf="@+id/minutos" />
 
     <NumberPicker
         android:id="@+id/segundos"
@@ -53,18 +53,19 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/minutos"
-        app:layout_constraintStart_toEndOf="@+id/textViewM"
+        app:layout_constraintStart_toEndOf="@+id/minutos"
         app:layout_constraintTop_toTopOf="@+id/minutos" />
 
     <TextView
-        android:id="@+id/textViewS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="s"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/horas"
-        app:layout_constraintStart_toEndOf="@+id/segundos"
-        app:layout_constraintTop_toTopOf="@+id/horas" />
+        android:layout_marginBottom="8dp"
+        android:text="ss"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/segundos"
+        app:layout_constraintEnd_toEndOf="@+id/segundos"
+        app:layout_constraintStart_toStartOf="@+id/segundos" />
 
     <NumberPicker
         android:id="@+id/milisegundos"
@@ -73,7 +74,28 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/segundos"
-        app:layout_constraintStart_toEndOf="@+id/textViewS"
+        app:layout_constraintStart_toEndOf="@+id/segundos"
         app:layout_constraintTop_toTopOf="@+id/segundos" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="ms"
+        android:textSize="20dp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/milisegundos"
+        app:layout_constraintEnd_toEndOf="@+id/milisegundos"
+        app:layout_constraintStart_toStartOf="@+id/milisegundos" />
+
+    <CheckBox
+        android:id="@+id/checkAbandono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Abandono"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/horas"
+        app:layout_constraintTop_toBottomOf="@+id/horas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

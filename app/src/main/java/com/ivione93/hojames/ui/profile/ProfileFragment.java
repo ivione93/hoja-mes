@@ -236,7 +236,7 @@ public class ProfileFragment extends Fragment {
                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                             if (documentSnapshot.exists()) {
                                 last_training_distance.setText(documentSnapshot.get("distance").toString() + " kms");
-                                last_training_time.setText(documentSnapshot.get("time").toString() + " min");
+                                last_training_time.setText(Utils.getFormattedTime(documentSnapshot.get("time").toString()) + " min");
                                 last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
                                 last_training_partial.setText(documentSnapshot.get("partial").toString() + " /km");
 

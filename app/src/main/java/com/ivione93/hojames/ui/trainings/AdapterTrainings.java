@@ -47,7 +47,7 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
     @Override
     public void onBindViewHolder(@NonNull AdapterTrainings.ViewHolderTraining holder, int position) {
         holder.itemTrainingDate.setText(Utils.toString(listTrainings.get(position).date));
-        holder.itemTrainingTime.setText(listTrainings.get(position).time + " min");
+        holder.itemTrainingTime.setText(Utils.getFormattedTime(listTrainings.get(position).time) + " min");
         holder.itemTrainingDistance.setText(listTrainings.get(position).distance + " km");
         holder.itemTrainingPartial.setText(listTrainings.get(position).partial + " /km");
 

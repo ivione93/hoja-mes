@@ -49,6 +49,7 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
                         return true;
                     case R.id.menu_delete_competition:
                         db.collection("competitions").document(model.id).delete();
+                        notifyItemRangeChanged(position, getItemCount());
                         notifyItemRemoved(position);
                         return true;
                     default:

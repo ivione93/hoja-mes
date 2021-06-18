@@ -108,7 +108,10 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
                                 }
                             }
                         });
+                        listTrainings.remove(position);
+                        listTrainingsFull.remove(position);
                         notifyItemRemoved(position);
+                        notifyItemRangeChanged(position, getItemCount());
                         return true;
                     default:
                         return false;

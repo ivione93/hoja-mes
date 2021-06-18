@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
@@ -39,6 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class ViewTrainingActivity extends AppCompatActivity {
 
@@ -49,6 +53,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     private AdapterCuestas adapterCuestas;
 
     TextInputLayout trainingTimeText, trainingDistanceText;
+    TextInputEditText editTextTrainingTime;
     EditText trainingDateText;
     Button btnAddSeries, btnAddCuestas, btnAddFartlek;
     TextView tvListSeries;
@@ -143,6 +148,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
         trainingDateText = findViewById(R.id.trainingDateText);
         trainingTimeText = findViewById(R.id.trainingTimeText);
         trainingDistanceText = findViewById(R.id.trainingDistanceText);
+        editTextTrainingTime = findViewById(R.id.editTextTrainingTime);
+        editTextTrainingTime.setOnClickListener(v -> selectTimePicker().show());
 
         btnAddSeries = findViewById(R.id.btnAddSeries);
         btnAddCuestas = findViewById(R.id.btnAddCuestas);
@@ -293,7 +300,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
                         db.collection("cuestas").document(idCuesta).set(cuesta);
                     }
                 }
-
                 goProfile(email, license);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
@@ -351,12 +357,21 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String distance = distanceSeries.getText().toString();
         String time = timeSeries.getText().toString();
 
-        if (distance.equals("") && time.equals("")) {
+        if (distance.equals("") || time.equals("")) {
             Toast.makeText(v.getContext(), "Campos incompletos", Toast.LENGTH_LONG).show();
         } else {
-            SeriesDto seriesDto = new SeriesDto(distance, time);
-            listSeriesDto.add(seriesDto);
+            if (validateTimeSeries(time)) {
+                SeriesDto seriesDto = new SeriesDto(distance, time);
+                listSeriesDto.add(seriesDto);
+            } else {
+                Toast.makeText(v.getContext(), "Formato de tiempo incorrecto", Toast.LENGTH_LONG).show();
+            }
         }
+    }
+
+    public boolean validateTimeSeries(String time) {
+        String formatoHora = "\\d{1,2}h|((\\d{1,2}h )?\\d{2}:)?\\d{2}(\\.\\d{1,2})?";
+        return Pattern.matches(formatoHora, time);
     }
 
     public AlertDialog createAddCuestasDialog() {
@@ -435,5 +450,51 @@ public class ViewTrainingActivity extends AppCompatActivity {
             isValid = false;
         }
         return isValid;
+    }
+
+    public AlertDialog selectTimePicker() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.fragment_number_picker_training, null);
+
+        NumberPicker horas = v.findViewById(R.id.horas);
+        horas.setMinValue(00);
+        horas.setMaxValue(24);
+
+        NumberPicker minutos = v.findViewById(R.id.minutos);
+        minutos.setMinValue(00);
+        minutos.setMaxValue(59);
+
+        NumberPicker segundos = v.findViewById(R.id.segundos);
+        segundos.setMinValue(00);
+        segundos.setMaxValue(59);
+
+        builder.setTitle("Introduce tiempo");
+        builder.setView(v)
+                .setPositiveButton("Añadir", (dialog, which) -> {
+                    String hours, minutes, seconds;
+                    if (horas.getValue() < 10) {
+                        hours = "0" + horas.getValue();
+                    } else {
+                        hours = "" + horas.getValue();
+                    }
+                    if (minutos.getValue() < 10) {
+                        minutes = "0" + minutos.getValue();
+                    } else {
+                        minutes = "" + minutos.getValue();
+                    }
+                    if (segundos.getValue() < 10) {
+                        seconds = "0" + segundos.getValue();
+                    } else {
+                        seconds = "" + segundos.getValue();
+                    }
+                    trainingTimeText.getEditText().setText(hours + "h " + minutes + ":" + seconds);
+
+                })
+                .setNegativeButton("Cancelar", (dialog, which) -> {
+
+                });
+
+        return builder.create();
     }
 }

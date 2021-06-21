@@ -40,7 +40,7 @@ public class TrainingsFragment extends Fragment {
     CalendarView calendarTrainings;
     RecyclerView rvTrainings;
 
-    String email, license;
+    String email;
     String dateSelected = Utils.toString(new Date());
 
     @Override
@@ -54,11 +54,10 @@ public class TrainingsFragment extends Fragment {
         // Setup
         Bundle bundle = getActivity().getIntent().getExtras();
         email = bundle.getString("email");
-        license = bundle.getString("license");
 
         listTrainings.clear();
         db.collection("trainings")
-                .whereEqualTo("license", license)
+                .whereEqualTo("email", email)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -91,19 +90,6 @@ public class TrainingsFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    license = task.getResult().get("license").toString();
-                }
-            }
-        });
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
     }
@@ -118,7 +104,6 @@ public class TrainingsFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_add_training) {
             Intent newTraining = new Intent(getActivity(), ViewTrainingActivity.class);
-            newTraining.putExtra("license", license);
             newTraining.putExtra("email", email);
             newTraining.putExtra("dateSelected", dateSelected);
             getContext().startActivity(newTraining);

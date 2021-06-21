@@ -28,9 +28,9 @@ public class NewAthleteActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ConstraintLayout newAthleteLayout;
-    TextView licenciaEditText, nombreEditText, apellidosEditText, birthEditText;
+    TextView nombreEditText, apellidosEditText, birthEditText;
 
-    String email, license;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,6 @@ public class NewAthleteActivity extends AppCompatActivity {
         // Setup
         Bundle bundle = getIntent().getExtras();
         email = bundle.getString("email");
-        license = bundle.getString("license");
         setup();
     }
 
@@ -51,8 +50,7 @@ public class NewAthleteActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    this.license = task.getResult().get("license").toString();
-                    goProfile(email, license);
+                    goProfile(email);
                 }
             }
         });
@@ -95,51 +93,42 @@ public class NewAthleteActivity extends AppCompatActivity {
     }
 
     private void setup() {
-
         newAthleteLayout = findViewById(R.id.newAthleteLayout);
 
-        licenciaEditText = findViewById(R.id.licenciaEditText);
         nombreEditText = findViewById(R.id.nombreEditText);
         apellidosEditText = findViewById(R.id.apellidosEditText);
         birthEditText = findViewById(R.id.birthEditText);
     }
 
-    private void goProfile(String email, String license) {
+    private void goProfile(String email) {
         Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
-        profileIntent.putExtra("license", license);
         startActivity(profileIntent);
     }
 
     private void saveAthlete() {
-        String license = licenciaEditText.getText().toString();
         String name = nombreEditText.getText().toString();
         String surname = apellidosEditText.getText().toString();
         String birthdate = birthEditText.getText().toString();
 
-        if (validateNewAthlete(license, name, surname, birthdate)) {
+        if (validateNewAthlete(name, surname, birthdate)) {
             Map<String,Object> user = new HashMap<>();
             user.put("email", email);
-            user.put("license", licenciaEditText.getText().toString());
             user.put("name", nombreEditText.getText().toString());
             user.put("surname", apellidosEditText.getText().toString());
             user.put("birth", birthEditText.getText().toString());
 
-            this.license = license;
             db.collection("athlete").document(email).set(user);
 
-            goProfile(email, license);
+            goProfile(email);
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos por completar", Toast.LENGTH_LONG);
             toast.show();
         }
     }
 
-    private boolean validateNewAthlete(String license, String name, String surname, String birthdate) {
+    private boolean validateNewAthlete(String name, String surname, String birthdate) {
         boolean isValid = true;
-        if (license.isEmpty() || license == null) {
-            isValid = false;
-        }
         if (name.isEmpty() || name == null) {
             isValid = false;
         }

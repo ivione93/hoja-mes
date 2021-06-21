@@ -38,7 +38,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
     TextInputEditText editTextResult;
     EditText dateText;
 
-    String email, license, id;
+    String email, id;
     Boolean isNew;
 
     @Override
@@ -49,7 +49,6 @@ public class NewCompetitionActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         email = getIntent().getStringExtra("email");
-        license = getIntent().getStringExtra("license");
         isNew = getIntent().getBooleanExtra("isNew", true);
 
         setup(isNew);
@@ -68,7 +67,6 @@ public class NewCompetitionActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             getIntent().putExtra("email", email);
-            getIntent().putExtra("license", license);
             onBackPressed();
             return true;
         }
@@ -83,7 +81,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.menu_share_competition) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            String msg = "*Hoja del mes - " + license + "*\n" +
+            String msg = "*Hoja del mes*\n" +
                     "_Mira mi competición del " + dateText.getText().toString() + ":_\n\n" +
                     "*" + competitionNameText.getEditText().getText() + "*\n" +
                     "- Lugar: " + placeText.getEditText().getText().toString() + "\n" +
@@ -207,7 +205,6 @@ public class NewCompetitionActivity extends AppCompatActivity {
                     id = UUID.randomUUID().toString();
                 }
                 competition.put("id", id);
-                competition.put("license", license);
                 competition.put("email", email);
                 competition.put("place", place);
                 competition.put("name", competitionName);
@@ -217,7 +214,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
 
                 db.collection("competitions").document(id).set(competition);
 
-                goProfile(email, license);
+                goProfile(email);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
                 toast.show();
@@ -228,10 +225,9 @@ public class NewCompetitionActivity extends AppCompatActivity {
         }
     }
 
-    private void goProfile(String email, String license) {
+    private void goProfile(String email) {
         Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
-        profileIntent.putExtra("license", license);
         startActivity(profileIntent);
     }
 

@@ -60,7 +60,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     RecyclerView rvSeries, rvCuestas, rvFartlek;
     TabLayout tabLayout;
 
-    String license, email, dateSelected, id;
+    String email, dateSelected, id;
     Boolean isNew;
 
     List<SeriesDto> listSeriesDto;
@@ -73,7 +73,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        license = getIntent().getStringExtra("license");
         email = getIntent().getStringExtra("email");
         dateSelected = getIntent().getStringExtra("dateSelected");
         isNew = getIntent().getBooleanExtra("isNew", true);
@@ -95,7 +94,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            getIntent().putExtra("license", license);
+            getIntent().putExtra("email", email);
             onBackPressed();
             return true;
         }
@@ -110,7 +109,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.menu_share_training) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            String msg = "*Hoja del mes - " + license + "*\n" +
+            String msg = "*Hoja del mes*\n" +
                     "_Mira mi entrenamiento del " + trainingDateText.getText() + ":_\n\n" +
                     "*Calentamiento:*\n" +
                     "- Tiempo: " + trainingTimeText.getEditText().getText().toString() + " min\n" +
@@ -264,7 +263,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     id = UUID.randomUUID().toString();
                 }
                 training.put("id", id);
-                training.put("license", license);
                 training.put("email", email);
                 training.put("date", Utils.toTimestamp(date));
                 training.put("time", time);
@@ -300,7 +298,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
                         db.collection("cuestas").document(idCuesta).set(cuesta);
                     }
                 }
-                goProfile(email, license);
+                goProfile(email);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
                 toast.show();
@@ -324,10 +322,9 @@ public class ViewTrainingActivity extends AppCompatActivity {
         });
     }
 
-    private void goProfile(String email, String license) {
+    private void goProfile(String email) {
         Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
-        profileIntent.putExtra("license", license);
         startActivity(profileIntent);
     }
 

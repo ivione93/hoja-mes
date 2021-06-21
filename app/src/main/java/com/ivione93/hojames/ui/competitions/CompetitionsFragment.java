@@ -28,7 +28,7 @@ public class CompetitionsFragment extends Fragment {
     private CollectionReference competitions = db.collection("competitions");
     private AdapterCompetitions adapterCompetitions;
 
-    String email, license;
+    String email;
 
     RecyclerView rvCompetitions;
 
@@ -43,7 +43,6 @@ public class CompetitionsFragment extends Fragment {
         // Setup
         Bundle bundle = getActivity().getIntent().getExtras();
         email = bundle.getString("email");
-        license = bundle.getString("license");
 
         setupRecyclerView(root);
 
@@ -52,7 +51,7 @@ public class CompetitionsFragment extends Fragment {
 
     private void setupRecyclerView(View root) {
         // Query
-        Query query = competitions.whereEqualTo("license", license)
+        Query query = competitions.whereEqualTo("email", email)
                 .orderBy("date", Query.Direction.DESCENDING);
 
         // Recycler options
@@ -72,14 +71,6 @@ public class CompetitionsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         adapterCompetitions.startListening();
-        db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    license = task.getResult().get("license").toString();
-                }
-            }
-        });
     }
 
     @Override
@@ -100,7 +91,6 @@ public class CompetitionsFragment extends Fragment {
             Intent newCompetition = new Intent(getActivity(), NewCompetitionActivity.class);
             newCompetition.putExtra("isNew", true);
             newCompetition.putExtra("email", email);
-            newCompetition.putExtra("license", license);
             getContext().startActivity(newCompetition);
         }
         return super.onOptionsItemSelected(item);

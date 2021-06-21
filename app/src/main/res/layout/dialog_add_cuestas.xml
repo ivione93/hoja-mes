@@ -14,10 +14,32 @@
         android:layout_marginTop="16dp"
         android:text="Repeticiones"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/repeticionesCuestasTextInput"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/repeticionesCuestasTextInput" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/repeticionesCuestasTextInput"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvRepeticiones"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/repeticionesCuestas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--<EditText
         android:id="@+id/repeticionesCuestas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -29,19 +51,40 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvRepeticiones"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvRepeticiones"
-        app:layout_constraintTop_toTopOf="@+id/tvRepeticiones" />
+        app:layout_constraintTop_toTopOf="@+id/tvRepeticiones" />-->
 
     <TextView
         android:id="@+id/tvTipoCuestas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:text="Tipo"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tipoCuestasTextInput"
         app:layout_constraintStart_toStartOf="@+id/tvRepeticiones"
-        app:layout_constraintTop_toBottomOf="@+id/tvRepeticiones" />
+        app:layout_constraintTop_toTopOf="@+id/tipoCuestasTextInput" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tipoCuestasTextInput"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvRepeticiones"
+        app:layout_constraintTop_toBottomOf="@+id/repeticionesCuestasTextInput">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tipoCuestas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--<EditText
         android:id="@+id/tipoCuestas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -49,6 +92,6 @@
         android:layout_marginRight="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvTipoCuestas"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/repeticionesCuestas"
-        app:layout_constraintTop_toTopOf="@+id/tvTipoCuestas" />
+        app:layout_constraintStart_toStartOf="@+id/repeticionesCuestasTextInput"
+        app:layout_constraintTop_toTopOf="@+id/tvTipoCuestas" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

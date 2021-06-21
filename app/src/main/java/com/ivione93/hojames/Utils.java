@@ -47,7 +47,7 @@ public class Utils {
         float fDistance = Float.parseFloat(distance);
         float fRitmo = fTime / fDistance;
         bRitmo = new BigDecimal(fRitmo).setScale(2, RoundingMode.UP);
-        int iRitmo = (int) fRitmo;
+        int iRitmo = bRitmo.intValue();
 
         String str = String.valueOf(bRitmo);
         int decNumberInt = Integer.parseInt(str.substring(str.indexOf('.') + 1));

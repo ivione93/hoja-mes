@@ -42,7 +42,7 @@ public class AuthActivity extends AppCompatActivity {
     Button btnSignIn, btnSignUp;
     SignInButton btnSignInGoogle;
 
-    String email, license;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +109,7 @@ public class AuthActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(emailEditText.getText().toString(),
                         passwordEditText.getText().toString()).addOnCompleteListener(it -> {
                     if (it.isSuccessful()) {
-                        goProfile(it.getResult().getUser().getEmail(), license);
+                        goProfile(it.getResult().getUser().getEmail());
                     } else {
                         showAlert();
                     }
@@ -144,18 +144,16 @@ public class AuthActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         email = prefs.getString("email", null);
-        license = prefs.getString("license", null);
 
-        if (email != null && license != null) {
+        if (email != null) {
             loginLayout.setVisibility(View.INVISIBLE);
-            goProfile(email, license);
+            goProfile(email);
         }
     }
 
-    private void goProfile(String email, String license) {
+    private void goProfile(String email) {
         Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
-        profileIntent.putExtra("license", license);
         startActivity(profileIntent);
         finish();
     }

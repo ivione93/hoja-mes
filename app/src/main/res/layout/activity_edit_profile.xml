@@ -29,18 +29,6 @@
         app:layout_constraintTop_toBottomOf="@+id/photoEditProfile"
         tools:text="ivgarciag93@gmail.com"/>
 
-    <TextView
-        android:id="@+id/licenseEditProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        tools:text="M1599"/>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameEditProfile"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -48,13 +36,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="Nombre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/licenseEditProfile">
+        app:layout_constraintTop_toBottomOf="@+id/emailEditProfile">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextName"

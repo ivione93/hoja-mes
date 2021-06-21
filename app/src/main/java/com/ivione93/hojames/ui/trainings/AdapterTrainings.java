@@ -88,7 +88,6 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
                         Intent newTraining = new Intent(holder.itemView.getContext(), ViewTrainingActivity.class);
                         newTraining.putExtra("isNew", false);
                         newTraining.putExtra("idTraining", listTrainings.get(position).id);
-                        newTraining.putExtra("license", listTrainings.get(position).license);
                         newTraining.putExtra("email", listTrainings.get(position).email);
                         holder.itemView.getContext().startActivity(newTraining);
                         return true;

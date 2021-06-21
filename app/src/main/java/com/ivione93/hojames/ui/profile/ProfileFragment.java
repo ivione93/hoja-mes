@@ -25,6 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -45,16 +46,18 @@ public class ProfileFragment extends Fragment {
     SharedPreferences.Editor prefs;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference competitions = db.collection("competitions");
+
     GoogleSignInClient mGoogleSignInClient;
 
     CircleImageView photoProfile;
-    TextView emailTextView, licenciaEditText, nombreEditText, birthEditText;
+    TextView emailTextView, nombreEditText, birthEditText;
     TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result;
     TextView title_training, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
     TextView tvIndicadorSeries, tvIndicadorCuestas;
     ImageView ivIndicadorSeries, ivIndicadorCuestas;
 
-    String email, license;
+    String email;
     String dateSelected = Utils.toString(new Date());
     Uri photoUrl;
 
@@ -69,7 +72,6 @@ public class ProfileFragment extends Fragment {
         // Setup
         Bundle bundle = getActivity().getIntent().getExtras();
         email = bundle.getString("email");
-        license = bundle.getString("license");
         setup(root, email);
 
         loadProfile();
@@ -99,22 +101,18 @@ public class ProfileFragment extends Fragment {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    license = task.getResult().get("license").toString();
-                    licenciaEditText.setText(task.getResult().get("license").toString());
                     nombreEditText.setText(task.getResult().get("name").toString() + " " + task.getResult().get("surname").toString());
                     birthEditText.setText(task.getResult().get("birth").toString());
 
-                    getLastCompetition(license);
-                    getLastTraining(license);
+                    getLastCompetition(email);
+                    getLastTraining(email);
 
                     // Guardar datos
                     prefs = getActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
                     prefs.putString("email", email);
-                    prefs.putString("license", license);
                     prefs.apply();
 
                     getActivity().getIntent().putExtra("email", email);
-                    getActivity().getIntent().putExtra("license", license);
                 }
             } else {
                 progressDialog.dismiss();
@@ -141,7 +139,6 @@ public class ProfileFragment extends Fragment {
         }
         if (item.getItemId() == R.id.menu_add_training_profile) {
             Intent viewTraining = new Intent(getActivity(), ViewTrainingActivity.class);
-            viewTraining.putExtra("license", license);
             viewTraining.putExtra("email", email);
             viewTraining.putExtra("dateSelected", dateSelected);
             getContext().startActivity(viewTraining);
@@ -150,7 +147,6 @@ public class ProfileFragment extends Fragment {
             Intent newCompetition = new Intent(getActivity(), NewCompetitionActivity.class);
             newCompetition.putExtra("isNew", true);
             newCompetition.putExtra("email", email);
-            newCompetition.putExtra("license", license);
             getContext().startActivity(newCompetition);
         }
         if (item.getItemId() == R.id.menu_log_out) {
@@ -173,7 +169,6 @@ public class ProfileFragment extends Fragment {
         photoProfile = root.findViewById(R.id.photoProfile);
         emailTextView = root.findViewById(R.id.emailTextView);
         emailTextView.setText(email);
-        licenciaEditText = root.findViewById(R.id.licenciaEditText);
         nombreEditText = root.findViewById(R.id.nombreEditText);
         birthEditText = root.findViewById(R.id.birthEditText);
 
@@ -199,9 +194,8 @@ public class ProfileFragment extends Fragment {
         ivIndicadorCuestas = root.findViewById(R.id.ivIndicadorCuestas);
     }
 
-    private void getLastCompetition(String license) {
-        db.collection("competitions")
-                .whereEqualTo("license", license)
+    private void getLastCompetition(String email) {
+        competitions.whereEqualTo("email", email)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .limit(1)
                 .get().addOnCompleteListener(task -> {
@@ -225,9 +219,9 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void getLastTraining(String license) {
+    private void getLastTraining(String email) {
         db.collection("trainings")
-                .whereEqualTo("license", license)
+                .whereEqualTo("email", email)
                 .orderBy("date", Query.Direction.DESCENDING)
                 .limit(1)
                 .get().addOnCompleteListener(task -> {

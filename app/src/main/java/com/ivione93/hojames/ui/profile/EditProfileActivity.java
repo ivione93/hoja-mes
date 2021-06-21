@@ -30,7 +30,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     CircleImageView photoEditProfile;
-    TextView emailEditProfile, licenseEditProfile;
+    TextView emailEditProfile;
     TextInputLayout nameEditProfile, surnameEditProfile;
     EditText birthEditProfile;
 
@@ -76,7 +76,6 @@ public class EditProfileActivity extends AppCompatActivity {
     private void setup() {
         photoEditProfile = findViewById(R.id.photoEditProfile);
         emailEditProfile = findViewById(R.id.emailEditProfile);
-        licenseEditProfile = findViewById(R.id.licenseEditProfile);
         nameEditProfile = findViewById(R.id.nameEditProfile);
         surnameEditProfile = findViewById(R.id.surnameEditProfile);
         birthEditProfile = findViewById(R.id.birthEditProfile);
@@ -91,7 +90,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     emailEditProfile.setText(task.getResult().get("email").toString());
-                    licenseEditProfile.setText(task.getResult().get("license").toString());
                     nameEditProfile.getEditText().setText(task.getResult().get("name").toString());
                     surnameEditProfile.getEditText().setText(task.getResult().get("surname").toString());
                     birthEditProfile.setText(task.getResult().get("birth").toString());
@@ -105,20 +103,16 @@ public class EditProfileActivity extends AppCompatActivity {
         editName = nameEditProfile.getEditText().getText().toString();
         editSurname = surnameEditProfile.getEditText().getText().toString();
         editBirth = birthEditProfile.getText().toString();
-        editLicense = licenseEditProfile.getText().toString();
 
         if (validateEditProfile(editName, editSurname, editBirth)) {
             if (Utils.validateDateFormat(editBirth)) {
                 Map<String,Object> user = new HashMap<>();
                 user.put("email", email);
-                user.put("license", editLicense);
                 user.put("name", editName);
                 user.put("surname", editSurname);
                 user.put("birth", editBirth);
 
                 db.collection("athlete").document(email).set(user);
-
-                //db.athleteDao().update(editName, editSurname, Utils.toDate(editBirth), license);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
                 toast.show();

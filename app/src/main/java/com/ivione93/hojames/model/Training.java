@@ -5,7 +5,6 @@ import com.google.firebase.Timestamp;
 public class Training {
 
     public String id;
-    public String license;
     public String email;
     public Timestamp date;
     public String distance;

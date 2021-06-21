@@ -49,23 +49,11 @@
         app:layout_constraintTop_toBottomOf="@+id/nombreEditText" />
 
     <TextView
-        android:id="@+id/licenciaEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/emailTextView"
-        app:layout_constraintTop_toBottomOf="@+id/emailTextView"
-        android:textStyle="bold"
-        tools:text="license" />
-
-    <TextView
         android:id="@+id/birthEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/licenciaEditText"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/emailTextView"
         app:layout_constraintTop_toBottomOf="@+id/emailTextView"
         tools:text="birthdate" />
 

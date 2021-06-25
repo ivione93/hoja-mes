@@ -11,4 +11,5 @@
     <string name="title_forgot_password">Recuperar contraseña</string>
     <string name="title_new_athlete">Alta atleta</string>
     <string name="title_activity_new_training">Nuevo entrenamiento</string>
+    <string name="delete_user">Eliminar usuario</string>
 </resources>

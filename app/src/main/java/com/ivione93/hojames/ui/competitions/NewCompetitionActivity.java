@@ -211,6 +211,11 @@ public class NewCompetitionActivity extends AppCompatActivity {
                 competition.put("date", Utils.toTimestamp(date));
                 competition.put("track", track);
                 competition.put("result", result);
+                // Firebase calendar
+                competition.put("start", Utils.toStringCalendar(Utils.toTimestamp(date)));
+                competition.put("end", Utils.toStringCalendar(Utils.toTimestamp(date)));
+                competition.put("color", "#d21950");
+                competition.put("details", track + ": " + result);
 
                 db.collection("competitions").document(id).set(competition);
 

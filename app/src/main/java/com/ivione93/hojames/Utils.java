@@ -34,6 +34,12 @@ public class Utils {
         return formatted;
     }
 
+    public static String toStringCalendar(Timestamp timestamp) {
+        Date date = timestamp.toDate();
+        String formatted = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        return formatted;
+    }
+
     public static String toString(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(date);

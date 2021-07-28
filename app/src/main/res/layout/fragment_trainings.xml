@@ -23,10 +23,35 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/calendar_trainings"
-        app:layout_constraintTop_toBottomOf="@+id/calendar_trainings"
-        android:visibility="visible"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvMonthly_kms" />
+
+    <TextView
+        android:id="@+id/tvMonthly_kms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="Kilómetros este mes: "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/rvTrainings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendar_trainings" />
+
+    <TextView
+        android:id="@+id/monthly_kms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvMonthly_kms"
+        app:layout_constraintStart_toEndOf="@+id/tvMonthly_kms"
+        app:layout_constraintTop_toTopOf="@+id/tvMonthly_kms"
+        tools:text="100.00" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

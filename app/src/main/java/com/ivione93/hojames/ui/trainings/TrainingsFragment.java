@@ -1,6 +1,7 @@
 package com.ivione93.hojames.ui.trainings;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -9,8 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class TrainingsFragment extends Fragment {
 
@@ -39,10 +43,12 @@ public class TrainingsFragment extends Fragment {
 
     CalendarView calendarTrainings;
     RecyclerView rvTrainings;
+    TextView monthlyKms;
 
     String email;
     String dateSelected = Utils.toString(new Date());
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,7 +83,6 @@ public class TrainingsFragment extends Fragment {
     }
 
     private void setupAdaptadorTrainings(View root) {
-
         rvTrainings = root.findViewById(R.id.rvTrainings);
         rvTrainings.setHasFixedSize(true);
         adapterTrainings = new AdapterTrainings(listTrainings);
@@ -111,7 +116,10 @@ public class TrainingsFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void setup(View root) {
+        monthlyKms = root.findViewById(R.id.monthly_kms);
+        monthlyKms.setText(getKms(dateSelected).toString());
         calendarTrainings = root.findViewById(R.id.calendar_trainings);
         calendarTrainings.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
             month += 1;
@@ -128,7 +136,30 @@ public class TrainingsFragment extends Fragment {
                     dateSelected = dayOfMonth + "/" + month + "/" + year;
                 }
             }
+            monthlyKms.setText(String.format("%.02f", getKms(dateSelected)));
             adapterTrainings.getFilter().filter(dateSelected);
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Float getKms(String dateSelected) {
+        String month = dateSelected.substring(3,5);
+        AtomicReference<Float> count = new AtomicReference<>(0.0f);
+        db.collection("trainings").whereEqualTo("email", email).get()
+                .addOnCompleteListener(task -> {
+                    count.set(0f);
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot snap : task.getResult()) {
+                            Training training = snap.toObject(Training.class);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                if (training.date.toDate().toInstant().toString().substring(5,7).equals(month)) {
+                                    count.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                }
+                            }
+                        }
+                        monthlyKms.setText(String.format("%.02f", count.get()));
+                    }
+                });
+        return count.get();
     }
 }

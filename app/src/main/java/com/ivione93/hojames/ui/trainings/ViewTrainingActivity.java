@@ -52,7 +52,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     private CollectionReference cuestas = db.collection("cuestas");
     private AdapterCuestas adapterCuestas;
 
-    TextInputLayout trainingTimeText, trainingDistanceText;
+    TextInputLayout trainingTimeText, trainingDistanceText, trainingObservesText;
     TextInputEditText editTextTrainingTime;
     EditText trainingDateText;
     Button btnAddSeries, btnAddCuestas, btnAddFartlek;
@@ -114,6 +114,9 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     "*Calentamiento:*\n" +
                     "- Tiempo: " + trainingTimeText.getEditText().getText().toString() + " min\n" +
                     "- Distancia: " + trainingDistanceText.getEditText().getText().toString() + " kms\n";
+            if (trainingObservesText.getEditText().getText() != null || !trainingObservesText.getEditText().getText().equals("")) {
+                msg +=  "- Observaciones: " + trainingObservesText.getEditText().getText().toString();
+            }
 
             sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
             sendIntent.setType("text/plain");
@@ -147,6 +150,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         trainingDateText = findViewById(R.id.trainingDateText);
         trainingTimeText = findViewById(R.id.trainingTimeText);
         trainingDistanceText = findViewById(R.id.trainingDistanceText);
+        trainingObservesText = findViewById(R.id.trainingObservesText);
         editTextTrainingTime = findViewById(R.id.editTextTrainingTime);
         editTextTrainingTime.setOnClickListener(v -> selectTimePicker().show());
 
@@ -255,6 +259,11 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String time = trainingTimeText.getEditText().getText().toString();
         String distance = trainingDistanceText.getEditText().getText().toString();
 
+        String observes = "";
+        if (trainingObservesText.getEditText().getText() != null) {
+            observes = trainingObservesText.getEditText().getText().toString();
+        }
+
         if (validateNewTraining(date, time, distance)) {
             if (Utils.validateDateFormat(date)) {
                 String partial = Utils.calculatePartial(time, distance);
@@ -268,6 +277,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 training.put("time", time);
                 training.put("distance", distance);
                 training.put("partial", partial);
+                training.put("observes", observes);
                 // Firebase calendar
                 training.put("name", "Entrenamiento");
                 training.put("start", Utils.toStringCalendar(Utils.toTimestamp(date)));
@@ -323,6 +333,9 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     trainingDateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date")));
                     trainingTimeText.getEditText().setText(task.getResult().getDocuments().get(0).get("time").toString());
                     trainingDistanceText.getEditText().setText(task.getResult().getDocuments().get(0).get("distance").toString());
+                    if (task.getResult().getDocuments().get(0).get("observes") != null) {
+                        trainingObservesText.getEditText().setText(task.getResult().getDocuments().get(0).get("observes").toString());
+                    }
                 }
             }
         });

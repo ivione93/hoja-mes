@@ -237,6 +237,31 @@
                 app:tint="@color/colorPrimary"
                 android:visibility="invisible"/>
 
+            <TextView
+                android:id="@+id/tvIndicadorGym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Gym"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorCuestas"
+                app:layout_constraintStart_toEndOf="@+id/ivIndicadorCuestas"
+                app:layout_constraintTop_toTopOf="@+id/ivIndicadorCuestas" />
+
+            <ImageView
+                android:id="@+id/ivIndicadorGym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_gym"
+                app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorGym"
+                app:layout_constraintStart_toEndOf="@+id/tvIndicadorGym"
+                app:layout_constraintTop_toTopOf="@+id/tvIndicadorGym"
+                app:tint="@color/colorPrimary"
+                android:visibility="invisible"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

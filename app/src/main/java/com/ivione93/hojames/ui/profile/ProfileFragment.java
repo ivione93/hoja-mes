@@ -54,8 +54,8 @@ public class ProfileFragment extends Fragment {
     TextView emailTextView, nombreEditText, birthEditText;
     TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result;
     TextView title_training, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
-    TextView tvIndicadorSeries, tvIndicadorCuestas;
-    ImageView ivIndicadorSeries, ivIndicadorCuestas;
+    TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorGym;
+    ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorGym;
 
     String email;
     String dateSelected = Utils.toString(new Date());
@@ -192,6 +192,9 @@ public class ProfileFragment extends Fragment {
 
         tvIndicadorCuestas = root.findViewById(R.id.tvIndicadorCuestas);
         ivIndicadorCuestas = root.findViewById(R.id.ivIndicadorCuestas);
+
+        tvIndicadorGym = root.findViewById(R.id.tvIndicadorGym);
+        ivIndicadorGym = root.findViewById(R.id.ivIndicadorGym);
     }
 
     private void getLastCompetition(String email) {
@@ -258,6 +261,20 @@ public class ProfileFragment extends Fragment {
                                         } else {
                                             tvIndicadorCuestas.setVisibility(View.INVISIBLE);
                                             ivIndicadorCuestas.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                });
+
+                                // check gym
+                                db.collection("gym").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
+                                    if (t.isSuccessful()) {
+                                        QuerySnapshot document = t.getResult();
+                                        if (!document.isEmpty()) {
+                                            tvIndicadorGym.setVisibility(View.VISIBLE);
+                                            ivIndicadorGym.setVisibility(View.VISIBLE);
+                                        } else {
+                                            tvIndicadorGym.setVisibility(View.INVISIBLE);
+                                            ivIndicadorGym.setVisibility(View.INVISIBLE);
                                         }
                                     }
                                 });

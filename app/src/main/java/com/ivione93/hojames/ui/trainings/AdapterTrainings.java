@@ -79,6 +79,20 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
             }
         });
 
+        // check gym
+        db.collection("gym").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot document = task.getResult();
+                if (document.isEmpty()) {
+                    holder.tvIndicadorGym.setVisibility(View.INVISIBLE);
+                    holder.ivIndicadorGym.setVisibility(View.INVISIBLE);
+                } else {
+                    holder.tvIndicadorGym.setVisibility(View.VISIBLE);
+                    holder.ivIndicadorGym.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         holder.ibOptionsTraining.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(holder.itemView.getContext(), holder.ibOptionsTraining);
             popup.inflate(R.menu.item_training_menu);
@@ -104,6 +118,13 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
                             if (task.isSuccessful()){
                                 for (DocumentSnapshot doc : task.getResult().getDocuments()) {
                                     db.collection("cuestas").document(doc.getId()).delete();
+                                }
+                            }
+                        });
+                        db.collection("gym").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
+                            if (task.isSuccessful()){
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    db.collection("gym").document(doc.getId()).delete();
                                 }
                             }
                         });
@@ -165,8 +186,8 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
         TextView itemTrainingDate, itemTrainingTime, itemTrainingDistance, itemTrainingPartial;
         ImageButton ibOptionsTraining;
 
-        TextView tvIndicadorSeries, tvIndicadorCuestas;
-        ImageView ivIndicadorSeries, ivIndicadorCuestas;
+        TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorGym;
+        ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorGym;
 
         public ViewHolderTraining(@NonNull View itemView) {
             super(itemView);
@@ -181,6 +202,9 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
 
             tvIndicadorCuestas = itemView.findViewById(R.id.tvIndicadorCuestas);
             ivIndicadorCuestas = itemView.findViewById(R.id.ivIndicadorCuestas);
+
+            tvIndicadorGym = itemView.findViewById(R.id.tvIndicadorGym);
+            ivIndicadorGym = itemView.findViewById(R.id.ivIndicadorGym);
         }
     }
 }

@@ -32,8 +32,10 @@ import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.dto.CuestasDto;
+import com.ivione93.hojames.dto.GymDto;
 import com.ivione93.hojames.dto.SeriesDto;
 import com.ivione93.hojames.model.Cuestas;
+import com.ivione93.hojames.model.Gym;
 import com.ivione93.hojames.model.Series;
 
 import java.text.ParseException;
@@ -51,13 +53,15 @@ public class ViewTrainingActivity extends AppCompatActivity {
     private AdapterSeries adapterSeries;
     private CollectionReference cuestas = db.collection("cuestas");
     private AdapterCuestas adapterCuestas;
+    private CollectionReference gym = db.collection("gym");
+    private AdapterGym adapterGym;
 
     TextInputLayout trainingTimeText, trainingDistanceText, trainingObservesText;
     TextInputEditText editTextTrainingTime;
     EditText trainingDateText;
-    Button btnAddSeries, btnAddCuestas, btnAddFartlek;
+    Button btnAddSeries, btnAddCuestas, btnAddFartlek, btnAddGym;
     TextView tvListSeries;
-    RecyclerView rvSeries, rvCuestas, rvFartlek;
+    RecyclerView rvSeries, rvCuestas, rvFartlek, rvGym;
     TabLayout tabLayout;
 
     String email, dateSelected, id;
@@ -65,6 +69,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
     List<SeriesDto> listSeriesDto;
     List<CuestasDto> listCuestasDto;
+    List<GymDto> listGymDto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         setup(isNew);
         setupRecyclerSeries();
         setupRecyclerCuestas();
+        setupRecyclerGym();
     }
 
     @Override
@@ -132,6 +138,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         super.onStart();
         adapterCuestas.startListening();
         adapterSeries.startListening();
+        adapterGym.startListening();
     }
 
     @Override
@@ -139,11 +146,13 @@ public class ViewTrainingActivity extends AppCompatActivity {
         super.onStop();
         adapterSeries.stopListening();
         adapterCuestas.stopListening();
+        adapterGym.stopListening();
     }
 
     private void setup(Boolean isNew) {
         listSeriesDto = new ArrayList<>();
         listCuestasDto = new ArrayList<>();
+        listGymDto = new ArrayList<>();
 
         tvListSeries = findViewById(R.id.tvListSeries);
 
@@ -157,19 +166,23 @@ public class ViewTrainingActivity extends AppCompatActivity {
         btnAddSeries = findViewById(R.id.btnAddSeries);
         btnAddCuestas = findViewById(R.id.btnAddCuestas);
         btnAddFartlek = findViewById(R.id.btnAddFartlek);
+        btnAddGym = findViewById(R.id.btnAddGym);
 
         rvSeries = findViewById(R.id.rvSeries);
         rvCuestas = findViewById(R.id.rvCuestas);
         rvFartlek = findViewById(R.id.rvFartlek);
+        rvGym = findViewById(R.id.rvGym);
 
         rvSeries.setVisibility(View.VISIBLE);
         rvCuestas.setVisibility(View.INVISIBLE);
         rvFartlek.setVisibility(View.INVISIBLE);
+        rvGym.setVisibility(View.INVISIBLE);
 
         tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("Series"));
         tabLayout.addTab(tabLayout.newTab().setText("Cuestas"));
         tabLayout.addTab(tabLayout.newTab().setText("Fartlek"));
+        tabLayout.addTab(tabLayout.newTab().setText("Gym"));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -178,14 +191,22 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     rvSeries.setVisibility(View.VISIBLE);
                     rvCuestas.setVisibility(View.INVISIBLE);
                     rvFartlek.setVisibility(View.INVISIBLE);
+                    rvGym.setVisibility(View.INVISIBLE);
                 } else if (tab.getPosition() == 1) {
                     rvSeries.setVisibility(View.INVISIBLE);
                     rvCuestas.setVisibility(View.VISIBLE);
                     rvFartlek.setVisibility(View.INVISIBLE);
+                    rvGym.setVisibility(View.INVISIBLE);
                 } else if (tab.getPosition() == 2) {
                     rvSeries.setVisibility(View.INVISIBLE);
                     rvCuestas.setVisibility(View.INVISIBLE);
                     rvFartlek.setVisibility(View.VISIBLE);
+                    rvGym.setVisibility(View.INVISIBLE);
+                } else if (tab.getPosition() == 3) {
+                    rvSeries.setVisibility(View.INVISIBLE);
+                    rvCuestas.setVisibility(View.INVISIBLE);
+                    rvFartlek.setVisibility(View.INVISIBLE);
+                    rvGym.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -205,17 +226,10 @@ public class ViewTrainingActivity extends AppCompatActivity {
             trainingDateText.setText(dateSelected);
         }
 
-        btnAddSeries.setOnClickListener(v -> {
-            createAddSeriesDialog().show();
-        });
-
-        btnAddCuestas.setOnClickListener(v -> {
-            createAddCuestasDialog().show();
-        });
-
-        btnAddFartlek.setOnClickListener(v -> {
-            createAddFartlekDialog().show();
-        });
+        btnAddSeries.setOnClickListener(v -> createAddSeriesDialog().show());
+        btnAddCuestas.setOnClickListener(v -> createAddCuestasDialog().show());
+        btnAddFartlek.setOnClickListener(v -> createAddFartlekDialog().show());
+        btnAddGym.setOnClickListener(v -> createAddGymDialog().show());
     }
 
     private void setupRecyclerSeries() {
@@ -252,6 +266,24 @@ public class ViewTrainingActivity extends AppCompatActivity {
         rvCuestas.setHasFixedSize(true);
         rvCuestas.setLayoutManager(new LinearLayoutManager(this));
         rvCuestas.setAdapter(adapterCuestas);
+    }
+
+    private void setupRecyclerGym() {
+        // Query
+        Query query = gym.whereEqualTo("idTraining", id)
+                .orderBy("date", Query.Direction.DESCENDING);
+
+        // Recycler options
+        FirestoreRecyclerOptions<Gym> options = new FirestoreRecyclerOptions.Builder<Gym>()
+                .setQuery(query, Gym.class)
+                .build();
+
+        adapterGym = new AdapterGym(options);
+
+        rvGym = findViewById(R.id.rvGym);
+        rvGym.setHasFixedSize(true);
+        rvGym.setLayoutManager(new LinearLayoutManager(this));
+        rvGym.setAdapter(adapterGym);
     }
 
     private void saveTraining() throws ParseException {
@@ -312,6 +344,21 @@ public class ViewTrainingActivity extends AppCompatActivity {
                         cuesta.put("date", training.get("date"));
 
                         db.collection("cuestas").document(idCuesta).set(cuesta);
+                    }
+                }
+                // Añadir gym
+                if (!listGymDto.isEmpty()) {
+                    for (GymDto dto : listGymDto) {
+                        String idGym = UUID.randomUUID().toString();
+                        Map<String, Object> gym = new HashMap<>();
+                        gym.put("id", idGym);
+                        gym.put("idTraining", training.get("id"));
+                        gym.put("exercise", dto.exercise);
+                        gym.put("times", dto.times);
+                        gym.put("kilos", dto.kilos);
+                        gym.put("date", training.get("date"));
+
+                        db.collection("gym").document(idGym).set(gym);
                     }
                 }
                 goProfile(email);
@@ -424,20 +471,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
         }
     }
 
-    private void showExtras() {
-        tvListSeries.setVisibility(View.VISIBLE);
-        String txt = "";
-
-        for (SeriesDto dto : listSeriesDto) {
-            txt += "S[" + dto.distance + ", " + dto.time + "] ";
-            tvListSeries.setText(txt);
-        }
-        for (CuestasDto dto : listCuestasDto) {
-            txt += "C[" + dto.type + ", " + dto.times + "] ";
-            tvListSeries.setText(txt);
-        }
-    }
-
     public AlertDialog createAddFartlekDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -452,6 +485,60 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 });
 
         return builder.create();
+    }
+
+    public AlertDialog createAddGymDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_add_gym, null);
+
+        builder.setTitle("Añadir rutina de gimnasio");
+        builder.setView(v)
+                .setPositiveButton("Añadir", (dialog, which) -> {
+                    addGym(v);
+                    showExtras();
+                })
+                .setNegativeButton("Cancelar", (dialog, which) -> {
+
+                });
+
+        return builder.create();
+    }
+
+    private void addGym(View v) {
+        EditText ejercicioGym, repeticionesGym, kilosGym;
+        ejercicioGym = v.findViewById(R.id.ejercicioGym);
+        repeticionesGym = v.findViewById(R.id.repeticionesGym);
+        kilosGym = v.findViewById(R.id.kilosGym);
+
+        String exercise = ejercicioGym.getText().toString();
+        String times = repeticionesGym.getText().toString();
+        String kilos = kilosGym.getText().toString();
+
+        if (exercise.equals("")) {
+            Toast.makeText(v.getContext(), "El ejercicio es obligatorio", Toast.LENGTH_LONG).show();
+        } else {
+            GymDto gymDto = new GymDto(exercise, times, kilos);
+            listGymDto.add(gymDto);
+        }
+    }
+
+    private void showExtras() {
+        tvListSeries.setVisibility(View.VISIBLE);
+        String txt = "";
+
+        for (SeriesDto dto : listSeriesDto) {
+            txt += "S[" + dto.distance + ", " + dto.time + "] ";
+            tvListSeries.setText(txt);
+        }
+        for (CuestasDto dto : listCuestasDto) {
+            txt += "C[" + dto.type + ", " + dto.times + "] ";
+            tvListSeries.setText(txt);
+        }
+        for (GymDto dto : listGymDto) {
+            txt += "G[" + dto.exercise + ", " + dto.times + ", " + dto.kilos + "] ";
+            tvListSeries.setText(txt);
+        }
     }
 
     private boolean validateNewTraining(String date, String time, String distance) {

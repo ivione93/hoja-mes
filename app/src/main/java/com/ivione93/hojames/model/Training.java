@@ -10,5 +10,6 @@ public class Training {
     public String distance;
     public String time;
     public String partial;
+    public String observes;
 
 }

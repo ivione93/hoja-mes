@@ -51,6 +51,12 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
         holder.itemTrainingDistance.setText(listTrainings.get(position).distance + " km");
         holder.itemTrainingPartial.setText(listTrainings.get(position).partial + " /km");
 
+        if (listTrainings.get(position).observes != null) {
+            holder.ivIndicadorObserves.setVisibility(View.VISIBLE);
+        } else {
+            holder.ivIndicadorObserves.setVisibility(View.INVISIBLE);
+        }
+
         // check series
         db.collection("series").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -75,6 +81,20 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
                 } else {
                     holder.tvIndicadorCuestas.setVisibility(View.VISIBLE);
                     holder.ivIndicadorCuestas.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        // check fartlek
+        db.collection("fartlek").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot document = task.getResult();
+                if (document.isEmpty()) {
+                    holder.tvIndicadorFartlek.setVisibility(View.INVISIBLE);
+                    holder.ivIndicadorFartlek.setVisibility(View.INVISIBLE);
+                } else {
+                    holder.tvIndicadorFartlek.setVisibility(View.VISIBLE);
+                    holder.ivIndicadorFartlek.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -118,6 +138,13 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
                             if (task.isSuccessful()){
                                 for (DocumentSnapshot doc : task.getResult().getDocuments()) {
                                     db.collection("cuestas").document(doc.getId()).delete();
+                                }
+                            }
+                        });
+                        db.collection("fartlek").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
+                            if (task.isSuccessful()){
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    db.collection("fartlek").document(doc.getId()).delete();
                                 }
                             }
                         });
@@ -186,8 +213,8 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
         TextView itemTrainingDate, itemTrainingTime, itemTrainingDistance, itemTrainingPartial;
         ImageButton ibOptionsTraining;
 
-        TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorGym;
-        ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorGym;
+        TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
+        ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorFartlek, ivIndicadorGym, ivIndicadorObserves;
 
         public ViewHolderTraining(@NonNull View itemView) {
             super(itemView);
@@ -203,8 +230,13 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
             tvIndicadorCuestas = itemView.findViewById(R.id.tvIndicadorCuestas);
             ivIndicadorCuestas = itemView.findViewById(R.id.ivIndicadorCuestas);
 
+            tvIndicadorFartlek = itemView.findViewById(R.id.tvIndicadorFartlek);
+            ivIndicadorFartlek = itemView.findViewById(R.id.ivIndicadorFartlek);
+
             tvIndicadorGym = itemView.findViewById(R.id.tvIndicadorGym);
             ivIndicadorGym = itemView.findViewById(R.id.ivIndicadorGym);
+
+            ivIndicadorObserves = itemView.findViewById(R.id.ivIndicadorObserves);
         }
     }
 }

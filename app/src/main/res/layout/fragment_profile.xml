@@ -193,11 +193,11 @@
                 android:id="@+id/tvIndicadorSeries"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:text="Series"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="@+id/title_training"
-                app:layout_constraintTop_toBottomOf="@+id/last_training_time"
-                android:visibility="invisible"/>
+                app:layout_constraintTop_toBottomOf="@+id/last_training_time" />
 
             <ImageView
                 android:id="@+id/ivIndicadorSeries"
@@ -238,6 +238,31 @@
                 android:visibility="invisible"/>
 
             <TextView
+                android:id="@+id/tvIndicadorFartlek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="Fartlek"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorCuestas"
+                app:layout_constraintStart_toEndOf="@+id/ivIndicadorCuestas"
+                app:layout_constraintTop_toTopOf="@+id/ivIndicadorCuestas" />
+
+            <ImageView
+                android:id="@+id/ivIndicadorFartlek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_fartlek"
+                app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorFartlek"
+                app:layout_constraintStart_toEndOf="@+id/tvIndicadorFartlek"
+                app:layout_constraintTop_toTopOf="@+id/tvIndicadorFartlek"
+                app:tint="@color/colorPrimary"
+                android:visibility="invisible"/>
+
+            <TextView
                 android:id="@+id/tvIndicadorGym"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -245,9 +270,9 @@
                 android:layout_marginLeft="16dp"
                 android:text="Gym"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorCuestas"
-                app:layout_constraintStart_toEndOf="@+id/ivIndicadorCuestas"
-                app:layout_constraintTop_toTopOf="@+id/ivIndicadorCuestas" />
+                app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorFartlek"
+                app:layout_constraintStart_toEndOf="@+id/ivIndicadorFartlek"
+                app:layout_constraintTop_toTopOf="@+id/ivIndicadorFartlek" />
 
             <ImageView
                 android:id="@+id/ivIndicadorGym"
@@ -261,6 +286,19 @@
                 app:layout_constraintTop_toTopOf="@+id/tvIndicadorGym"
                 app:tint="@color/colorPrimary"
                 android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/ivIndicadorObserves"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_observes"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/title_training"
+                app:layout_constraintStart_toEndOf="@+id/title_training"
+                app:layout_constraintTop_toTopOf="@+id/title_training"
+                app:tint="@color/colorPrimary" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

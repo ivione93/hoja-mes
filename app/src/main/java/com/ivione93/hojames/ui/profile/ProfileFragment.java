@@ -54,8 +54,8 @@ public class ProfileFragment extends Fragment {
     TextView emailTextView, nombreEditText, birthEditText;
     TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result;
     TextView title_training, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
-    TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorGym;
-    ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorGym;
+    TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
+    ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorFartlek, ivIndicadorGym, ivIndicadorObserves;
 
     String email;
     String dateSelected = Utils.toString(new Date());
@@ -193,8 +193,13 @@ public class ProfileFragment extends Fragment {
         tvIndicadorCuestas = root.findViewById(R.id.tvIndicadorCuestas);
         ivIndicadorCuestas = root.findViewById(R.id.ivIndicadorCuestas);
 
+        tvIndicadorFartlek = root.findViewById(R.id.tvIndicadorFartlek);
+        ivIndicadorFartlek = root.findViewById(R.id.ivIndicadorFartlek);
+
         tvIndicadorGym = root.findViewById(R.id.tvIndicadorGym);
         ivIndicadorGym = root.findViewById(R.id.ivIndicadorGym);
+
+        ivIndicadorObserves = root.findViewById(R.id.ivIndicadorObserves);
     }
 
     private void getLastCompetition(String email) {
@@ -237,6 +242,10 @@ public class ProfileFragment extends Fragment {
                                 last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
                                 last_training_partial.setText(documentSnapshot.get("partial").toString() + " /km");
 
+                                if (documentSnapshot.get("observes") != null) {
+                                    ivIndicadorObserves.setVisibility(View.VISIBLE);
+                                }
+
                                 // check series
                                 db.collection("series").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
                                     if (t.isSuccessful()) {
@@ -261,6 +270,20 @@ public class ProfileFragment extends Fragment {
                                         } else {
                                             tvIndicadorCuestas.setVisibility(View.INVISIBLE);
                                             ivIndicadorCuestas.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                });
+
+                                // check fartlek
+                                db.collection("fartlek").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
+                                    if (t.isSuccessful()) {
+                                        QuerySnapshot document = t.getResult();
+                                        if (!document.isEmpty()) {
+                                            tvIndicadorFartlek.setVisibility(View.VISIBLE);
+                                            ivIndicadorFartlek.setVisibility(View.VISIBLE);
+                                        } else {
+                                            tvIndicadorFartlek.setVisibility(View.INVISIBLE);
+                                            ivIndicadorFartlek.setVisibility(View.INVISIBLE);
                                         }
                                     }
                                 });

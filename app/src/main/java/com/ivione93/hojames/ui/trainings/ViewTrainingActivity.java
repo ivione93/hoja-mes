@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -32,9 +31,11 @@ import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.dto.CuestasDto;
+import com.ivione93.hojames.dto.FartlekDto;
 import com.ivione93.hojames.dto.GymDto;
 import com.ivione93.hojames.dto.SeriesDto;
 import com.ivione93.hojames.model.Cuestas;
+import com.ivione93.hojames.model.Fartlek;
 import com.ivione93.hojames.model.Gym;
 import com.ivione93.hojames.model.Series;
 
@@ -53,6 +54,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
     private AdapterSeries adapterSeries;
     private CollectionReference cuestas = db.collection("cuestas");
     private AdapterCuestas adapterCuestas;
+    private CollectionReference fartlek = db.collection("fartlek");
+    private AdapterFartlek adapterFartlek;
     private CollectionReference gym = db.collection("gym");
     private AdapterGym adapterGym;
 
@@ -69,6 +72,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
     List<SeriesDto> listSeriesDto;
     List<CuestasDto> listCuestasDto;
+    List<FartlekDto> listFartlekDto;
     List<GymDto> listGymDto;
 
     @Override
@@ -85,6 +89,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         setup(isNew);
         setupRecyclerSeries();
         setupRecyclerCuestas();
+        setupRecyclerFartlek();
         setupRecyclerGym();
     }
 
@@ -138,6 +143,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         super.onStart();
         adapterCuestas.startListening();
         adapterSeries.startListening();
+        adapterFartlek.startListening();
         adapterGym.startListening();
     }
 
@@ -146,12 +152,14 @@ public class ViewTrainingActivity extends AppCompatActivity {
         super.onStop();
         adapterSeries.stopListening();
         adapterCuestas.stopListening();
+        adapterFartlek.stopListening();
         adapterGym.stopListening();
     }
 
     private void setup(Boolean isNew) {
         listSeriesDto = new ArrayList<>();
         listCuestasDto = new ArrayList<>();
+        listFartlekDto = new ArrayList<>();
         listGymDto = new ArrayList<>();
 
         tvListSeries = findViewById(R.id.tvListSeries);
@@ -268,6 +276,24 @@ public class ViewTrainingActivity extends AppCompatActivity {
         rvCuestas.setAdapter(adapterCuestas);
     }
 
+    private void setupRecyclerFartlek() {
+        // Query
+        Query query = fartlek.whereEqualTo("idTraining", id)
+                .orderBy("date", Query.Direction.DESCENDING);
+
+        // Recycler options
+        FirestoreRecyclerOptions<Fartlek> options = new FirestoreRecyclerOptions.Builder<Fartlek>()
+                .setQuery(query, Fartlek.class)
+                .build();
+
+        adapterFartlek = new AdapterFartlek(options);
+
+        rvFartlek = findViewById(R.id.rvFartlek);
+        rvFartlek.setHasFixedSize(true);
+        rvFartlek.setLayoutManager(new LinearLayoutManager(this));
+        rvFartlek.setAdapter(adapterFartlek);
+    }
+
     private void setupRecyclerGym() {
         // Query
         Query query = gym.whereEqualTo("idTraining", id)
@@ -344,6 +370,19 @@ public class ViewTrainingActivity extends AppCompatActivity {
                         cuesta.put("date", training.get("date"));
 
                         db.collection("cuestas").document(idCuesta).set(cuesta);
+                    }
+                }
+                // Añadir fartlek
+                if (!listFartlekDto.isEmpty()) {
+                    for (FartlekDto dto : listFartlekDto) {
+                        String idFartlek = UUID.randomUUID().toString();
+                        Map<String, Object> fartlek = new HashMap<>();
+                        fartlek.put("id", idFartlek);
+                        fartlek.put("idTraining", training.get("id"));
+                        fartlek.put("fartlek", dto.fartlek);
+                        fartlek.put("date", training.get("date"));
+
+                        db.collection("fartlek").document(idFartlek).set(fartlek);
                     }
                 }
                 // Añadir gym
@@ -478,13 +517,29 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         builder.setTitle("Añadir fartlek");
         builder.setView(v)
-                /*.setPositiveButton("Añadir", (dialog, which) -> {
-                })*/
-                .setNegativeButton("Aceptar", (dialog, which) -> {
+                .setPositiveButton("Añadir", (dialog, which) -> {
+                    addFartlek(v);
+                    showExtras();
+                })
+                .setNegativeButton("Cancelar", (dialog, which) -> {
 
                 });
 
         return builder.create();
+    }
+
+    private void addFartlek(View v) {
+        EditText fartlekFartlek;
+        fartlekFartlek = v.findViewById(R.id.fartlekFartlek);
+
+        String fartlek = fartlekFartlek.getText().toString();
+
+        if (fartlek.equals("")) {
+            Toast.makeText(v.getContext(), "El campo es obligatorio", Toast.LENGTH_LONG).show();
+        } else {
+            FartlekDto fartlekDto = new FartlekDto(fartlek);
+            listFartlekDto.add(fartlekDto);
+        }
     }
 
     public AlertDialog createAddGymDialog() {
@@ -533,6 +588,10 @@ public class ViewTrainingActivity extends AppCompatActivity {
         }
         for (CuestasDto dto : listCuestasDto) {
             txt += "C[" + dto.type + ", " + dto.times + "] ";
+            tvListSeries.setText(txt);
+        }
+        for (FartlekDto dto : listFartlekDto) {
+            txt += "F[" + dto.fartlek + "] ";
             tvListSeries.setText(txt);
         }
         for (GymDto dto : listGymDto) {

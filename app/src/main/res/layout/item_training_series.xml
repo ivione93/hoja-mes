@@ -158,15 +158,15 @@
             android:id="@+id/tvIndicadorCuestas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="Cuestas"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivIndicadorSeries"
-            app:layout_constraintTop_toBottomOf="@+id/itemTrainingTime"
-            android:visibility="invisible"/>
+            app:layout_constraintTop_toBottomOf="@+id/itemTrainingTime" />
 
         <ImageView
             android:id="@+id/ivIndicadorCuestas"
@@ -182,18 +182,45 @@
             android:visibility="invisible"/>
 
         <TextView
-            android:id="@+id/tvIndicadorGym"
+            android:id="@+id/tvIndicadorFartlek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Fartlek"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivIndicadorCuestas"
+            app:layout_constraintTop_toBottomOf="@+id/itemTrainingTime" />
+
+        <ImageView
+            android:id="@+id/ivIndicadorFartlek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_fartlek"
+            app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorFartlek"
+            app:layout_constraintStart_toEndOf="@+id/tvIndicadorFartlek"
+            app:layout_constraintTop_toTopOf="@+id/tvIndicadorFartlek"
+            app:tint="@color/colorPrimary"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/tvIndicadorGym"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="Gym"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ivIndicadorCuestas"
-            app:layout_constraintTop_toBottomOf="@+id/itemTrainingTime"
-            android:visibility="invisible"/>
+            app:layout_constraintStart_toEndOf="@+id/ivIndicadorFartlek"
+            app:layout_constraintTop_toBottomOf="@+id/itemTrainingTime" />
 
         <ImageView
             android:id="@+id/ivIndicadorGym"
@@ -202,11 +229,26 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:src="@drawable/ic_gym"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorGym"
+            app:layout_constraintEnd_toEndOf="@+id/itemTrainingPartial"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tvIndicadorGym"
             app:layout_constraintTop_toTopOf="@+id/tvIndicadorGym"
-            app:tint="@color/colorPrimary"
-            android:visibility="invisible"/>
+            app:tint="@color/colorPrimary" />
+
+        <ImageView
+            android:id="@+id/ivIndicadorObserves"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_observes"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/title_training"
+            app:layout_constraintStart_toEndOf="@+id/title_training"
+            app:layout_constraintTop_toTopOf="@+id/title_training"
+            app:tint="@color/colorPrimary" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

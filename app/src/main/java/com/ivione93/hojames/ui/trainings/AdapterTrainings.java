@@ -1,5 +1,6 @@
 package com.ivione93.hojames.ui.trainings;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -126,39 +127,47 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
                         holder.itemView.getContext().startActivity(newTraining);
                         return true;
                     case R.id.menu_delete_training:
-                        db.collection("trainings").document(listTrainings.get(position).id).delete();
-                        db.collection("series").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()){
-                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
-                                    db.collection("series").document(doc.getId()).delete();
+                        AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
+                        deleteConfirm.setTitle("Eliminar entrenamiento");
+                        deleteConfirm.setMessage("¿Está seguro que quiere eliminar el entrenamiento?");
+                        deleteConfirm.setCancelable(false);
+                        deleteConfirm.setPositiveButton("Aceptar", (dialog, which) -> {
+                            db.collection("trainings").document(listTrainings.get(position).id).delete();
+                            db.collection("series").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
+                                if (task.isSuccessful()){
+                                    for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                        db.collection("series").document(doc.getId()).delete();
+                                    }
                                 }
-                            }
-                        });
-                        db.collection("cuestas").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()){
-                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
-                                    db.collection("cuestas").document(doc.getId()).delete();
+                            });
+                            db.collection("cuestas").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
+                                if (task.isSuccessful()){
+                                    for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                        db.collection("cuestas").document(doc.getId()).delete();
+                                    }
                                 }
-                            }
-                        });
-                        db.collection("fartlek").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()){
-                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
-                                    db.collection("fartlek").document(doc.getId()).delete();
+                            });
+                            db.collection("fartlek").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
+                                if (task.isSuccessful()){
+                                    for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                        db.collection("fartlek").document(doc.getId()).delete();
+                                    }
                                 }
-                            }
-                        });
-                        db.collection("gym").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()){
-                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
-                                    db.collection("gym").document(doc.getId()).delete();
+                            });
+                            db.collection("gym").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
+                                if (task.isSuccessful()){
+                                    for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                        db.collection("gym").document(doc.getId()).delete();
+                                    }
                                 }
-                            }
+                            });
+                            listTrainingsFull.remove(listTrainings.get(position));
+                            listTrainings.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, getItemCount());
                         });
-                        listTrainingsFull.remove(listTrainings.get(position));
-                        listTrainings.remove(position);
-                        notifyItemRemoved(position);
-                        notifyItemRangeChanged(position, getItemCount());
+                        deleteConfirm.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                        deleteConfirm.show();
                         return true;
                     default:
                         return false;

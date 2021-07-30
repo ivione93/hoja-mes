@@ -1,5 +1,7 @@
 package com.ivione93.hojames.ui.competitions;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Competition;
+import com.ivione93.hojames.ui.login.AuthActivity;
 
 public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, AdapterCompetitions.CompetitionViewHolder> {
 
@@ -47,9 +50,17 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
                         holder.itemView.getContext().startActivity(newCompetition);
                         return true;
                     case R.id.menu_delete_competition:
-                        db.collection("competitions").document(model.id).delete();
-                        notifyItemRangeChanged(position, getItemCount());
-                        notifyItemRemoved(position);
+                        AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
+                        deleteConfirm.setTitle("Eliminar competición");
+                        deleteConfirm.setMessage("¿Está seguro que quiere eliminar la competición?");
+                        deleteConfirm.setCancelable(false);
+                        deleteConfirm.setPositiveButton("Aceptar", (dialog, which) -> {
+                            db.collection("competitions").document(model.id).delete();
+                            notifyItemRangeChanged(position, getItemCount());
+                            notifyItemRemoved(position);
+                        });
+                        deleteConfirm.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                        deleteConfirm.show();
                         return true;
                     default:
                         return false;

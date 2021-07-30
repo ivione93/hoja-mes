@@ -1,5 +1,6 @@
 package com.ivione93.hojames.ui.trainings;
 
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +30,17 @@ public class AdapterFartlek extends FirestoreRecyclerAdapter<Fartlek, AdapterFar
         holder.showFartlek.setText(model.fartlek);
 
         holder.ibDeleteFartlek.setOnClickListener(v -> {
-            db.collection("fartlek").document(model.id).delete();
-            notifyItemRangeChanged(position, getItemCount());
-            notifyItemRemoved(position);
+            AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
+            deleteConfirm.setTitle("Eliminar fartlek");
+            deleteConfirm.setMessage("¿Está seguro que quiere eliminar el fartlek?\n\nATENCIÓN: Se elimina sin necesidad de guardar el entrenamiento");
+            deleteConfirm.setCancelable(false);
+            deleteConfirm.setPositiveButton("Aceptar", (dialog, which) -> {
+                db.collection("fartlek").document(model.id).delete();
+                notifyItemRangeChanged(position, getItemCount());
+                notifyItemRemoved(position);
+            });
+            deleteConfirm.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            deleteConfirm.show();
         });
     }
 

@@ -1,5 +1,6 @@
 package com.ivione93.hojames.ui.trainings;
 
+import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +30,17 @@ public class AdapterCuestas extends FirestoreRecyclerAdapter<Cuestas, AdapterCue
         holder.showTimesCuestas.setText(String.valueOf(model.times));
 
         holder.ibDeleteCuesta.setOnClickListener(v -> {
-            db.collection("cuestas").document(model.id).delete();
-            notifyItemRangeChanged(position, getItemCount());
-            notifyItemRemoved(position);
+            AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
+            deleteConfirm.setTitle("Eliminar cuesta");
+            deleteConfirm.setMessage("¿Está seguro que quiere eliminar la cuesta?\n\nATENCIÓN: Se elimina sin necesidad de guardar el entrenamiento");
+            deleteConfirm.setCancelable(false);
+            deleteConfirm.setPositiveButton("Aceptar", (dialog, which) -> {
+                db.collection("cuestas").document(model.id).delete();
+                notifyItemRangeChanged(position, getItemCount());
+                notifyItemRemoved(position);
+            });
+            deleteConfirm.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            deleteConfirm.show();
         });
     }
 

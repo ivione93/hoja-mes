@@ -13,6 +13,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.R;
+import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Series;
 
 public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSeries.SeriesViewHolder> {
@@ -26,7 +27,7 @@ public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSerie
     @Override
     protected void onBindViewHolder(@NonNull SeriesViewHolder holder, int position, @NonNull Series model) {
         holder.showDistanceSerie.setText(model.distance + " m");
-        holder.showTimeSerie.setText(model.time);
+        holder.showTimeSerie.setText(Utils.getFormattedResult(model.time));
 
         holder.ibDeleteSerie.setOnClickListener(v -> {
             db.collection("series").document(model.id).delete();

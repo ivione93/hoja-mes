@@ -33,10 +33,11 @@
         android:id="@+id/tvMonthly_kms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:text="Kilómetros acumulados este mes: "
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/rvTrainings"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendar_trainings" />
 

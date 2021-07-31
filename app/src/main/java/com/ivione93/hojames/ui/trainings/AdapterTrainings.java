@@ -52,10 +52,10 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
         holder.itemTrainingDistance.setText(listTrainings.get(position).distance + " km");
         holder.itemTrainingPartial.setText(listTrainings.get(position).partial + " /km");
 
-        if (listTrainings.get(position).observes != null) {
-            holder.ivIndicadorObserves.setVisibility(View.VISIBLE);
-        } else {
+        if (listTrainings.get(position).observes == null || listTrainings.get(position).observes.equals("")) {
             holder.ivIndicadorObserves.setVisibility(View.INVISIBLE);
+        } else {
+            holder.ivIndicadorObserves.setVisibility(View.VISIBLE);
         }
 
         // check series

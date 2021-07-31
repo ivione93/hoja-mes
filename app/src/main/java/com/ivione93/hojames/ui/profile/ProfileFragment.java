@@ -242,7 +242,9 @@ public class ProfileFragment extends Fragment {
                                 last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
                                 last_training_partial.setText(documentSnapshot.get("partial").toString() + " /km");
 
-                                if (documentSnapshot.get("observes") != null) {
+                                if (documentSnapshot.get("observes") == null || documentSnapshot.get("observes").equals("")) {
+                                    ivIndicadorObserves.setVisibility(View.INVISIBLE);
+                                } else {
                                     ivIndicadorObserves.setVisibility(View.VISIBLE);
                                 }
 

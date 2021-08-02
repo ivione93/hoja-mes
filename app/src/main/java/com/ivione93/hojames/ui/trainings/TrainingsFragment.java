@@ -152,7 +152,7 @@ public class TrainingsFragment extends Fragment {
                         for (DocumentSnapshot snap : task.getResult()) {
                             Training training = snap.toObject(Training.class);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                if (training.date.toDate().toInstant().toString().substring(5,7).equals(month)) {
+                                if (training.start.substring(5,7).equals(month)) {
                                     count.updateAndGet(v -> v + Float.valueOf(training.distance));
                                 }
                             }

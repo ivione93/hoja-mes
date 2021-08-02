@@ -11,5 +11,6 @@ public class Training {
     public String time;
     public String partial;
     public String observes;
+    public String start;
 
 }

@@ -25,6 +25,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Training;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,7 +45,7 @@ public class TrainingsFragment extends Fragment {
 
     private List<Training> listTrainings = new ArrayList<>();
 
-    CalendarView calendarTrainings;
+    MaterialCalendarView calendarTrainings;
     RecyclerView rvTrainings;
     TextView monthlyKms;
 
@@ -121,24 +125,34 @@ public class TrainingsFragment extends Fragment {
         monthlyKms = root.findViewById(R.id.monthly_kms);
         monthlyKms.setText(getKms(dateSelected).toString());
         calendarTrainings = root.findViewById(R.id.calendar_trainings);
-        calendarTrainings.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
-            month += 1;
-            if (month < 10) {
-                if (dayOfMonth < 10) {
-                    dateSelected = "0" + dayOfMonth + "/0" + month + "/" + year;
-                } else {
-                    dateSelected = dayOfMonth + "/0" + month + "/" + year;
-                }
-            } else {
-                if (dayOfMonth < 10) {
-                    dateSelected = "0" + dayOfMonth + "/" + month + "/" + year;
-                } else {
-                    dateSelected = dayOfMonth + "/" + month + "/" + year;
-                }
-            }
-            monthlyKms.setText(String.format("%.02f", getKms(dateSelected)));
+        calendarTrainings.setDateSelected(Calendar.getInstance().getTime(), true);
+
+        calendarTrainings.setOnDateChangedListener((widget, date, selected) -> {
+            getDateSelected(date);
             adapterTrainings.getFilter().filter(dateSelected);
         });
+
+        calendarTrainings.setOnMonthChangedListener((widget, date) -> {
+            getDateSelected(date);
+            monthlyKms.setText(String.format("%.02f", getKms(dateSelected)));
+        });
+    }
+
+    private void getDateSelected(CalendarDay date) {
+        int month = date.getMonth() + 1;
+        if (month < 10) {
+            if (date.getDay() < 10) {
+                dateSelected = "0" + date.getDay() + "/0" + month + "/" + date.getYear();
+            } else {
+                dateSelected = date.getDay() + "/0" + month + "/" + date.getYear();
+            }
+        } else {
+            if (date.getDay() < 10) {
+                dateSelected = "0" + date.getDay() + "/" + month + "/" + date.getYear();
+            } else {
+                dateSelected = date.getDay() + "/" + month + "/" + date.getYear();
+            }
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

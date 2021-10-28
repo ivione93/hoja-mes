@@ -1,11 +1,13 @@
 package com.ivione93.hojames.ui.profile;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -17,9 +19,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -48,6 +54,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
     String email;
     Uri photoUrl;
+
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,68 +117,109 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void deleteUser() {
+        deleteProfileInformation(email);
+
+        //deleteProfileAuthentication();
+
         // Borrado datos inicio de sesion
         SharedPreferences.Editor prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
         prefs.clear();
         prefs.apply();
+    }
 
-        db.collection("trainings").whereEqualTo("email", email).get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    WriteBatch batch = db.batch();
-                    List<DocumentSnapshot> doc = queryDocumentSnapshots.getDocuments();
-                    for (DocumentSnapshot snapshot: doc) {
-                        batch.delete(snapshot.getReference());
-                    }
-                    batch.commit().addOnSuccessListener(aVoid -> {
-                        Toast.makeText(EditProfileActivity.this, "Entrenamientos eliminados", Toast.LENGTH_LONG).show();
-                    });
-                });
-
-
+    private void deleteProfileInformation(String email) {
         // Eliminar entrenamientos e hijos
-        /*db.collection("trainings").whereEqualTo("email", email).get().addOnCompleteListener(task -> {
+        db.collection("trainings").whereEqualTo("email", email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot training : task.getResult()) {
                     db.collection("trainings").document(training.getId()).delete();
-                    // Eliminar series y cuestas
+                    // Eliminar series
                     db.collection("series").whereEqualTo("idTraining", training.getId()).get().addOnCompleteListener(task1 -> {
-                       if (task1.isSuccessful()) {
-                           for (QueryDocumentSnapshot serie : task1.getResult()) {
-                               db.collection("series").document(serie.getId()).delete();
-                           }
-                       }
+                        if (task1.isSuccessful()) {
+                            for (QueryDocumentSnapshot serie : task1.getResult()) {
+                                db.collection("series").document(serie.getId()).delete().addOnCompleteListener(task2 -> {
+                                    Log.d("DEL", "Series eliminadas");
+                                });
+                            }
+                        }
                     });
+                    // Eliminar cuestas
                     db.collection("cuestas").whereEqualTo("idTraining", training.getId()).get().addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
                             for (QueryDocumentSnapshot cuesta : task1.getResult()) {
-                                db.collection("cuestas").document(cuesta.getId()).delete();
+                                db.collection("cuestas").document(cuesta.getId()).delete().addOnCompleteListener(task2 -> {
+                                    Log.d("DEL", "Cuestas eliminadas");
+                                });
+                            }
+                        }
+                    });
+                    // Eliminar fartlek
+                    db.collection("fartlek").whereEqualTo("idTraining", training.getId()).get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            for (QueryDocumentSnapshot fartlek : task1.getResult()) {
+                                db.collection("fartlek").document(fartlek.getId()).delete().addOnCompleteListener(task2 -> {
+                                    Log.d("DEL", "Fartlek eliminados");
+                                });
+                            }
+                        }
+                    });
+                    // Eliminar gym
+                    db.collection("gym").whereEqualTo("idTraining", training.getId()).get().addOnCompleteListener(task1 -> {
+                        if (task1.isSuccessful()) {
+                            for (QueryDocumentSnapshot gym : task1.getResult()) {
+                                db.collection("gym").document(gym.getId()).delete().addOnCompleteListener(task2 -> {
+                                    Log.d("DEL", "Gym eliminados");
+                                });
                             }
                         }
                     });
                 }
             }
         });
+
+        // Eliminar entrenamientos
+        db.collection("trainings").whereEqualTo("email", email).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (QueryDocumentSnapshot doc : task.getResult()) {
+                    db.collection("trainings").document(doc.getId()).delete().addOnSuccessListener(aVoid -> {
+                        Log.d("DEL", "Entrenamientos eliminados");
+                        Toast.makeText(EditProfileActivity.this, "Entrenamientos eliminados", Toast.LENGTH_LONG).show();
+                    });
+                }
+            }
+        });
+
         // Eliminar competiciones
         db.collection("competitions").whereEqualTo("email", email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot doc : task.getResult()) {
-                    db.collection("competitions").document(doc.getId()).delete();
+                    db.collection("competitions").document(doc.getId()).delete().addOnSuccessListener(aVoid -> {
+                        Log.d("DEL", "Competiciones eliminadas");
+                        Toast.makeText(EditProfileActivity.this, "Competiciones eliminadas", Toast.LENGTH_LONG).show();
+                    });
                 }
-            }
-        });*/
-        // Eliminar atleta (perfil)
-        db.collection("athlete").document(email).delete().addOnCompleteListener(task2 -> {
-            if (task2.isSuccessful()) {
-                Toast.makeText(EditProfileActivity.this, "Usuario eliminado", Toast.LENGTH_LONG).show();
             }
         });
 
+        // Eliminar atleta (athlete)
+        db.collection("athlete").document(email).delete().addOnCompleteListener(task2 -> {
+            Log.d("DEL", "Atleta eliminado");
+        });
+    }
+
+    private void deleteProfileAuthentication() {
         // Eliminar cuenta autenticada
-        FirebaseAuth.getInstance().getCurrentUser().delete();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user.delete().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Log.d("DEL", "Cuenta de usuario eliminada");
+                Toast.makeText(EditProfileActivity.this, "Usuario eliminado", Toast.LENGTH_LONG).show();
+            }
+        });
         FirebaseAuth.getInstance().signOut();
     }
 
-    private void loadAthlete(String license) {
+    private void loadAthlete(String email) {
         db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if (photoUrl != null) {

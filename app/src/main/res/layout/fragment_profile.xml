@@ -13,12 +13,12 @@
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        app:civ_border_color="@color/cardview_dark_background"
-        app:civ_border_width="2dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_profile"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="1dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_profile"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nombreEditText"
@@ -68,7 +68,8 @@
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photoProfile">
+        app:layout_constraintTop_toBottomOf="@+id/photoProfile"
+        app:cardCornerRadius="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -148,10 +149,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/title_time"
                 android:text="Media"
-                />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title_time" />
 
             <TextView
                 android:id="@+id/last_training_time"
@@ -300,6 +301,16 @@
                 app:layout_constraintTop_toTopOf="@+id/title_training"
                 app:tint="@color/colorPrimary" />
 
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="393dp"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toTopOf="@+id/title_training"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_last_training" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -312,6 +323,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/last_training">
@@ -328,11 +340,11 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@android:color/transparent"
+                android:contentDescription="@string/ultima_competicion"
                 android:padding="4dp"
                 android:src="@drawable/ic_competitions"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/ultima_competicion" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -345,51 +357,86 @@
                 app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
             <TextView
+                android:id="@+id/last_competition_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/textView2"
+                tools:text="09/07/2017" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="393dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toTopOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:layout_constraintVertical_bias="0.65" />
+
+            <TextView
                 android:id="@+id/last_competition_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:maxLines="1"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                app:layout_constraintTop_toBottomOf="@+id/last_competition_place"
                 tools:text="Campeonato de Madrid absoluto" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="8dp"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                android:src="@drawable/ic_location"
+                app:layout_constraintEnd_toStartOf="@+id/last_competition_place"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <TextView
                 android:id="@+id/last_competition_place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="24dp"
                 android:maxLines="1"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toStartOf="@+id/last_competition_result"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/last_competition_name"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintEnd_toEndOf="@+id/last_competition_date"
+                app:layout_constraintTop_toTopOf="@+id/imageView5"
                 tools:text="Tres Cantos" />
 
             <TextView
-                android:id="@+id/last_competition_date"
+                android:id="@+id/last_competition_track_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/last_competition_place"
-                app:layout_constraintTop_toBottomOf="@+id/last_competition_place"
-                tools:text="09/07/2017" />
+                android:text="Prueba"
+                app:layout_constraintStart_toStartOf="@+id/last_competition_name"
+                app:layout_constraintTop_toBottomOf="@+id/last_competition_name" />
 
             <TextView
                 android:id="@+id/last_competition_track"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/last_competition_date"
-                app:layout_constraintTop_toBottomOf="@+id/last_competition_date"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/last_competition_track_text"
+                app:layout_constraintTop_toBottomOf="@+id/last_competition_track_text"
                 tools:text="400mv" />
 
             <TextView
@@ -398,12 +445,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
+                android:textColor="@color/colorPrimary"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@+id/last_competition_track"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/last_competition_place"
+                app:layout_constraintTop_toTopOf="@+id/last_competition_track_text"
                 tools:text="55.95" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

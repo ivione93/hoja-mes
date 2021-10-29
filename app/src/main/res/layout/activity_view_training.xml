@@ -105,6 +105,7 @@
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:text="+ series"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/trainingObservesText"
         app:layout_constraintTop_toBottomOf="@+id/trainingObservesText" />
@@ -116,6 +117,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:text="+ cuestas"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/trainingObservesText"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/btnAddSeries" />
@@ -125,6 +127,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="+ fartlek"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btnAddSeries"
         app:layout_constraintStart_toStartOf="@+id/btnAddSeries"
         app:layout_constraintTop_toBottomOf="@+id/btnAddSeries" />
@@ -134,6 +137,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="+ gym"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btnAddCuestas"
         app:layout_constraintStart_toStartOf="@+id/btnAddCuestas"
         app:layout_constraintTop_toTopOf="@+id/btnAddFartlek" />

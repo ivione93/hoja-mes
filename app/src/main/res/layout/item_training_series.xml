@@ -9,7 +9,8 @@
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
     android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp">
+    android:layout_marginRight="8dp"
+    app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/trainingLayout"
@@ -89,9 +90,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
+            android:text="Media"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/title_time"
-            android:text="Media" />
+            app:layout_constraintTop_toTopOf="@+id/title_time" />
 
         <TextView
             android:id="@+id/itemTrainingTime"
@@ -249,6 +251,15 @@
             app:layout_constraintStart_toEndOf="@+id/title_training"
             app:layout_constraintTop_toTopOf="@+id/title_training"
             app:tint="@color/colorPrimary" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="393dp"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toTopOf="@+id/title_training"
+            app:layout_constraintTop_toBottomOf="@+id/itemTrainingDate"
+            tools:layout_editor_absoluteX="1dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

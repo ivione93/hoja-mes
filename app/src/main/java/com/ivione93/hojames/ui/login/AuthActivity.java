@@ -82,7 +82,8 @@ public class AuthActivity extends AppCompatActivity {
         });
 
         btnSignUp.setOnClickListener(v -> {
-            if (!emailEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
+            goNewAthlete(null);
+            /*if (!emailEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
                 String emailUser = emailEditText.getText().toString().trim();
                 if (emailUser.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(emailUser).matches()) {
                     emailEditText.setError("Correo inválido");
@@ -96,7 +97,7 @@ public class AuthActivity extends AppCompatActivity {
                         showAlert();
                     }
                 });
-            }
+            }*/
         });
 
         btnSignIn.setOnClickListener(v -> {

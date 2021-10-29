@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -28,7 +30,7 @@ public class NewAthleteActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ConstraintLayout newAthleteLayout;
-    TextView nombreEditText, apellidosEditText, birthEditText;
+    TextView nombreEditText, apellidosEditText, birthEditText, emailEditText, passwordEditText;
 
     String email;
 
@@ -46,15 +48,18 @@ public class NewAthleteActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    goProfile(email);
+        if (email != null) {
+            db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        goProfile(email);
+                    }
                 }
-            }
-        });
-        newAthleteLayout.setVisibility(View.VISIBLE);
+            });
+            newAthleteLayout.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -87,8 +92,10 @@ public class NewAthleteActivity extends AppCompatActivity {
         prefs.clear();
         prefs.apply();
 
-        FirebaseAuth.getInstance().getCurrentUser().delete();
-        FirebaseAuth.getInstance().signOut();
+        if (email != null) {
+            FirebaseAuth.getInstance().getCurrentUser().delete();
+            FirebaseAuth.getInstance().signOut();
+        }
         finish();
     }
 
@@ -98,6 +105,8 @@ public class NewAthleteActivity extends AppCompatActivity {
         nombreEditText = findViewById(R.id.nombreEditText);
         apellidosEditText = findViewById(R.id.apellidosEditText);
         birthEditText = findViewById(R.id.birthEditText);
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
     }
 
     private void goProfile(String email) {
@@ -110,8 +119,14 @@ public class NewAthleteActivity extends AppCompatActivity {
         String name = nombreEditText.getText().toString();
         String surname = apellidosEditText.getText().toString();
         String birthdate = birthEditText.getText().toString();
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
 
-        if (validateNewAthlete(name, surname, birthdate)) {
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailEditText.setError("Correo inválido");
+            return;
+        }
+        if (validateNewAthlete(name, surname, birthdate, email, password)) {
             Map<String,Object> user = new HashMap<>();
             user.put("email", email);
             user.put("name", nombreEditText.getText().toString());
@@ -120,14 +135,24 @@ public class NewAthleteActivity extends AppCompatActivity {
 
             db.collection("athlete").document(email).set(user);
 
-            goProfile(email);
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailEditText.getText().toString(),
+                    passwordEditText.getText().toString()).addOnCompleteListener(it -> {
+                if (it.isSuccessful()) {
+                    goProfile(email);
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Error");
+                    builder.setMessage("Ya existe un registro con ese email");
+                    builder.create().show();
+                }
+            });
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Todos los campos son obligatorios", Toast.LENGTH_LONG);
             toast.show();
         }
     }
 
-    private boolean validateNewAthlete(String name, String surname, String birthdate) {
+    private boolean validateNewAthlete(String name, String surname, String birthdate, String email, String password) {
         boolean isValid = true;
         if (name.isEmpty() || name == null) {
             isValid = false;
@@ -136,6 +161,12 @@ public class NewAthleteActivity extends AppCompatActivity {
             isValid = false;
         }
         if (birthdate.isEmpty() || birthdate == null) {
+            isValid = false;
+        }
+        if (email.isEmpty() || email == null) {
+            isValid = false;
+        }
+        if (password.isEmpty() || password == null) {
             isValid = false;
         }
         return isValid;

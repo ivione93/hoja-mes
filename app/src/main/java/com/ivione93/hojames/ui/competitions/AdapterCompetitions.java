@@ -1,6 +1,5 @@
 package com.ivione93.hojames.ui.competitions;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Competition;
-import com.ivione93.hojames.ui.login.AuthActivity;
 
 public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, AdapterCompetitions.CompetitionViewHolder> {
 

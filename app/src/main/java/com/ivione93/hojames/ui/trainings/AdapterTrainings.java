@@ -13,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -47,6 +48,13 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
 
     @Override
     public void onBindViewHolder(@NonNull AdapterTrainings.ViewHolderTraining holder, int position) {
+        holder.trainingCV.setOnClickListener(v -> {
+            Intent newTraining = new Intent(holder.itemView.getContext(), ViewTrainingActivity.class);
+            newTraining.putExtra("isNew", false);
+            newTraining.putExtra("idTraining", listTrainings.get(position).id);
+            newTraining.putExtra("email", listTrainings.get(position).email);
+            holder.itemView.getContext().startActivity(newTraining);
+        });
         holder.itemTrainingDate.setText(Utils.toString(listTrainings.get(position).date));
         holder.itemTrainingTime.setText(Utils.getFormattedTime(listTrainings.get(position).time) + " min");
         holder.itemTrainingDistance.setText(listTrainings.get(position).distance + " km");
@@ -119,13 +127,6 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
             popup.inflate(R.menu.item_training_menu);
             popup.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
-                    case R.id.menu_edit_training:
-                        Intent newTraining = new Intent(holder.itemView.getContext(), ViewTrainingActivity.class);
-                        newTraining.putExtra("isNew", false);
-                        newTraining.putExtra("idTraining", listTrainings.get(position).id);
-                        newTraining.putExtra("email", listTrainings.get(position).email);
-                        holder.itemView.getContext().startActivity(newTraining);
-                        return true;
                     case R.id.menu_delete_training:
                         AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
                         deleteConfirm.setTitle("Eliminar entrenamiento");
@@ -225,6 +226,8 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
         TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
         ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorFartlek, ivIndicadorGym, ivIndicadorObserves;
 
+        ConstraintLayout trainingCV;
+
         public ViewHolderTraining(@NonNull View itemView) {
             super(itemView);
             itemTrainingDate = itemView.findViewById(R.id.itemTrainingDate);
@@ -246,6 +249,8 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
             ivIndicadorGym = itemView.findViewById(R.id.ivIndicadorGym);
 
             ivIndicadorObserves = itemView.findViewById(R.id.ivIndicadorObserves);
+
+            trainingCV = itemView.findViewById(R.id.trainingCV);
         }
     }
 }

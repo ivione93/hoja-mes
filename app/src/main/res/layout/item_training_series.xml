@@ -12,6 +12,7 @@
     android:layout_marginRight="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/trainingCV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

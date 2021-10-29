@@ -125,8 +125,10 @@ public class TrainingsFragment extends Fragment {
         calendarTrainings.setDateSelected(Calendar.getInstance().getTime(), true);
 
         calendarTrainings.setOnDateChangedListener((widget, date, selected) -> {
-            getDateSelected(date);
-            adapterTrainings.getFilter().filter(dateSelected);
+            if (adapterTrainings != null) {
+                getDateSelected(date);
+                adapterTrainings.getFilter().filter(dateSelected);
+            }
         });
 
         calendarTrainings.setOnMonthChangedListener((widget, date) -> {

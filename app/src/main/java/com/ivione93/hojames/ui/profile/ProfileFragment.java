@@ -252,8 +252,6 @@ public class ProfileFragment extends Fragment {
                         for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                             if (documentSnapshot.exists()) {
                                 lastTrainingCV.setOnClickListener(v -> {
-                                    Log.d("PROFILE", "Ultimo entreno");
-
                                     Intent newTraining = new Intent(getContext(), ViewTrainingActivity.class);
                                     newTraining.putExtra("isNew", false);
                                     newTraining.putExtra("idTraining", documentSnapshot.get("id").toString());

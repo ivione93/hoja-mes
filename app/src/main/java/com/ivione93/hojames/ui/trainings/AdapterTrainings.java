@@ -48,7 +48,7 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
 
     @Override
     public void onBindViewHolder(@NonNull AdapterTrainings.ViewHolderTraining holder, int position) {
-        holder.trainingCV.setOnClickListener(v -> {
+        holder.trainingLayout.setOnClickListener(v -> {
             Intent newTraining = new Intent(holder.itemView.getContext(), ViewTrainingActivity.class);
             newTraining.putExtra("isNew", false);
             newTraining.putExtra("idTraining", listTrainings.get(position).id);
@@ -226,7 +226,7 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
         TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
         ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorFartlek, ivIndicadorGym, ivIndicadorObserves;
 
-        ConstraintLayout trainingCV;
+        ConstraintLayout trainingLayout;
 
         public ViewHolderTraining(@NonNull View itemView) {
             super(itemView);
@@ -250,7 +250,7 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
 
             ivIndicadorObserves = itemView.findViewById(R.id.ivIndicadorObserves);
 
-            trainingCV = itemView.findViewById(R.id.trainingCV);
+            trainingLayout = itemView.findViewById(R.id.trainingLayout);
         }
     }
 }

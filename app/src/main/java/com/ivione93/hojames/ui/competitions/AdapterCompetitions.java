@@ -10,6 +10,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -35,18 +36,19 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
         holder.result.setText(Utils.getFormattedResult(model.result));
         holder.date.setText(Utils.toString(model.date));
 
+        holder.competitionLayout.setOnClickListener(v -> {
+            Intent newCompetition = new Intent(holder.itemView.getContext(), NewCompetitionActivity.class);
+            newCompetition.putExtra("isNew", false);
+            newCompetition.putExtra("idCompetition", model.id);
+            newCompetition.putExtra("email", model.email);
+            holder.itemView.getContext().startActivity(newCompetition);
+        });
+
         holder.ibOptionsCompetition.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(holder.itemView.getContext(), holder.ibOptionsCompetition);
             popup.inflate(R.menu.item_competition_menu);
             popup.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
-                    case R.id.menu_edit_competition:
-                        Intent newCompetition = new Intent(holder.itemView.getContext(), NewCompetitionActivity.class);
-                        newCompetition.putExtra("isNew", false);
-                        newCompetition.putExtra("idCompetition", model.id);
-                        newCompetition.putExtra("email", model.email);
-                        holder.itemView.getContext().startActivity(newCompetition);
-                        return true;
                     case R.id.menu_delete_competition:
                         AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
                         deleteConfirm.setTitle("Eliminar competición");
@@ -80,6 +82,8 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
         TextView name, place, track, result, date;
         ImageButton ibOptionsCompetition;
 
+        ConstraintLayout competitionLayout;
+
         public CompetitionViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.competitionNameText);
@@ -88,6 +92,8 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
             result = itemView.findViewById(R.id.resultText);
             date = itemView.findViewById(R.id.dateText);
             ibOptionsCompetition = itemView.findViewById(R.id.ibOptionsCompetition);
+
+            competitionLayout = itemView.findViewById(R.id.competitionLayout);
         }
     }
 }

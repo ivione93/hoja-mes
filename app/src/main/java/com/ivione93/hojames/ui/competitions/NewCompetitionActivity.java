@@ -225,7 +225,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
                 toast.show();
             }
         } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos por completar", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), "Todos los campos son obligatorios", Toast.LENGTH_LONG);
             toast.show();
         }
     }

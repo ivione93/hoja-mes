@@ -81,24 +81,7 @@ public class AuthActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        btnSignUp.setOnClickListener(v -> {
-            goNewAthlete(null);
-            /*if (!emailEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
-                String emailUser = emailEditText.getText().toString().trim();
-                if (emailUser.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(emailUser).matches()) {
-                    emailEditText.setError("Correo inválido");
-                    return;
-                }
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailEditText.getText().toString(),
-                        passwordEditText.getText().toString()).addOnCompleteListener(it -> {
-                    if (it.isSuccessful()) {
-                        goNewAthlete(it.getResult().getUser().getEmail());
-                    } else {
-                        showAlert();
-                    }
-                });
-            }*/
-        });
+        btnSignUp.setOnClickListener(v -> goNewAthlete(null));
 
         btnSignIn.setOnClickListener(v -> {
             if (!emailEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {

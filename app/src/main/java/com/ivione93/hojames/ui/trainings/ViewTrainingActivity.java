@@ -460,7 +460,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String time = timeSeries.getText().toString();
 
         if (distance.equals("") || time.equals("")) {
-            Toast.makeText(v.getContext(), "Campos incompletos", Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
         } else {
             if (validateTimeSeries(time)) {
                 SeriesDto seriesDto = new SeriesDto(distance, time);
@@ -503,7 +503,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String times = repeticionesCuestas.getText().toString();
 
         if (type.equals("") && times.equals("")) {
-            Toast.makeText(v.getContext(), "Campos incompletos", Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
         } else {
             CuestasDto cuestasDto = new CuestasDto(type, Integer.parseInt(times));
             listCuestasDto.add(cuestasDto);

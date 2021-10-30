@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Fartlek"
+        android:text="Fartlek *"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/fartlekTextInput"
         app:layout_constraintStart_toStartOf="parent"

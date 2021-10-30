@@ -239,19 +239,34 @@ public class NewCompetitionActivity extends AppCompatActivity {
     private boolean validateNewCompetition(String place, String competitionName, String track, String result, String date) {
         boolean isValid = true;
         if(place.isEmpty() || place == null) {
+            placeText.setError("El lugar es obligatorio");
             isValid = false;
+        } else {
+            placeText.setError(null);
         }
         if(competitionName.isEmpty() || competitionName == null) {
+            competitionNameText.setError("El campeonato es obligatorio");
             isValid = false;
+        } else {
+            competitionNameText.setError(null);
         }
         if(track.isEmpty() || track == null) {
+            trackText.setError("La prueba es obligatoria");
             isValid = false;
+        } else {
+            trackText.setError(null);
         }
         if(result.isEmpty() || result == null) {
+            resultText.setError("La marca es obligatoria");
             isValid = false;
+        } else {
+            resultText.setError(null);
         }
         if(date.isEmpty() || date == null) {
+            dateText.setError("La fecha es obligatoria");
             isValid = false;
+        } else {
+            dateText.setError(null);
         }
         return isValid;
     }

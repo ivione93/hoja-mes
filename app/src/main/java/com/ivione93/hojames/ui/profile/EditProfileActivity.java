@@ -251,6 +251,10 @@ public class EditProfileActivity extends AppCompatActivity {
                 user.put("birth", editBirth);
 
                 db.collection("athlete").document(email).set(user);
+
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("email", email);
+                startActivity(intent);
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
                 toast.show();
@@ -259,22 +263,27 @@ public class EditProfileActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos por completar", Toast.LENGTH_LONG);
             toast.show();
         }
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
     }
 
     private boolean validateEditProfile(String name, String surname, String birthdate) {
         boolean isValid = true;
         if(name.isEmpty() || name == null) {
+            nameEditProfile.setError("El nombre es obligatorio");
             isValid = false;
+        } else {
+            nameEditProfile.setError(null);
         }
         if(surname.isEmpty() || surname == null) {
+            surnameEditProfile.setError("Los apellidos son obligatorios");
             isValid = false;
+        } else {
+            surnameEditProfile.setError(null);
         }
         if(birthdate.isEmpty() || birthdate == null) {
+            birthEditProfile.setError("La fecha de nacimiento es obligatoria");
             isValid = false;
+        } else {
+            birthEditProfile.setError(null);
         }
         return isValid;
     }

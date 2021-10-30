@@ -122,10 +122,6 @@ public class NewAthleteActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.setError("Correo inválido");
-            return;
-        }
         if (validateNewAthlete(name, surname, birthdate, email, password)) {
             Map<String,Object> user = new HashMap<>();
             user.put("email", email);
@@ -155,19 +151,37 @@ public class NewAthleteActivity extends AppCompatActivity {
     private boolean validateNewAthlete(String name, String surname, String birthdate, String email, String password) {
         boolean isValid = true;
         if (name.isEmpty() || name == null) {
+            nombreEditText.setError("El nombre es obligatorio");
             isValid = false;
+        } else {
+            nombreEditText.setError(null);
         }
         if (surname.isEmpty() || surname == null) {
+            apellidosEditText.setError("Los apellidos es obligatorio");
             isValid = false;
+        } else {
+            apellidosEditText.setError(null);
         }
         if (birthdate.isEmpty() || birthdate == null) {
+            birthEditText.setError("La fecha de nacimiento es obligatorio");
             isValid = false;
+        } else {
+            birthEditText.setError(null);
         }
         if (email.isEmpty() || email == null) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                emailEditText.setError("Correo inválido");
+            }
+            emailEditText.setError("El email es obligatorio");
             isValid = false;
+        } else {
+            emailEditText.setError(null);
         }
         if (password.isEmpty() || password == null) {
+            passwordEditText.setError("La contraseña es obligatoria");
             isValid = false;
+        } else {
+            passwordEditText.setError(null);
         }
         return isValid;
     }

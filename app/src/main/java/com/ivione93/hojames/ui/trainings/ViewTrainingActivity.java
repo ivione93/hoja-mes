@@ -603,13 +603,22 @@ public class ViewTrainingActivity extends AppCompatActivity {
     private boolean validateNewTraining(String date, String time, String distance) {
         boolean isValid = true;
         if (date.isEmpty() || date == null) {
+            trainingDateText.setError("La fecha es obligatoria");
             isValid = false;
+        } else {
+            trainingDateText.setError(null);
         }
         if (time.isEmpty() || time == null) {
+            trainingTimeText.setError("El tiempo es obligatorio");
             isValid = false;
+        } else {
+            trainingTimeText.setError(null);
         }
         if (distance.isEmpty() || distance == null) {
+            trainingDistanceText.setError("La distancia es obligatoria");
             isValid = false;
+        } else {
+            trainingDistanceText.setError(null);
         }
         return isValid;
     }

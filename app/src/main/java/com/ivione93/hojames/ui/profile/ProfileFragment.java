@@ -57,6 +57,8 @@ public class ProfileFragment extends Fragment {
     TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result;
     TextView title_training, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
     TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
+    TextView last_competition_track_text;
+    ImageView mapImageView;
     ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorFartlek, ivIndicadorGym, ivIndicadorObserves;
 
     CardView lastTrainingCV, lastCompetitionCV;
@@ -193,6 +195,9 @@ public class ProfileFragment extends Fragment {
         last_training_distance = root.findViewById(R.id.last_training_distance);
         last_training_partial = root.findViewById(R.id.last_training_partial);
 
+        last_competition_track_text = root.findViewById(R.id.last_competition_track_text);
+        mapImageView = root.findViewById(R.id.mapImageView);
+
         tvIndicadorSeries = root.findViewById(R.id.tvIndicadorSeries);
         ivIndicadorSeries = root.findViewById(R.id.ivIndicadorSeries);
 
@@ -218,23 +223,29 @@ public class ProfileFragment extends Fragment {
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 progressDialog.dismiss();
-                for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                    if (documentSnapshot.exists()) {
-                        lastCompetitionCV.setOnClickListener(v -> {
-                            Intent newCompetition = new Intent(getContext(), NewCompetitionActivity.class);
-                            newCompetition.putExtra("isNew", false);
-                            newCompetition.putExtra("idCompetition", documentSnapshot.get("id").toString());
-                            newCompetition.putExtra("email", email);
-                            startActivity(newCompetition);
-                        });
-                        last_competition_name.setText(documentSnapshot.get("name").toString());
-                        last_competition_place.setText(documentSnapshot.get("place").toString());
-                        last_competition_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
-                        last_competition_track.setText(documentSnapshot.get("track").toString());
-                        last_competition_result.setText(Utils.getFormattedResult(documentSnapshot.get("result").toString()));
-                    } else {
-                        last_competition_name.setText("No se han encontrado competiciones");
+                if (task.getResult().size() > 0) {
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        if (documentSnapshot.exists()) {
+                            lastCompetitionCV.setOnClickListener(v -> {
+                                Intent newCompetition = new Intent(getContext(), NewCompetitionActivity.class);
+                                newCompetition.putExtra("isNew", false);
+                                newCompetition.putExtra("idCompetition", documentSnapshot.get("id").toString());
+                                newCompetition.putExtra("email", email);
+                                startActivity(newCompetition);
+                            });
+                            last_competition_name.setText(documentSnapshot.get("name").toString());
+                            last_competition_place.setText(documentSnapshot.get("place").toString());
+                            last_competition_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
+                            last_competition_track.setText(documentSnapshot.get("track").toString());
+                            last_competition_result.setText(Utils.getFormattedResult(documentSnapshot.get("result").toString()));
+                        } else {
+                            last_competition_name.setText("No se han encontrado competiciones");
+                        }
                     }
+                } else {
+                    last_competition_name.setText("No se han encontrado competiciones");
+                    last_competition_track_text.setVisibility(View.INVISIBLE);
+                    mapImageView.setVisibility(View.INVISIBLE);
                 }
             } else {
                 progressDialog.dismiss();
@@ -251,83 +262,87 @@ public class ProfileFragment extends Fragment {
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
-                        for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                            if (documentSnapshot.exists()) {
-                                lastTrainingCV.setOnClickListener(v -> {
-                                    Intent newTraining = new Intent(getContext(), ViewTrainingActivity.class);
-                                    newTraining.putExtra("isNew", false);
-                                    newTraining.putExtra("idTraining", documentSnapshot.get("id").toString());
-                                    newTraining.putExtra("email", email);
-                                    startActivity(newTraining);
-                                });
+                        if (task.getResult().size() > 0) {
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                if (documentSnapshot.exists()) {
+                                    lastTrainingCV.setOnClickListener(v -> {
+                                        Intent newTraining = new Intent(getContext(), ViewTrainingActivity.class);
+                                        newTraining.putExtra("isNew", false);
+                                        newTraining.putExtra("idTraining", documentSnapshot.get("id").toString());
+                                        newTraining.putExtra("email", email);
+                                        startActivity(newTraining);
+                                    });
 
-                                last_training_distance.setText(documentSnapshot.get("distance").toString() + " kms");
-                                last_training_time.setText(Utils.getFormattedTime(documentSnapshot.get("time").toString()) + " min");
-                                last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
-                                last_training_partial.setText(documentSnapshot.get("partial").toString() + " /km");
+                                    last_training_distance.setText(documentSnapshot.get("distance").toString() + " kms");
+                                    last_training_time.setText(Utils.getFormattedTime(documentSnapshot.get("time").toString()) + " min");
+                                    last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
+                                    last_training_partial.setText(documentSnapshot.get("partial").toString() + " /km");
 
-                                if (documentSnapshot.get("observes") == null || documentSnapshot.get("observes").equals("")) {
-                                    ivIndicadorObserves.setVisibility(View.INVISIBLE);
-                                } else {
-                                    ivIndicadorObserves.setVisibility(View.VISIBLE);
+                                    if (documentSnapshot.get("observes") == null || documentSnapshot.get("observes").equals("")) {
+                                        ivIndicadorObserves.setVisibility(View.INVISIBLE);
+                                    } else {
+                                        ivIndicadorObserves.setVisibility(View.VISIBLE);
+                                    }
+
+                                    // check series
+                                    db.collection("series").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
+                                        if (t.isSuccessful()) {
+                                            QuerySnapshot document = t.getResult();
+                                            if (!document.isEmpty()) {
+                                                tvIndicadorSeries.setVisibility(View.VISIBLE);
+                                                ivIndicadorSeries.setVisibility(View.VISIBLE);
+                                            } else {
+                                                tvIndicadorSeries.setVisibility(View.INVISIBLE);
+                                                ivIndicadorSeries.setVisibility(View.INVISIBLE);
+                                            }
+                                        }
+                                    });
+
+                                    // check cuestas
+                                    db.collection("cuestas").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
+                                        if (t.isSuccessful()) {
+                                            QuerySnapshot document = t.getResult();
+                                            if (!document.isEmpty()) {
+                                                tvIndicadorCuestas.setVisibility(View.VISIBLE);
+                                                ivIndicadorCuestas.setVisibility(View.VISIBLE);
+                                            } else {
+                                                tvIndicadorCuestas.setVisibility(View.INVISIBLE);
+                                                ivIndicadorCuestas.setVisibility(View.INVISIBLE);
+                                            }
+                                        }
+                                    });
+
+                                    // check fartlek
+                                    db.collection("fartlek").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
+                                        if (t.isSuccessful()) {
+                                            QuerySnapshot document = t.getResult();
+                                            if (!document.isEmpty()) {
+                                                tvIndicadorFartlek.setVisibility(View.VISIBLE);
+                                                ivIndicadorFartlek.setVisibility(View.VISIBLE);
+                                            } else {
+                                                tvIndicadorFartlek.setVisibility(View.INVISIBLE);
+                                                ivIndicadorFartlek.setVisibility(View.INVISIBLE);
+                                            }
+                                        }
+                                    });
+
+                                    // check gym
+                                    db.collection("gym").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
+                                        if (t.isSuccessful()) {
+                                            QuerySnapshot document = t.getResult();
+                                            if (!document.isEmpty()) {
+                                                tvIndicadorGym.setVisibility(View.VISIBLE);
+                                                ivIndicadorGym.setVisibility(View.VISIBLE);
+                                            } else {
+                                                tvIndicadorGym.setVisibility(View.INVISIBLE);
+                                                ivIndicadorGym.setVisibility(View.INVISIBLE);
+                                            }
+                                        }
+                                    });
                                 }
-
-                                // check series
-                                db.collection("series").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
-                                    if (t.isSuccessful()) {
-                                        QuerySnapshot document = t.getResult();
-                                        if (!document.isEmpty()) {
-                                            tvIndicadorSeries.setVisibility(View.VISIBLE);
-                                            ivIndicadorSeries.setVisibility(View.VISIBLE);
-                                        } else {
-                                            tvIndicadorSeries.setVisibility(View.INVISIBLE);
-                                            ivIndicadorSeries.setVisibility(View.INVISIBLE);
-                                        }
-                                    }
-                                });
-
-                                // check cuestas
-                                db.collection("cuestas").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
-                                    if (t.isSuccessful()) {
-                                        QuerySnapshot document = t.getResult();
-                                        if (!document.isEmpty()) {
-                                            tvIndicadorCuestas.setVisibility(View.VISIBLE);
-                                            ivIndicadorCuestas.setVisibility(View.VISIBLE);
-                                        } else {
-                                            tvIndicadorCuestas.setVisibility(View.INVISIBLE);
-                                            ivIndicadorCuestas.setVisibility(View.INVISIBLE);
-                                        }
-                                    }
-                                });
-
-                                // check fartlek
-                                db.collection("fartlek").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
-                                    if (t.isSuccessful()) {
-                                        QuerySnapshot document = t.getResult();
-                                        if (!document.isEmpty()) {
-                                            tvIndicadorFartlek.setVisibility(View.VISIBLE);
-                                            ivIndicadorFartlek.setVisibility(View.VISIBLE);
-                                        } else {
-                                            tvIndicadorFartlek.setVisibility(View.INVISIBLE);
-                                            ivIndicadorFartlek.setVisibility(View.INVISIBLE);
-                                        }
-                                    }
-                                });
-
-                                // check gym
-                                db.collection("gym").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
-                                    if (t.isSuccessful()) {
-                                        QuerySnapshot document = t.getResult();
-                                        if (!document.isEmpty()) {
-                                            tvIndicadorGym.setVisibility(View.VISIBLE);
-                                            ivIndicadorGym.setVisibility(View.VISIBLE);
-                                        } else {
-                                            tvIndicadorGym.setVisibility(View.INVISIBLE);
-                                            ivIndicadorGym.setVisibility(View.INVISIBLE);
-                                        }
-                                    }
-                                });
                             }
+                        } else {
+                            last_training_time.setText("No se han encontrado entrenamientos");
                         }
                     }
         });

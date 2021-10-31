@@ -117,6 +117,8 @@ public class ProfileFragment extends Fragment {
                     prefs.apply();
 
                     getActivity().getIntent().putExtra("email", email);
+                } else {
+                    progressDialog.dismiss();
                 }
             } else {
                 progressDialog.dismiss();

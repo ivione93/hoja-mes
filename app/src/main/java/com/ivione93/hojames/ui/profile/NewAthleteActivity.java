@@ -54,12 +54,14 @@ public class NewAthleteActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         goProfile(email);
+                    } else {
+                        emailEditText.setText(email);
+                        emailEditText.setEnabled(false);
                     }
                 }
             });
             newAthleteLayout.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
@@ -123,17 +125,20 @@ public class NewAthleteActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString();
 
         if (validateNewAthlete(name, surname, birthdate, email, password)) {
-            Map<String,Object> user = new HashMap<>();
-            user.put("email", email);
-            user.put("name", nombreEditText.getText().toString());
-            user.put("surname", apellidosEditText.getText().toString());
-            user.put("birth", birthEditText.getText().toString());
+            Map<String,Object> athlete = new HashMap<>();
+            athlete.put("email", email);
+            athlete.put("name", nombreEditText.getText().toString());
+            athlete.put("surname", apellidosEditText.getText().toString());
+            athlete.put("birth", birthEditText.getText().toString());
 
-            db.collection("athlete").document(email).set(user);
+            if (this.email != null) {
+                FirebaseAuth.getInstance().getCurrentUser().delete();
+            }
 
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailEditText.getText().toString(),
                     passwordEditText.getText().toString()).addOnCompleteListener(it -> {
                 if (it.isSuccessful()) {
+                    db.collection("athlete").document(email).set(athlete);
                     goProfile(email);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);

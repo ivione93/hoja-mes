@@ -268,13 +268,13 @@ public class EditProfileActivity extends AppCompatActivity {
     private boolean validateEditProfile(String name, String surname, String birthdate) {
         boolean isValid = true;
         if(name.isEmpty() || name == null) {
-            nameEditProfile.setError("El nombre es obligatorio");
+            nameEditProfile.getEditText().setError("El nombre es obligatorio");
             isValid = false;
         } else {
             nameEditProfile.setError(null);
         }
         if(surname.isEmpty() || surname == null) {
-            surnameEditProfile.setError("Los apellidos son obligatorios");
+            surnameEditProfile.getEditText().setError("Los apellidos son obligatorios");
             isValid = false;
         } else {
             surnameEditProfile.setError(null);

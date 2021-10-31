@@ -39,8 +39,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     public void validate() {
         String email = emailEditText.getText().toString().trim();
 
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.setError("Correo inválido");
+        if (!email.isEmpty()) {
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                emailEditText.setError("Correo inválido");
+                return;
+            }
+        } else {
+            emailEditText.setError("El correo es obligatorio");
             return;
         }
         

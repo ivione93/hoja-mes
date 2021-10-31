@@ -609,13 +609,13 @@ public class ViewTrainingActivity extends AppCompatActivity {
             trainingDateText.setError(null);
         }
         if (time.isEmpty() || time == null) {
-            trainingTimeText.setError("El tiempo es obligatorio");
+            trainingTimeText.getEditText().setError("El tiempo es obligatorio");
             isValid = false;
         } else {
             trainingTimeText.setError(null);
         }
         if (distance.isEmpty() || distance == null) {
-            trainingDistanceText.setError("La distancia es obligatoria");
+            trainingDistanceText.getEditText().setError("La distancia es obligatoria");
             isValid = false;
         } else {
             trainingDistanceText.setError(null);

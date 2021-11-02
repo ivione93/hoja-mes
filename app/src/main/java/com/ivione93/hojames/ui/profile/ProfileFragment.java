@@ -101,7 +101,7 @@ public class ProfileFragment extends Fragment {
                 Glide.with(getActivity().getApplicationContext()).load(account.getPhotoUrl()).into(photoProfile);
             }
         }
-        progressDialog.setMessage("Cargando perfil...");
+        progressDialog.setMessage("Cargando datos...");
         progressDialog.show();
         db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

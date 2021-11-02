@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -34,11 +36,14 @@ import com.google.firebase.firestore.WriteBatch;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
+import com.ivione93.hojames.model.Competition;
+import com.ivione93.hojames.model.Training;
 import com.ivione93.hojames.ui.login.AuthActivity;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -47,7 +52,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     CircleImageView photoEditProfile;
-    TextView emailEditProfile;
+    TextView emailEditProfile, totalEntrenamientosPerfil, totalCompeticionesPerfil, totalKmEntrenamientosPerfil;
     TextInputLayout nameEditProfile, surnameEditProfile;
     EditText birthEditProfile;
     Button btnDeleteUser;
@@ -57,6 +62,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,11 +100,17 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void setup() {
+        progressDialog = new ProgressDialog(this);
         photoEditProfile = findViewById(R.id.photoEditProfile);
         emailEditProfile = findViewById(R.id.emailEditProfile);
         nameEditProfile = findViewById(R.id.nameEditProfile);
         surnameEditProfile = findViewById(R.id.surnameEditProfile);
         birthEditProfile = findViewById(R.id.birthEditProfile);
+
+        totalEntrenamientosPerfil = findViewById(R.id.totalEntrenamientosPerfil);
+        totalCompeticionesPerfil = findViewById(R.id.totalCompeticionesPerfil);
+        totalKmEntrenamientosPerfil = findViewById(R.id.totalKmEntrenamientosPerfil);
+
         btnDeleteUser = findViewById(R.id.btnDeleteUser);
 
         btnDeleteUser.setOnClickListener(v -> {
@@ -219,9 +231,13 @@ public class EditProfileActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void loadAthlete(String email) {
+        progressDialog.setMessage("Cargando datos...");
+        progressDialog.show();
         db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                progressDialog.dismiss();
                 if (photoUrl != null) {
                     Glide.with(this).load(photoUrl).into(photoEditProfile);
                 }
@@ -231,9 +247,62 @@ public class EditProfileActivity extends AppCompatActivity {
                     nameEditProfile.getEditText().setText(task.getResult().get("name").toString());
                     surnameEditProfile.getEditText().setText(task.getResult().get("surname").toString());
                     birthEditProfile.setText(task.getResult().get("birth").toString());
+                    totalEntrenamientosPerfil.setText(String.valueOf(getTotalTrainings()));
+                    totalCompeticionesPerfil.setText(String.valueOf(getTotalCompetitions()));
+                    totalKmEntrenamientosPerfil.setText(String.valueOf(getTotalTrainings()));
+                } else {
+                    progressDialog.dismiss();
                 }
+            } else {
+                progressDialog.dismiss();
             }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Integer getTotalTrainings() {
+        AtomicReference<Integer> count = new AtomicReference<>(0);
+        AtomicReference<Float> countKm = new AtomicReference<>(0.0f);
+        db.collection("trainings").whereEqualTo("email", email).get()
+                .addOnCompleteListener(task -> {
+                    count.set(0);
+                    countKm.set(0f);
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot snap : task.getResult()) {
+                            Training training = snap.toObject(Training.class);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                if (training.email.equals(email)) {
+                                    count.updateAndGet(v -> v + 1);
+                                    countKm.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                }
+                            }
+                        }
+                        totalEntrenamientosPerfil.setText(String.valueOf(count.get()));
+                        totalKmEntrenamientosPerfil.setText(String.format("%.02f", countKm.get()));
+                    }
+                });
+        return count.get();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Integer getTotalCompetitions() {
+        AtomicReference<Integer> count = new AtomicReference<>(0);
+        db.collection("competitions").whereEqualTo("email", email).get()
+                .addOnCompleteListener(task -> {
+                    count.set(0);
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot snap : task.getResult()) {
+                            Competition competition = snap.toObject(Competition.class);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                if (competition.email.equals(email)) {
+                                    count.updateAndGet(v -> v + 1);
+                                }
+                            }
+                        }
+                        totalCompeticionesPerfil.setText(String.valueOf(count.get()));
+                    }
+                });
+        return count.get();
     }
 
     private void saveEditProfile() {

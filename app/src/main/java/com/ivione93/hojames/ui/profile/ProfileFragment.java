@@ -143,7 +143,6 @@ public class ProfileFragment extends Fragment {
                 editProfile.putExtra("photoUrl", photoUrl.toString());
             }
             getContext().startActivity(editProfile);
-            return true;
         }
         if (item.getItemId() == R.id.menu_add_training_profile) {
             Intent viewTraining = new Intent(getActivity(), ViewTrainingActivity.class);
@@ -214,6 +213,15 @@ public class ProfileFragment extends Fragment {
 
         lastTrainingCV = root.findViewById(R.id.last_training);
         lastCompetitionCV = root.findViewById(R.id.last_competition);
+
+        photoProfile.setOnClickListener(v -> {
+            Intent editProfile = new Intent(getActivity(), EditProfileActivity.class);
+            editProfile.putExtra("email", email);
+            if (photoUrl != null) {
+                editProfile.putExtra("photoUrl", photoUrl.toString());
+            }
+            getContext().startActivity(editProfile);
+        });
     }
 
     private void getLastCompetition(String email) {

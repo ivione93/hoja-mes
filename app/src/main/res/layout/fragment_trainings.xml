@@ -42,6 +42,7 @@
         android:layout_marginLeft="16dp"
         android:text="Kilómetros acumulados este mes: "
         android:textSize="16sp"
+        android:fontFamily="sans-serif-smallcaps"
         app:layout_constraintBottom_toTopOf="@+id/rvTrainings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendar_trainings" />
@@ -53,6 +54,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:fontFamily="sans-serif-smallcaps"
         app:layout_constraintBottom_toBottomOf="@+id/tvMonthly_kms"
         app:layout_constraintStart_toEndOf="@+id/tvMonthly_kms"
         app:layout_constraintTop_toTopOf="@+id/tvMonthly_kms"

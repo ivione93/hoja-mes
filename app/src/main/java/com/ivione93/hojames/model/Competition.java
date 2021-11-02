@@ -12,4 +12,9 @@ public class Competition {
     public String track;
     public String result;
 
+    public String color;
+    public String start;
+    public String end;
+    public String details;
+
 }

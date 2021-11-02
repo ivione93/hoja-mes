@@ -13,4 +13,9 @@ public class Training {
     public String observes;
     public String start;
 
+    public String color;
+    public String end;
+    public String name;
+    public String details;
+
 }

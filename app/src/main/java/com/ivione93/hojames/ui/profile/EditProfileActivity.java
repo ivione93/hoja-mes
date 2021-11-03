@@ -21,18 +21,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.WriteBatch;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
@@ -41,8 +35,8 @@ import com.ivione93.hojames.model.Training;
 import com.ivione93.hojames.ui.login.AuthActivity;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -114,24 +108,35 @@ public class EditProfileActivity extends AppCompatActivity {
         btnDeleteUser = findViewById(R.id.btnDeleteUser);
 
         btnDeleteUser.setOnClickListener(v -> {
-            AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(this);
-            deleteConfirm.setTitle("Eliminar usuario");
-            deleteConfirm.setMessage("¿Está seguro que quiere eliminar el usuario?");
-            deleteConfirm.setCancelable(false);
-            deleteConfirm.setPositiveButton("Aceptar", (dialog, which) -> {
-                deleteUser();
-                Intent auth = new Intent(this, AuthActivity.class);
-                startActivity(auth);
+            AlertDialog.Builder deleteDataUser = new AlertDialog.Builder(this);
+            deleteDataUser.setTitle("Eliminar datos de usuario");
+            deleteDataUser.setMessage("¿Está seguro que quiere borrar los datos del usuario?");
+            deleteDataUser.setCancelable(false);
+            deleteDataUser.setPositiveButton("Aceptar", (dialog, which) -> {
+                deleteProfileInformation(email);
+                AlertDialog.Builder deleteUser = new AlertDialog.Builder(this);
+                deleteUser.setTitle("Eliminar usuario");
+                deleteUser.setMessage("¿Está seguro que quiere eliminar el usuario?");
+                deleteUser.setCancelable(false);
+                deleteUser.setPositiveButton("Borrar", (dialog1, which1) -> {
+                    try {
+                        Thread.sleep(15000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    deleteUser();
+                    Intent auth = new Intent(this, AuthActivity.class);
+                    startActivity(auth);
+                });
+                deleteUser.show();
             });
-            deleteConfirm.setNegativeButton("Cancelar", (dialog, which) -> finish());
-            deleteConfirm.show();
+            deleteDataUser.setNegativeButton("Cancelar", (dialog, which) -> finish());
+            deleteDataUser.show();
         });
     }
 
     private void deleteUser() {
-        deleteProfileInformation(email);
-
-        //deleteProfileAuthentication();
+        deleteProfileAuthentication();
 
         // Borrado datos inicio de sesion
         SharedPreferences.Editor prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
@@ -139,20 +144,26 @@ public class EditProfileActivity extends AppCompatActivity {
         prefs.apply();
     }
 
-    private void deleteProfileInformation(String email) {
+    private boolean deleteProfileInformation(String email) {
         // Eliminar entrenamientos e hijos
+        AtomicBoolean deletedSeries = new AtomicBoolean(false);
+        AtomicBoolean deletedCuestas = new AtomicBoolean(false);
+        AtomicBoolean deletedGym = new AtomicBoolean(false);
+        AtomicBoolean deletedFartlek = new AtomicBoolean(false);
         db.collection("trainings").whereEqualTo("email", email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot training : task.getResult()) {
-                    db.collection("trainings").document(training.getId()).delete();
                     // Eliminar series
                     db.collection("series").whereEqualTo("idTraining", training.getId()).get().addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
                             for (QueryDocumentSnapshot serie : task1.getResult()) {
                                 db.collection("series").document(serie.getId()).delete().addOnCompleteListener(task2 -> {
                                     Log.d("DEL", "Series eliminadas");
+                                    deletedSeries.set(true);
                                 });
                             }
+                        } else {
+                            deletedSeries.set(true);
                         }
                     });
                     // Eliminar cuestas
@@ -161,8 +172,11 @@ public class EditProfileActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot cuesta : task1.getResult()) {
                                 db.collection("cuestas").document(cuesta.getId()).delete().addOnCompleteListener(task2 -> {
                                     Log.d("DEL", "Cuestas eliminadas");
+                                    deletedCuestas.set(true);
                                 });
                             }
+                        } else {
+                            deletedCuestas.set(true);
                         }
                     });
                     // Eliminar fartlek
@@ -171,8 +185,11 @@ public class EditProfileActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot fartlek : task1.getResult()) {
                                 db.collection("fartlek").document(fartlek.getId()).delete().addOnCompleteListener(task2 -> {
                                     Log.d("DEL", "Fartlek eliminados");
+                                    deletedFartlek.set(true);
                                 });
                             }
+                        } else {
+                            deletedFartlek.set(true);
                         }
                     });
                     // Eliminar gym
@@ -181,8 +198,11 @@ public class EditProfileActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot gym : task1.getResult()) {
                                 db.collection("gym").document(gym.getId()).delete().addOnCompleteListener(task2 -> {
                                     Log.d("DEL", "Gym eliminados");
+                                    deletedGym.set(true);
                                 });
                             }
+                        } else {
+                            deletedGym.set(true);
                         }
                     });
                 }
@@ -190,33 +210,47 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
         // Eliminar entrenamientos
+        AtomicBoolean deletedTrainings = new AtomicBoolean(false);
         db.collection("trainings").whereEqualTo("email", email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot doc : task.getResult()) {
                     db.collection("trainings").document(doc.getId()).delete().addOnSuccessListener(aVoid -> {
                         Log.d("DEL", "Entrenamientos eliminados");
                         Toast.makeText(EditProfileActivity.this, "Entrenamientos eliminados", Toast.LENGTH_LONG).show();
+                        deletedTrainings.set(true);
                     });
                 }
+            } else {
+                deletedTrainings.set(true);
             }
         });
 
         // Eliminar competiciones
+        AtomicBoolean deletedCompetitions = new AtomicBoolean(false);
         db.collection("competitions").whereEqualTo("email", email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot doc : task.getResult()) {
                     db.collection("competitions").document(doc.getId()).delete().addOnSuccessListener(aVoid -> {
                         Log.d("DEL", "Competiciones eliminadas");
                         Toast.makeText(EditProfileActivity.this, "Competiciones eliminadas", Toast.LENGTH_LONG).show();
+                        deletedCompetitions.set(true);
                     });
                 }
+            } else {
+                deletedCompetitions.set(true);
             }
         });
 
         // Eliminar atleta (athlete)
+        AtomicBoolean deletedAthlete = new AtomicBoolean(false);
         db.collection("athlete").document(email).delete().addOnCompleteListener(task2 -> {
             Log.d("DEL", "Atleta eliminado");
+            Toast.makeText(EditProfileActivity.this, "Atleta eliminado", Toast.LENGTH_LONG).show();
+            deletedAthlete.set(true);
         });
+
+        return deletedCompetitions.get() && deletedAthlete.get() && deletedTrainings.get() &&
+                deletedCuestas.get() && deletedGym.get() && deletedFartlek.get() && deletedSeries.get();
     }
 
     private void deleteProfileAuthentication() {

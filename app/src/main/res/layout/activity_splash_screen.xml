@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreenActivity">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/splashTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,6 +16,20 @@
         android:textSize="50dp"
         android:textStyle="bold"
         android:fontFamily="sans-serif-smallcaps"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <ImageView
+        android:id="@+id/splashTitle"
+        android:layout_width="279dp"
+        android:layout_height="235dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/app_name"
+        android:scaleX="1.4"
+        android:scaleY="1.4"
+        android:src="@drawable/ic_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +51,7 @@
         android:id="@+id/splashAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-20dp"
         android:fontFamily="casual"
         android:text="Iván García Gómez"
         android:textColor="@color/colorPrimary"

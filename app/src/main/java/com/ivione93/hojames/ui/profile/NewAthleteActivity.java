@@ -49,6 +49,7 @@ public class NewAthleteActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        getSupportActionBar().hide();
         newAthleteLayout.setVisibility(View.INVISIBLE);
         if (email != null) {
             db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
@@ -57,6 +58,7 @@ public class NewAthleteActivity extends AppCompatActivity {
                     if (document.exists()) {
                         goProfile(email);
                     } else {
+                        getSupportActionBar().show();
                         newAthleteLayout.setVisibility(View.VISIBLE);
                         emailEditText.setText(email);
                         emailEditText.setEnabled(false);
@@ -64,6 +66,7 @@ public class NewAthleteActivity extends AppCompatActivity {
                 }
             });
         } else {
+            getSupportActionBar().show();
             newAthleteLayout.setVisibility(View.VISIBLE);
         }
     }

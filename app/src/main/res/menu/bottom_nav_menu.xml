@@ -4,16 +4,19 @@
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile"
+        android:enabled="true"
         android:title="@string/title_profile" />
 
     <item
         android:id="@+id/navigation_trainings"
         android:icon="@drawable/ic_trainings"
+        android:enabled="true"
         android:title="@string/title_trainings" />
 
     <item
         android:id="@+id/navigation_competitions"
         android:icon="@drawable/ic_competitions"
+        android:enabled="true"
         android:title="@string/title_competitions" />
 
 </menu>

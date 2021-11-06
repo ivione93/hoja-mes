@@ -115,6 +115,7 @@ public class NewAthleteActivity extends AppCompatActivity {
         Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
         startActivity(profileIntent);
+        finish();
     }
 
     private void saveAthlete() {

@@ -358,6 +358,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("email", email);
                 startActivity(intent);
+                finish();
             } else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
                 toast.show();

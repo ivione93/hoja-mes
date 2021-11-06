@@ -234,6 +234,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
         Intent profileIntent = new Intent(this, MainActivity.class);
         profileIntent.putExtra("email", email);
         startActivity(profileIntent);
+        finish();
     }
 
     private boolean validateNewCompetition(String place, String competitionName, String track, String result, String date) {

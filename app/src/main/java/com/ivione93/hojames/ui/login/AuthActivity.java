@@ -146,6 +146,7 @@ public class AuthActivity extends AppCompatActivity {
         Intent newAthlete = new Intent(this, NewAthleteActivity.class);
         newAthlete.putExtra("email", email);
         startActivity(newAthlete);
+        finish();
     }
 
     private void showAlert() {

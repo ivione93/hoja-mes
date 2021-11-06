@@ -1,7 +1,6 @@
 package com.ivione93.hojames.ui.competitions;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;

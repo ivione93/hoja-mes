@@ -60,5 +60,4 @@
         app:layout_constraintTop_toTopOf="@+id/tvMonthly_kms"
         tools:text="100.00" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

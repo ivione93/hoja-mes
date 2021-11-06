@@ -15,7 +15,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.model.Fartlek;
-import com.ivione93.hojames.model.Gym;
 
 public class AdapterFartlek extends FirestoreRecyclerAdapter<Fartlek, AdapterFartlek.FartlekViewHolder> {
 

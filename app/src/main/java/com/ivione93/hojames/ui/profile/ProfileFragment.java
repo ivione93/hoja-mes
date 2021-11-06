@@ -3,7 +3,6 @@ package com.ivione93.hojames.ui.profile;
 import android.app.ProgressDialog;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;

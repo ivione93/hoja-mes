@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ivione93.hojames.ui.login.AuthActivity;
-
 public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
@@ -36,7 +34,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         splashAuthor.setAnimation(animation);
 
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(getApplicationContext(), AuthActivity.class);
+            Intent intent = new Intent(getApplicationContext(), InformationActivity.class);
             startActivity(intent);
             finish();
         }, 3000);

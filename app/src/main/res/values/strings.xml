@@ -12,4 +12,8 @@
     <string name="title_new_athlete">Alta usuario</string>
     <string name="title_activity_new_training">Nuevo entrenamiento</string>
     <string name="delete_user">Eliminar usuario</string>
+    <string name="information_title"><b>Hoja del mes es gratis sin publicidad.</b></string>
+    <string name="information_content">Está desarrollada en ratos libres uniendo dos de nuestras aficiones: el desarrollo de software y el
+        atletismo. Si algo no funciona correctamente, por favor, hágalo saber antes de dar una valoración negativa.</string>
+    <string name="information_end">¡Esperamos seguir creciendo para que podáis seguir disfrutando!</string>
 </resources>

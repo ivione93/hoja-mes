@@ -33,6 +33,8 @@ import com.ivione93.hojames.ui.profile.NewAthleteActivity;
 
 public class AuthActivity extends AppCompatActivity {
 
+    SharedPreferences.Editor prefs;
+
     private static int GOOGLE_SIGN_IN = 100;
     private FirebaseAnalytics mFirebaseAnalytics;
 
@@ -67,6 +69,11 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void setup() {
+        // Guardar pantalla de informacion
+        prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
+        prefs.putBoolean("showInformation", false);
+        prefs.apply();
+
         getSupportActionBar().hide();
 
         emailEditText = findViewById(R.id.emailEditText);
@@ -146,7 +153,6 @@ public class AuthActivity extends AppCompatActivity {
         Intent newAthlete = new Intent(this, NewAthleteActivity.class);
         newAthlete.putExtra("email", email);
         startActivity(newAthlete);
-        finish();
     }
 
     private void showAlert() {

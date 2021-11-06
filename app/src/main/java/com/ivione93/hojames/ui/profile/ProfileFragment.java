@@ -165,7 +165,7 @@ public class ProfileFragment extends Fragment {
                     .setCancelable(false)
                     .setPositiveButton("Salir", (dialogInterface, i) -> {
                         SharedPreferences.Editor prefs = getActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
-                        prefs.clear();
+                        prefs.remove("email");
                         prefs.apply();
 
                         FirebaseAuth.getInstance().signOut();

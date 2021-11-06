@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.HojaMes">
-        <activity android:name=".SplashScreenActivity">
+        <activity android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,8 +19,12 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".InformationActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
             android:name=".ui.login.AuthActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.ForgotPasswordActivity"
             android:label="@string/title_forgot_password"
@@ -38,7 +43,8 @@
             android:label="@string/title_edit_profile"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.trainings.ViewTrainingActivity"
+        <activity
+            android:name=".ui.trainings.ViewTrainingActivity"
             android:label="@string/title_activity_new_training"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />

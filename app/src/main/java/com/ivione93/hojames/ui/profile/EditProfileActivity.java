@@ -140,7 +140,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         // Borrado datos inicio de sesion
         SharedPreferences.Editor prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
-        prefs.clear();
+        prefs.remove("email");
         prefs.apply();
     }
 

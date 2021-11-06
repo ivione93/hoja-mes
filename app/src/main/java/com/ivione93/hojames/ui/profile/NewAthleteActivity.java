@@ -42,12 +42,14 @@ public class NewAthleteActivity extends AppCompatActivity {
         // Setup
         Bundle bundle = getIntent().getExtras();
         email = bundle.getString("email");
+
         setup();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        newAthleteLayout.setVisibility(View.INVISIBLE);
         if (email != null) {
             db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
@@ -55,11 +57,13 @@ public class NewAthleteActivity extends AppCompatActivity {
                     if (document.exists()) {
                         goProfile(email);
                     } else {
+                        newAthleteLayout.setVisibility(View.VISIBLE);
                         emailEditText.setText(email);
                         emailEditText.setEnabled(false);
                     }
                 }
             });
+        } else {
             newAthleteLayout.setVisibility(View.VISIBLE);
         }
     }

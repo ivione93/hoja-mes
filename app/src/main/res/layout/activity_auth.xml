@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/titleLogin"
-        android:layout_width="216dp"
+        android:layout_width="250dp"
         android:layout_height="250dp"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/app_name"
@@ -32,6 +32,7 @@
         android:fontFamily="sans-serif-smallcaps"
         android:text="Inicia sesión para continuar"
         android:textSize="18dp"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toTopOf="@+id/emailText"
         app:layout_constraintStart_toStartOf="@+id/emailText"
         app:layout_constraintTop_toBottomOf="@+id/titleLogin" />
@@ -143,6 +144,7 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="Desarrollado por "
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"

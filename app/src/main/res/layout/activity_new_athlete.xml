@@ -18,6 +18,7 @@
         android:fontFamily="sans-serif-smallcaps"
         android:text="Introduce tus datos de registro"
         android:textSize="18dp"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/splashTitle"
-        android:layout_width="279dp"
-        android:layout_height="235dp"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/app_name"
         android:scaleX="1.3"
@@ -25,12 +25,10 @@
         android:id="@+id/splashBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="creado por "
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/splashAuthor"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="@+id/splashTitle"
         app:layout_constraintTop_toBottomOf="@+id/splashTitle" />
 
@@ -42,9 +40,9 @@
         android:fontFamily="sans-serif-smallcaps"
         android:text="Iván García Gómez"
         android:textColor="@color/colorPrimary"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/splashTitle"
+        app:layout_constraintStart_toEndOf="@+id/splashBy"
         app:layout_constraintTop_toBottomOf="@+id/splashTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

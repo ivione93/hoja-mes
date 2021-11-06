@@ -10,7 +10,7 @@
 
         <menu>
             <item android:id="@+id/menu_edit_profile"
-                android:title="Editar perfil" />
+                android:title="Ver perfil" />
             <item android:id="@+id/menu_add_training_profile"
                 android:title="Añadir entrenamiento" />
             <item android:id="@+id/menu_add_competition_profile"

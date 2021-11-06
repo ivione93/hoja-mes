@@ -102,6 +102,7 @@ public class ProfileFragment extends Fragment {
             }
         }
         progressDialog.setMessage("Cargando datos...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {

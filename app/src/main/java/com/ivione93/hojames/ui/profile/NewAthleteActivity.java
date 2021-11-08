@@ -3,6 +3,7 @@ package com.ivione93.hojames.ui.profile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.Menu;
@@ -34,7 +35,7 @@ public class NewAthleteActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     ConstraintLayout newAthleteLayout;
-    TextView nombreEditText, apellidosEditText, birthEditText, emailEditText, passwordEditText;
+    TextView nombreEditText, apellidosEditText, birthEditText, emailEditText, passwordEditText, policiesUrl;
     CheckBox checkPolicies;
 
     String email;
@@ -127,6 +128,15 @@ public class NewAthleteActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         checkPolicies = findViewById(R.id.checkPolicies);
+
+        policiesUrl = findViewById(R.id.policiesUrl);
+        policiesUrl.setOnClickListener(v -> {
+            String url = "https://ivione93.github.io/hoja-mes-policies/";
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(uri);
+            startActivity(intent);
+        });
     }
 
     private void goProfile(String email) {

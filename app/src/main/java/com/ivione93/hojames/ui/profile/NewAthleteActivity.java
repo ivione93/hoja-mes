@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
+import com.ivione93.hojames.Utils;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,8 +35,10 @@ public class NewAthleteActivity extends AppCompatActivity {
 
     ConstraintLayout newAthleteLayout;
     TextView nombreEditText, apellidosEditText, birthEditText, emailEditText, passwordEditText;
+    CheckBox checkPolicies;
 
     String email;
+    String date = Utils.toString(new Date());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +86,11 @@ public class NewAthleteActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_new_athlete) {
-            saveAthlete();
+            try {
+                saveAthlete();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             return true;
         }
         if (item.getItemId() == R.id.menu_cancel_new_athlete) {
@@ -116,6 +126,7 @@ public class NewAthleteActivity extends AppCompatActivity {
         birthEditText = findViewById(R.id.birthEditText);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+        checkPolicies = findViewById(R.id.checkPolicies);
     }
 
     private void goProfile(String email) {
@@ -125,19 +136,21 @@ public class NewAthleteActivity extends AppCompatActivity {
         finish();
     }
 
-    private void saveAthlete() {
+    private void saveAthlete() throws ParseException {
         String name = nombreEditText.getText().toString();
         String surname = apellidosEditText.getText().toString();
         String birthdate = birthEditText.getText().toString();
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
+        Boolean isChecked = checkPolicies.isChecked();
 
-        if (validateNewAthlete(name, surname, birthdate, email, password)) {
+        if (validateNewAthlete(name, surname, birthdate, email, password, isChecked)) {
             Map<String,Object> athlete = new HashMap<>();
             athlete.put("email", email);
             athlete.put("name", nombreEditText.getText().toString());
             athlete.put("surname", apellidosEditText.getText().toString());
             athlete.put("birth", birthEditText.getText().toString());
+            athlete.put("creationDate", Utils.toTimestamp(date));
 
             if (this.email != null) {
                 FirebaseAuth.getInstance().getCurrentUser().delete();
@@ -161,7 +174,7 @@ public class NewAthleteActivity extends AppCompatActivity {
         }
     }
 
-    private boolean validateNewAthlete(String name, String surname, String birthdate, String email, String password) {
+    private boolean validateNewAthlete(String name, String surname, String birthdate, String email, String password, Boolean isCheked) {
         boolean isValid = true;
         if (name.isEmpty() || name == null) {
             nombreEditText.setError("El nombre es obligatorio");
@@ -195,6 +208,12 @@ public class NewAthleteActivity extends AppCompatActivity {
             isValid = false;
         } else {
             passwordEditText.setError(null);
+        }
+        if (isCheked) {
+            checkPolicies.setError(null);
+        } else {
+            checkPolicies.setError("Tiene que aceptar las condiciones de uso");
+            isValid = false;
         }
         return isValid;
     }

@@ -122,6 +122,12 @@ public class AuthActivity extends AppCompatActivity {
 
         createdBy = findViewById(R.id.createdBy);
         createdBy.setOnClickListener(v -> {
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+            //Evento ver perfil de linkedin Analytics
+            Bundle bundle = new Bundle();
+            bundle.putString("message", "Ver perfil Linkedin");
+            mFirebaseAnalytics.logEvent("visit_linkedin", bundle);
+
             String url = "https://ivione93.github.io/cv-online/";
             Uri uri = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -138,6 +144,11 @@ public class AuthActivity extends AppCompatActivity {
 
         if (email != null) {
             loginLayout.setVisibility(View.INVISIBLE);
+            //Evento inicio sesion Analytics
+            Bundle bundle = new Bundle();
+            bundle.putString("message", "Inicio de sesion");
+            bundle.putString("user", email);
+            mFirebaseAnalytics.logEvent("login", bundle);
             goProfile(email);
         }
     }

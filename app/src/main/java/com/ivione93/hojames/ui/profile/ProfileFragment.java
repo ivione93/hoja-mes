@@ -26,6 +26,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.Timestamp;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -47,6 +48,7 @@ public class ProfileFragment extends Fragment {
 
     SharedPreferences.Editor prefs;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference competitions = db.collection("competitions");
 
@@ -170,6 +172,12 @@ public class ProfileFragment extends Fragment {
 
                         FirebaseAuth.getInstance().signOut();
                         mGoogleSignInClient.signOut();
+
+                        //Evento cerrar sesion Analytics
+                        Bundle bundle = new Bundle();
+                        bundle.putString("message", "Cerrar de sesion");
+                        bundle.putString("user", email);
+                        mFirebaseAnalytics.logEvent("logout", bundle);
 
                         Intent mainIntent = new Intent(getActivity().getApplicationContext(), AuthActivity.class);
                         startActivity(mainIntent);

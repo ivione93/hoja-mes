@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,6 +34,7 @@ import java.util.Map;
 public class NewAthleteActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     ConstraintLayout newAthleteLayout;
     TextView nombreEditText, apellidosEditText, birthEditText, emailEditText, passwordEditText, policiesUrl;
@@ -63,6 +65,11 @@ public class NewAthleteActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
+                        //Evento inicio sesion Analytics
+                        Bundle bundle = new Bundle();
+                        bundle.putString("message", "Inicio de sesion");
+                        bundle.putString("user", email);
+                        mFirebaseAnalytics.logEvent("login", bundle);
                         goProfile(email);
                     } else {
                         getSupportActionBar().show();
@@ -131,6 +138,12 @@ public class NewAthleteActivity extends AppCompatActivity {
 
         policiesUrl = findViewById(R.id.policiesUrl);
         policiesUrl.setOnClickListener(v -> {
+            //Evento lectura de condiciones de uso Analytics
+            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+            Bundle bundle = new Bundle();
+            bundle.putString("message", "Lectura de condiciones de uso");
+            mFirebaseAnalytics.logEvent("visit_policies", bundle);
+
             String url = "https://ivione93.github.io/hoja-mes-policies/";
             Uri uri = Uri.parse(url);
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -170,6 +183,11 @@ public class NewAthleteActivity extends AppCompatActivity {
                     passwordEditText.getText().toString()).addOnCompleteListener(it -> {
                 if (it.isSuccessful()) {
                     db.collection("athlete").document(email).set(athlete);
+                    //Evento registro usuario Analytics
+                    Bundle bundle = new Bundle();
+                    bundle.putString("message", "Registro de usuario");
+                    bundle.putString("user", email);
+                    mFirebaseAnalytics.logEvent("signup", bundle);
                     goProfile(email);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);

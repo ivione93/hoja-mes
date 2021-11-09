@@ -337,7 +337,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     bundle.putString("message", "Nuevo entrenamiento");
                     bundle.putString("user", email);
                     bundle.putString("id", id);
-                    mFirebaseAnalytics.logEvent("add_competition", bundle);
+                    mFirebaseAnalytics.logEvent("add_training", bundle);
                 }
                 training.put("id", id);
                 training.put("email", email);

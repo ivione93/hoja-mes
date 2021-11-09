@@ -64,13 +64,13 @@
         android:layout_height="200dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photoProfile"
-        app:cardCornerRadius="15dp">
+        app:layout_constraintTop_toBottomOf="@+id/photoProfile">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -84,19 +84,19 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@android:color/transparent"
+                android:contentDescription="@string/ultimo_entrenamiento"
                 android:padding="4dp"
                 android:src="@drawable/ic_trainings"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/ultimo_entrenamiento" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/title_last_training"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-smallcaps"
                 android:text="@string/ultimo_entrenamiento"
                 android:textSize="18sp"
-                android:fontFamily="sans-serif-smallcaps"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="@+id/imageView" />
@@ -105,14 +105,14 @@
                 android:id="@+id/last_training_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="02/04/2021"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-smallcaps"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/title_last_training"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.8"
                 app:layout_constraintStart_toEndOf="@+id/title_last_training"
-                app:layout_constraintTop_toTopOf="@+id/title_last_training" />
+                app:layout_constraintTop_toTopOf="@+id/title_last_training"
+                tools:text="02/04/2021" />
 
             <TextView
                 android:id="@+id/title_training"
@@ -132,9 +132,9 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="8dp"
+                android:text="Tiempo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_training"
-                android:text="Tiempo" />
+                app:layout_constraintTop_toBottomOf="@+id/title_training" />
 
             <TextView
                 android:id="@+id/title_distance"
@@ -163,18 +163,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_time"
-                android:textSize="18sp"
-                android:textColor="@color/colorPrimary"
                 tools:text="40 min" />
 
             <TextView
                 android:id="@+id/last_training_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/title_distance"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/title_distance"
@@ -187,10 +187,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/last_training_time"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/last_training_time"
                 tools:text="4:00 /km" />
 
             <TextView
@@ -210,11 +210,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/ic_chrono"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorSeries"
                 app:layout_constraintStart_toEndOf="@+id/tvIndicadorSeries"
                 app:layout_constraintTop_toTopOf="@+id/tvIndicadorSeries"
-                app:tint="@color/colorPrimary"
-                android:visibility="invisible"/>
+                app:tint="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/tvIndicadorCuestas"
@@ -235,11 +235,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/ic_cuestas"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorCuestas"
                 app:layout_constraintStart_toEndOf="@+id/tvIndicadorCuestas"
                 app:layout_constraintTop_toTopOf="@+id/tvIndicadorCuestas"
-                app:tint="@color/colorPrimary"
-                android:visibility="invisible"/>
+                app:tint="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/tvIndicadorFartlek"
@@ -260,11 +260,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/ic_fartlek"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorFartlek"
                 app:layout_constraintStart_toEndOf="@+id/tvIndicadorFartlek"
                 app:layout_constraintTop_toTopOf="@+id/tvIndicadorFartlek"
-                app:tint="@color/colorPrimary"
-                android:visibility="invisible"/>
+                app:tint="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/tvIndicadorGym"
@@ -285,11 +285,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/ic_gym"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorGym"
                 app:layout_constraintStart_toEndOf="@+id/tvIndicadorGym"
                 app:layout_constraintTop_toTopOf="@+id/tvIndicadorGym"
-                app:tint="@color/colorPrimary"
-                android:visibility="invisible"/>
+                app:tint="@color/colorPrimary" />
 
             <ImageView
                 android:id="@+id/ivIndicadorObserves"
@@ -327,9 +327,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/last_training">
+        app:layout_constraintTop_toBottomOf="@+id/last_training"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -353,9 +355,9 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-smallcaps"
                 android:text="@string/ultima_competicion"
                 android:textSize="18sp"
-                android:fontFamily="sans-serif-smallcaps"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -364,8 +366,8 @@
                 android:id="@+id/last_competition_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:fontFamily="sans-serif-smallcaps"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.8"
                 app:layout_constraintStart_toEndOf="@+id/textView2"

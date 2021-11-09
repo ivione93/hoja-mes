@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -43,6 +44,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditProfileActivity extends AppCompatActivity {
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     CircleImageView photoEditProfile;
@@ -94,6 +96,8 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private void setup() {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         progressDialog = new ProgressDialog(this);
         photoEditProfile = findViewById(R.id.photoEditProfile);
         emailEditProfile = findViewById(R.id.emailEditProfile);
@@ -125,6 +129,11 @@ public class EditProfileActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     deleteUser();
+                    //Evento eliminacion usuario Analytics
+                    Bundle bundle = new Bundle();
+                    bundle.putString("message", "Eliminacion cuenta de usuario");
+                    bundle.putString("user", email);
+                    mFirebaseAnalytics.logEvent("delete_user", bundle);
                     Intent auth = new Intent(this, AuthActivity.class);
                     startActivity(auth);
                 });

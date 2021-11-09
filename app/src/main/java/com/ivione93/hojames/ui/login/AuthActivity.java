@@ -127,6 +127,7 @@ public class AuthActivity extends AppCompatActivity {
             //Evento ver perfil de linkedin Analytics
             Bundle bundle = new Bundle();
             bundle.putString("message", "Ver perfil Linkedin");
+            bundle.putString("user", email);
             mFirebaseAnalytics.logEvent("visit_linkedin", bundle);
 
             String url = "https://ivione93.github.io/cv-online/";

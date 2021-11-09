@@ -143,6 +143,7 @@ public class NewAthleteActivity extends AppCompatActivity {
             //Evento lectura de condiciones de uso Analytics
             Bundle bundle = new Bundle();
             bundle.putString("message", "Lectura de condiciones de uso");
+            bundle.putString("date", date);
             mFirebaseAnalytics.logEvent("visit_policies", bundle);
 
             String url = "https://ivione93.github.io/hoja-mes-policies/";

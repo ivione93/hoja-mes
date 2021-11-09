@@ -9,10 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.ivione93.hojames.R;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     EditText emailEditText;
     Button btnRecuperar;
@@ -26,6 +29,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     }
 
     private void setup() {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         emailEditText = findViewById(R.id.emailRecuEditText);
@@ -57,6 +62,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         auth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Toast.makeText(this, "Correo enviado!", Toast.LENGTH_LONG).show();
+                //Evento recuperar contraseña Analytics
+                Bundle bundle = new Bundle();
+                bundle.putString("message", "Recuperar contraseña");
+                bundle.putString("user", email);
+                mFirebaseAnalytics.logEvent("forgot_password", bundle);
+
                 Intent intent = new Intent(this, AuthActivity.class);
                 startActivity(intent);
             } else {

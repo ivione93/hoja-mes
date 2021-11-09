@@ -131,7 +131,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     deleteUser();
                     //Evento eliminacion usuario Analytics
                     Bundle bundle = new Bundle();
-                    bundle.putString("message", "Eliminacion cuenta de usuario");
+                    bundle.putString("message", "Eliminación cuenta de usuario");
                     bundle.putString("user", email);
                     mFirebaseAnalytics.logEvent("delete_user", bundle);
                     Intent auth = new Intent(this, AuthActivity.class);

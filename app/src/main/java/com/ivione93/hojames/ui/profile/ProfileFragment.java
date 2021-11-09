@@ -190,6 +190,8 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setup(View root, String email) {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
+
         progressDialog = new ProgressDialog(getContext());
         photoProfile = root.findViewById(R.id.photoProfile);
         emailTextView = root.findViewById(R.id.emailTextView);

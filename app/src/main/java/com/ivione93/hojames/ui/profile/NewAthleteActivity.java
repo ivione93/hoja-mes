@@ -127,6 +127,8 @@ public class NewAthleteActivity extends AppCompatActivity {
     }
 
     private void setup() {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         newAthleteLayout = findViewById(R.id.newAthleteLayout);
 
         nombreEditText = findViewById(R.id.nombreEditText);
@@ -139,7 +141,6 @@ public class NewAthleteActivity extends AppCompatActivity {
         policiesUrl = findViewById(R.id.policiesUrl);
         policiesUrl.setOnClickListener(v -> {
             //Evento lectura de condiciones de uso Analytics
-            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
             Bundle bundle = new Bundle();
             bundle.putString("message", "Lectura de condiciones de uso");
             mFirebaseAnalytics.logEvent("visit_policies", bundle);

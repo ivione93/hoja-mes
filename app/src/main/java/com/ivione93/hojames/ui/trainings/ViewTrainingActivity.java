@@ -23,6 +23,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -49,6 +50,7 @@ import java.util.regex.Pattern;
 
 public class ViewTrainingActivity extends AppCompatActivity {
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference series = db.collection("series");
     private AdapterSeries adapterSeries;
@@ -157,6 +159,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
     }
 
     private void setup(Boolean isNew) {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         listSeriesDto = new ArrayList<>();
         listCuestasDto = new ArrayList<>();
         listFartlekDto = new ArrayList<>();
@@ -328,6 +332,12 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 Map<String,Object> training = new HashMap<>();
                 if (isNew) {
                     id = UUID.randomUUID().toString();
+                    //Evento nuevo entrenamiento Analytics
+                    Bundle bundle = new Bundle();
+                    bundle.putString("message", "Nuevo entrenamiento");
+                    bundle.putString("user", email);
+                    bundle.putString("id", id);
+                    mFirebaseAnalytics.logEvent("add_competition", bundle);
                 }
                 training.put("id", id);
                 training.put("email", email);

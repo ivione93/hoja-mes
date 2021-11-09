@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.MainActivity;
@@ -31,6 +32,7 @@ import java.util.UUID;
 
 public class NewCompetitionActivity extends AppCompatActivity {
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     TextInputLayout placeText, competitionNameText, trackText, resultText;
@@ -96,6 +98,8 @@ public class NewCompetitionActivity extends AppCompatActivity {
     }
 
     private void setup(boolean isNew) {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         placeText = findViewById(R.id.placeText);
         competitionNameText = findViewById(R.id.competitionNameText);
         trackText = findViewById(R.id.surnameText);
@@ -201,7 +205,12 @@ public class NewCompetitionActivity extends AppCompatActivity {
             if (Utils.validateDateFormat(date)) {
                 Map<String,Object> competition = new HashMap<>();
                 if (isNew) {
-                    id = UUID.randomUUID().toString();
+                    id = UUID.randomUUID().toString();//Evento nueva competicion Analytics
+                    Bundle bundle = new Bundle();
+                    bundle.putString("message", "Nueva competicion");
+                    bundle.putString("user", email);
+                    bundle.putString("id", id);
+                    mFirebaseAnalytics.logEvent("add_competition", bundle);
                 }
                 competition.put("id", id);
                 competition.put("email", email);

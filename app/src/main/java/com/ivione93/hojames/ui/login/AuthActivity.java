@@ -69,6 +69,8 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void setup() {
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         // Guardar pantalla de informacion
         prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
         prefs.putBoolean("showInformation", false);
@@ -122,7 +124,6 @@ public class AuthActivity extends AppCompatActivity {
 
         createdBy = findViewById(R.id.createdBy);
         createdBy.setOnClickListener(v -> {
-            mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
             //Evento ver perfil de linkedin Analytics
             Bundle bundle = new Bundle();
             bundle.putString("message", "Ver perfil Linkedin");

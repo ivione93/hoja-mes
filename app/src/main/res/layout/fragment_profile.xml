@@ -29,39 +29,43 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:lines="1"
         android:maxLines="1"
         android:textColor="@color/colorPrimary"
-        android:textSize="24sp"
-        android:fontFamily="sans-serif-smallcaps"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/photoProfile"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15"
         tools:text="Iván García Gómez" />
 
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Email"
+        app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
         app:layout_constraintEnd_toEndOf="@+id/nombreEditText"
         app:layout_constraintStart_toStartOf="@+id/nombreEditText"
-        app:layout_constraintTop_toBottomOf="@+id/nombreEditText" />
+        app:layout_constraintTop_toTopOf="@+id/photoProfile" />
 
     <TextView
         android:id="@+id/birthEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
         app:layout_constraintStart_toStartOf="@+id/emailTextView"
-        app:layout_constraintTop_toBottomOf="@+id/emailTextView"
+        app:layout_constraintTop_toTopOf="@+id/photoProfile"
+        app:layout_constraintVertical_bias="0.85"
         tools:text="birthdate" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/last_training"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
@@ -105,8 +109,10 @@
                 android:id="@+id/last_training_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
                 android:fontFamily="sans-serif-smallcaps"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/title_last_training"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.8"
@@ -165,6 +171,7 @@
                 android:layout_marginLeft="32dp"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
+                android:maxLines="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title_time"
                 tools:text="40 min" />
@@ -198,8 +205,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="Series"
                 android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/title_training"
                 app:layout_constraintTop_toBottomOf="@+id/last_training_time" />
 
@@ -320,7 +329,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/last_competition"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
@@ -366,8 +375,11 @@
                 android:id="@+id/last_competition_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
                 android:fontFamily="sans-serif-smallcaps"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.8"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -443,7 +455,9 @@
                 android:id="@+id/last_competition_track"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/last_competition_track_text"
                 app:layout_constraintTop_toBottomOf="@+id/last_competition_track_text"
                 tools:text="400mv" />

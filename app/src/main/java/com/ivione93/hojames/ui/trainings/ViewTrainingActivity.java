@@ -99,7 +99,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.new_training_menu, menu);
         if (isNew) {
-            menu.findItem(R.id.menu_share_training).setVisible(false);
+            //menu.findItem(R.id.menu_share_training).setVisible(false);
         }
         return true;
     }
@@ -119,7 +119,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
             }
             return true;
         }
-        if (item.getItemId() == R.id.menu_share_training) {
+        /*if (item.getItemId() == R.id.menu_share_training) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             String msg = "*Hoja del mes*\n" +
@@ -136,7 +136,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
             Intent shareIntent = Intent.createChooser(sendIntent, null);
             startActivity(shareIntent);
-        }
+        }*/
         return super.onOptionsItemSelected(item);
     }
 

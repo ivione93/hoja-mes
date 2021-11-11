@@ -353,7 +353,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 training.put("name", "Entrenamiento");
                 training.put("start", Utils.toStringCalendar(Utils.toTimestamp(date)));
                 training.put("end", Utils.toStringCalendar(Utils.toTimestamp(date)));
-                training.put("color", "#F60");
+                training.put("color", "#212B39");
                 training.put("details", distance + "kms: " + time);
 
                 db.collection("trainings").document(id).set(training);

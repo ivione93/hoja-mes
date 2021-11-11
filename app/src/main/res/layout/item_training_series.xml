@@ -12,6 +12,11 @@
     android:layout_marginRight="8dp"
     app:cardCornerRadius="15dp">
 
+    <FrameLayout
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="5dp"
+        android:layout_height="match_parent"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/trainingLayout"
         android:layout_width="match_parent"
@@ -255,12 +260,13 @@
 
         <View
             android:id="@+id/divider3"
-            android:layout_width="393dp"
+            android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider"
             app:layout_constraintBottom_toTopOf="@+id/title_training"
-            app:layout_constraintTop_toBottomOf="@+id/itemTrainingDate"
-            tools:layout_editor_absoluteX="1dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemTrainingDate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

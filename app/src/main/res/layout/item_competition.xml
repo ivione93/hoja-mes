@@ -12,6 +12,11 @@
     android:layout_marginRight="8dp"
     app:cardCornerRadius="15dp">
 
+    <FrameLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="5dp"
+        android:layout_height="match_parent"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/competitionLayout"
         android:layout_width="match_parent"

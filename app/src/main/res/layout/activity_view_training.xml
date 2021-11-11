@@ -144,13 +144,14 @@
 
     <Button
         android:id="@+id/btnShowExtras"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="Ver extras"
         android:textColor="@color/white"
-        android:backgroundTint="@color/colorPrimaryDark"
-        app:layout_constraintEnd_toEndOf="@+id/btnAddCuestas"
-        app:layout_constraintStart_toStartOf="@+id/btnAddCuestas"
+        app:layout_constraintEnd_toEndOf="@+id/btnAddGym"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/btnAddFartlek"
         app:layout_constraintTop_toBottomOf="@+id/btnAddGym" />
 
     <com.google.android.material.tabs.TabLayout

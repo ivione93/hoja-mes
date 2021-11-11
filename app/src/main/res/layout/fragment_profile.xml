@@ -76,6 +76,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/photoProfile">
 
+        <FrameLayout
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -341,6 +346,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/last_training"
         app:layout_constraintVertical_bias="0.0">
+
+        <FrameLayout
+            android:background="@color/colorPrimary"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

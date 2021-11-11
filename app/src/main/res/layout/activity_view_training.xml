@@ -153,23 +153,14 @@
         app:layout_constraintStart_toStartOf="@+id/btnAddCuestas"
         app:layout_constraintTop_toBottomOf="@+id/btnAddGym" />
 
-    <TextView
-        android:id="@+id/tvListSeries"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/btnAddSeries"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddFartlek" />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvListSeries"
+        app:layout_constraintTop_toBottomOf="@+id/btnShowExtras"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView

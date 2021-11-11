@@ -1,5 +1,6 @@
 package com.ivione93.hojames.ui.trainings;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -68,7 +69,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
     TextInputEditText editTextTrainingTime;
     EditText trainingDateText;
     Button btnAddSeries, btnAddCuestas, btnAddFartlek, btnAddGym, btnShowExtras;
-    TextView tvListSeries;
     RecyclerView rvSeries, rvCuestas, rvFartlek, rvGym;
     TabLayout tabLayout;
 
@@ -168,8 +168,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
         listCuestasDto = new ArrayList<>();
         listFartlekDto = new ArrayList<>();
         listGymDto = new ArrayList<>();
-
-        tvListSeries = findViewById(R.id.tvListSeries);
 
         trainingDateText = findViewById(R.id.trainingDateText);
         trainingTimeText = findViewById(R.id.trainingTimeText);
@@ -458,7 +456,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
         builder.setView(v)
                 .setPositiveButton("Añadir", (dialog, which) -> {
                     addSeries(v);
-                    showExtras();
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> {
 
@@ -481,6 +478,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
             if (validateTimeSeries(time)) {
                 SeriesDto seriesDto = new SeriesDto(distance, time);
                 listSeriesDto.add(seriesDto);
+                Toast.makeText(v.getContext(), "Serie añadida", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(v.getContext(), "Formato de tiempo incorrecto", Toast.LENGTH_LONG).show();
             }
@@ -501,7 +499,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
         builder.setView(v)
                 .setPositiveButton("Añadir", (dialog, which) -> {
                     addCuestas(v);
-                    showExtras();
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> {
 
@@ -523,6 +520,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         } else {
             CuestasDto cuestasDto = new CuestasDto(type, Integer.parseInt(times));
             listCuestasDto.add(cuestasDto);
+            Toast.makeText(v.getContext(), "Cuesta añadida", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -535,7 +533,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
         builder.setView(v)
                 .setPositiveButton("Añadir", (dialog, which) -> {
                     addFartlek(v);
-                    showExtras();
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> {
 
@@ -555,6 +552,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         } else {
             FartlekDto fartlekDto = new FartlekDto(fartlek);
             listFartlekDto.add(fartlekDto);
+            Toast.makeText(v.getContext(), "Fartlek añadido", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -567,7 +565,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
         builder.setView(v)
                 .setPositiveButton("Añadir", (dialog, which) -> {
                     addGym(v);
-                    showExtras();
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> {
 
@@ -591,48 +588,142 @@ public class ViewTrainingActivity extends AppCompatActivity {
         } else {
             GymDto gymDto = new GymDto(exercise, times, kilos);
             listGymDto.add(gymDto);
+            Toast.makeText(v.getContext(), "Rutina de gym añadida", Toast.LENGTH_SHORT).show();
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     public AlertDialog createViewExtrasDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_view_extras, null);
         TableLayout tableExtras = v.findViewById(R.id.tableExtras);
-        TableRow row = new TableRow(this);
-        row.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        TextView textView = new TextView(this);
-        textView.setText("Add dynamically");
-        row.addView(textView);
-        tableExtras.addView(row, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        // Series
+        if (listSeriesDto.size() > 0) {
+            TableRow rowSeriesTitle = new TableRow(this);
+            rowSeriesTitle.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            TextView textViewTitleSeries = new TextView(this);
+            textViewTitleSeries.setText("Series");
+            textViewTitleSeries.setTextSize(18);
+            rowSeriesTitle.addView(textViewTitleSeries);
+            tableExtras.addView(rowSeriesTitle, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            for (SeriesDto dto : listSeriesDto) {
+                TableRow rowSeries = new TableRow(this);
+                rowSeries.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                TextView textViewDistance = new TextView(this);
+                TextView textViewTime = new TextView(this);
+                textViewDistance.setText(dto.distance);
+                textViewDistance.setTextSize(16);
+                textViewDistance.setGravity(View.FOCUS_LEFT);
+                textViewTime.setText(dto.time);
+                textViewTime.setTextSize(16);
+                textViewTime.setGravity(View.FOCUS_RIGHT);
+                rowSeries.addView(textViewDistance);
+                rowSeries.addView(textViewTime);
+                tableExtras.addView(rowSeries, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            }
+            View viewSeries = new View(this);
+            viewSeries.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
+            viewSeries.setBackgroundColor(R.color.colorPrimaryDark);
+            tableExtras.addView(viewSeries);
+        }
+
+        // Cuestas
+        if (listCuestasDto.size() > 0) {
+            TableRow rowCuestasTitle = new TableRow(this);
+            rowCuestasTitle.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            TextView textViewTitleCuestas = new TextView(this);
+            textViewTitleCuestas.setText("Cuestas");
+            textViewTitleCuestas.setTextSize(18);
+            rowCuestasTitle.addView(textViewTitleCuestas);
+            tableExtras.addView(rowCuestasTitle, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            for (CuestasDto dto : listCuestasDto) {
+                TableRow rowCuestas = new TableRow(this);
+                rowCuestas.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                TextView textViewType = new TextView(this);
+                TextView textViewTimes = new TextView(this);
+                textViewTimes.setText(String.valueOf(dto.times));
+                textViewTimes.setTextSize(16);
+                textViewTimes.setGravity(View.FOCUS_LEFT);
+                textViewType.setText(dto.type);
+                textViewType.setTextSize(16);
+                textViewType.setGravity(View.FOCUS_RIGHT);
+                rowCuestas.addView(textViewTimes);
+                rowCuestas.addView(textViewType);
+                tableExtras.addView(rowCuestas, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            }
+            View viewCuestas = new View(this);
+            viewCuestas.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
+            viewCuestas.setBackgroundColor(R.color.colorPrimaryDark);
+            tableExtras.addView(viewCuestas);
+        }
+        // Fartlek
+        if (listFartlekDto.size() > 0) {
+            TableRow rowFartlekTitle = new TableRow(this);
+            rowFartlekTitle.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            TextView textViewTitleFartlek = new TextView(this);
+            textViewTitleFartlek.setText("Fartlek");
+            textViewTitleFartlek.setTextSize(18);
+            rowFartlekTitle.addView(textViewTitleFartlek);
+            tableExtras.addView(rowFartlekTitle, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            for (FartlekDto dto : listFartlekDto) {
+                TableRow rowFartlek = new TableRow(this);
+                rowFartlek.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                TextView textViewFartlek = new TextView(this);
+                textViewFartlek.setText(dto.fartlek);
+                textViewFartlek.setTextSize(16);
+                textViewFartlek.setGravity(View.FOCUS_LEFT);
+                rowFartlek.addView(textViewFartlek);
+                tableExtras.addView(rowFartlek, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            }
+            View viewFartlek = new View(this);
+            viewFartlek.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
+            viewFartlek.setBackgroundColor(R.color.colorPrimaryDark);
+            tableExtras.addView(viewFartlek);
+        }
+        // Gym
+        if (listGymDto.size() > 0) {
+            TableRow rowGymTitle = new TableRow(this);
+            rowGymTitle.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            TextView textViewTitleGym = new TextView(this);
+            textViewTitleGym.setText("Gym");
+            textViewTitleGym.setTextSize(18);
+            rowGymTitle.addView(textViewTitleGym);
+            tableExtras.addView(rowGymTitle, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            for (GymDto dto : listGymDto) {
+                TableRow rowGym = new TableRow(this);
+                rowGym.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                TextView textViewExercise = new TextView(this);
+                TextView textViewTimes = new TextView(this);
+                TextView textViewKilos = new TextView(this);
+                textViewExercise.setText(dto.exercise);
+                textViewExercise.setTextSize(16);
+                textViewExercise.setGravity(View.FOCUS_LEFT);
+                rowGym.addView(textViewExercise);
+                if (dto.times != null) {
+                    textViewTimes.setText(dto.times + " rep.");
+                    textViewTimes.setTextSize(16);
+                    textViewTimes.setPadding(40,0,40,0);
+                    rowGym.addView(textViewTimes);
+                }
+                if (dto.kilos != null) {
+                    textViewKilos.setText(dto.kilos + " kgs");
+                    textViewKilos.setTextSize(16);
+                    rowGym.addView(textViewKilos);
+                }
+                tableExtras.addView(rowGym, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            }
+            View viewGym = new View(this);
+            viewGym.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
+            viewGym.setBackgroundColor(R.color.colorPrimaryDark);
+            tableExtras.addView(viewGym);
+        }
         builder.setTitle("Extras añadidos");
         builder.setView(v)
                 .setPositiveButton("Aceptar", (dialog, which) -> {
                 });
 
         return builder.create();
-    }
-
-    private void showExtras() {
-        tvListSeries.setVisibility(View.VISIBLE);
-        String txt = "";
-
-        for (SeriesDto dto : listSeriesDto) {
-            txt += "S[" + dto.distance + ", " + dto.time + "] ";
-            tvListSeries.setText(txt);
-        }
-        for (CuestasDto dto : listCuestasDto) {
-            txt += "C[" + dto.type + ", " + dto.times + "] ";
-            tvListSeries.setText(txt);
-        }
-        for (FartlekDto dto : listFartlekDto) {
-            txt += "F[" + dto.fartlek + "] ";
-            tvListSeries.setText(txt);
-        }
-        for (GymDto dto : listGymDto) {
-            txt += "G[" + dto.exercise + ", " + dto.times + ", " + dto.kilos + "] ";
-            tvListSeries.setText(txt);
-        }
     }
 
     private boolean validateNewTraining(String date, String time, String distance) {

@@ -6,9 +6,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -64,7 +67,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     TextInputLayout trainingTimeText, trainingDistanceText, trainingObservesText;
     TextInputEditText editTextTrainingTime;
     EditText trainingDateText;
-    Button btnAddSeries, btnAddCuestas, btnAddFartlek, btnAddGym;
+    Button btnAddSeries, btnAddCuestas, btnAddFartlek, btnAddGym, btnShowExtras;
     TextView tvListSeries;
     RecyclerView rvSeries, rvCuestas, rvFartlek, rvGym;
     TabLayout tabLayout;
@@ -179,6 +182,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         btnAddCuestas = findViewById(R.id.btnAddCuestas);
         btnAddFartlek = findViewById(R.id.btnAddFartlek);
         btnAddGym = findViewById(R.id.btnAddGym);
+        btnShowExtras = findViewById(R.id.btnShowExtras);
 
         rvSeries = findViewById(R.id.rvSeries);
         rvCuestas = findViewById(R.id.rvCuestas);
@@ -242,6 +246,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         btnAddCuestas.setOnClickListener(v -> createAddCuestasDialog().show());
         btnAddFartlek.setOnClickListener(v -> createAddFartlekDialog().show());
         btnAddGym.setOnClickListener(v -> createAddGymDialog().show());
+        btnShowExtras.setOnClickListener(v -> createViewExtrasDialog().show());
     }
 
     private void setupRecyclerSeries() {
@@ -587,6 +592,25 @@ public class ViewTrainingActivity extends AppCompatActivity {
             GymDto gymDto = new GymDto(exercise, times, kilos);
             listGymDto.add(gymDto);
         }
+    }
+
+    public AlertDialog createViewExtrasDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.dialog_view_extras, null);
+        TableLayout tableExtras = v.findViewById(R.id.tableExtras);
+        TableRow row = new TableRow(this);
+        row.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        TextView textView = new TextView(this);
+        textView.setText("Add dynamically");
+        row.addView(textView);
+        tableExtras.addView(row, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        builder.setTitle("Extras añadidos");
+        builder.setView(v)
+                .setPositiveButton("Aceptar", (dialog, which) -> {
+                });
+
+        return builder.create();
     }
 
     private void showExtras() {

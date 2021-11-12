@@ -108,6 +108,20 @@ public class ViewTrainingActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        android.app.AlertDialog.Builder cancelTraining = new android.app.AlertDialog.Builder(this);
+        cancelTraining.setTitle("¿Salir del entrenamiento?");
+        cancelTraining.setMessage("Se perderán todos los cambios no guardados");
+        cancelTraining.setPositiveButton("Salir", (dialog, which) -> {
+            super.onBackPressed();
+        });
+        cancelTraining.setNegativeButton("Cancelar", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        cancelTraining.show();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             getIntent().putExtra("email", email);

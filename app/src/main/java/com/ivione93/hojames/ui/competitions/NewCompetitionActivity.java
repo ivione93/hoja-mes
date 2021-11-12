@@ -65,6 +65,20 @@ public class NewCompetitionActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        android.app.AlertDialog.Builder cancelCompetition = new android.app.AlertDialog.Builder(this);
+        cancelCompetition.setTitle("¿Salir de la competición?");
+        cancelCompetition.setMessage("Se perderán todos los cambios no guardados");
+        cancelCompetition.setPositiveButton("Salir", (dialog, which) -> {
+            super.onBackPressed();
+        });
+        cancelCompetition.setNegativeButton("Cancelar", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        cancelCompetition.show();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             getIntent().putExtra("email", email);

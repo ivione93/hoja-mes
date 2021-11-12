@@ -82,6 +82,20 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        android.app.AlertDialog.Builder cancelEditProfile = new android.app.AlertDialog.Builder(this);
+        cancelEditProfile.setTitle(R.string.exit);
+        cancelEditProfile.setMessage(R.string.exit_message);
+        cancelEditProfile.setPositiveButton("Salir", (dialog, which) -> {
+            super.onBackPressed();
+        });
+        cancelEditProfile.setNegativeButton("Cancelar", (dialog, which) -> {
+            dialog.dismiss();
+        });
+        cancelEditProfile.show();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             getIntent().putExtra("email", email);

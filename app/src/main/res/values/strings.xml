@@ -16,4 +16,6 @@
     <string name="information_content">Está desarrollada en ratos libres uniendo dos de nuestras aficiones: el desarrollo de software y el
         atletismo. Si algo no funciona correctamente, por favor, hágalo saber antes de dar una valoración negativa.</string>
     <string name="information_end">¡Esperamos seguir creciendo para que podáis seguir disfrutando!</string>
+    <string name="exit">¿Salir sin guardar?</string>
+    <string name="exit_message">Se perderán todos los cambios no guardados</string>
 </resources>

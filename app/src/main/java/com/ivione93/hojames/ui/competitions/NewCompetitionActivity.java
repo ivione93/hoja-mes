@@ -67,8 +67,8 @@ public class NewCompetitionActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         android.app.AlertDialog.Builder cancelCompetition = new android.app.AlertDialog.Builder(this);
-        cancelCompetition.setTitle("¿Salir de la competición?");
-        cancelCompetition.setMessage("Se perderán todos los cambios no guardados");
+        cancelCompetition.setTitle(R.string.exit);
+        cancelCompetition.setMessage(R.string.exit_message);
         cancelCompetition.setPositiveButton("Salir", (dialog, which) -> {
             super.onBackPressed();
         });

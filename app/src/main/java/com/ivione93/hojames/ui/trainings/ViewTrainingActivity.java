@@ -110,8 +110,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         android.app.AlertDialog.Builder cancelTraining = new android.app.AlertDialog.Builder(this);
-        cancelTraining.setTitle("¿Salir del entrenamiento?");
-        cancelTraining.setMessage("Se perderán todos los cambios no guardados");
+        cancelTraining.setTitle(R.string.exit);
+        cancelTraining.setMessage(R.string.exit_message);
         cancelTraining.setPositiveButton("Salir", (dialog, which) -> {
             super.onBackPressed();
         });

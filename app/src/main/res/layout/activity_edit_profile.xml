@@ -129,7 +129,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_view_training_border">
 
             <TextView
                 android:id="@+id/estadisiticasTV"
@@ -138,6 +139,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-smallcaps"
                 android:text="ESTADÍSTICAS"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -234,7 +236,7 @@
                 android:id="@+id/divider5"
                 android:layout_width="1dp"
                 android:layout_height="100dp"
-                android:background="?android:attr/listDivider"
+                android:background="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

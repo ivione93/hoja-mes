@@ -10,7 +10,7 @@
     android:layout_marginBottom="4dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    app:cardCornerRadius="15dp">
+    app:cardCornerRadius="15dp" >
 
     <FrameLayout
         android:background="@color/colorPrimary"
@@ -20,7 +20,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/competitionLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_view_competition_border">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -30,6 +31,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:background="@android:color/transparent"
+            app:tint="@color/colorPrimary"
             android:padding="2dp"
             android:scaleX="0.9"
             android:scaleY="0.9"
@@ -59,6 +61,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@null"
+            app:tint="@color/colorPrimary"
             android:src="@drawable/ic_menu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -91,6 +94,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:textSize="18dp"
+            android:textColor="@color/colorPrimary"
             android:fontFamily="sans-serif-smallcaps"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -137,7 +141,7 @@
             android:id="@+id/divider4"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
+            android:background="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/competitionNameText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

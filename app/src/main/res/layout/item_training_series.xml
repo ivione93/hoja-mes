@@ -20,7 +20,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/trainingLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_view_training_border">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -30,6 +31,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:background="@android:color/transparent"
+            app:tint="@color/colorPrimaryDark"
             android:padding="4dp"
             android:src="@drawable/ic_trainings"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +44,7 @@
             android:maxLines="1"
             android:textSize="18dp"
             android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
             android:fontFamily="sans-serif-smallcaps"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -53,6 +56,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@null"
+            app:tint="@color/colorPrimaryDark"
             android:onClick="showPopup"
             android:src="@drawable/ic_menu"
             app:layout_constraintEnd_toEndOf="parent"
@@ -262,7 +266,7 @@
             android:id="@+id/divider3"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
+            android:background="@color/colorPrimaryDark"
             app:layout_constraintBottom_toTopOf="@+id/title_training"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

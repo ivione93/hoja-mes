@@ -14,11 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "431129962660-fj6k9up3qifqke3sq0j34cko7j5o0pt5.apps.googleusercontent.com",
+          "client_id": "431129962660-3r7kjrh8c0bcj2alv04p76d05nktatsh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ivione93.hojames",
-            "certificate_hash": "0cfe20e6580fcf20fe390f290d5fef6c55cdc86e"
+            "certificate_hash": "0391aff81de2b6f6294a1d3b480ef9bdb80833a0"
+          }
+        },
+        {
+          "client_id": "431129962660-70gtu52979jvroh4tm3rf1cgrkvoj9v7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ivione93.hojames",
+            "certificate_hash": "d53b8269de9f7022787def4445e79b9272079cd1"
           }
         },
         {

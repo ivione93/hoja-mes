@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
@@ -185,8 +187,11 @@ public class ViewTrainingActivity extends AppCompatActivity {
         listGymDto = new ArrayList<>();
 
         // Material Date Picker
+        CalendarConstraints.Builder constraints = new CalendarConstraints.Builder();
+        constraints.setValidator(DateValidatorPointBackward.now());
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
-        builder.setTitleText("Selecciona fecha");
+        builder.setTitleText(R.string.select_date);
+        builder.setCalendarConstraints(constraints.build());
         MaterialDatePicker datePicker = builder.build();
         trainingDateText = findViewById(R.id.trainingDateText);
         trainingDateText.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));

@@ -21,6 +21,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -124,8 +126,11 @@ public class EditProfileActivity extends AppCompatActivity {
         nameEditProfile = findViewById(R.id.nameEditProfile);
         surnameEditProfile = findViewById(R.id.surnameEditProfile);
         // Material Date Picker
+        CalendarConstraints.Builder constraints = new CalendarConstraints.Builder();
+        constraints.setValidator(DateValidatorPointBackward.now());
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
-        builder.setTitleText("Selecciona fecha");
+        builder.setTitleText(R.string.select_date);
+        builder.setCalendarConstraints(constraints.build());
         MaterialDatePicker datePicker = builder.build();
         birthEditProfile = findViewById(R.id.birthEditProfile);
         birthEditProfile.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));

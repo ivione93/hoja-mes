@@ -21,5 +21,6 @@
     <string name="no_results">Sin resultados</string>
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
+    <string name="select_date">Selecciona fecha</string>
 
 </resources>

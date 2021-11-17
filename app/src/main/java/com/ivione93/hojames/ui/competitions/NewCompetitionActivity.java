@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -123,8 +125,11 @@ public class NewCompetitionActivity extends AppCompatActivity {
         editTextResult = findViewById(R.id.editTextResult);
         placeText = findViewById(R.id.placeText);
         // Material Date Picker
+        CalendarConstraints.Builder constraints = new CalendarConstraints.Builder();
+        constraints.setValidator(DateValidatorPointBackward.now());
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
-        builder.setTitleText("Selecciona fecha");
+        builder.setTitleText(R.string.select_date);
+        builder.setCalendarConstraints(constraints.build());
         MaterialDatePicker datePicker = builder.build();
         dateText = findViewById(R.id.dateText);
         dateText.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));

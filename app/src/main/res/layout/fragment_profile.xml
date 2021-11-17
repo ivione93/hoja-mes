@@ -1,500 +1,506 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
+    android:layout_height="match_parent">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/photoProfile"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_profile"
-        app:civ_border_color="@color/black"
-        app:civ_border_width="2dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nombreEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:lines="1"
-        android:maxLines="1"
-        android:textColor="@color/colorPrimary"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/photoProfile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15"
-        tools:text="Iván García Gómez" />
-
-    <TextView
-        android:id="@+id/emailTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Email"
-        app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
-        app:layout_constraintEnd_toEndOf="@+id/nombreEditText"
-        app:layout_constraintStart_toStartOf="@+id/nombreEditText"
-        app:layout_constraintTop_toTopOf="@+id/photoProfile" />
-
-    <TextView
-        android:id="@+id/birthEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
-        app:layout_constraintStart_toStartOf="@+id/emailTextView"
-        app:layout_constraintTop_toTopOf="@+id/photoProfile"
-        app:layout_constraintVertical_bias="0.85"
-        tools:text="birthdate" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/last_training"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/photoProfile">
+        android:layout_height="match_parent"
+        tools:context=".ui.profile.ProfileFragment">
 
-        <FrameLayout
-            android:background="@color/colorPrimaryDark"
-            android:layout_width="5dp"
-            android:layout_height="match_parent"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/photoProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_profile"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/nombreEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/photoProfile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.15"
+            tools:text="Iván García Gómez" />
+
+        <TextView
+            android:id="@+id/emailTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
+            app:layout_constraintEnd_toEndOf="@+id/nombreEditText"
+            app:layout_constraintStart_toStartOf="@+id/nombreEditText"
+            app:layout_constraintTop_toTopOf="@+id/photoProfile" />
+
+        <TextView
+            android:id="@+id/birthEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
+            app:layout_constraintStart_toStartOf="@+id/emailTextView"
+            app:layout_constraintTop_toTopOf="@+id/photoProfile"
+            app:layout_constraintVertical_bias="0.85"
+            tools:text="birthdate" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/last_training"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/card_view_training_border">
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photoProfile">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/ultimo_entrenamiento"
-                android:padding="4dp"
-                android:src="@drawable/ic_trainings"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/colorPrimaryDark" />
+                android:background="@drawable/card_view_training_border">
 
-            <TextView
-                android:id="@+id/title_last_training"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/ultimo_entrenamiento"
-                android:textSize="18sp"
-                android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/imageView" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/ultimo_entrenamiento"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_trainings"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/last_training_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:textSize="16sp"
-                android:textColor="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="@+id/title_last_training"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.8"
-                app:layout_constraintStart_toEndOf="@+id/title_last_training"
-                app:layout_constraintTop_toTopOf="@+id/title_last_training"
-                tools:text="02/04/2021" />
+                <TextView
+                    android:id="@+id/title_last_training"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="@string/ultimo_entrenamiento"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="@+id/imageView" />
 
-            <TextView
-                android:id="@+id/title_training"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="24dp"
-                android:text="Calentamiento"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                <TextView
+                    android:id="@+id/last_training_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/title_last_training"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.8"
+                    app:layout_constraintStart_toEndOf="@+id/title_last_training"
+                    app:layout_constraintTop_toTopOf="@+id/title_last_training"
+                    tools:text="02/04/2021" />
 
-            <TextView
-                android:id="@+id/title_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginTop="8dp"
-                android:text="Tiempo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_training" />
+                <TextView
+                    android:id="@+id/title_training"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="Calentamiento"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-            <TextView
-                android:id="@+id/title_distance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Distancia"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.45"
-                app:layout_constraintStart_toStartOf="@+id/title_time"
-                app:layout_constraintTop_toTopOf="@+id/title_time" />
+                <TextView
+                    android:id="@+id/title_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Tiempo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_training" />
 
-            <TextView
-                android:id="@+id/title_partial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:text="Media"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/title_time" />
+                <TextView
+                    android:id="@+id/title_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distancia"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.45"
+                    app:layout_constraintStart_toStartOf="@+id/title_time"
+                    app:layout_constraintTop_toTopOf="@+id/title_time" />
 
-            <TextView
-                android:id="@+id/last_training_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:maxLines="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_time"
-                tools:text="40 min" />
+                <TextView
+                    android:id="@+id/title_partial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:text="Media"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/title_time" />
 
-            <TextView
-                android:id="@+id/last_training_distance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="@+id/title_distance"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/title_distance"
-                app:layout_constraintTop_toTopOf="@+id/last_training_time"
-                tools:text="10 km" />
+                <TextView
+                    android:id="@+id/last_training_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:maxLines="1"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_time"
+                    tools:text="40 min" />
 
-            <TextView
-                android:id="@+id/last_training_partial"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/last_training_time"
-                tools:text="4:00 /km" />
+                <TextView
+                    android:id="@+id/last_training_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="@+id/title_distance"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/title_distance"
+                    app:layout_constraintTop_toTopOf="@+id/last_training_time"
+                    tools:text="10 km" />
 
-            <TextView
-                android:id="@+id/tvIndicadorSeries"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="Series"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/title_training"
-                app:layout_constraintTop_toBottomOf="@+id/last_training_time" />
+                <TextView
+                    android:id="@+id/last_training_partial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/last_training_time"
+                    tools:text="4:00 /km" />
 
-            <ImageView
-                android:id="@+id/ivIndicadorSeries"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/ic_chrono"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorSeries"
-                app:layout_constraintStart_toEndOf="@+id/tvIndicadorSeries"
-                app:layout_constraintTop_toTopOf="@+id/tvIndicadorSeries"
-                app:tint="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/tvIndicadorSeries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Series"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/title_training"
+                    app:layout_constraintTop_toBottomOf="@+id/last_training_time" />
 
-            <TextView
-                android:id="@+id/tvIndicadorCuestas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:text="Cuestas"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorSeries"
-                app:layout_constraintStart_toEndOf="@+id/ivIndicadorSeries"
-                app:layout_constraintTop_toTopOf="@+id/ivIndicadorSeries" />
+                <ImageView
+                    android:id="@+id/ivIndicadorSeries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_chrono"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorSeries"
+                    app:layout_constraintStart_toEndOf="@+id/tvIndicadorSeries"
+                    app:layout_constraintTop_toTopOf="@+id/tvIndicadorSeries"
+                    app:tint="@color/colorPrimary" />
 
-            <ImageView
-                android:id="@+id/ivIndicadorCuestas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/ic_cuestas"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorCuestas"
-                app:layout_constraintStart_toEndOf="@+id/tvIndicadorCuestas"
-                app:layout_constraintTop_toTopOf="@+id/tvIndicadorCuestas"
-                app:tint="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/tvIndicadorCuestas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="Cuestas"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorSeries"
+                    app:layout_constraintStart_toEndOf="@+id/ivIndicadorSeries"
+                    app:layout_constraintTop_toTopOf="@+id/ivIndicadorSeries" />
 
-            <TextView
-                android:id="@+id/tvIndicadorFartlek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:text="Fartlek"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorCuestas"
-                app:layout_constraintStart_toEndOf="@+id/ivIndicadorCuestas"
-                app:layout_constraintTop_toTopOf="@+id/ivIndicadorCuestas" />
+                <ImageView
+                    android:id="@+id/ivIndicadorCuestas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_cuestas"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorCuestas"
+                    app:layout_constraintStart_toEndOf="@+id/tvIndicadorCuestas"
+                    app:layout_constraintTop_toTopOf="@+id/tvIndicadorCuestas"
+                    app:tint="@color/colorPrimary" />
 
-            <ImageView
-                android:id="@+id/ivIndicadorFartlek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/ic_fartlek"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorFartlek"
-                app:layout_constraintStart_toEndOf="@+id/tvIndicadorFartlek"
-                app:layout_constraintTop_toTopOf="@+id/tvIndicadorFartlek"
-                app:tint="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/tvIndicadorFartlek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="Fartlek"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorCuestas"
+                    app:layout_constraintStart_toEndOf="@+id/ivIndicadorCuestas"
+                    app:layout_constraintTop_toTopOf="@+id/ivIndicadorCuestas" />
 
-            <TextView
-                android:id="@+id/tvIndicadorGym"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:text="Gym"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorFartlek"
-                app:layout_constraintStart_toEndOf="@+id/ivIndicadorFartlek"
-                app:layout_constraintTop_toTopOf="@+id/ivIndicadorFartlek" />
+                <ImageView
+                    android:id="@+id/ivIndicadorFartlek"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_fartlek"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorFartlek"
+                    app:layout_constraintStart_toEndOf="@+id/tvIndicadorFartlek"
+                    app:layout_constraintTop_toTopOf="@+id/tvIndicadorFartlek"
+                    app:tint="@color/colorPrimary" />
 
-            <ImageView
-                android:id="@+id/ivIndicadorGym"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/ic_gym"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorGym"
-                app:layout_constraintStart_toEndOf="@+id/tvIndicadorGym"
-                app:layout_constraintTop_toTopOf="@+id/tvIndicadorGym"
-                app:tint="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/tvIndicadorGym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:text="Gym"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorFartlek"
+                    app:layout_constraintStart_toEndOf="@+id/ivIndicadorFartlek"
+                    app:layout_constraintTop_toTopOf="@+id/ivIndicadorFartlek" />
 
-            <ImageView
-                android:id="@+id/ivIndicadorObserves"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/ic_observes"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@+id/title_training"
-                app:layout_constraintStart_toEndOf="@+id/title_training"
-                app:layout_constraintTop_toTopOf="@+id/title_training"
-                app:tint="@color/colorPrimary" />
+                <ImageView
+                    android:id="@+id/ivIndicadorGym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_gym"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorGym"
+                    app:layout_constraintStart_toEndOf="@+id/tvIndicadorGym"
+                    app:layout_constraintTop_toTopOf="@+id/tvIndicadorGym"
+                    app:tint="@color/colorPrimary" />
 
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:background="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toTopOf="@+id/title_training"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_last_training" />
+                <ImageView
+                    android:id="@+id/ivIndicadorObserves"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/ic_observes"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/title_training"
+                    app:layout_constraintStart_toEndOf="@+id/title_training"
+                    app:layout_constraintTop_toTopOf="@+id/title_training"
+                    app:tint="@color/colorPrimary" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimaryDark"
+                    app:layout_constraintBottom_toTopOf="@+id/title_training"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_last_training" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/last_competition"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/last_training"
-        app:layout_constraintVertical_bias="0.0">
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-        <FrameLayout
-            android:background="@color/colorPrimary"
-            android:layout_width="5dp"
-            android:layout_height="match_parent"/>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/last_competition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/card_view_competition_border">
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/last_training"
+            app:layout_constraintVertical_bias="0.0">
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/ultima_competicion"
-                android:padding="4dp"
-                android:src="@drawable/ic_competitions"
-                app:tint="@color/colorPrimary"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:background="@drawable/card_view_competition_border">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/ultima_competicion"
-                android:textSize="18sp"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toTopOf="@+id/imageView2" />
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/ultima_competicion"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_competitions"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorPrimary" />
 
-            <TextView
-                android:id="@+id/last_competition_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:textSize="16sp"
-                android:textColor="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.8"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="@+id/textView2"
-                tools:text="09/07/2017" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:text="@string/ultima_competicion"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/colorPrimary"
-                app:layout_constraintBottom_toTopOf="@+id/mapImageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2"
-                app:layout_constraintVertical_bias="0.65" />
+                <TextView
+                    android:id="@+id/last_competition_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.8"
+                    app:layout_constraintStart_toEndOf="@+id/textView2"
+                    app:layout_constraintTop_toTopOf="@+id/textView2"
+                    tools:text="09/07/2017" />
 
-            <TextView
-                android:id="@+id/last_competition_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:maxLines="1"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/last_competition_place"
-                tools:text="Campeonato de Madrid absoluto" />
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintBottom_toTopOf="@+id/mapImageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:layout_constraintVertical_bias="0.65" />
 
-            <ImageView
-                android:id="@+id/mapImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="16dp"
-                android:scaleX="0.7"
-                android:scaleY="0.7"
-                android:src="@drawable/ic_location"
-                app:layout_constraintEnd_toStartOf="@+id/last_competition_place"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                <TextView
+                    android:id="@+id/last_competition_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:maxLines="1"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/last_competition_place"
+                    tools:text="Campeonato de Madrid absoluto" />
 
-            <TextView
-                android:id="@+id/last_competition_place"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/mapImageView"
-                app:layout_constraintEnd_toEndOf="@+id/last_competition_date"
-                app:layout_constraintTop_toTopOf="@+id/mapImageView"
-                tools:text="Tres Cantos" />
+                <ImageView
+                    android:id="@+id/mapImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleX="0.7"
+                    android:scaleY="0.7"
+                    android:src="@drawable/ic_location"
+                    app:layout_constraintEnd_toStartOf="@+id/last_competition_place"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-            <TextView
-                android:id="@+id/last_competition_track_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Prueba"
-                app:layout_constraintStart_toStartOf="@+id/last_competition_name"
-                app:layout_constraintTop_toBottomOf="@+id/last_competition_name" />
+                <TextView
+                    android:id="@+id/last_competition_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/mapImageView"
+                    app:layout_constraintEnd_toEndOf="@+id/last_competition_date"
+                    app:layout_constraintTop_toTopOf="@+id/mapImageView"
+                    tools:text="Tres Cantos" />
 
-            <TextView
-                android:id="@+id/last_competition_track"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/last_competition_track_text"
-                app:layout_constraintTop_toBottomOf="@+id/last_competition_track_text"
-                tools:text="400mv" />
+                <TextView
+                    android:id="@+id/last_competition_track_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Prueba"
+                    app:layout_constraintStart_toStartOf="@+id/last_competition_name"
+                    app:layout_constraintTop_toBottomOf="@+id/last_competition_name" />
 
-            <TextView
-                android:id="@+id/last_competition_result"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
-                android:textColor="@color/colorPrimary"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/last_competition_track"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/last_competition_track_text"
-                tools:text="55.95" />
+                <TextView
+                    android:id="@+id/last_competition_track"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/last_competition_track_text"
+                    app:layout_constraintTop_toBottomOf="@+id/last_competition_track_text"
+                    tools:text="400mv" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/last_competition_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginRight="24dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/last_competition_track"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/last_competition_track_text"
+                    tools:text="55.95" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

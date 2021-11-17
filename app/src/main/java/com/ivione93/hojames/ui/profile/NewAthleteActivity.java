@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class NewAthleteActivity extends AppCompatActivity {
     ConstraintLayout newAthleteLayout;
     TextView nombreEditText, apellidosEditText, birthEditText, emailEditText, passwordEditText, policiesUrl;
     CheckBox checkPolicies;
+    Button btnSaveRegister, btnCancelRegister;
 
     String email;
     String date = Utils.toString(new Date());
@@ -160,6 +162,17 @@ public class NewAthleteActivity extends AppCompatActivity {
             intent.setData(uri);
             startActivity(intent);
         });
+
+        btnSaveRegister = findViewById(R.id.btn_save_register);
+        btnSaveRegister.setOnClickListener(v -> {
+            try {
+                saveAthlete();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        });
+        btnCancelRegister = findViewById(R.id.btn_cancel_register);
+        btnCancelRegister.setOnClickListener(v -> cancelNewAthlete());
     }
 
     private void goProfile(String email) {

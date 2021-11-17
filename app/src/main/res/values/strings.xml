@@ -19,4 +19,7 @@
     <string name="exit">¿Salir sin guardar?</string>
     <string name="exit_message">Se perderán todos los cambios no guardados</string>
     <string name="no_results">Sin resultados</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+
 </resources>

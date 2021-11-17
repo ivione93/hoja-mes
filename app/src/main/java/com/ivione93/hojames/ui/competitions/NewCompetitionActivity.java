@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.Timestamp;
@@ -25,6 +26,7 @@ import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
@@ -120,7 +122,13 @@ public class NewCompetitionActivity extends AppCompatActivity {
         resultText = findViewById(R.id.resultText);
         editTextResult = findViewById(R.id.editTextResult);
         placeText = findViewById(R.id.placeText);
+        // Material Date Picker
+        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Selecciona fecha");
+        MaterialDatePicker datePicker = builder.build();
         dateText = findViewById(R.id.dateText);
+        dateText.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));
+        datePicker.addOnPositiveButtonClickListener(selection -> dateText.setText(datePicker.getHeaderText()));
 
         editTextResult.setOnClickListener(v -> selectTimePicker().show());
 
@@ -216,36 +224,31 @@ public class NewCompetitionActivity extends AppCompatActivity {
         String date = dateText.getText().toString();
 
         if (validateNewCompetition(place, competitionName, track, result, date)) {
-            if (Utils.validateDateFormat(date)) {
-                Map<String,Object> competition = new HashMap<>();
-                if (isNew) {
-                    id = UUID.randomUUID().toString();//Evento nueva competicion Analytics
-                    Bundle bundle = new Bundle();
-                    bundle.putString("message", "Nueva competicion");
-                    bundle.putString("user", email);
-                    bundle.putString("id", id);
-                    mFirebaseAnalytics.logEvent("add_competition", bundle);
-                }
-                competition.put("id", id);
-                competition.put("email", email);
-                competition.put("place", place);
-                competition.put("name", competitionName);
-                competition.put("date", Utils.toTimestamp(date));
-                competition.put("track", track);
-                competition.put("result", result);
-                // Firebase calendar
-                competition.put("start", Utils.toStringCalendar(Utils.toTimestamp(date)));
-                competition.put("end", Utils.toStringCalendar(Utils.toTimestamp(date)));
-                competition.put("color", "#039BE5");
-                competition.put("details", track + ": " + result);
-
-                db.collection("competitions").document(id).set(competition);
-
-                goProfile(email);
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
-                toast.show();
+            Map<String,Object> competition = new HashMap<>();
+            if (isNew) {
+                id = UUID.randomUUID().toString();//Evento nueva competicion Analytics
+                Bundle bundle = new Bundle();
+                bundle.putString("message", "Nueva competicion");
+                bundle.putString("user", email);
+                bundle.putString("id", id);
+                mFirebaseAnalytics.logEvent("add_competition", bundle);
             }
+            competition.put("id", id);
+            competition.put("email", email);
+            competition.put("place", place);
+            competition.put("name", competitionName);
+            competition.put("date", Utils.toTimestamp(date));
+            competition.put("track", track);
+            competition.put("result", result);
+            // Firebase calendar
+            competition.put("start", Utils.toStringCalendar(Utils.toTimestamp(date)));
+            competition.put("end", Utils.toStringCalendar(Utils.toTimestamp(date)));
+            competition.put("color", "#039BE5");
+            competition.put("details", track + ": " + result);
+
+            db.collection("competitions").document(id).set(competition);
+
+            goProfile(email);
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Todos los campos son obligatorios", Toast.LENGTH_LONG);
             toast.show();

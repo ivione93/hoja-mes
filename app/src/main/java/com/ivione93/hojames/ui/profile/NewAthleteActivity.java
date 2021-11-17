@@ -18,6 +18,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -133,7 +135,13 @@ public class NewAthleteActivity extends AppCompatActivity {
 
         nombreEditText = findViewById(R.id.nombreEditText);
         apellidosEditText = findViewById(R.id.apellidosEditText);
+        // Material Date Picker
+        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Selecciona fecha");
+        MaterialDatePicker datePicker = builder.build();
         birthEditText = findViewById(R.id.birthEditText);
+        birthEditText.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));
+        datePicker.addOnPositiveButtonClickListener(selection -> birthEditText.setText(datePicker.getHeaderText()));
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         checkPolicies = findViewById(R.id.checkPolicies);

@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -183,7 +184,13 @@ public class ViewTrainingActivity extends AppCompatActivity {
         listFartlekDto = new ArrayList<>();
         listGymDto = new ArrayList<>();
 
+        // Material Date Picker
+        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Selecciona fecha");
+        MaterialDatePicker datePicker = builder.build();
         trainingDateText = findViewById(R.id.trainingDateText);
+        trainingDateText.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));
+        datePicker.addOnPositiveButtonClickListener(selection -> trainingDateText.setText(datePicker.getHeaderText()));
         trainingTimeText = findViewById(R.id.trainingTimeText);
         trainingDistanceText = findViewById(R.id.trainingDistanceText);
         trainingObservesText = findViewById(R.id.trainingObservesText);
@@ -344,94 +351,89 @@ public class ViewTrainingActivity extends AppCompatActivity {
         }
 
         if (validateNewTraining(date, time, distance)) {
-            if (Utils.validateDateFormat(date)) {
-                String partial = Utils.calculatePartial(time, distance);
-                Map<String,Object> training = new HashMap<>();
-                if (isNew) {
-                    id = UUID.randomUUID().toString();
-                    //Evento nuevo entrenamiento Analytics
-                    Bundle bundle = new Bundle();
-                    bundle.putString("message", "Nuevo entrenamiento");
-                    bundle.putString("user", email);
-                    bundle.putString("id", id);
-                    mFirebaseAnalytics.logEvent("add_training", bundle);
-                }
-                training.put("id", id);
-                training.put("email", email);
-                training.put("date", Utils.toTimestamp(date));
-                training.put("time", time);
-                training.put("distance", distance);
-                training.put("partial", partial);
-                training.put("observes", observes);
-                // Firebase calendar
-                training.put("name", "Entrenamiento");
-                training.put("start", Utils.toStringCalendar(Utils.toTimestamp(date)));
-                training.put("end", Utils.toStringCalendar(Utils.toTimestamp(date)));
-                training.put("color", "#212B39");
-                training.put("details", distance + "kms: " + time);
-
-                db.collection("trainings").document(id).set(training);
-                // Añadir series
-                if (!listSeriesDto.isEmpty()) {
-                    for (SeriesDto dto : listSeriesDto) {
-                        String idSerie = UUID.randomUUID().toString();
-                        Map<String, Object> serie = new HashMap<>();
-                        serie.put("id", idSerie);
-                        serie.put("idTraining", training.get("id"));
-                        serie.put("distance", dto.distance);
-                        serie.put("time", dto.time);
-                        serie.put("date", training.get("date"));
-
-                        db.collection("series").document(idSerie).set(serie);
-                    }
-                }
-                // Añadir cuestas
-                if (!listCuestasDto.isEmpty()) {
-                    for (CuestasDto dto : listCuestasDto) {
-                        String idCuesta = UUID.randomUUID().toString();
-                        Map<String, Object> cuesta = new HashMap<>();
-                        cuesta.put("id", idCuesta);
-                        cuesta.put("idTraining", training.get("id"));
-                        cuesta.put("type", dto.type);
-                        cuesta.put("times", dto.times);
-                        cuesta.put("date", training.get("date"));
-
-                        db.collection("cuestas").document(idCuesta).set(cuesta);
-                    }
-                }
-                // Añadir fartlek
-                if (!listFartlekDto.isEmpty()) {
-                    for (FartlekDto dto : listFartlekDto) {
-                        String idFartlek = UUID.randomUUID().toString();
-                        Map<String, Object> fartlek = new HashMap<>();
-                        fartlek.put("id", idFartlek);
-                        fartlek.put("idTraining", training.get("id"));
-                        fartlek.put("fartlek", dto.fartlek);
-                        fartlek.put("date", training.get("date"));
-
-                        db.collection("fartlek").document(idFartlek).set(fartlek);
-                    }
-                }
-                // Añadir gym
-                if (!listGymDto.isEmpty()) {
-                    for (GymDto dto : listGymDto) {
-                        String idGym = UUID.randomUUID().toString();
-                        Map<String, Object> gym = new HashMap<>();
-                        gym.put("id", idGym);
-                        gym.put("idTraining", training.get("id"));
-                        gym.put("exercise", dto.exercise);
-                        gym.put("times", dto.times);
-                        gym.put("kilos", dto.kilos);
-                        gym.put("date", training.get("date"));
-
-                        db.collection("gym").document(idGym).set(gym);
-                    }
-                }
-                goProfile(email);
-            } else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
-                toast.show();
+            String partial = Utils.calculatePartial(time, distance);
+            Map<String,Object> training = new HashMap<>();
+            if (isNew) {
+                id = UUID.randomUUID().toString();
+                //Evento nuevo entrenamiento Analytics
+                Bundle bundle = new Bundle();
+                bundle.putString("message", "Nuevo entrenamiento");
+                bundle.putString("user", email);
+                bundle.putString("id", id);
+                mFirebaseAnalytics.logEvent("add_training", bundle);
             }
+            training.put("id", id);
+            training.put("email", email);
+            training.put("date", Utils.toTimestamp(date));
+            training.put("time", time);
+            training.put("distance", distance);
+            training.put("partial", partial);
+            training.put("observes", observes);
+            // Firebase calendar
+            training.put("name", "Entrenamiento");
+            training.put("start", Utils.toStringCalendar(Utils.toTimestamp(date)));
+            training.put("end", Utils.toStringCalendar(Utils.toTimestamp(date)));
+            training.put("color", "#212B39");
+            training.put("details", distance + "kms: " + time);
+
+            db.collection("trainings").document(id).set(training);
+            // Añadir series
+            if (!listSeriesDto.isEmpty()) {
+                for (SeriesDto dto : listSeriesDto) {
+                    String idSerie = UUID.randomUUID().toString();
+                    Map<String, Object> serie = new HashMap<>();
+                    serie.put("id", idSerie);
+                    serie.put("idTraining", training.get("id"));
+                    serie.put("distance", dto.distance);
+                    serie.put("time", dto.time);
+                    serie.put("date", training.get("date"));
+
+                    db.collection("series").document(idSerie).set(serie);
+                }
+            }
+            // Añadir cuestas
+            if (!listCuestasDto.isEmpty()) {
+                for (CuestasDto dto : listCuestasDto) {
+                    String idCuesta = UUID.randomUUID().toString();
+                    Map<String, Object> cuesta = new HashMap<>();
+                    cuesta.put("id", idCuesta);
+                    cuesta.put("idTraining", training.get("id"));
+                    cuesta.put("type", dto.type);
+                    cuesta.put("times", dto.times);
+                    cuesta.put("date", training.get("date"));
+
+                    db.collection("cuestas").document(idCuesta).set(cuesta);
+                }
+            }
+            // Añadir fartlek
+            if (!listFartlekDto.isEmpty()) {
+                for (FartlekDto dto : listFartlekDto) {
+                    String idFartlek = UUID.randomUUID().toString();
+                    Map<String, Object> fartlek = new HashMap<>();
+                    fartlek.put("id", idFartlek);
+                    fartlek.put("idTraining", training.get("id"));
+                    fartlek.put("fartlek", dto.fartlek);
+                    fartlek.put("date", training.get("date"));
+
+                    db.collection("fartlek").document(idFartlek).set(fartlek);
+                }
+            }
+            // Añadir gym
+            if (!listGymDto.isEmpty()) {
+                for (GymDto dto : listGymDto) {
+                    String idGym = UUID.randomUUID().toString();
+                    Map<String, Object> gym = new HashMap<>();
+                    gym.put("id", idGym);
+                    gym.put("idTraining", training.get("id"));
+                    gym.put("exercise", dto.exercise);
+                    gym.put("times", dto.times);
+                    gym.put("kilos", dto.kilos);
+                    gym.put("date", training.get("date"));
+
+                    db.collection("gym").document(idGym).set(gym);
+                }
+            }
+            goProfile(email);
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos por completar", Toast.LENGTH_LONG);
             toast.show();

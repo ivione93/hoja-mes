@@ -21,6 +21,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +36,7 @@ import com.ivione93.hojames.model.Competition;
 import com.ivione93.hojames.model.Training;
 import com.ivione93.hojames.ui.login.AuthActivity;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -103,7 +105,11 @@ public class EditProfileActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.menu_save_edit_profile) {
-            saveEditProfile();
+            try {
+                saveEditProfile();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -117,7 +123,13 @@ public class EditProfileActivity extends AppCompatActivity {
         emailEditProfile = findViewById(R.id.emailEditProfile);
         nameEditProfile = findViewById(R.id.nameEditProfile);
         surnameEditProfile = findViewById(R.id.surnameEditProfile);
+        // Material Date Picker
+        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("Selecciona fecha");
+        MaterialDatePicker datePicker = builder.build();
         birthEditProfile = findViewById(R.id.birthEditProfile);
+        birthEditProfile.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));
+        datePicker.addOnPositiveButtonClickListener(selection -> birthEditProfile.setText(datePicker.getHeaderText()));
 
         totalEntrenamientosPerfil = findViewById(R.id.totalEntrenamientosPerfil);
         totalCompeticionesPerfil = findViewById(R.id.totalCompeticionesPerfil);
@@ -362,30 +374,30 @@ public class EditProfileActivity extends AppCompatActivity {
         return count.get();
     }
 
-    private void saveEditProfile() {
+    private void saveEditProfile() throws ParseException {
         String editName, editSurname, editBirth;
         editName = nameEditProfile.getEditText().getText().toString();
         editSurname = surnameEditProfile.getEditText().getText().toString();
-        editBirth = birthEditProfile.getText().toString();
+        editBirth = Utils.toString(Utils.toTimestamp(birthEditProfile.getText().toString()));
 
         if (validateEditProfile(editName, editSurname, editBirth)) {
-            if (Utils.validateDateFormat(editBirth)) {
+            //if (Utils.validateDateFormat(editBirth)) {
                 Map<String,Object> user = new HashMap<>();
                 user.put("email", email);
                 user.put("name", editName);
                 user.put("surname", editSurname);
                 user.put("birth", editBirth);
 
-                db.collection("athlete").document(email).set(user);
+                db.collection("athlete").document(email).update(user);
 
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
-            } else {
+            /*} else {
                 Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
                 toast.show();
-            }
+            }*/
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos por completar", Toast.LENGTH_LONG);
             toast.show();

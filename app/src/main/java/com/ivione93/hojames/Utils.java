@@ -22,7 +22,7 @@ public class Utils {
     }
 
     public static Timestamp toTimestamp(String date) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy");
         Date parsedDate = dateFormat.parse(date);
         Timestamp timestamp = new Timestamp(parsedDate);
         return timestamp;
@@ -30,7 +30,7 @@ public class Utils {
 
     public static String toString(Timestamp timestamp) {
         Date date = timestamp.toDate();
-        String formatted = new SimpleDateFormat("dd/MM/yyyy").format(date);
+        String formatted = new SimpleDateFormat("d MMM yyyy").format(date);
         return formatted;
     }
 
@@ -41,7 +41,7 @@ public class Utils {
     }
 
     public static String toString(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy");
         return sdf.format(date);
     }
 

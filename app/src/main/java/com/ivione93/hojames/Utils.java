@@ -45,6 +45,21 @@ public class Utils {
         return sdf.format(date);
     }
 
+    public static String initCalendarToString(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(date);
+    }
+
+    public static String selectDateCalendarToString(String date) {
+        Date sdf = null;
+        try {
+            sdf = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return toString(sdf);
+    }
+
     public static String calculatePartial(String time, String distance) {
         String sRitmo;
         BigDecimal bRitmo;

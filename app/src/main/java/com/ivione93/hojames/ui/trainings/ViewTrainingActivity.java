@@ -507,7 +507,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     }
 
     public boolean validateTimeSeries(String time) {
-        String formatoHora = "\\d{1,2}h|((\\d{1,2}h )?\\d{2}:)?\\d{2}(\\.\\d{1,2})?";
+        String formatoHora = "\\d{1,2}h \\d{2}:\\d{2}\\.\\d{1,2}";
         return Pattern.matches(formatoHora, time);
     }
 

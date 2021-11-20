@@ -47,7 +47,7 @@ public class TrainingsFragment extends Fragment {
     TextView monthlyKms;
 
     String email;
-    String dateSelected = Utils.toString(new Date());
+    String dateSelected = Utils.initCalendarToString(new Date());
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -96,9 +96,7 @@ public class TrainingsFragment extends Fragment {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-    }
+    public void onStop() { super.onStop(); }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -111,7 +109,7 @@ public class TrainingsFragment extends Fragment {
         if (item.getItemId() == R.id.menu_add_training) {
             Intent newTraining = new Intent(getActivity(), ViewTrainingActivity.class);
             newTraining.putExtra("email", email);
-            newTraining.putExtra("dateSelected", dateSelected);
+            newTraining.putExtra("dateSelected", Utils.selectDateCalendarToString(dateSelected));
             getContext().startActivity(newTraining);
         }
         return super.onOptionsItemSelected(item);

@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointBackward;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -39,6 +43,7 @@ public class NewAthleteActivity extends AppCompatActivity {
     ConstraintLayout newAthleteLayout;
     TextView nombreEditText, apellidosEditText, birthEditText, emailEditText, passwordEditText, policiesUrl;
     CheckBox checkPolicies;
+    Button btnSaveRegister, btnCancelRegister;
 
     String email;
     String date = Utils.toString(new Date());
@@ -133,7 +138,16 @@ public class NewAthleteActivity extends AppCompatActivity {
 
         nombreEditText = findViewById(R.id.nombreEditText);
         apellidosEditText = findViewById(R.id.apellidosEditText);
+        // Material Date Picker
+        CalendarConstraints.Builder constraints = new CalendarConstraints.Builder();
+        constraints.setValidator(DateValidatorPointBackward.now());
+        MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText(R.string.select_date);
+        builder.setCalendarConstraints(constraints.build());
+        MaterialDatePicker datePicker = builder.build();
         birthEditText = findViewById(R.id.birthEditText);
+        birthEditText.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));
+        datePicker.addOnPositiveButtonClickListener(selection -> birthEditText.setText(datePicker.getHeaderText()));
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         checkPolicies = findViewById(R.id.checkPolicies);
@@ -152,6 +166,17 @@ public class NewAthleteActivity extends AppCompatActivity {
             intent.setData(uri);
             startActivity(intent);
         });
+
+        btnSaveRegister = findViewById(R.id.btn_save_register);
+        btnSaveRegister.setOnClickListener(v -> {
+            try {
+                saveAthlete();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        });
+        btnCancelRegister = findViewById(R.id.btn_cancel_register);
+        btnCancelRegister.setOnClickListener(v -> cancelNewAthlete());
     }
 
     private void goProfile(String email) {

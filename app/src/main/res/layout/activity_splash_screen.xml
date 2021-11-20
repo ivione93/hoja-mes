@@ -36,13 +36,13 @@
         android:id="@+id/splashAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-20dp"
         android:fontFamily="sans-serif-smallcaps"
         android:text="Iván García Gómez"
         android:textColor="@color/colorPrimary"
         android:textSize="18dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/splashBy"
         app:layout_constraintStart_toEndOf="@+id/splashBy"
-        app:layout_constraintTop_toBottomOf="@+id/splashTitle" />
+        app:layout_constraintTop_toTopOf="@+id/splashBy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

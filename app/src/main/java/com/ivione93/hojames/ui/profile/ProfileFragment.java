@@ -267,17 +267,17 @@ public class ProfileFragment extends Fragment {
                             last_competition_track.setText(documentSnapshot.get("track").toString());
                             last_competition_result.setText(Utils.getFormattedResult(documentSnapshot.get("result").toString()));
                         } else {
-                            last_competition_name.setText("No se han encontrado competiciones");
+                            last_competition_name.setText(R.string.no_results);
                         }
                     }
                 } else {
-                    last_competition_name.setText("No se han encontrado competiciones");
+                    last_competition_name.setText(R.string.no_results);
                     last_competition_track_text.setVisibility(View.INVISIBLE);
                     mapImageView.setVisibility(View.INVISIBLE);
                 }
             } else {
                 progressDialog.dismiss();
-                last_competition_name.setText("No se han encontrado competiciones");
+                last_competition_name.setText(R.string.no_results);
             }
         });
     }
@@ -370,7 +370,7 @@ public class ProfileFragment extends Fragment {
                                 }
                             }
                         } else {
-                            last_training_time.setText("No se han encontrado entrenamientos");
+                            last_training_time.setText(R.string.no_results);
                         }
                     }
         });

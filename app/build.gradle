@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.ivione93.hojames"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 3
         versionName "1.2"
@@ -47,6 +47,7 @@ dependencies {
 
     // firebase
     implementation platform('com.google.firebase:firebase-bom:28.3.0')
+    implementation 'com.google.firebase:firebase-core:20.0.0'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'

@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_profile_options"
-        android:title="Opciones"
+        android:title="@string/options"
         android:icon="@drawable/ic_menu"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" >
 
         <menu>
             <item android:id="@+id/menu_edit_profile"
-                android:title="Ver perfil" />
+                android:title="@string/show_profile" />
             <item android:id="@+id/menu_add_training_profile"
-                android:title="Añadir entrenamiento" />
+                android:title="@string/add_training" />
             <item android:id="@+id/menu_add_competition_profile"
-                android:title="Añadir competición" />
+                android:title="@string/add_competition" />
         </menu>
     </item>
 
     <item android:id="@+id/menu_log_out"
-        android:title="Cerrar sesión"
+        android:title="@string/log_out"
         android:icon="@drawable/ic_logout"
         app:showAsAction="ifRoom" />
 

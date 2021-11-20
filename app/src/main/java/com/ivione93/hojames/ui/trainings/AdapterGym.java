@@ -36,15 +36,15 @@ public class AdapterGym extends FirestoreRecyclerAdapter<Gym, AdapterGym.GymView
 
         holder.ibDeleteGym.setOnClickListener(v -> {
             AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
-            deleteConfirm.setTitle("Eliminar gimnasio");
-            deleteConfirm.setMessage("¿Está seguro que quiere eliminar el ejercicio?\n\nATENCIÓN: Se elimina sin necesidad de guardar el entrenamiento");
+            deleteConfirm.setTitle(R.string.delete_gym);
+            deleteConfirm.setMessage(R.string.delete_gym_confirm);
             deleteConfirm.setCancelable(false);
-            deleteConfirm.setPositiveButton("Aceptar", (dialog, which) -> {
+            deleteConfirm.setPositiveButton(R.string.accept, (dialog, which) -> {
                 db.collection("gym").document(model.id).delete();
                 notifyItemRangeChanged(position, getItemCount());
                 notifyItemRemoved(position);
             });
-            deleteConfirm.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            deleteConfirm.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.cancel());
             deleteConfirm.show();
         });
     }

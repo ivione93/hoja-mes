@@ -96,7 +96,7 @@ public class AuthActivity extends AppCompatActivity {
             if (!emailEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
                 String emailUser = emailEditText.getText().toString().trim();
                 if (emailUser.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(emailUser).matches()) {
-                    emailEditText.setError("Correo inválido");
+                    emailEditText.setError(getString(R.string.email_invalid));
                     return;
                 }
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(emailEditText.getText().toString(),
@@ -170,8 +170,8 @@ public class AuthActivity extends AppCompatActivity {
 
     private void showAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Error");
-        builder.setMessage("Se ha producido un error en la autenticación");
+        builder.setTitle(R.string.error_title);
+        builder.setMessage(R.string.error_message);
         builder.create().show();
     }
 

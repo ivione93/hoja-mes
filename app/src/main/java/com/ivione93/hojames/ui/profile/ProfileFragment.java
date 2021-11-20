@@ -103,7 +103,7 @@ public class ProfileFragment extends Fragment {
                 Glide.with(getActivity().getApplicationContext()).load(account.getPhotoUrl()).into(photoProfile);
             }
         }
-        progressDialog.setMessage("Cargando datos...");
+        progressDialog.setMessage(getString(R.string.loading_data));
         progressDialog.setCancelable(false);
         progressDialog.show();
         db.collection("athlete").document(email).get().addOnCompleteListener(task -> {
@@ -162,10 +162,10 @@ public class ProfileFragment extends Fragment {
         if (item.getItemId() == R.id.menu_log_out) {
             // Borrado datos inicio de sesion
             new AlertDialog.Builder(getActivity())
-                    .setTitle("Salir")
-                    .setMessage("¿Está seguro que quiere cerrar sesión?")
+                    .setTitle(R.string.exit)
+                    .setMessage(getString(R.string.log_out))
                     .setCancelable(false)
-                    .setPositiveButton("Salir", (dialogInterface, i) -> {
+                    .setPositiveButton(getString(R.string.exit), (dialogInterface, i) -> {
                         SharedPreferences.Editor prefs = getActivity().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit();
                         prefs.remove("email");
                         prefs.apply();
@@ -183,7 +183,7 @@ public class ProfileFragment extends Fragment {
                         startActivity(mainIntent);
                         getActivity().finish();
                     })
-                    .setNegativeButton("Cancelar", (dialogInterface, i) -> dialogInterface.dismiss())
+                    .setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> dialogInterface.dismiss())
                     .show();
         }
         return super.onOptionsItemSelected(item);

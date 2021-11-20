@@ -17,7 +17,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="Campeonato *"
+        android:hint="@string/championship"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -38,7 +38,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="Lugar *"
+        android:hint="@string/place"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/competitionNameText">
@@ -59,7 +59,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="Fecha *"
+        android:hint="@string/date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/placeText">
@@ -83,7 +83,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
-        android:hint="Prueba *"
+        android:hint="@string/track"
         app:layout_constraintEnd_toStartOf="@+id/resultText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateTextText">
@@ -103,7 +103,7 @@
         android:layout_marginLeft="2dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="Marca *"
+        android:hint="@string/result"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/surnameText"
         app:layout_constraintTop_toTopOf="@+id/surnameText">

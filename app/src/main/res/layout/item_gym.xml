@@ -28,7 +28,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Ejercicio" />
+            tools:text="@string/exercise_item_gym" />
 
         <TextView
             android:id="@+id/showTimesGym"
@@ -40,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/showExerciseGym"
             app:layout_constraintStart_toEndOf="@+id/showExerciseGym"
             app:layout_constraintTop_toTopOf="@+id/showExerciseGym"
-            tools:text="Repeticiones" />
+            tools:text="@string/times_gym" />
 
         <TextView
             android:id="@+id/showKilosGym"
@@ -52,7 +52,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/showTimesGym"
             app:layout_constraintStart_toEndOf="@+id/showTimesGym"
             app:layout_constraintTop_toTopOf="@+id/showTimesGym"
-            tools:text="Kilos" />
+            tools:text="@string/kilos_gym" />
 
         <ImageButton
             android:id="@+id/ibDeleteGym"

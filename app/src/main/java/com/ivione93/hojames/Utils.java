@@ -11,7 +11,7 @@ import java.util.Date;
 public class Utils {
 
     public static Timestamp toTimestamp(String date) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(String.valueOf(R.string.format_date));
         Date parsedDate = dateFormat.parse(date);
         Timestamp timestamp = new Timestamp(parsedDate);
         return timestamp;
@@ -19,7 +19,7 @@ public class Utils {
 
     public static String toString(Timestamp timestamp) {
         Date date = timestamp.toDate();
-        String formatted = new SimpleDateFormat("d MMM yyyy").format(date);
+        String formatted = new SimpleDateFormat(String.valueOf(R.string.format_date)).format(date);
         return formatted;
     }
 
@@ -30,7 +30,7 @@ public class Utils {
     }
 
     public static String toString(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat(String.valueOf(R.string.format_date));
         return sdf.format(date);
     }
 

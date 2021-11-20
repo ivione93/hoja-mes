@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom" />-->
 
     <item android:id="@+id/menu_new_training"
-        android:title="Guardar"
+        android:title="@string/save"
         android:icon="@drawable/ic_save"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" />

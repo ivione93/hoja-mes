@@ -32,15 +32,15 @@ public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSerie
 
         holder.ibDeleteSerie.setOnClickListener(v -> {
             AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
-            deleteConfirm.setTitle("Eliminar serie");
-            deleteConfirm.setMessage("¿Está seguro que quiere eliminar la serie?\n\nATENCIÓN: Se elimina sin necesidad de guardar el entrenamiento");
+            deleteConfirm.setTitle(R.string.delete_serie);
+            deleteConfirm.setMessage(R.string.delete_serie_confirm);
             deleteConfirm.setCancelable(false);
-            deleteConfirm.setPositiveButton("Aceptar", (dialog, which) -> {
+            deleteConfirm.setPositiveButton(R.string.accept, (dialog, which) -> {
                 db.collection("series").document(model.id).delete();
                 notifyItemRangeChanged(position, getItemCount());
                 notifyItemRemoved(position);
             });
-            deleteConfirm.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+            deleteConfirm.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.cancel());
             deleteConfirm.show();
         });
     }

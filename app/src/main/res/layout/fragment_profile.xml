@@ -99,7 +99,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:background="@android:color/transparent"
-                    android:contentDescription="@string/ultimo_entrenamiento"
+                    android:contentDescription="@string/last_training"
                     android:padding="4dp"
                     android:src="@drawable/ic_trainings"
                     app:layout_constraintStart_toStartOf="parent"
@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:text="@string/ultimo_entrenamiento"
+                    android:text="@string/last_training"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -141,7 +141,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="24dp"
-                    android:text="Calentamiento"
+                    android:text="@string/warm_up"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -152,7 +152,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginLeft="32dp"
                     android:layout_marginTop="8dp"
-                    android:text="Tiempo"
+                    android:text="@string/time_lt"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_training" />
 
@@ -160,7 +160,7 @@
                     android:id="@+id/title_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Distancia"
+                    android:text="@string/distance_lt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.45"
                     app:layout_constraintStart_toStartOf="@+id/title_time"
@@ -172,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="32dp"
                     android:layout_marginRight="32dp"
-                    android:text="Media"
+                    android:text="@string/rate_lt"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/title_time" />
@@ -374,7 +374,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:background="@android:color/transparent"
-                    android:contentDescription="@string/ultima_competicion"
+                    android:contentDescription="@string/last_competition"
                     android:padding="4dp"
                     android:src="@drawable/ic_competitions"
                     app:layout_constraintStart_toStartOf="parent"
@@ -386,7 +386,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:text="@string/ultima_competicion"
+                    android:text="@string/last_competition"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView2"
@@ -470,7 +470,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Prueba"
+                    android:text="@string/track_lc"
                     app:layout_constraintStart_toStartOf="@+id/last_competition_name"
                     app:layout_constraintTop_toBottomOf="@+id/last_competition_name" />
 

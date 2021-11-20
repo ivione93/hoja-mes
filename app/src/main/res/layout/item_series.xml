@@ -28,7 +28,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Distancia" />
+            tools:text="@string/distance_lt" />
 
         <TextView
             android:id="@+id/showTimeSerie"
@@ -40,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/showDistanceSerie"
             app:layout_constraintStart_toEndOf="@+id/showDistanceSerie"
             app:layout_constraintTop_toTopOf="@+id/showDistanceSerie"
-            tools:text="Tiempo" />
+            tools:text="@string/time_lt" />
 
         <ImageButton
             android:id="@+id/ibDeleteSerie"

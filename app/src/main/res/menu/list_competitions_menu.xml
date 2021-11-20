@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_add_competition"
-        android:title="Nueva competición"
+        android:title="@string/title_activity_new_competition"
         android:icon="@drawable/ic_add"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom|collapseActionView" />

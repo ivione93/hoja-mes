@@ -51,15 +51,15 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
                 switch (item.getItemId()) {
                     case R.id.menu_delete_competition:
                         AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
-                        deleteConfirm.setTitle("Eliminar competición");
-                        deleteConfirm.setMessage("¿Está seguro que quiere eliminar la competición?");
+                        deleteConfirm.setTitle(R.string.delete_competition);
+                        deleteConfirm.setMessage(R.string.delete_competition_confirm);
                         deleteConfirm.setCancelable(false);
-                        deleteConfirm.setPositiveButton("Aceptar", (dialog, which) -> {
+                        deleteConfirm.setPositiveButton(R.string.accept, (dialog, which) -> {
                             db.collection("competitions").document(model.id).delete();
                             notifyItemRangeChanged(position, getItemCount());
                             notifyItemRemoved(position);
                         });
-                        deleteConfirm.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                        deleteConfirm.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.cancel());
                         deleteConfirm.show();
                         return true;
                     default:

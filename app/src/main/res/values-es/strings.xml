@@ -1,0 +1,150 @@
+<resources>
+    <string name="app_name">Hoja del Mes</string>
+    <string name="ivi">Iván García Gómez</string>
+    <string name="prefs_file">com.ivione93.hojames.PREFERENCE_FILE_KEY</string>
+    <!-- AuthActivity -->
+    <string name="login_to_continue">Inicia sesión para continuar</string>
+    <string name="email">Email</string>
+    <string name="pass">Contraseña</string>
+    <string name="recover_pass">Recuperar la contraseña</string>
+    <string name="enter">Entrar</string>
+    <string name="register">Registrar</string>
+    <string name="developer_by">Desarrollado por </string>
+    <string name="error_title">Error</string>
+    <string name="error_message">Se ha producido un error en la autenticación</string>
+    <string name="email_invalid">Correo inválido</string>
+    <!-- EditProfileActivity -->
+    <string name="title_edit_profile">Editar perfil</string>
+    <string name="name">Nombre *</string>
+    <string name="surname">Apellidos *</string>
+    <string name="birthday">Fecha nacimiento *</string>
+    <string name="statistics">ESTADÍSTICAS</string>
+    <string name="total_trainings">Total de entrenamientos</string>
+    <string name="total_km">Total de kilómetros</string>
+    <string name="total_competitions">Total de competiciones</string>
+    <string name="delete_user">Eliminar usuario</string>
+    <!-- ForgotPasswordActivity -->
+    <string name="title_forgot_password">Recuperar contraseña</string>
+    <string name="enter_your_email">Introduce tu dirección de correo</string>
+    <string name="recover">Recuperar</string>
+    <string name="email_sent">Correo enviado!</string>
+    <!-- InformationActivity -->
+    <string name="information_title"><b>Hoja del mes es gratis sin publicidad.</b></string>
+    <string name="information_content">Está desarrollada en ratos libres uniendo dos de nuestras aficiones: el desarrollo de software y el
+        atletismo. Si algo no funciona correctamente, por favor, hágalo saber antes de dar una valoración negativa.</string>
+    <string name="information_end">¡Esperamos seguir creciendo para que podáis seguir disfrutando!</string>
+    <!-- NewAthleteActivity -->
+    <string name="title_new_athlete">Alta usuario</string>
+    <string name="registration_details">Introduce tus datos de registro</string>
+    <string name="read_and_agree">He leído y acepto las</string>
+    <string name="terms_of_use">Condiciones de uso</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <!-- NewCompetitionActivity -->
+    <string name="title_activity_new_competition">Nueva competición</string>
+    <string name="title_competition">Competition</string>
+    <string name="championship">Campeonato *</string>
+    <string name="place">Lugar *</string>
+    <string name="date">Fecha *</string>
+    <string name="track">Prueba *</string>
+    <string name="result">Marca *</string>
+    <!-- ViewTrainingActivity -->
+    <string name="title_activity_new_training">Nuevo entrenamiento</string>
+    <string name="title_training">Entrenamiento</string>
+    <string name="time_training">Tiempo (hh mm:ss) *</string>
+    <string name="distance_training">Distancia (km) *</string>
+    <string name="observes">Observaciones</string>
+    <string name="show_extras">Ver extras</string>
+    <!-- DialogAddCuestas -->
+    <string name="times_cuestas">Repeticiones *</string>
+    <string name="type_cuestas">Tipo *</string>
+    <!-- DialogAddGym -->
+    <string name="exercise_gym">Ejercicio *</string>
+    <string name="times_gym">Repeticiones</string>
+    <string name="kilos_gym">Kilos</string>
+    <!-- DialogAddSeries -->
+    <string name="distance_series">Distancia *</string>
+    <string name="time_series">Tiempo *</string>
+    <!-- FragmentNumberPicker -->
+    <string name="no_time">Sin marca</string>
+    <!-- ProfileFragment -->
+    <string name="title_profile">Perfil</string>
+    <string name="last_training">Último entrenamiento</string>
+    <string name="warm_up">Warm up</string>
+    <string name="time_lt">Tiempo</string>
+    <string name="distance_lt">Distancia</string>
+    <string name="rate_lt">Media</string>
+    <string name="last_competition">Última competición</string>
+    <string name="track_lc">Prueba</string>
+    <!-- TrainingsFragment -->
+    <string name="title_trainings">Entrenamientos</string>
+    <string name="kms_month">Kilómetros este mes: </string>
+    <!-- CompetitionsFragment -->
+    <string name="title_competitions">Competiciones</string>
+    <string name="delete_competition">Eliminar competición</string>
+    <string name="delete_competition_confirm">¿Está seguro que quiere eliminar la competición?</string>
+    <!-- Extras -->
+    <string name="exercise_item_gym">Ejercicio</string>
+    <string name="type_item_cuestas">Tipo</string>
+    <string name="add_serie">Añadir serie</string>
+    <string name="serie_added">Serie añadida</string>
+    <string name="wrong_time_format">Formato de tiempo incorrecto</string>
+    <string name="add_cuestas">Añadir cuestas</string>
+    <string name="cuesta_added">Cuesta añadida</string>
+    <string name="add_fartlek">Añadir fartlek</string>
+    <string name="fartlek_added">Fartlek añadido</string>
+    <string name="add_gym">Añadir rutina de gimnasio</string>
+    <string name="exercise_mandatory">El ejercicio es obligatorio</string>
+    <string name="gym_added">Rutina de gym añadida</string>
+    <string name="extras_added">Extras añadidos</string>
+    <string name="time_mandatory">El tiempo es obligatorio</string>
+    <string name="distance_mandatory">La distancia es obligatoria</string>
+    <string name="insert_time">Introduce tiempo</string>
+    <!-- Exit -->
+    <string name="exit_title">¿Salir sin guardar?</string>
+    <string name="exit_message">Se perderán todos los cambios no guardados</string>
+    <string name="exit">Salir</string>
+    <string name="no_results">Sin resultados</string>
+    <!-- DatePicker -->
+    <string name="select_date">Selecciona fecha</string>
+    <string name="format_date">d MMM yyyy</string>
+    <!-- Forms -->
+    <string name="insert_result">Introduce marca</string>
+    <string name="add">Añadir</string>
+    <string name="all_fields_mandatories">Todos los campos son obligatorios</string>
+    <string name="place_mandatory">El lugar es obligatorio</string>
+    <string name="championship_mandatory">El campeonato es obligatorio</string>
+    <string name="track_mandatory">La prueba es obligatoria</string>
+    <string name="result_mandatory">La marca es obligatoria</string>
+    <string name="date_mandatory">La fecha es obligatoria</string>
+    <string name="email_mandatory">El correo es obligatorio</string>
+    <string name="user_exists">Ya existe un registro con ese email</string>
+    <string name="name_mandatory">El nombre es obligatorio</string>
+    <string name="surname_mandatory">Los apellidos es obligatorio</string>
+    <string name="birth_mandatory">La fecha de nacimiento es obligatorio</string>
+    <string name="pass_mandatory">La contraseña es obligatoria</string>
+    <string name="accept_terms">Tiene que aceptar las condiciones de uso</string>
+    <string name="delete_training">Eliminar entrenamiento</string>
+    <string name="delete_training_confirm">¿Está seguro que quiere eliminar el entrenamiento?</string>
+    <string name="delete_cuesta">Eliminar cuesta</string>
+    <string name="delete_cuesta_confirm">¿Está seguro que quiere eliminar la cuesta?\n\nATENCIÓN: Se elimina sin necesidad de guardar el entrenamiento</string>
+    <string name="delete_fartlek">Eliminar fartlek</string>
+    <string name="delete_fartlek_confirm">¿Está seguro que quiere eliminar el fartlek?\n\nATENCIÓN: Se elimina sin necesidad de guardar el entrenamiento</string>
+    <string name="delete_gym">Eliminar gimnasio</string>
+    <string name="delete_gym_confirm">¿Está seguro que quiere eliminar el ejercicio?\n\nATENCIÓN: Se elimina sin necesidad de guardar el entrenamiento</string>
+    <string name="delete_serie">Eliminar serie</string>
+    <string name="delete_serie_confirm">¿Está seguro que quiere eliminar la serie?\n\nATENCIÓN: Se elimina sin necesidad de guardar el entrenamiento</string>
+    <string name="delete_user_data">Eliminar datos de usuario</string>
+    <string name="delete_user_data_confirm">¿Está seguro que quiere borrar los datos del usuario?</string>
+    <string name="delete_user_confirm">¿Está seguro que quiere eliminar el usuario?</string>
+    <string name="delete">Borrar</string>
+    <string name="accept">Aceptar</string>
+    <string name="loading_data">Cargando datos...</string>
+    <string name="log_out">¿Está seguro que quiere cerrar sesión?</string>
+    <!-- Menus -->
+    <string name="share">Compartir</string>
+    <string name="options">Opciones</string>
+    <string name="show_profile">Ver perfil</string>
+    <string name="add_training">Añadir entrenamiento</string>
+    <string name="add_competition">Añadir competición</string>
+</resources>

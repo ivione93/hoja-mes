@@ -1,26 +1,150 @@
 <resources>
     <string name="app_name">Hoja del Mes</string>
+    <string name="ivi">Iván García Gómez</string>
     <string name="prefs_file">com.ivione93.hojames.PREFERENCE_FILE_KEY</string>
-    <string name="title_profile">Perfil</string>
-    <string name="title_edit_profile">Editar perfil</string>
-    <string name="title_trainings">Entrenamientos</string>
-    <string name="title_competitions">Competiciones</string>
-    <string name="title_activity_new_competition">Nueva competición</string>
-    <string name="ultimo_entrenamiento">Último entrenamiento</string>
-    <string name="ultima_competicion">Última competición</string>
-    <string name="title_forgot_password">Recuperar contraseña</string>
-    <string name="title_new_athlete">Alta usuario</string>
-    <string name="title_activity_new_training">Nuevo entrenamiento</string>
-    <string name="delete_user">Eliminar usuario</string>
-    <string name="information_title"><b>Hoja del mes es gratis sin publicidad.</b></string>
-    <string name="information_content">Está desarrollada en ratos libres uniendo dos de nuestras aficiones: el desarrollo de software y el
-        atletismo. Si algo no funciona correctamente, por favor, hágalo saber antes de dar una valoración negativa.</string>
-    <string name="information_end">¡Esperamos seguir creciendo para que podáis seguir disfrutando!</string>
-    <string name="exit">¿Salir sin guardar?</string>
-    <string name="exit_message">Se perderán todos los cambios no guardados</string>
-    <string name="no_results">Sin resultados</string>
-    <string name="save">Guardar</string>
-    <string name="cancel">Cancelar</string>
-    <string name="select_date">Selecciona fecha</string>
-
+    <!-- AuthActivity -->
+    <string name="login_to_continue">Login to continue</string>
+    <string name="email">Email</string>
+    <string name="pass">Password</string>
+    <string name="recover_pass">Recover password</string>
+    <string name="enter">Log in</string>
+    <string name="register">Register</string>
+    <string name="developer_by">Developed by </string>
+    <string name="error_title">Error</string>
+    <string name="error_message">Authentication failed</string>
+    <string name="email_invalid">Invalid email</string>
+    <!-- EditProfileActivity -->
+    <string name="title_edit_profile">Edit profile</string>
+    <string name="name">Name *</string>
+    <string name="surname">Surname *</string>
+    <string name="birthday">Date of birth *</string>
+    <string name="statistics">STATISTICS</string>
+    <string name="total_trainings">Total trainings</string>
+    <string name="total_km">Total kilometers</string>
+    <string name="total_competitions">Total competitions</string>
+    <string name="delete_user">Delete user</string>
+    <!-- ForgotPasswordActivity -->
+    <string name="title_forgot_password">Forgot Password</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="recover">Recover</string>
+    <string name="email_sent">Email sent!</string>
+    <!-- InformationActivity -->
+    <string name="information_title"><b>Hoja del mes is free without adds.</b></string>
+    <string name="information_content">It is developed in spare time combining two of our hobbies: software development and
+        Athletics. If something is not working properly, please let me know before giving a negative feedback.</string>
+    <string name="information_end">We hope to continue growing so that you can continue enjoying!</string>
+    <!-- NewAthleteActivity -->
+    <string name="title_new_athlete">New user</string>
+    <string name="registration_details">Enter your registration details</string>
+    <string name="read_and_agree">I have read and accept the</string>
+    <string name="terms_of_use">Terms of use</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <!-- NewCompetitionActivity -->
+    <string name="title_activity_new_competition">New competition</string>
+    <string name="title_competition">Competition</string>
+    <string name="championship">Championship *</string>
+    <string name="place">Place *</string>
+    <string name="date">Date *</string>
+    <string name="track">Track *</string>
+    <string name="result">Result *</string>
+    <!-- ViewTrainingActivity -->
+    <string name="title_activity_new_training">New training</string>
+    <string name="title_training">Trainings</string>
+    <string name="time_training">Time (hh mm:ss) *</string>
+    <string name="distance_training">Distance (km) *</string>
+    <string name="observes">Observes</string>
+    <string name="show_extras">Show extras</string>
+    <!-- DialogAddCuestas -->
+    <string name="times_cuestas">Times *</string>
+    <string name="type_cuestas">Type *</string>
+    <!-- DialogAddGym -->
+    <string name="exercise_gym">Exercise *</string>
+    <string name="times_gym">Times</string>
+    <string name="kilos_gym">Kilos</string>
+    <!-- DialogAddSeries -->
+    <string name="distance_series">Distance *</string>
+    <string name="time_series">Time *</string>
+    <!-- FragmentNumberPicker -->
+    <string name="no_time">No time</string>
+    <!-- ProfileFragment -->
+    <string name="title_profile">Profile</string>
+    <string name="last_training">Last training</string>
+    <string name="warm_up">Warm up</string>
+    <string name="time_lt">Time</string>
+    <string name="distance_lt">Distance</string>
+    <string name="rate_lt">Rate</string>
+    <string name="last_competition">Last competition</string>
+    <string name="track_lc">Track</string>
+    <!-- TrainingsFragment -->
+    <string name="title_trainings">Trainings</string>
+    <string name="kms_month">Kms this month: </string>
+    <!-- CompetitionsFragment -->
+    <string name="title_competitions">Competitions</string>
+    <string name="delete_competition">Delete competition</string>
+    <string name="delete_competition_confirm">Are you sure you want to eliminate the competition?</string>
+    <!-- Extras -->
+    <string name="exercise_item_gym">Exercise</string>
+    <string name="type_item_cuestas">Type</string>
+    <string name="add_serie">Add serie</string>
+    <string name="serie_added">Serie added</string>
+    <string name="wrong_time_format">Wrong time format</string>
+    <string name="add_cuestas">Add cuestas</string>
+    <string name="cuesta_added">Cuesta added</string>
+    <string name="add_fartlek">Add fartlek</string>
+    <string name="fartlek_added">Fartlek added</string>
+    <string name="add_gym">Add gym</string>
+    <string name="exercise_mandatory">Exercise is mandatory</string>
+    <string name="gym_added">Gym addded</string>
+    <string name="extras_added">Extras added</string>
+    <string name="time_mandatory">Time is mandatory</string>
+    <string name="distance_mandatory">Distance is mandatory</string>
+    <string name="insert_time">Insert time</string>
+    <!-- Exit -->
+    <string name="exit_title">Exit without saving?</string>
+    <string name="exit_message">All unsaved changes will be lost</string>
+    <string name="exit">Exit</string>
+    <string name="no_results">No results</string>
+    <!-- DatePicker -->
+    <string name="select_date">Select date</string>
+    <string name="format_date">MMM d, yyyy</string>
+    <!-- Forms -->
+    <string name="insert_result">Insert result</string>
+    <string name="add">Add</string>
+    <string name="all_fields_mandatories">All fields are mandatories</string>
+    <string name="place_mandatory">Place is mandatory</string>
+    <string name="championship_mandatory">Championship is mandatory</string>
+    <string name="track_mandatory">Track is mandatory</string>
+    <string name="result_mandatory">Result is mandatory</string>
+    <string name="date_mandatory">Date is mandatory</string>
+    <string name="email_mandatory">Email is mandatory</string>
+    <string name="user_exists">User already exists with this email</string>
+    <string name="name_mandatory">Name is mandatory</string>
+    <string name="surname_mandatory">Surname is mandatory</string>
+    <string name="birth_mandatory">Birthday is mandatory</string>
+    <string name="pass_mandatory">Password is mandatory</string>
+    <string name="accept_terms">You have to accept the terms of use</string>
+    <string name="delete_training">Delete training</string>
+    <string name="delete_training_confirm">Are you sure you want to eliminate the training?</string>
+    <string name="delete_cuesta">Delete cuesta</string>
+    <string name="delete_cuesta_confirm">Are you sure you want to eliminate cuesta?\n\nATTENTION: It is eliminated without the need to save the training</string>
+    <string name="delete_fartlek">Delete fartlek</string>
+    <string name="delete_fartlek_confirm">Are you sure you want to eliminate fartlek?\n\nATTENTION: It is eliminated without the need to save the training</string>
+    <string name="delete_gym">Delete gym</string>
+    <string name="delete_gym_confirm">Are you sure you want to eliminate gym?\n\nATTENTION: It is eliminated without the need to save the training</string>
+    <string name="delete_serie">Delete serie</string>
+    <string name="delete_serie_confirm">Are you sure you want to eliminate serie?\n\nATTENTION: It is eliminated without the need to save the training</string>
+    <string name="delete_user_data">Delete data user</string>
+    <string name="delete_user_data_confirm">Are you sure you want to delete user data?</string>
+    <string name="delete_user_confirm">Are you sure you want to delete user data?</string>
+    <string name="delete">Delete</string>
+    <string name="accept">Accept</string>
+    <string name="loading_data">Loading data...</string>
+    <string name="log_out">Are you sure you want to log out?</string>
+    <!-- Menus -->
+    <string name="share">Share</string>
+    <string name="options">Options</string>
+    <string name="show_profile">Show profile</string>
+    <string name="add_training">Add training</string>
+    <string name="add_competition">Add competition</string>
 </resources>

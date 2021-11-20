@@ -113,12 +113,12 @@ public class ViewTrainingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         android.app.AlertDialog.Builder cancelTraining = new android.app.AlertDialog.Builder(this);
-        cancelTraining.setTitle(R.string.exit);
+        cancelTraining.setTitle(R.string.exit_title);
         cancelTraining.setMessage(R.string.exit_message);
-        cancelTraining.setPositiveButton("Salir", (dialog, which) -> {
+        cancelTraining.setPositiveButton(R.string.exit, (dialog, which) -> {
             super.onBackPressed();
         });
-        cancelTraining.setNegativeButton("Cancelar", (dialog, which) -> {
+        cancelTraining.setNegativeButton(R.string.cancel, (dialog, which) -> {
             dialog.dismiss();
         });
         cancelTraining.show();
@@ -258,11 +258,11 @@ public class ViewTrainingActivity extends AppCompatActivity {
         });
 
         if (!isNew) {
-            getSupportActionBar().setTitle("Entrenamiento");
+            getSupportActionBar().setTitle(getString(R.string.title_training));
             id = getIntent().getStringExtra("idTraining");
             loadTraining(id);
         } else {
-            getSupportActionBar().setTitle("Nuevo entrenamiento");
+            getSupportActionBar().setTitle(getString(R.string.title_activity_new_training));
             trainingDateText.setText(dateSelected);
         }
 
@@ -440,7 +440,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
             }
             goProfile(email);
         } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos por completar", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.all_fields_mandatories, Toast.LENGTH_LONG);
             toast.show();
         }
     }
@@ -473,12 +473,12 @@ public class ViewTrainingActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_add_series, null);
 
-        builder.setTitle("Añadir serie");
+        builder.setTitle(R.string.add_serie);
         builder.setView(v)
-                .setPositiveButton("Añadir", (dialog, which) -> {
+                .setPositiveButton(R.string.add, (dialog, which) -> {
                     addSeries(v);
                 })
-                .setNegativeButton("Cancelar", (dialog, which) -> {
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
 
                 });
 
@@ -494,14 +494,14 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String time = timeSeries.getText().toString();
 
         if (distance.equals("") || time.equals("")) {
-            Toast.makeText(v.getContext(), "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), R.string.all_fields_mandatories, Toast.LENGTH_LONG).show();
         } else {
             if (validateTimeSeries(time)) {
                 SeriesDto seriesDto = new SeriesDto(distance, time);
                 listSeriesDto.add(seriesDto);
-                Toast.makeText(v.getContext(), "Serie añadida", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), getString(R.string.serie_added), Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(v.getContext(), "Formato de tiempo incorrecto", Toast.LENGTH_LONG).show();
+                Toast.makeText(v.getContext(), getString(R.string.wrong_time_format), Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -516,12 +516,12 @@ public class ViewTrainingActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_add_cuestas, null);
 
-        builder.setTitle("Añadir cuestas");
+        builder.setTitle(R.string.add_cuestas);
         builder.setView(v)
-                .setPositiveButton("Añadir", (dialog, which) -> {
+                .setPositiveButton(R.string.add, (dialog, which) -> {
                     addCuestas(v);
                 })
-                .setNegativeButton("Cancelar", (dialog, which) -> {
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
 
                 });
 
@@ -537,11 +537,11 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String times = repeticionesCuestas.getText().toString();
 
         if (type.equals("") && times.equals("")) {
-            Toast.makeText(v.getContext(), "Todos los campos son obligatorios", Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), R.string.all_fields_mandatories, Toast.LENGTH_LONG).show();
         } else {
             CuestasDto cuestasDto = new CuestasDto(type, Integer.parseInt(times));
             listCuestasDto.add(cuestasDto);
-            Toast.makeText(v.getContext(), "Cuesta añadida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), getString(R.string.cuesta_added), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -550,12 +550,12 @@ public class ViewTrainingActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_add_fartlek, null);
 
-        builder.setTitle("Añadir fartlek");
+        builder.setTitle(R.string.add_fartlek);
         builder.setView(v)
-                .setPositiveButton("Añadir", (dialog, which) -> {
+                .setPositiveButton(R.string.add, (dialog, which) -> {
                     addFartlek(v);
                 })
-                .setNegativeButton("Cancelar", (dialog, which) -> {
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
 
                 });
 
@@ -569,11 +569,11 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String fartlek = fartlekFartlek.getText().toString();
 
         if (fartlek.equals("")) {
-            Toast.makeText(v.getContext(), "El campo es obligatorio", Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), R.string.all_fields_mandatories, Toast.LENGTH_LONG).show();
         } else {
             FartlekDto fartlekDto = new FartlekDto(fartlek);
             listFartlekDto.add(fartlekDto);
-            Toast.makeText(v.getContext(), "Fartlek añadido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), getString(R.string.fartlek_added), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -582,12 +582,12 @@ public class ViewTrainingActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View v = inflater.inflate(R.layout.dialog_add_gym, null);
 
-        builder.setTitle("Añadir rutina de gimnasio");
+        builder.setTitle(R.string.add_gym);
         builder.setView(v)
-                .setPositiveButton("Añadir", (dialog, which) -> {
+                .setPositiveButton(R.string.add, (dialog, which) -> {
                     addGym(v);
                 })
-                .setNegativeButton("Cancelar", (dialog, which) -> {
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
 
                 });
 
@@ -605,11 +605,11 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String kilos = kilosGym.getText().toString();
 
         if (exercise.equals("")) {
-            Toast.makeText(v.getContext(), "El ejercicio es obligatorio", Toast.LENGTH_LONG).show();
+            Toast.makeText(v.getContext(), getString(R.string.exercise_mandatory), Toast.LENGTH_LONG).show();
         } else {
             GymDto gymDto = new GymDto(exercise, times, kilos);
             listGymDto.add(gymDto);
-            Toast.makeText(v.getContext(), "Rutina de gym añadida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(v.getContext(), getString(R.string.gym_added), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -739,9 +739,9 @@ public class ViewTrainingActivity extends AppCompatActivity {
             viewGym.setBackgroundColor(R.color.colorPrimaryDark);
             tableExtras.addView(viewGym);
         }
-        builder.setTitle("Extras añadidos");
+        builder.setTitle(R.string.extras_added);
         builder.setView(v)
-                .setPositiveButton("Aceptar", (dialog, which) -> {
+                .setPositiveButton(R.string.accept, (dialog, which) -> {
                 });
 
         return builder.create();
@@ -750,19 +750,19 @@ public class ViewTrainingActivity extends AppCompatActivity {
     private boolean validateNewTraining(String date, String time, String distance) {
         boolean isValid = true;
         if (date.isEmpty() || date == null) {
-            trainingDateText.setError("La fecha es obligatoria");
+            trainingDateText.setError(getString(R.string.date_mandatory));
             isValid = false;
         } else {
             trainingDateText.setError(null);
         }
         if (time.isEmpty() || time == null) {
-            trainingTimeText.getEditText().setError("El tiempo es obligatorio");
+            trainingTimeText.getEditText().setError(getString(R.string.time_mandatory));
             isValid = false;
         } else {
             trainingTimeText.setError(null);
         }
         if (distance.isEmpty() || distance == null) {
-            trainingDistanceText.getEditText().setError("La distancia es obligatoria");
+            trainingDistanceText.getEditText().setError(getString(R.string.distance_mandatory));
             isValid = false;
         } else {
             trainingDistanceText.setError(null);
@@ -787,9 +787,9 @@ public class ViewTrainingActivity extends AppCompatActivity {
         segundos.setMinValue(00);
         segundos.setMaxValue(59);
 
-        builder.setTitle("Introduce tiempo");
+        builder.setTitle(R.string.insert_time);
         builder.setView(v)
-                .setPositiveButton("Añadir", (dialog, which) -> {
+                .setPositiveButton(R.string.add, (dialog, which) -> {
                     String hours, minutes, seconds;
                     if (horas.getValue() < 10) {
                         hours = "0" + horas.getValue();
@@ -809,7 +809,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     trainingTimeText.getEditText().setText(hours + "h " + minutes + ":" + seconds);
 
                 })
-                .setNegativeButton("Cancelar", (dialog, which) -> {
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
 
                 });
 

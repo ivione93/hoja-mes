@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menu_cancel_new_athlete"
-        android:title="Cancelar"
+        android:title="@string/cancel"
         android:icon="@drawable/ic_cancel"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" />
 
     <item android:id="@+id/menu_new_athlete"
-        android:title="Guardar"
+        android:title="@string/save"
         android:icon="@drawable/ic_save"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" />

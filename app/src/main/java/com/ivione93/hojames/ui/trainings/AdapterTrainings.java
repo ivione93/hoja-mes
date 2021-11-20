@@ -129,10 +129,10 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
                 switch (item.getItemId()) {
                     case R.id.menu_delete_training:
                         AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
-                        deleteConfirm.setTitle("Eliminar entrenamiento");
-                        deleteConfirm.setMessage("¿Está seguro que quiere eliminar el entrenamiento?");
+                        deleteConfirm.setTitle(R.string.delete_training);
+                        deleteConfirm.setMessage(R.string.delete_training_confirm);
                         deleteConfirm.setCancelable(false);
-                        deleteConfirm.setPositiveButton("Aceptar", (dialog, which) -> {
+                        deleteConfirm.setPositiveButton(R.string.accept, (dialog, which) -> {
                             db.collection("trainings").document(listTrainings.get(position).id).delete();
                             db.collection("series").whereEqualTo("idTraining", listTrainings.get(position).id).get().addOnCompleteListener(task -> {
                                 if (task.isSuccessful()){
@@ -167,7 +167,7 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
                             notifyItemRemoved(position);
                             notifyItemRangeChanged(position, getItemCount());
                         });
-                        deleteConfirm.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
+                        deleteConfirm.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.cancel());
                         deleteConfirm.show();
                         return true;
                     default:

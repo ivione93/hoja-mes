@@ -70,12 +70,12 @@ public class NewCompetitionActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         android.app.AlertDialog.Builder cancelCompetition = new android.app.AlertDialog.Builder(this);
-        cancelCompetition.setTitle(R.string.exit);
+        cancelCompetition.setTitle(R.string.exit_title);
         cancelCompetition.setMessage(R.string.exit_message);
-        cancelCompetition.setPositiveButton("Salir", (dialog, which) -> {
+        cancelCompetition.setPositiveButton(R.string.exit, (dialog, which) -> {
             super.onBackPressed();
         });
-        cancelCompetition.setNegativeButton("Cancelar", (dialog, which) -> {
+        cancelCompetition.setNegativeButton(R.string.cancel, (dialog, which) -> {
             dialog.dismiss();
         });
         cancelCompetition.show();
@@ -137,11 +137,11 @@ public class NewCompetitionActivity extends AppCompatActivity {
         editTextResult.setOnClickListener(v -> selectTimePicker().show());
 
         if (!isNew) {
-            getSupportActionBar().setTitle("Competición");
+            getSupportActionBar().setTitle(R.string.title_competition);
             id = getIntent().getStringExtra("idCompetition");
             loadCompetition(id);
         } else {
-            getSupportActionBar().setTitle("Nueva competición");
+            getSupportActionBar().setTitle(R.string.title_activity_new_competition);
         }
     }
 
@@ -166,9 +166,9 @@ public class NewCompetitionActivity extends AppCompatActivity {
         milisegundos.setMinValue(00);
         milisegundos.setMaxValue(99);
 
-        builder.setTitle("Introduce marca");
+        builder.setTitle(R.string.insert_result);
         builder.setView(v)
-                .setPositiveButton("Añadir", (dialog, which) -> {
+                .setPositiveButton(R.string.add, (dialog, which) -> {
                     String hours, minutes, seconds, miliseconds;
                     CheckBox checkAbandono = v.findViewById(R.id.checkAbandono);
 
@@ -198,7 +198,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
                         resultText.getEditText().setText(hours + "h " + minutes + ":" + seconds + "." + miliseconds);
                     }
                 })
-                .setNegativeButton("Cancelar", (dialog, which) -> {
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
 
                 });
 
@@ -254,7 +254,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
 
             goProfile(email);
         } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Todos los campos son obligatorios", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.all_fields_mandatories, Toast.LENGTH_LONG);
             toast.show();
         }
     }
@@ -269,31 +269,31 @@ public class NewCompetitionActivity extends AppCompatActivity {
     private boolean validateNewCompetition(String place, String competitionName, String track, String result, String date) {
         boolean isValid = true;
         if(place.isEmpty() || place == null) {
-            placeText.getEditText().setError("El lugar es obligatorio");
+            placeText.getEditText().setError(getString(R.string.place_mandatory));
             isValid = false;
         } else {
             placeText.setError(null);
         }
         if(competitionName.isEmpty() || competitionName == null) {
-            competitionNameText.getEditText().setError("El campeonato es obligatorio");
+            competitionNameText.getEditText().setError(getString(R.string.championship_mandatory));
             isValid = false;
         } else {
             competitionNameText.setError(null);
         }
         if(track.isEmpty() || track == null) {
-            trackText.getEditText().setError("La prueba es obligatoria");
+            trackText.getEditText().setError(getString(R.string.track_mandatory));
             isValid = false;
         } else {
             trackText.setError(null);
         }
         if(result.isEmpty() || result == null) {
-            resultText.getEditText().setError("La marca es obligatoria");
+            resultText.getEditText().setError(getString(R.string.result_mandatory));
             isValid = false;
         } else {
             resultText.setError(null);
         }
         if(date.isEmpty() || date == null) {
-            dateText.setError("La fecha es obligatoria");
+            dateText.setError(getString(R.string.date_mandatory));
             isValid = false;
         } else {
             dateText.setError(null);

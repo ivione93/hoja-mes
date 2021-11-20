@@ -89,12 +89,12 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         android.app.AlertDialog.Builder cancelEditProfile = new android.app.AlertDialog.Builder(this);
-        cancelEditProfile.setTitle(R.string.exit);
+        cancelEditProfile.setTitle(R.string.exit_title);
         cancelEditProfile.setMessage(R.string.exit_message);
-        cancelEditProfile.setPositiveButton("Salir", (dialog, which) -> {
+        cancelEditProfile.setPositiveButton(R.string.exit, (dialog, which) -> {
             super.onBackPressed();
         });
-        cancelEditProfile.setNegativeButton("Cancelar", (dialog, which) -> {
+        cancelEditProfile.setNegativeButton(R.string.cancel, (dialog, which) -> {
             dialog.dismiss();
         });
         cancelEditProfile.show();
@@ -145,16 +145,16 @@ public class EditProfileActivity extends AppCompatActivity {
 
         btnDeleteUser.setOnClickListener(v -> {
             AlertDialog.Builder deleteDataUser = new AlertDialog.Builder(this);
-            deleteDataUser.setTitle("Eliminar datos de usuario");
-            deleteDataUser.setMessage("¿Está seguro que quiere borrar los datos del usuario?");
+            deleteDataUser.setTitle(R.string.delete_user_data);
+            deleteDataUser.setMessage(R.string.delete_user_data_confirm);
             deleteDataUser.setCancelable(false);
-            deleteDataUser.setPositiveButton("Aceptar", (dialog, which) -> {
+            deleteDataUser.setPositiveButton(R.string.accept, (dialog, which) -> {
                 deleteProfileInformation(email);
                 AlertDialog.Builder deleteUser = new AlertDialog.Builder(this);
-                deleteUser.setTitle("Eliminar usuario");
-                deleteUser.setMessage("¿Está seguro que quiere eliminar el usuario?");
+                deleteUser.setTitle(R.string.delete_user);
+                deleteUser.setMessage(R.string.delete_user_confirm);
                 deleteUser.setCancelable(false);
-                deleteUser.setPositiveButton("Borrar", (dialog1, which1) -> {
+                deleteUser.setPositiveButton(R.string.delete, (dialog1, which1) -> {
                     try {
                         Thread.sleep(15000);
                     } catch (Exception e) {
@@ -171,7 +171,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 });
                 deleteUser.show();
             });
-            deleteDataUser.setNegativeButton("Cancelar", (dialog, which) -> finish());
+            deleteDataUser.setNegativeButton(R.string.cancel, (dialog, which) -> finish());
             deleteDataUser.show();
         });
     }

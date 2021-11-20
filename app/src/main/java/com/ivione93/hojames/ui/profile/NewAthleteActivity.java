@@ -218,13 +218,13 @@ public class NewAthleteActivity extends AppCompatActivity {
                     goProfile(email);
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Error");
-                    builder.setMessage("Ya existe un registro con ese email");
+                    builder.setTitle(R.string.error_title);
+                    builder.setMessage(R.string.user_exists);
                     builder.create().show();
                 }
             });
         } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Todos los campos son obligatorios", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.all_fields_mandatories, Toast.LENGTH_LONG);
             toast.show();
         }
     }
@@ -232,34 +232,34 @@ public class NewAthleteActivity extends AppCompatActivity {
     private boolean validateNewAthlete(String name, String surname, String birthdate, String email, String password, Boolean isCheked) {
         boolean isValid = true;
         if (name.isEmpty() || name == null) {
-            nombreEditText.setError("El nombre es obligatorio");
+            nombreEditText.setError(getString(R.string.name_mandatory));
             isValid = false;
         } else {
             nombreEditText.setError(null);
         }
         if (surname.isEmpty() || surname == null) {
-            apellidosEditText.setError("Los apellidos es obligatorio");
+            apellidosEditText.setError(getString(R.string.surname_mandatory));
             isValid = false;
         } else {
             apellidosEditText.setError(null);
         }
         if (birthdate.isEmpty() || birthdate == null) {
-            birthEditText.setError("La fecha de nacimiento es obligatorio");
+            birthEditText.setError(getString(R.string.birth_mandatory));
             isValid = false;
         } else {
             birthEditText.setError(null);
         }
         if (email.isEmpty() || email == null) {
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                emailEditText.setError("Correo inválido");
+                emailEditText.setError(getString(R.string.email_invalid));
             }
-            emailEditText.setError("El email es obligatorio");
+            emailEditText.setError(getString(R.string.email_mandatory));
             isValid = false;
         } else {
             emailEditText.setError(null);
         }
         if (password.isEmpty() || password == null) {
-            passwordEditText.setError("La contraseña es obligatoria");
+            passwordEditText.setError(getString(R.string.pass_mandatory));
             isValid = false;
         } else {
             passwordEditText.setError(null);
@@ -267,7 +267,7 @@ public class NewAthleteActivity extends AppCompatActivity {
         if (isCheked) {
             checkPolicies.setError(null);
         } else {
-            checkPolicies.setError("Tiene que aceptar las condiciones de uso");
+            checkPolicies.setError(getString(R.string.accept_terms));
             isValid = false;
         }
         return isValid;

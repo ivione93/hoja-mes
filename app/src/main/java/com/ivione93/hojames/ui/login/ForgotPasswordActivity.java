@@ -46,11 +46,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         if (!email.isEmpty()) {
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                emailEditText.setError("Correo inválido");
+                emailEditText.setError(getString(R.string.email_invalid));
                 return;
             }
         } else {
-            emailEditText.setError("El correo es obligatorio");
+            emailEditText.setError(getString(R.string.email_mandatory));
             return;
         }
         
@@ -61,7 +61,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Toast.makeText(this, "Correo enviado!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.email_sent), Toast.LENGTH_LONG).show();
                 //Evento recuperar contraseña Analytics
                 Bundle bundle = new Bundle();
                 bundle.putString("message", "Recuperar contraseña");
@@ -71,7 +71,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, AuthActivity.class);
                 startActivity(intent);
             } else {
-                Toast.makeText(this, "Correo inválido!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.email_invalid), Toast.LENGTH_LONG).show();
             }
         });
     }

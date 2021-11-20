@@ -28,7 +28,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Repeticiones" />
+            tools:text="@string/times_gym" />
 
         <TextView
             android:id="@+id/showTypeCuestas"
@@ -40,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/showTimesCuestas"
             app:layout_constraintStart_toEndOf="@+id/showTimesCuestas"
             app:layout_constraintTop_toTopOf="@+id/showTimesCuestas"
-            tools:text="Tipo" />
+            tools:text="@string/type_item_cuestas" />
 
         <ImageButton
             android:id="@+id/ibDeleteCuesta"

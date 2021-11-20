@@ -28,7 +28,6 @@ import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;

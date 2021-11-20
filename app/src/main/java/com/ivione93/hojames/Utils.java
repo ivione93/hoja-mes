@@ -10,17 +10,6 @@ import java.util.Date;
 
 public class Utils {
 
-    public static boolean validateDateFormat(String sDate) {
-        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
-        formatDate.setLenient(false);
-        try {
-            formatDate.parse(sDate);
-        } catch (ParseException e) {
-            return false;
-        }
-        return true;
-    }
-
     public static Timestamp toTimestamp(String date) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy");
         Date parsedDate = dateFormat.parse(date);

@@ -396,23 +396,18 @@ public class EditProfileActivity extends AppCompatActivity {
         editBirth = Utils.toString(Utils.toTimestamp(birthEditProfile.getText().toString()));
 
         if (validateEditProfile(editName, editSurname, editBirth)) {
-            //if (Utils.validateDateFormat(editBirth)) {
-                Map<String,Object> user = new HashMap<>();
-                user.put("email", email);
-                user.put("name", editName);
-                user.put("surname", editSurname);
-                user.put("birth", editBirth);
+            Map<String,Object> user = new HashMap<>();
+            user.put("email", email);
+            user.put("name", editName);
+            user.put("surname", editSurname);
+            user.put("birth", editBirth);
 
-                db.collection("athlete").document(email).update(user);
+            db.collection("athlete").document(email).update(user);
 
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("email", email);
-                startActivity(intent);
-                finish();
-            /*} else {
-                Toast toast = Toast.makeText(getApplicationContext(), "Formato de fecha incorrecto", Toast.LENGTH_LONG);
-                toast.show();
-            }*/
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("email", email);
+            startActivity(intent);
+            finish();
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "Faltan campos por completar", Toast.LENGTH_LONG);
             toast.show();

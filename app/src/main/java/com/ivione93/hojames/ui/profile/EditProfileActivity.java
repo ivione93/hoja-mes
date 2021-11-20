@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -320,7 +321,11 @@ public class EditProfileActivity extends AppCompatActivity {
                     emailEditProfile.setText(task.getResult().get("email").toString());
                     nameEditProfile.getEditText().setText(task.getResult().get("name").toString());
                     surnameEditProfile.getEditText().setText(task.getResult().get("surname").toString());
-                    birthEditProfile.setText(task.getResult().get("birth").toString());
+                    if (validateDate(task.getResult().get("birth").toString())) {
+                        birthEditProfile.setText(Utils.selectDateCalendarToString(task.getResult().get("birth").toString()));
+                    } else {
+                        birthEditProfile.setText(task.getResult().get("birth").toString());
+                    }
                     totalEntrenamientosPerfil.setText(String.valueOf(getTotalTrainings()));
                     totalCompeticionesPerfil.setText(String.valueOf(getTotalCompetitions()));
                     totalKmEntrenamientosPerfil.setText(String.valueOf(getTotalTrainings()));
@@ -331,6 +336,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+    }
+
+    public static boolean validateDate(String date) {
+        String formatDate = "\\d{2}/\\d{2}/\\d{4}";
+        return Pattern.matches(formatDate, date);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

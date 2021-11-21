@@ -9,7 +9,7 @@
     <string name="recover_pass">Recover password</string>
     <string name="enter">Log in</string>
     <string name="register">Register</string>
-    <string name="developer_by">Developed by </string>
+    <string name="developer_by">Developed by\u0020</string>
     <string name="error_title">Error</string>
     <string name="error_message">Authentication failed</string>
     <string name="email_invalid">Invalid email</string>
@@ -36,7 +36,7 @@
     <!-- NewAthleteActivity -->
     <string name="title_new_athlete">New user</string>
     <string name="registration_details">Enter your registration details</string>
-    <string name="read_and_agree">I have read and accept the</string>
+    <string name="read_and_agree">I have read and accept the\u0020</string>
     <string name="terms_of_use">Terms of use</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
@@ -78,7 +78,7 @@
     <string name="track_lc">Track</string>
     <!-- TrainingsFragment -->
     <string name="title_trainings">Trainings</string>
-    <string name="kms_month">Kms this month: </string>
+    <string name="kms_month">Kms this month:\u0020</string>
     <!-- CompetitionsFragment -->
     <string name="title_competitions">Competitions</string>
     <string name="delete_competition">Delete competition</string>

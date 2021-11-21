@@ -9,7 +9,7 @@
     <string name="recover_pass">Recuperar la contraseña</string>
     <string name="enter">Entrar</string>
     <string name="register">Registrar</string>
-    <string name="developer_by">Desarrollado por </string>
+    <string name="developer_by">Desarrollado por\u0020</string>
     <string name="error_title">Error</string>
     <string name="error_message">Se ha producido un error en la autenticación</string>
     <string name="email_invalid">Correo inválido</string>
@@ -36,7 +36,7 @@
     <!-- NewAthleteActivity -->
     <string name="title_new_athlete">Alta usuario</string>
     <string name="registration_details">Introduce tus datos de registro</string>
-    <string name="read_and_agree">He leído y acepto las</string>
+    <string name="read_and_agree">He leído y acepto las\u0020</string>
     <string name="terms_of_use">Condiciones de uso</string>
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
@@ -78,7 +78,7 @@
     <string name="track_lc">Prueba</string>
     <!-- TrainingsFragment -->
     <string name="title_trainings">Entrenamientos</string>
-    <string name="kms_month">Kilómetros este mes: </string>
+    <string name="kms_month">Kilómetros este mes:\u0020</string>
     <!-- CompetitionsFragment -->
     <string name="title_competitions">Competiciones</string>
     <string name="delete_competition">Eliminar competición</string>

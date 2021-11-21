@@ -10,16 +10,16 @@ import java.util.Date;
 
 public class Utils {
 
-    public static Timestamp toTimestamp(String date) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(String.valueOf(R.string.format_date));
+    public static Timestamp toTimestamp(String date, String format) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         Date parsedDate = dateFormat.parse(date);
         Timestamp timestamp = new Timestamp(parsedDate);
         return timestamp;
     }
 
-    public static String toString(Timestamp timestamp) {
+    public static String toString(Timestamp timestamp, String format) {
         Date date = timestamp.toDate();
-        String formatted = new SimpleDateFormat(String.valueOf(R.string.format_date)).format(date);
+        String formatted = new SimpleDateFormat(format).format(date);
         return formatted;
     }
 
@@ -29,8 +29,8 @@ public class Utils {
         return formatted;
     }
 
-    public static String toString(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat(String.valueOf(R.string.format_date));
+    public static String toString(Date date, String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(date);
     }
 
@@ -39,14 +39,14 @@ public class Utils {
         return sdf.format(date);
     }
 
-    public static String selectDateCalendarToString(String date) {
+    public static String selectDateCalendarToString(String date, String format) {
         Date sdf = null;
         try {
             sdf = new SimpleDateFormat("dd/MM/yyyy").parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return toString(sdf);
+        return toString(sdf, format);
     }
 
     public static String calculatePartial(String time, String distance) {

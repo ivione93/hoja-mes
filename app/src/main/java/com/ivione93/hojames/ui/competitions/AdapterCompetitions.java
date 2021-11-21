@@ -34,7 +34,7 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
         holder.place.setText(model.place);
         holder.track.setText(model.track);
         holder.result.setText(Utils.getFormattedResult(model.result));
-        holder.date.setText(Utils.toString(model.date));
+        holder.date.setText(Utils.toString(model.date, holder.itemView.getResources().getString(R.string.format_date)));
 
         holder.competitionLayout.setOnClickListener(v -> {
             Intent newCompetition = new Intent(holder.itemView.getContext(), NewCompetitionActivity.class);

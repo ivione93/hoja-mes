@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -66,7 +67,7 @@ public class ProfileFragment extends Fragment {
     CardView lastTrainingCV, lastCompetitionCV;
 
     String email;
-    String dateSelected = Utils.toString(new Date());
+    String dateSelected;
     Uri photoUrl;
 
     private ProgressDialog progressDialog;
@@ -190,6 +191,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void setup(View root, String email) {
+        Resources res = root.getResources();
+        String formatDate = res.getString(R.string.format_date);
+        dateSelected = Utils.toString(new Date(), formatDate);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getActivity());
 
         progressDialog = new ProgressDialog(getContext());
@@ -263,7 +267,7 @@ public class ProfileFragment extends Fragment {
                             });
                             last_competition_name.setText(documentSnapshot.get("name").toString());
                             last_competition_place.setText(documentSnapshot.get("place").toString());
-                            last_competition_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
+                            last_competition_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date"), getString(R.string.format_date)));
                             last_competition_track.setText(documentSnapshot.get("track").toString());
                             last_competition_result.setText(Utils.getFormattedResult(documentSnapshot.get("result").toString()));
                         } else {
@@ -303,7 +307,7 @@ public class ProfileFragment extends Fragment {
 
                                     last_training_distance.setText(documentSnapshot.get("distance").toString() + " kms");
                                     last_training_time.setText(Utils.getFormattedTime(documentSnapshot.get("time").toString()) + " min");
-                                    last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date")));
+                                    last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date"), getString(R.string.format_date)));
                                     last_training_partial.setText(documentSnapshot.get("partial").toString() + " /km");
 
                                     if (documentSnapshot.get("observes") == null || documentSnapshot.get("observes").equals("")) {

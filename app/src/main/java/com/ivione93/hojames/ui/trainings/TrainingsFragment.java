@@ -47,7 +47,7 @@ public class TrainingsFragment extends Fragment {
     TextView monthlyKms;
 
     String email;
-    String dateSelected = Utils.initCalendarToString(new Date());
+    String dateSelected;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -109,7 +109,7 @@ public class TrainingsFragment extends Fragment {
         if (item.getItemId() == R.id.menu_add_training) {
             Intent newTraining = new Intent(getActivity(), ViewTrainingActivity.class);
             newTraining.putExtra("email", email);
-            newTraining.putExtra("dateSelected", Utils.selectDateCalendarToString(dateSelected));
+            newTraining.putExtra("dateSelected", Utils.selectDateCalendarToString(dateSelected, getString(R.string.format_date)));
             getContext().startActivity(newTraining);
         }
         return super.onOptionsItemSelected(item);
@@ -117,6 +117,8 @@ public class TrainingsFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void setup(View root) {
+        dateSelected = Utils.initCalendarToString(new Date());
+
         monthlyKms = root.findViewById(R.id.monthly_kms);
         monthlyKms.setText(getKms(dateSelected).toString());
         calendarTrainings = root.findViewById(R.id.calendar_trainings);

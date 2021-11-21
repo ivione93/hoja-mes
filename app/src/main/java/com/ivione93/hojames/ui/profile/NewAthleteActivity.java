@@ -3,6 +3,7 @@ package com.ivione93.hojames.ui.profile;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -46,7 +47,7 @@ public class NewAthleteActivity extends AppCompatActivity {
     Button btnSaveRegister, btnCancelRegister;
 
     String email;
-    String date = Utils.toString(new Date());
+    String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +133,10 @@ public class NewAthleteActivity extends AppCompatActivity {
     }
 
     private void setup() {
+        Resources res = getResources();
+        String formatDate = res.getString(R.string.format_date);
+        date = Utils.toString(new Date(), formatDate);
+
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         newAthleteLayout = findViewById(R.id.newAthleteLayout);
@@ -200,7 +205,7 @@ public class NewAthleteActivity extends AppCompatActivity {
             athlete.put("name", nombreEditText.getText().toString());
             athlete.put("surname", apellidosEditText.getText().toString());
             athlete.put("birth", birthEditText.getText().toString());
-            athlete.put("creationDate", Utils.toTimestamp(date));
+            athlete.put("creationDate", Utils.toTimestamp(date, getString(R.string.format_date)));
 
             if (this.email != null) {
                 FirebaseAuth.getInstance().getCurrentUser().delete();

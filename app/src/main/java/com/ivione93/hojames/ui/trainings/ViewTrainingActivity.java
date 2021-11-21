@@ -369,15 +369,15 @@ public class ViewTrainingActivity extends AppCompatActivity {
             }
             training.put("id", id);
             training.put("email", email);
-            training.put("date", Utils.toTimestamp(date));
+            training.put("date", Utils.toTimestamp(date, getString(R.string.format_date)));
             training.put("time", time);
             training.put("distance", distance);
             training.put("partial", partial);
             training.put("observes", observes);
             // Firebase calendar
             training.put("name", "Entrenamiento");
-            training.put("start", Utils.toStringCalendar(Utils.toTimestamp(date)));
-            training.put("end", Utils.toStringCalendar(Utils.toTimestamp(date)));
+            training.put("start", Utils.toStringCalendar(Utils.toTimestamp(date, getString(R.string.format_date))));
+            training.put("end", Utils.toStringCalendar(Utils.toTimestamp(date, getString(R.string.format_date))));
             training.put("color", "#212B39");
             training.put("details", distance + "kms: " + time);
 
@@ -450,7 +450,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 QuerySnapshot document = task.getResult();
                 if (!document.isEmpty()) {
-                    trainingDateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date")));
+                    trainingDateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date"), getString(R.string.format_date)));
                     trainingTimeText.getEditText().setText(task.getResult().getDocuments().get(0).get("time").toString());
                     trainingDistanceText.getEditText().setText(task.getResult().getDocuments().get(0).get("distance").toString());
                     if (task.getResult().getDocuments().get(0).get("observes") != null) {

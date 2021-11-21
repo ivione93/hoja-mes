@@ -214,7 +214,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
                     competitionNameText.getEditText().setText(task.getResult().getDocuments().get(0).get("name").toString());
                     trackText.getEditText().setText(task.getResult().getDocuments().get(0).get("track").toString());
                     resultText.getEditText().setText(task.getResult().getDocuments().get(0).get("result").toString());
-                    dateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date")));
+                    dateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date"), getString(R.string.format_date)));
                 }
             }
         });
@@ -241,12 +241,12 @@ public class NewCompetitionActivity extends AppCompatActivity {
             competition.put("email", email);
             competition.put("place", place);
             competition.put("name", competitionName);
-            competition.put("date", Utils.toTimestamp(date));
+            competition.put("date", Utils.toTimestamp(date, getString(R.string.format_date)));
             competition.put("track", track);
             competition.put("result", result);
             // Firebase calendar
-            competition.put("start", Utils.toStringCalendar(Utils.toTimestamp(date)));
-            competition.put("end", Utils.toStringCalendar(Utils.toTimestamp(date)));
+            competition.put("start", Utils.toStringCalendar(Utils.toTimestamp(date, getString(R.string.format_date))));
+            competition.put("end", Utils.toStringCalendar(Utils.toTimestamp(date, getString(R.string.format_date))));
             competition.put("color", "#039BE5");
             competition.put("details", track + ": " + result);
 

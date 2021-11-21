@@ -55,7 +55,7 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
             newTraining.putExtra("email", listTrainings.get(position).email);
             holder.itemView.getContext().startActivity(newTraining);
         });
-        holder.itemTrainingDate.setText(Utils.toString(listTrainings.get(position).date));
+        holder.itemTrainingDate.setText(Utils.toString(listTrainings.get(position).date, holder.itemView.getResources().getString(R.string.format_date)));
         holder.itemTrainingTime.setText(Utils.getFormattedTime(listTrainings.get(position).time) + " min");
         holder.itemTrainingDistance.setText(listTrainings.get(position).distance + " km");
         holder.itemTrainingPartial.setText(listTrainings.get(position).partial + " /km");

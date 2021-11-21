@@ -322,7 +322,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     nameEditProfile.getEditText().setText(task.getResult().get("name").toString());
                     surnameEditProfile.getEditText().setText(task.getResult().get("surname").toString());
                     if (validateDate(task.getResult().get("birth").toString())) {
-                        birthEditProfile.setText(Utils.selectDateCalendarToString(task.getResult().get("birth").toString()));
+                        birthEditProfile.setText(Utils.selectDateCalendarToString(task.getResult().get("birth").toString(), getString(R.string.format_date)));
                     } else {
                         birthEditProfile.setText(task.getResult().get("birth").toString());
                     }
@@ -393,7 +393,7 @@ public class EditProfileActivity extends AppCompatActivity {
         String editName, editSurname, editBirth;
         editName = nameEditProfile.getEditText().getText().toString();
         editSurname = surnameEditProfile.getEditText().getText().toString();
-        editBirth = Utils.toString(Utils.toTimestamp(birthEditProfile.getText().toString()));
+        editBirth = Utils.toString(Utils.toTimestamp(birthEditProfile.getText().toString(), getString(R.string.format_date)), getString(R.string.format_date));
 
         if (validateEditProfile(editName, editSurname, editBirth)) {
             Map<String,Object> user = new HashMap<>();

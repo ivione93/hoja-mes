@@ -8,5 +8,7 @@ public class Series {
     public String distance;
     public String time;
     public Timestamp date;
+    public boolean hurdles;
+    public String shoes;
 
 }

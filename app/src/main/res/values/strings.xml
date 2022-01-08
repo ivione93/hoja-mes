@@ -147,4 +147,10 @@
     <string name="show_profile">Show profile</string>
     <string name="add_training">Add training</string>
     <string name="add_competition">Add competition</string>
+
+    <string name="serie_with_hurdles">With hurdles?</string>
+    <string name="shoes">Shoes:</string>
+    <string name="normal_shoe">Normal</string>
+    <string name="flying_shoe">Flying</string>
+    <string name="spike_shoe">Spikes</string>
 </resources>

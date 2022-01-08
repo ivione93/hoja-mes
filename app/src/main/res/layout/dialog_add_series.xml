@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,10 +24,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="16dp"
         android:hint="(m)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvDistance"
@@ -38,6 +37,15 @@
             android:layout_height="wrap_content"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Switch
+        android:id="@+id/swHurdles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/serie_with_hurdles"
+        app:layout_constraintStart_toStartOf="@+id/tvDistance"
+        app:layout_constraintTop_toBottomOf="@+id/distance_seriesTextInput" />
 
     <TextView
         android:id="@+id/tvTime"
@@ -55,18 +63,58 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="16dp"
         android:hint="(xxh mm:ss.ms)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/distance_seriesTextInput"
-        app:layout_constraintTop_toBottomOf="@+id/distance_seriesTextInput">
+        app:layout_constraintTop_toBottomOf="@+id/swHurdles">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/time_series"
-            android:text="00h 00:00.00"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="00h 00:00.00" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvShoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/shoes"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/time_seriesTextInput"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvTime"
+        app:layout_constraintTop_toBottomOf="@+id/time_seriesTextInput" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupShoes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/time_seriesTextInput"
+        app:layout_constraintStart_toStartOf="@+id/tvShoes"
+        app:layout_constraintTop_toBottomOf="@+id/tvShoes">
+
+        <RadioButton
+            android:id="@+id/radio_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/normal_shoe" />
+
+        <RadioButton
+            android:id="@+id/radio_flying"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/flying_shoe" />
+
+        <RadioButton
+            android:id="@+id/radio_spikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spike_shoe" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -392,6 +395,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     serie.put("distance", dto.distance);
                     serie.put("time", dto.time);
                     serie.put("date", training.get("date"));
+                    serie.put("hurdles", dto.hurdles);
+                    serie.put("shoes", dto.shoes);
 
                     db.collection("series").document(idSerie).set(serie);
                 }
@@ -493,11 +498,28 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String distance = distanceSeries.getText().toString();
         String time = timeSeries.getText().toString();
 
+        Switch hurdles = v.findViewById(R.id.swHurdles);
+        Boolean withHurdles = hurdles.isChecked();
+
+        String shoes = null;
+        RadioGroup radioGroupShoes = v.findViewById(R.id.radioGroupShoes);
+        RadioButton radioNormal, radioFlying, radioSpikes;
+        radioNormal = v.findViewById(R.id.radio_normal);
+        radioFlying = v.findViewById(R.id.radio_flying);
+        radioSpikes = v.findViewById(R.id.radio_spikes);
+        if (radioGroupShoes.getCheckedRadioButtonId() == radioNormal.getId()) {
+            shoes = getString(R.string.normal_shoe);
+        } else if (radioGroupShoes.getCheckedRadioButtonId() == radioFlying.getId()) {
+            shoes = getString(R.string.flying_shoe);
+        } else if (radioGroupShoes.getCheckedRadioButtonId() == radioSpikes.getId()) {
+            shoes = getString(R.string.spike_shoe);
+        }
+
         if (distance.equals("") || time.equals("")) {
             Toast.makeText(v.getContext(), R.string.all_fields_mandatories, Toast.LENGTH_LONG).show();
         } else {
             if (validateTimeSeries(time)) {
-                SeriesDto seriesDto = new SeriesDto(distance, time);
+                SeriesDto seriesDto = new SeriesDto(distance, time, withHurdles, shoes);
                 listSeriesDto.add(seriesDto);
                 Toast.makeText(v.getContext(), getString(R.string.serie_added), Toast.LENGTH_SHORT).show();
             } else {
@@ -507,7 +529,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     }
 
     public boolean validateTimeSeries(String time) {
-        String formatoHora = "\\d{1,2}h \\d{2}:\\d{2}\\.\\d{1,2}";
+        String formatoHora = "\\d{1,2}h \\d{2}:\\d{2}\\.\\d{2}";
         return Pattern.matches(formatoHora, time);
     }
 
@@ -632,14 +654,25 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 TableRow rowSeries = new TableRow(this);
                 rowSeries.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 TextView textViewDistance = new TextView(this);
+                TextView textHurdles = new TextView(this);
                 TextView textViewTime = new TextView(this);
-                textViewDistance.setText(dto.distance);
+                TextView textViewShoe = new TextView(this);
+                textViewDistance.setText(dto.distance + " m");
                 textViewDistance.setTextSize(16);
                 textViewDistance.setGravity(View.FOCUS_LEFT);
+                if(dto.hurdles) {
+                    textHurdles.setText("V");
+                    textHurdles.setTextSize(16);
+                }
                 textViewTime.setText(dto.time);
                 textViewTime.setTextSize(16);
                 textViewTime.setGravity(View.FOCUS_RIGHT);
+                textViewShoe.setText(dto.shoes + " - ");
+                textViewShoe.setTextSize(16);
+                textViewShoe.setGravity(View.FOCUS_RIGHT);
                 rowSeries.addView(textViewDistance);
+                rowSeries.addView(textHurdles);
+                rowSeries.addView(textViewShoe);
                 rowSeries.addView(textViewTime);
                 tableExtras.addView(rowSeries, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             }

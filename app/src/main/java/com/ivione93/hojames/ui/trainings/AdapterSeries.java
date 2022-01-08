@@ -28,7 +28,13 @@ public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSerie
     @Override
     protected void onBindViewHolder(@NonNull SeriesViewHolder holder, int position, @NonNull Series model) {
         holder.showDistanceSerie.setText(model.distance + " m");
+        if(model.hurdles) {
+            holder.hurdlesSerie.setVisibility(View.VISIBLE);
+        } else {
+            holder.hurdlesSerie.setVisibility(View.INVISIBLE);
+        }
         holder.showTimeSerie.setText(Utils.getFormattedResult(model.time));
+        holder.shoeSerie.setText(model.shoes);
 
         holder.ibDeleteSerie.setOnClickListener(v -> {
             AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(v.getContext());
@@ -54,13 +60,15 @@ public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSerie
 
     class SeriesViewHolder extends RecyclerView.ViewHolder {
 
-        TextView showDistanceSerie, showTimeSerie;
+        TextView showDistanceSerie, showTimeSerie, shoeSerie, hurdlesSerie;
         ImageButton ibDeleteSerie;
 
         public SeriesViewHolder(@NonNull View itemView) {
             super(itemView);
             showDistanceSerie = itemView.findViewById(R.id.showDistanceSerie);
             showTimeSerie = itemView.findViewById(R.id.showTimeSerie);
+            shoeSerie = itemView.findViewById(R.id.shoeSerie);
+            hurdlesSerie = itemView.findViewById(R.id.hurdlesSerie);
             ibDeleteSerie = itemView.findViewById(R.id.ibDeleteSerie);
         }
     }

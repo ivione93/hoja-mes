@@ -24,22 +24,43 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/distance_lt" />
 
         <TextView
-            android:id="@+id/showTimeSerie"
+            android:id="@+id/hurdlesSerie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
+            android:text="V"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/showDistanceSerie"
             app:layout_constraintStart_toEndOf="@+id/showDistanceSerie"
+            app:layout_constraintTop_toTopOf="@+id/showDistanceSerie" />
+
+        <TextView
+            android:id="@+id/shoeSerie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/showDistanceSerie"
+            app:layout_constraintStart_toEndOf="@+id/hurdlesSerie"
             app:layout_constraintTop_toTopOf="@+id/showDistanceSerie"
+            tools:text="@string/spike_shoe" />
+
+        <TextView
+            android:id="@+id/showTimeSerie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="48dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/shoeSerie"
+            app:layout_constraintEnd_toStartOf="@+id/ibDeleteSerie"
+            app:layout_constraintTop_toTopOf="@+id/shoeSerie"
             tools:text="@string/time_lt" />
 
         <ImageButton

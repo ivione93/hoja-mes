@@ -42,7 +42,7 @@
     <string name="cancel">Cancelar</string>
     <!-- NewCompetitionActivity -->
     <string name="title_activity_new_competition">Nueva competición</string>
-    <string name="title_competition">Competition</string>
+    <string name="title_competition">Competición</string>
     <string name="championship">Campeonato *</string>
     <string name="place">Lugar *</string>
     <string name="date">Fecha *</string>
@@ -70,7 +70,7 @@
     <!-- ProfileFragment -->
     <string name="title_profile">Perfil</string>
     <string name="last_training">Último entrenamiento</string>
-    <string name="warm_up">Warm up</string>
+    <string name="warm_up">Calentamiento</string>
     <string name="time_lt">Tiempo</string>
     <string name="distance_lt">Distancia</string>
     <string name="rate_lt">Media</string>
@@ -147,4 +147,10 @@
     <string name="show_profile">Ver perfil</string>
     <string name="add_training">Añadir entrenamiento</string>
     <string name="add_competition">Añadir competición</string>
+
+    <string name="serie_with_hurdles">¿Con vallas?</string>
+    <string name="shoes">Zapatillas:</string>
+    <string name="normal_shoe">Normales</string>
+    <string name="flying_shoe">Voladoras</string>
+    <string name="spike_shoe">Clavos</string>
 </resources>

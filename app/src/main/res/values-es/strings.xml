@@ -65,6 +65,11 @@
     <!-- DialogAddSeries -->
     <string name="distance_series">Distancia *</string>
     <string name="time_series">Tiempo *</string>
+    <string name="serie_with_hurdles">¿Con vallas?</string>
+    <string name="shoes">Zapatillas:</string>
+    <string name="normal_shoe">Normales</string>
+    <string name="flying_shoe">Voladoras</string>
+    <string name="spike_shoe">Clavos</string>
     <!-- FragmentNumberPicker -->
     <string name="no_time">Sin marca</string>
     <!-- ProfileFragment -->
@@ -88,6 +93,7 @@
     <string name="type_item_cuestas">Tipo</string>
     <string name="add_serie">Añadir serie</string>
     <string name="serie_added">Serie añadida</string>
+    <string name="serie_updated">Serie actualizada</string>
     <string name="wrong_time_format">Formato de tiempo incorrecto</string>
     <string name="add_cuestas">Añadir cuestas</string>
     <string name="cuesta_added">Cuesta añadida</string>
@@ -147,10 +153,4 @@
     <string name="show_profile">Ver perfil</string>
     <string name="add_training">Añadir entrenamiento</string>
     <string name="add_competition">Añadir competición</string>
-
-    <string name="serie_with_hurdles">¿Con vallas?</string>
-    <string name="shoes">Zapatillas:</string>
-    <string name="normal_shoe">Normales</string>
-    <string name="flying_shoe">Voladoras</string>
-    <string name="spike_shoe">Clavos</string>
 </resources>

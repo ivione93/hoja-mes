@@ -65,6 +65,11 @@
     <!-- DialogAddSeries -->
     <string name="distance_series">Distance *</string>
     <string name="time_series">Time *</string>
+    <string name="serie_with_hurdles">With hurdles?</string>
+    <string name="shoes">Shoes:</string>
+    <string name="normal_shoe">Normal</string>
+    <string name="flying_shoe">Flying</string>
+    <string name="spike_shoe">Spikes</string>
     <!-- FragmentNumberPicker -->
     <string name="no_time">No time</string>
     <!-- ProfileFragment -->
@@ -88,6 +93,7 @@
     <string name="type_item_cuestas">Type</string>
     <string name="add_serie">Add serie</string>
     <string name="serie_added">Serie added</string>
+    <string name="serie_updated">Serie updated</string>
     <string name="wrong_time_format">Wrong time format</string>
     <string name="add_cuestas">Add cuestas</string>
     <string name="cuesta_added">Cuesta added</string>
@@ -147,10 +153,4 @@
     <string name="show_profile">Show profile</string>
     <string name="add_training">Add training</string>
     <string name="add_competition">Add competition</string>
-
-    <string name="serie_with_hurdles">With hurdles?</string>
-    <string name="shoes">Shoes:</string>
-    <string name="normal_shoe">Normal</string>
-    <string name="flying_shoe">Flying</string>
-    <string name="spike_shoe">Spikes</string>
 </resources>

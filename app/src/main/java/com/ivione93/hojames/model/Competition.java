@@ -11,6 +11,7 @@ public class Competition {
     public String place;
     public String track;
     public String result;
+    public String type;
 
     public String color;
     public String start;

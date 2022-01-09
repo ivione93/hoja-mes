@@ -57,7 +57,7 @@ public class ProfileFragment extends Fragment {
 
     CircleImageView photoProfile;
     TextView emailTextView, nombreEditText, birthEditText;
-    TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result;
+    TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result, last_competition_type;
     TextView title_training, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
     TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
     TextView last_competition_track_text;
@@ -208,6 +208,7 @@ public class ProfileFragment extends Fragment {
         last_competition_date = root.findViewById(R.id.last_competition_date);
         last_competition_track = root.findViewById(R.id.last_competition_track);
         last_competition_result = root.findViewById(R.id.last_competition_result);
+        last_competition_type = root.findViewById(R.id.last_competition_type);
 
         title_training = root.findViewById(R.id.title_training);
         last_training_date = root.findViewById(R.id.last_training_date);
@@ -270,6 +271,9 @@ public class ProfileFragment extends Fragment {
                             last_competition_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date"), getString(R.string.format_date)));
                             last_competition_track.setText(documentSnapshot.get("track").toString());
                             last_competition_result.setText(Utils.getFormattedResult(documentSnapshot.get("result").toString()));
+                            if(documentSnapshot.get("type") != null) {
+                                last_competition_type.setText(documentSnapshot.get("type").toString());
+                            }
                         } else {
                             last_competition_name.setText(R.string.no_results);
                         }

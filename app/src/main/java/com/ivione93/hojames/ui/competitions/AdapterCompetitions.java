@@ -35,6 +35,9 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
         holder.track.setText(model.track);
         holder.result.setText(Utils.getFormattedResult(model.result));
         holder.date.setText(Utils.toString(model.date, holder.itemView.getResources().getString(R.string.format_date)));
+        if (model.type != null) {
+            holder.type.setText(model.type);
+        }
 
         holder.competitionLayout.setOnClickListener(v -> {
             Intent newCompetition = new Intent(holder.itemView.getContext(), NewCompetitionActivity.class);
@@ -79,7 +82,7 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
 
     class CompetitionViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name, place, track, result, date;
+        TextView name, place, track, result, date, type;
         ImageButton ibOptionsCompetition;
 
         ConstraintLayout competitionLayout;
@@ -91,6 +94,7 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
             track = itemView.findViewById(R.id.surnameText);
             result = itemView.findViewById(R.id.resultText);
             date = itemView.findViewById(R.id.dateText);
+            type = itemView.findViewById(R.id.typeText);
             ibOptionsCompetition = itemView.findViewById(R.id.ibOptionsCompetition);
 
             competitionLayout = itemView.findViewById(R.id.competitionLayout);

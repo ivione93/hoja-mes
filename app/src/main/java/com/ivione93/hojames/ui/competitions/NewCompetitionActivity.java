@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,6 +43,8 @@ public class NewCompetitionActivity extends AppCompatActivity {
     TextInputLayout placeText, competitionNameText, trackText, resultText;
     TextInputEditText editTextResult;
     EditText dateText;
+    RadioGroup radioGroupTypeCompetition;
+    RadioButton radioPC, radioAL, radioCross, radioRoad;
 
     String email, id;
     Boolean isNew;
@@ -119,7 +123,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
 
         placeText = findViewById(R.id.placeText);
         competitionNameText = findViewById(R.id.competitionNameText);
-        trackText = findViewById(R.id.surnameText);
+        trackText = findViewById(R.id.trackText);
         resultText = findViewById(R.id.resultText);
         editTextResult = findViewById(R.id.editTextResult);
         placeText = findViewById(R.id.placeText);
@@ -143,6 +147,12 @@ public class NewCompetitionActivity extends AppCompatActivity {
         } else {
             getSupportActionBar().setTitle(R.string.title_activity_new_competition);
         }
+
+        radioGroupTypeCompetition = findViewById(R.id.radioGroupTypeCompetition);
+        radioPC = findViewById(R.id.radio_pc);
+        radioAL = findViewById(R.id.radio_al);
+        radioCross = findViewById(R.id.radio_cross);
+        radioRoad = findViewById(R.id.radio_road);
     }
 
     public AlertDialog selectTimePicker() {
@@ -215,6 +225,20 @@ public class NewCompetitionActivity extends AppCompatActivity {
                     trackText.getEditText().setText(task.getResult().getDocuments().get(0).get("track").toString());
                     resultText.getEditText().setText(task.getResult().getDocuments().get(0).get("result").toString());
                     dateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date"), getString(R.string.format_date)));
+                    if(task.getResult().getDocuments().get(0).get("type") != null) {
+                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.type_pc))) {
+                            radioPC.setChecked(true);
+                        }
+                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.type_al))) {
+                            radioAL.setChecked(true);
+                        }
+                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.type_cross))) {
+                            radioCross.setChecked(true);
+                        }
+                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.type_road))) {
+                            radioRoad.setChecked(true);
+                        }
+                    }
                 }
             }
         });
@@ -226,6 +250,17 @@ public class NewCompetitionActivity extends AppCompatActivity {
         String track = trackText.getEditText().getText().toString();
         String result = resultText.getEditText().getText().toString();
         String date = dateText.getText().toString();
+        String typeCompetition = null;
+
+        if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioPC.getId()) {
+            typeCompetition = getString(R.string.type_pc);
+        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioAL.getId()) {
+            typeCompetition = getString(R.string.type_al);
+        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioCross.getId()) {
+            typeCompetition = getString(R.string.type_cross);
+        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioRoad.getId()) {
+            typeCompetition = getString(R.string.type_road);
+        }
 
         if (validateNewCompetition(place, competitionName, track, result, date)) {
             Map<String,Object> competition = new HashMap<>();
@@ -244,6 +279,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
             competition.put("date", Utils.toTimestamp(date, getString(R.string.format_date)));
             competition.put("track", track);
             competition.put("result", result);
+            competition.put("type", typeCompetition);
             // Firebase calendar
             competition.put("start", Utils.toStringCalendar(Utils.toTimestamp(date, getString(R.string.format_date))));
             competition.put("end", Utils.toStringCalendar(Utils.toTimestamp(date, getString(R.string.format_date))));

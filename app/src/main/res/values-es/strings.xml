@@ -48,6 +48,10 @@
     <string name="date">Fecha *</string>
     <string name="track">Prueba *</string>
     <string name="result">Marca *</string>
+    <string name="type_pc">PC</string>
+    <string name="type_al">AL</string>
+    <string name="type_cross">Cross</string>
+    <string name="type_road">Ruta</string>
     <!-- ViewTrainingActivity -->
     <string name="title_activity_new_training">Nuevo entrenamiento</string>
     <string name="title_training">Entrenamiento</string>

@@ -8,7 +8,7 @@
     tools:context=".ui.competitions.NewCompetitionActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/competitionNameText"
+        android:id="@+id/dateTextText"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,15 +17,18 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="@string/championship"
+        android:hint="@string/date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextCompetitionName"
+            android:id="@+id/dateText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:inputType="none"
+            android:textIsSelectable="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -41,7 +44,7 @@
         android:hint="@string/place"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/competitionNameText">
+        app:layout_constraintTop_toBottomOf="@+id/dateTextText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPlace"
@@ -50,7 +53,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dateTextText"
+        android:id="@+id/competitionNameText"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,34 +62,63 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:hint="@string/date"
+        android:hint="@string/championship"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/placeText">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dateText"
+            android:id="@+id/editTextCompetitionName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:inputType="none"
-            android:textIsSelectable="false"/>
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <RadioGroup
+        android:id="@+id/radioGroupTypeCompetition"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/competitionNameText"
+        app:layout_constraintStart_toStartOf="@+id/competitionNameText"
+        app:layout_constraintTop_toBottomOf="@+id/competitionNameText">
+
+        <RadioButton
+            android:id="@+id/radio_pc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/type_pc" />
+
+        <RadioButton
+            android:id="@+id/radio_al"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/type_al" />
+
+        <RadioButton
+            android:id="@+id/radio_cross"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/type_cross" />
+
+        <RadioButton
+            android:id="@+id/radio_road"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/type_road" />
+    </RadioGroup>
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/surnameText"
+        android:id="@+id/trackText"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
         android:hint="@string/track"
         app:layout_constraintEnd_toStartOf="@+id/resultText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateTextText">
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupTypeCompetition">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTrack"
@@ -105,8 +137,8 @@
         android:layout_marginRight="8dp"
         android:hint="@string/result"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/surnameText"
-        app:layout_constraintTop_toTopOf="@+id/surnameText">
+        app:layout_constraintStart_toEndOf="@+id/trackText"
+        app:layout_constraintTop_toTopOf="@+id/trackText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextResult"

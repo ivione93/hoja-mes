@@ -61,7 +61,7 @@ public class ProfileFragment extends Fragment {
     TextView title_training, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
     TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
     TextView last_competition_track_text;
-    ImageView mapImageView;
+    ImageView mapImageView, imageTypeCompetition;
     ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorFartlek, ivIndicadorGym, ivIndicadorObserves;
 
     CardView lastTrainingCV, lastCompetitionCV;
@@ -209,6 +209,7 @@ public class ProfileFragment extends Fragment {
         last_competition_track = root.findViewById(R.id.last_competition_track);
         last_competition_result = root.findViewById(R.id.last_competition_result);
         last_competition_type = root.findViewById(R.id.last_competition_type);
+        imageTypeCompetition = root.findViewById(R.id.imageTypeCompetition);
 
         title_training = root.findViewById(R.id.title_training);
         last_training_date = root.findViewById(R.id.last_training_date);
@@ -273,6 +274,18 @@ public class ProfileFragment extends Fragment {
                             last_competition_result.setText(Utils.getFormattedResult(documentSnapshot.get("result").toString()));
                             if(documentSnapshot.get("type") != null) {
                                 last_competition_type.setText(documentSnapshot.get("type").toString());
+                                if (documentSnapshot.get("type").toString().equals(getString(R.string.type_pc))) {
+                                    imageTypeCompetition.setBackground(getResources().getDrawable(R.drawable.bg_pista));
+                                }
+                                if (documentSnapshot.get("type").toString().equals(getString(R.string.type_al))) {
+                                    imageTypeCompetition.setBackground(getResources().getDrawable(R.drawable.bg_pista));
+                                }
+                                if (documentSnapshot.get("type").toString().equals(getString(R.string.type_cross))) {
+                                    imageTypeCompetition.setBackground(getResources().getDrawable(R.drawable.bg_cross));
+                                }
+                                if (documentSnapshot.get("type").toString().equals(getString(R.string.type_road))) {
+                                    imageTypeCompetition.setBackground(getResources().getDrawable(R.drawable.bg_road));
+                                }
                             }
                         } else {
                             last_competition_name.setText(R.string.no_results);

@@ -1,11 +1,13 @@
 package com.ivione93.hojames.ui.competitions;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -37,6 +39,18 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
         holder.date.setText(Utils.toString(model.date, holder.itemView.getResources().getString(R.string.format_date)));
         if (model.type != null) {
             holder.type.setText(model.type);
+            if(model.type.equals(holder.itemView.getContext().getString(R.string.type_pc))) {
+                holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_pista));
+            }
+            if(model.type.equals(holder.itemView.getContext().getString(R.string.type_al))) {
+                holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_pista));
+            }
+            if(model.type.equals(holder.itemView.getContext().getString(R.string.type_cross))) {
+                holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_cross));
+            }
+            if(model.type.equals(holder.itemView.getContext().getString(R.string.type_road))) {
+                holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_road));
+            }
         }
 
         holder.competitionLayout.setOnClickListener(v -> {
@@ -83,6 +97,7 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
     class CompetitionViewHolder extends RecyclerView.ViewHolder {
 
         TextView name, place, track, result, date, type;
+        ImageView imageTypeCompetition;
         ImageButton ibOptionsCompetition;
 
         ConstraintLayout competitionLayout;
@@ -96,6 +111,7 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
             date = itemView.findViewById(R.id.dateText);
             type = itemView.findViewById(R.id.typeText);
             ibOptionsCompetition = itemView.findViewById(R.id.ibOptionsCompetition);
+            imageTypeCompetition = itemView.findViewById(R.id.imageTypeCompetition);
 
             competitionLayout = itemView.findViewById(R.id.competitionLayout);
         }

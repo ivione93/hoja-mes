@@ -10,18 +10,30 @@
     android:layout_marginBottom="4dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    app:cardCornerRadius="15dp" >
+    app:cardCornerRadius="15dp">
 
     <FrameLayout
         android:background="@color/colorPrimary"
         android:layout_width="5dp"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/competitionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/card_view_competition_border">
+
+        <ImageView
+            android:id="@+id/imageTypeCompetition"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:backgroundTint="#261E88E5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/divider4"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imageView3"

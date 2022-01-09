@@ -90,6 +90,16 @@
                 android:background="@drawable/card_view_training_border">
 
                 <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/ic_chrono"
+                    android:backgroundTint="#26000000"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorFartlek"
+                    app:layout_constraintEnd_toEndOf="@+id/title_partial"
+                    app:layout_constraintStart_toEndOf="@+id/title_distance"
+                    app:layout_constraintTop_toTopOf="@+id/title_training" />
+
+                <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -364,6 +374,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_view_competition_border">
+
+                <ImageView
+                    android:id="@+id/imageTypeCompetition"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/bg_pista"
+                    android:backgroundTint="#261E88E5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/divider"
+                    app:layout_constraintTop_toTopOf="@+id/divider" />
 
                 <ImageView
                     android:id="@+id/imageView2"

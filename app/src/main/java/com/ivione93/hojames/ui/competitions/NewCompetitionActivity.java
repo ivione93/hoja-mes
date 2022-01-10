@@ -226,16 +226,16 @@ public class NewCompetitionActivity extends AppCompatActivity {
                     resultText.getEditText().setText(task.getResult().getDocuments().get(0).get("result").toString());
                     dateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date"), getString(R.string.format_date)));
                     if(task.getResult().getDocuments().get(0).get("type") != null) {
-                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.type_pc))) {
+                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_pc))) {
                             radioPC.setChecked(true);
                         }
-                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.type_al))) {
+                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_al))) {
                             radioAL.setChecked(true);
                         }
-                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.type_cross))) {
+                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_cross))) {
                             radioCross.setChecked(true);
                         }
-                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.type_road))) {
+                        if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_road))) {
                             radioRoad.setChecked(true);
                         }
                     }
@@ -253,13 +253,13 @@ public class NewCompetitionActivity extends AppCompatActivity {
         String typeCompetition = null;
 
         if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioPC.getId()) {
-            typeCompetition = getString(R.string.type_pc);
+            typeCompetition = getString(R.string.bd_pc);
         } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioAL.getId()) {
-            typeCompetition = getString(R.string.type_al);
+            typeCompetition = getString(R.string.bd_al);
         } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioCross.getId()) {
-            typeCompetition = getString(R.string.type_cross);
+            typeCompetition = getString(R.string.bd_cross);
         } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioRoad.getId()) {
-            typeCompetition = getString(R.string.type_road);
+            typeCompetition = getString(R.string.bd_road);
         }
 
         if (validateNewCompetition(place, competitionName, track, result, date)) {

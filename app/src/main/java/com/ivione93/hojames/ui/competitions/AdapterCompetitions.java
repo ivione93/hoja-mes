@@ -39,16 +39,16 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
         holder.date.setText(Utils.toString(model.date, holder.itemView.getResources().getString(R.string.format_date)));
         if (model.type != null) {
             holder.type.setText(model.type);
-            if(model.type.equals(holder.itemView.getContext().getString(R.string.type_pc))) {
+            if(model.type.equals(holder.itemView.getContext().getString(R.string.bd_pc))) {
                 holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_pista));
             }
-            if(model.type.equals(holder.itemView.getContext().getString(R.string.type_al))) {
+            if(model.type.equals(holder.itemView.getContext().getString(R.string.bd_al))) {
                 holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_pista));
             }
-            if(model.type.equals(holder.itemView.getContext().getString(R.string.type_cross))) {
+            if(model.type.equals(holder.itemView.getContext().getString(R.string.bd_cross))) {
                 holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_cross));
             }
-            if(model.type.equals(holder.itemView.getContext().getString(R.string.type_road))) {
+            if(model.type.equals(holder.itemView.getContext().getString(R.string.bd_road))) {
                 holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_road));
             }
         }

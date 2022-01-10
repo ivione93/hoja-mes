@@ -48,6 +48,7 @@
     <string name="date">Fecha *</string>
     <string name="track">Prueba *</string>
     <string name="result">Marca *</string>
+    <string name="tv_type_competition">Tipo de competición:</string>
     <string name="type_pc">PC</string>
     <string name="type_al">AL</string>
     <string name="type_cross">Cross</string>

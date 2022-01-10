@@ -73,6 +73,17 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Tipo de competición:"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintStart_toStartOf="@+id/competitionNameText"
+        app:layout_constraintTop_toBottomOf="@+id/competitionNameText" />
+
     <RadioGroup
         android:id="@+id/radioGroupTypeCompetition"
         android:layout_width="0dp"
@@ -80,32 +91,36 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/competitionNameText"
         app:layout_constraintStart_toStartOf="@+id/competitionNameText"
-        app:layout_constraintTop_toBottomOf="@+id/competitionNameText">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <RadioButton
             android:id="@+id/radio_pc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="@string/type_pc" />
+            android:text="@string/type_pc"
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/radio_al"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/type_al" />
+            android:text="@string/type_al"
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/radio_cross"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/type_cross" />
+            android:text="@string/type_cross"
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/radio_road"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/type_road" />
+            android:text="@string/type_road"
+            android:textSize="16sp" />
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -114,6 +129,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="2dp"
         android:hint="@string/track"
         app:layout_constraintEnd_toStartOf="@+id/resultText"

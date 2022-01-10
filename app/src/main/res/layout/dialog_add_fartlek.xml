@@ -12,7 +12,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="Fartlek *"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/fartlekTextInput"
         app:layout_constraintStart_toStartOf="parent"

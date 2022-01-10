@@ -13,7 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="@string/distance_series"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/distance_seriesTextInput"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/serie_with_hurdles"
+        android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="@+id/tvDistance"
         app:layout_constraintTop_toBottomOf="@+id/distance_seriesTextInput" />
@@ -54,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/time_series"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/time_seriesTextInput"
         app:layout_constraintStart_toStartOf="@+id/tvDistance"
@@ -85,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/shoes"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="@+id/time_seriesTextInput"
         app:layout_constraintHorizontal_bias="0.0"
@@ -107,6 +108,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="@string/normal_shoe"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"/>
 
         <RadioButton
@@ -114,6 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/flying_shoe"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"/>
 
         <RadioButton
@@ -121,6 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spike_shoe"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"/>
     </RadioGroup>
 

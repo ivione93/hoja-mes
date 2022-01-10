@@ -14,6 +14,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/times_cuestas"
         android:textSize="18sp"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/repeticionesCuestasTextInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/repeticionesCuestasTextInput" />
@@ -43,6 +44,7 @@
         android:layout_height="wrap_content"
         android:text="@string/type_cuestas"
         android:textSize="18sp"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/tipoCuestasTextInput"
         app:layout_constraintStart_toStartOf="@+id/tvRepeticiones"
         app:layout_constraintTop_toTopOf="@+id/tipoCuestasTextInput" />

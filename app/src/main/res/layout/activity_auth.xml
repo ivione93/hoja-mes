@@ -94,6 +94,7 @@
             android:clickable="true"
             android:text="@string/recover_pass"
             android:textSize="16dp"
+            android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="@+id/passwordText"
             app:layout_constraintTop_toBottomOf="@+id/passwordText" />
 

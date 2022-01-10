@@ -75,6 +75,7 @@
     <string name="distance_series">Distancia *</string>
     <string name="time_series">Tiempo *</string>
     <string name="serie_with_hurdles">¿Con vallas?</string>
+    <string name="serie_with_drags">¿Con arrastres?</string>
     <string name="shoes">Zapatillas:</string>
     <string name="normal_shoe">Normales</string>
     <string name="flying_shoe">Voladoras</string>
@@ -115,6 +116,8 @@
     <string name="time_mandatory">El tiempo es obligatorio</string>
     <string name="distance_mandatory">La distancia es obligatoria</string>
     <string name="insert_time">Introduce tiempo</string>
+    <string name="ind_hurdles">V</string>
+    <string name="ind_drags">(A)</string>
     <!-- Exit -->
     <string name="exit_title">¿Salir sin guardar?</string>
     <string name="exit_message">Se perderán todos los cambios no guardados</string>

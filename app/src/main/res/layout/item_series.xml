@@ -34,7 +34,7 @@
             android:id="@+id/hurdlesSerie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="V"
+            android:text="@string/ind_hurdles"
             android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="@+id/showDistanceSerie"
@@ -42,14 +42,25 @@
             app:layout_constraintTop_toTopOf="@+id/showDistanceSerie" />
 
         <TextView
+            android:id="@+id/dragsSerie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ind_drags"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/showDistanceSerie"
+            app:layout_constraintStart_toEndOf="@+id/hurdlesSerie"
+            app:layout_constraintTop_toTopOf="@+id/showDistanceSerie" />
+
+        <TextView
             android:id="@+id/shoeSerie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="16sp"
+            android:layout_marginStart="8dp"
             android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/showDistanceSerie"
-            app:layout_constraintStart_toEndOf="@+id/hurdlesSerie"
+            app:layout_constraintStart_toEndOf="@+id/dragsSerie"
             app:layout_constraintTop_toTopOf="@+id/showDistanceSerie"
             tools:text="@string/spike_shoe" />
 

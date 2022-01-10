@@ -10,6 +10,7 @@ public class Series {
     public String time;
     public Timestamp date;
     public boolean hurdles;
+    public boolean drags;
     public String shoes;
 
 }

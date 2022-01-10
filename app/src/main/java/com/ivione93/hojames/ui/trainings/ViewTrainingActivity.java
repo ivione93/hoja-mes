@@ -396,6 +396,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     serie.put("time", dto.time);
                     serie.put("date", training.get("date"));
                     serie.put("hurdles", dto.hurdles);
+                    serie.put("drags", dto.drags);
                     serie.put("shoes", dto.shoes);
 
                     db.collection("series").document(idSerie).set(serie);
@@ -501,6 +502,9 @@ public class ViewTrainingActivity extends AppCompatActivity {
         Switch hurdles = v.findViewById(R.id.swHurdles);
         Boolean withHurdles = hurdles.isChecked();
 
+        Switch drags = v.findViewById(R.id.swDrags);
+        Boolean withDrags = drags.isChecked();
+
         String shoes = null;
         RadioGroup radioGroupShoes = v.findViewById(R.id.radioGroupShoes);
         RadioButton radioNormal, radioFlying, radioSpikes;
@@ -519,7 +523,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
             Toast.makeText(v.getContext(), R.string.all_fields_mandatories, Toast.LENGTH_LONG).show();
         } else {
             if (validateTimeSeries(time)) {
-                SeriesDto seriesDto = new SeriesDto(distance, time, withHurdles, shoes);
+                SeriesDto seriesDto = new SeriesDto(distance, time, withHurdles, withDrags, shoes);
                 listSeriesDto.add(seriesDto);
                 Toast.makeText(v.getContext(), getString(R.string.serie_added), Toast.LENGTH_SHORT).show();
             } else {
@@ -655,14 +659,19 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 rowSeries.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                 TextView textViewDistance = new TextView(this);
                 TextView textHurdles = new TextView(this);
+                TextView textDrags = new TextView(this);
                 TextView textViewTime = new TextView(this);
                 TextView textViewShoe = new TextView(this);
                 textViewDistance.setText(dto.distance + " m");
                 textViewDistance.setTextSize(16);
                 textViewDistance.setGravity(View.FOCUS_LEFT);
                 if(dto.hurdles) {
-                    textHurdles.setText("V");
+                    textHurdles.setText(R.string.ind_hurdles);
                     textHurdles.setTextSize(16);
+                }
+                if(dto.drags) {
+                    textDrags.setText(getResources().getString(R.string.ind_drags) + " - ");
+                    textDrags.setTextSize(16);
                 }
                 textViewTime.setText(dto.time);
                 textViewTime.setTextSize(16);
@@ -672,6 +681,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 textViewShoe.setGravity(View.FOCUS_RIGHT);
                 rowSeries.addView(textViewDistance);
                 rowSeries.addView(textHurdles);
+                rowSeries.addView(textDrags);
                 rowSeries.addView(textViewShoe);
                 rowSeries.addView(textViewTime);
                 tableExtras.addView(rowSeries, new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));

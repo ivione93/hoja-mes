@@ -75,6 +75,7 @@
     <string name="distance_series">Distance *</string>
     <string name="time_series">Time *</string>
     <string name="serie_with_hurdles">With hurdles?</string>
+    <string name="serie_with_drags">With drags?</string>
     <string name="shoes">Shoes:</string>
     <string name="normal_shoe">Normal</string>
     <string name="flying_shoe">Flying</string>
@@ -115,6 +116,8 @@
     <string name="time_mandatory">Time is mandatory</string>
     <string name="distance_mandatory">Distance is mandatory</string>
     <string name="insert_time">Insert time</string>
+    <string name="ind_hurdles">H</string>
+    <string name="ind_drags">(D)</string>
     <!-- Exit -->
     <string name="exit_title">Exit without saving?</string>
     <string name="exit_message">All unsaved changes will be lost</string>

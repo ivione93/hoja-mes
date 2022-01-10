@@ -49,24 +49,30 @@ public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSerie
         } else {
             holder.hurdlesSerie.setVisibility(View.INVISIBLE);
         }
+        if(model.drags) {
+            holder.dragsSerie.setVisibility(View.VISIBLE);
+        } else {
+            holder.dragsSerie.setVisibility(View.INVISIBLE);
+        }
         holder.showTimeSerie.setText(Utils.getFormattedResult(model.time));
         holder.shoeSerie.setText(model.shoes);
 
         holder.cvSeries.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-            if (model.hurdles) {
-                if (model.shoes != null) {
-                    builder.setTitle("Editar serie: \n" + model.distance + " mV - " + model.time + " - " + model.shoes);
-                } else {
-                    builder.setTitle("Editar serie: \n" + model.distance + " mV - " + model.time);
-                }
+            String title = "Editar serie: \n";
+            if (model.hurdles && model.drags) {
+                    title = title + model.distance + " mV (A) - " + model.time;
+            } else if (model.hurdles) {
+                title = title + model.distance + "mV - " + model.time;
+            } else if (model.drags) {
+                title = title + model.distance + "m (A) - " + model.time;
             } else {
-                if (model.shoes != null) {
-                    builder.setTitle("Editar serie: \n" + model.distance + " m - " + model.time + " - " + model.shoes);
-                } else {
-                    builder.setTitle("Editar serie: \n" + model.distance + " m - " + model.time);
-                }
+                title = title + model.distance + "m - " + model.time;
             }
+            if (model.shoes != null) {
+                title = title + " - " + model.shoes;
+            }
+            builder.setTitle(title);
             builder.setView(R.layout.dialog_add_series);
             builder.setPositiveButton(R.string.save, (dialog, which) -> updateSerie((AlertDialog) dialog, model, v));
             builder.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss());
@@ -93,6 +99,7 @@ public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSerie
         distanceSeries = ((AlertDialog) dialog).findViewById(R.id.distance_series);
         timeSeries = ((AlertDialog) dialog).findViewById(R.id.time_series);
         Switch hurdles = ((AlertDialog) dialog).findViewById(R.id.swHurdles);
+        Switch drags = ((AlertDialog) dialog).findViewById(R.id.swDrags);
 
         if (distanceSeries.getText().toString().equals("") || timeSeries.getText().toString().equals("")) {
             Toast.makeText(view.getContext(), R.string.all_fields_mandatories, Toast.LENGTH_LONG).show();
@@ -105,6 +112,7 @@ public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSerie
                 serie.put("time", timeSeries.getText().toString());
                 serie.put("date", model.date);
                 serie.put("hurdles", hurdles.isChecked());
+                serie.put("drags", drags.isChecked());
 
                 String shoes = null;
                 RadioGroup radioGroupShoes = ((AlertDialog) dialog).findViewById(R.id.radioGroupShoes);
@@ -144,7 +152,7 @@ public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSerie
     class SeriesViewHolder extends RecyclerView.ViewHolder {
 
         CardView cvSeries;
-        TextView showDistanceSerie, showTimeSerie, shoeSerie, hurdlesSerie;
+        TextView showDistanceSerie, showTimeSerie, shoeSerie, hurdlesSerie, dragsSerie;
         ImageButton ibDeleteSerie;
 
         public SeriesViewHolder(@NonNull View itemView) {
@@ -154,6 +162,7 @@ public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSerie
             showTimeSerie = itemView.findViewById(R.id.showTimeSerie);
             shoeSerie = itemView.findViewById(R.id.shoeSerie);
             hurdlesSerie = itemView.findViewById(R.id.hurdlesSerie);
+            dragsSerie = itemView.findViewById(R.id.dragsSerie);
             ibDeleteSerie = itemView.findViewById(R.id.ibDeleteSerie);
         }
     }

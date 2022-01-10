@@ -26,12 +26,12 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/ic_chrono"
+            android:background="@drawable/bg_training"
             android:backgroundTint="#1A000000"
-            app:layout_constraintBottom_toBottomOf="@+id/tvIndicadorGym"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/title_partial"
-            app:layout_constraintStart_toEndOf="@+id/title_distance"
-            app:layout_constraintTop_toTopOf="@+id/title_training" />
+            app:layout_constraintStart_toStartOf="@+id/title_distance"
+            app:layout_constraintTop_toTopOf="@+id/divider3" />
 
         <ImageView
             android:id="@+id/imageView3"

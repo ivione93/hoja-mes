@@ -13,7 +13,7 @@
     app:cardCornerRadius="15dp">
 
     <FrameLayout
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorText"
         android:layout_width="5dp"
         android:layout_height="match_parent"/>
 
@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/bg_training"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorText"
             android:alpha="0.20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/title_partial"
@@ -41,7 +41,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
-            app:tint="@color/colorPrimaryDark"
+            app:tint="@color/colorText"
             android:padding="4dp"
             android:src="@drawable/ic_trainings"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
             android:maxLines="1"
             android:textSize="18dp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorText"
             android:fontFamily="sans-serif-smallcaps"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -66,7 +66,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@null"
-            app:tint="@color/colorPrimaryDark"
+            app:tint="@color/colorText"
             android:onClick="showPopup"
             android:src="@drawable/ic_menu"
             app:layout_constraintEnd_toEndOf="parent"
@@ -285,7 +285,7 @@
             android:id="@+id/divider3"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorText"
             app:layout_constraintBottom_toTopOf="@+id/title_training"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

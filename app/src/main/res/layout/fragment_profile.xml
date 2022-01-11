@@ -18,7 +18,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_profile"
-            app:civ_border_color="@color/black"
+            app:civ_border_color="@color/colorPrimaryDark"
             app:civ_border_width="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +84,7 @@
             <FrameLayout
                 android:layout_width="5dp"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@color/colorText" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -95,7 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/bg_training"
-                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:backgroundTint="@color/colorText"
                     android:alpha="0.20"
                     app:layout_constraintBottom_toBottomOf="@+id/ivIndicadorFartlek"
                     app:layout_constraintEnd_toEndOf="@+id/title_partial"
@@ -114,7 +114,7 @@
                     android:src="@drawable/ic_trainings"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/colorPrimaryDark" />
+                    app:tint="@color/colorText" />
 
                 <TextView
                     android:id="@+id/title_last_training"
@@ -122,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-smallcaps"
                     android:text="@string/last_training"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorText"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -135,7 +135,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginLeft="4dp"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorText"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/title_last_training"
@@ -351,7 +351,7 @@
                     android:id="@+id/divider2"
                     android:layout_width="wrap_content"
                     android:layout_height="1dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@color/colorText"
                     app:layout_constraintBottom_toTopOf="@+id/title_training"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -12,4 +12,5 @@
     <color name="colorPrimaryDark">#212B39</color>
     <color name="colorAccent">#F57C00</color>
     <color name="colorDanger">#F44336</color>
+    <color name="colorText">#426483</color>
 </resources>

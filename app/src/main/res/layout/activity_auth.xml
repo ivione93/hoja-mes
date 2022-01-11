@@ -42,7 +42,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -51,6 +51,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/email"
+            app:startIconDrawable="@drawable/ic_email"
+            app:startIconTint="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInicioSesion">
@@ -59,12 +61,12 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -72,7 +74,10 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/pass"
+            app:startIconDrawable="@drawable/ic_lock"
+            app:startIconTint="@color/colorPrimaryDark"
             app:endIconMode="password_toggle"
+            app:endIconTint="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailText">

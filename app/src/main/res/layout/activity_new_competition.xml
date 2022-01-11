@@ -9,7 +9,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dateTextText"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/outlinedTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/placeText"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/outlinedTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -54,7 +54,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/competitionNameText"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/outlinedTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -125,7 +125,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/trackText"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/outlinedTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -144,7 +144,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/resultText"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/outlinedTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"

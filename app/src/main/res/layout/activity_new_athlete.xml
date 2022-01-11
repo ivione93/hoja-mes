@@ -27,7 +27,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nombreText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_marginStart="8dp"
@@ -50,7 +50,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/apellidosText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_marginStart="8dp"
@@ -73,7 +73,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/birthText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_marginStart="8dp"
@@ -98,7 +98,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_marginStart="8dp"
@@ -116,12 +116,12 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

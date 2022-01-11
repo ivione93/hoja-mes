@@ -36,7 +36,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameEditProfile"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -57,7 +57,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/surnameEditProfile"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -78,7 +78,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/birthEditProfileText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -248,7 +248,7 @@
                     android:id="@+id/divider5"
                     android:layout_width="1dp"
                     android:layout_height="100dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@color/colorText"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -8,11 +8,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -71,14 +74,15 @@ public class ViewTrainingActivity extends AppCompatActivity {
     private CollectionReference gym = db.collection("gym");
     private AdapterGym adapterGym;
 
-    TextInputLayout trainingTimeText, trainingDistanceText, trainingObservesText;
+    TextInputLayout trainingTimeText, trainingDistanceText, trainingObservesText, trainingPartialText;
     TextInputEditText editTextTrainingTime;
     EditText trainingDateText;
+    Spinner spinnerTypes;
     Button btnAddSeries, btnAddCuestas, btnAddFartlek, btnAddGym, btnShowExtras;
     RecyclerView rvSeries, rvCuestas, rvFartlek, rvGym;
     TabLayout tabLayout;
 
-    String email, dateSelected, id;
+    String email, dateSelected, id, typeTrainingSelected;
     Boolean isNew;
 
     List<SeriesDto> listSeriesDto;
@@ -202,8 +206,38 @@ public class ViewTrainingActivity extends AppCompatActivity {
         trainingTimeText = findViewById(R.id.trainingTimeText);
         trainingDistanceText = findViewById(R.id.trainingDistanceText);
         trainingObservesText = findViewById(R.id.trainingObservesText);
+        trainingPartialText = findViewById(R.id.trainingPartialText);
         editTextTrainingTime = findViewById(R.id.editTextTrainingTime);
         editTextTrainingTime.setOnClickListener(v -> selectTimePicker().show());
+
+        spinnerTypes = findViewById(R.id.spinnerTypes);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.trainning_types, R.layout.support_simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTypes.setAdapter(adapter);
+        spinnerTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    typeTrainingSelected = "Carrera";
+                } else if (position == 1) {
+                    typeTrainingSelected = "Carrera en cinta";
+                }
+                else if (position == 2) {
+                    typeTrainingSelected = "Elíptica";
+                }
+                else if (position == 3) {
+                    typeTrainingSelected = "Ciclismo";
+                }
+                else if (position == 4) {
+                    typeTrainingSelected = "Ciclismo en sala";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                typeTrainingSelected = "Carrera";
+            }
+        });
 
         btnAddSeries = findViewById(R.id.btnAddSeries);
         btnAddCuestas = findViewById(R.id.btnAddCuestas);
@@ -359,7 +393,13 @@ public class ViewTrainingActivity extends AppCompatActivity {
         }
 
         if (validateNewTraining(date, time, distance)) {
-            String partial = Utils.calculatePartial(time, distance);
+            String partial = "-";
+            if (typeTrainingSelected.equals("Carrera") || typeTrainingSelected.equals("Carrera en cinta") || typeTrainingSelected.equals("Elíptica")) {
+                partial = Utils.calculatePartial(time, distance);
+            } else {
+                partial = Utils.calculatePartialCycling(time, distance);
+            }
+
             Map<String,Object> training = new HashMap<>();
             if (isNew) {
                 id = UUID.randomUUID().toString();
@@ -373,6 +413,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
             training.put("id", id);
             training.put("email", email);
             training.put("date", Utils.toTimestamp(date, getString(R.string.format_date)));
+            training.put("type", typeTrainingSelected);
             training.put("time", time);
             training.put("distance", distance);
             training.put("partial", partial);
@@ -462,6 +503,29 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     if (task.getResult().getDocuments().get(0).get("observes") != null) {
                         trainingObservesText.getEditText().setText(task.getResult().getDocuments().get(0).get("observes").toString());
                     }
+                    String partialFormat = " /km";
+                    if (task.getResult().getDocuments().get(0).get("type") != null) {
+                        if (task.getResult().getDocuments().get(0).get("type").equals("Carrera")) {
+                            spinnerTypes.setSelection(0);
+                            partialFormat = " /km";
+                        } else if (task.getResult().getDocuments().get(0).get("type").equals("Carrera en cinta")) {
+                            spinnerTypes.setSelection(1);
+                            partialFormat = " /km";
+                        } else if (task.getResult().getDocuments().get(0).get("type").equals("Elíptica")) {
+                            spinnerTypes.setSelection(2);
+                            partialFormat = " km/h";
+                        } else if (task.getResult().getDocuments().get(0).get("type").equals("Ciclismo")) {
+                            spinnerTypes.setSelection(3);
+                            partialFormat = " km/h";
+                        } else if (task.getResult().getDocuments().get(0).get("type").equals("Ciclismo en sala")) {
+                            spinnerTypes.setSelection(4);
+                            partialFormat = " km/h";
+                        }
+                    } else {
+                        spinnerTypes.setSelection(0);
+                        partialFormat = " /km";
+                    }
+                    trainingPartialText.getEditText().setText(task.getResult().getDocuments().get(0).get("partial").toString() + partialFormat);
                 }
             }
         });

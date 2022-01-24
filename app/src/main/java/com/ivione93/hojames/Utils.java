@@ -74,6 +74,16 @@ public class Utils {
         return sRitmo;
     }
 
+    public static String calculatePartialCycling(String time, String distance) {
+        String formattedTime = convertTime(time); // minutos
+        Float t = Float.parseFloat(formattedTime) / 60;
+        Float d = Float.parseFloat(distance);
+        Float v = d / t;
+        BigDecimal result = new BigDecimal(v).setScale(1, RoundingMode.UP);
+
+        return String.valueOf(result);
+    }
+
     public static String convertTime(String time) {
         String formattedTime;
         if (time.startsWith("00")) {

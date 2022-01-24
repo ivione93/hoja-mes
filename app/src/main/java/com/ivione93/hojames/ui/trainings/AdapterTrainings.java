@@ -55,10 +55,23 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
             newTraining.putExtra("email", listTrainings.get(position).email);
             holder.itemView.getContext().startActivity(newTraining);
         });
+
+        String partialFormat = " /km";
+        if (listTrainings.get(position).type != null) {
+            holder.itemTrainingType.setText(listTrainings.get(position).type);
+            if (listTrainings.get(position).type.equals("Carrera") || listTrainings.get(position).type.equals("Carrera en cinta") || listTrainings.get(position).type.equals("Elíptica")) {
+                partialFormat = " /km";
+            } else {
+                partialFormat = " km/h";
+            }
+        } else {
+            holder.itemTrainingType.setText("Carrera");
+        }
+
         holder.itemTrainingDate.setText(Utils.toString(listTrainings.get(position).date, holder.itemView.getResources().getString(R.string.format_date)));
         holder.itemTrainingTime.setText(Utils.getFormattedTime(listTrainings.get(position).time) + " min");
         holder.itemTrainingDistance.setText(listTrainings.get(position).distance + " km");
-        holder.itemTrainingPartial.setText(listTrainings.get(position).partial + " /km");
+        holder.itemTrainingPartial.setText(listTrainings.get(position).partial + partialFormat);
 
         if (listTrainings.get(position).observes == null || listTrainings.get(position).observes.equals("")) {
             holder.ivIndicadorObserves.setVisibility(View.INVISIBLE);
@@ -220,7 +233,7 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
 
     class ViewHolderTraining extends RecyclerView.ViewHolder {
 
-        TextView itemTrainingDate, itemTrainingTime, itemTrainingDistance, itemTrainingPartial;
+        TextView itemTrainingType, itemTrainingDate, itemTrainingTime, itemTrainingDistance, itemTrainingPartial;
         ImageButton ibOptionsTraining;
 
         TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
@@ -230,6 +243,7 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
 
         public ViewHolderTraining(@NonNull View itemView) {
             super(itemView);
+            itemTrainingType = itemView.findViewById(R.id.itemTrainingType);
             itemTrainingDate = itemView.findViewById(R.id.itemTrainingDate);
             itemTrainingTime = itemView.findViewById(R.id.itemTrainingTime);
             itemTrainingDistance = itemView.findViewById(R.id.itemTrainingDistance);

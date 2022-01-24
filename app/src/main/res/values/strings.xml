@@ -62,8 +62,17 @@
     <string name="title_training">Trainings</string>
     <string name="time_training">Time (hh mm:ss) *</string>
     <string name="distance_training">Distance (km) *</string>
+    <string name="partial_training">Partial</string>
     <string name="observes">Observes</string>
     <string name="show_extras">Show extras</string>
+    <string name="type_training">Type of training:</string>
+    <string-array name="trainning_types">
+        <item>Run</item>
+        <item>Indoor run</item>
+        <item>Elliptical</item>
+        <item>Cycling</item>
+        <item>Indoor cycling</item>
+    </string-array>
     <!-- DialogAddCuestas -->
     <string name="times_cuestas">Times *</string>
     <string name="type_cuestas">Type *</string>

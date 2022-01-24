@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment {
     CircleImageView photoProfile;
     TextView emailTextView, nombreEditText, birthEditText;
     TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result, last_competition_type;
-    TextView title_training, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
+    TextView title_type, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
     TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
     TextView last_competition_track_text;
     ImageView mapImageView, imageTypeCompetition;
@@ -67,7 +67,7 @@ public class ProfileFragment extends Fragment {
     CardView lastTrainingCV, lastCompetitionCV;
 
     String email;
-    String dateSelected;
+    String dateSelected, partialFormat;
     Uri photoUrl;
 
     private ProgressDialog progressDialog;
@@ -211,7 +211,7 @@ public class ProfileFragment extends Fragment {
         last_competition_type = root.findViewById(R.id.last_competition_type);
         imageTypeCompetition = root.findViewById(R.id.imageTypeCompetition);
 
-        title_training = root.findViewById(R.id.title_training);
+        title_type = root.findViewById(R.id.title_type);
         last_training_date = root.findViewById(R.id.last_training_date);
         title_time = root.findViewById(R.id.title_time);
         title_distance = root.findViewById(R.id.title_distance);
@@ -322,10 +322,22 @@ public class ProfileFragment extends Fragment {
                                         startActivity(newTraining);
                                     });
 
+                                    String partialFormat = " /km";
+                                    if (documentSnapshot.get("type") != null) {
+                                        title_type.setText(documentSnapshot.get("type").toString());
+                                        if (documentSnapshot.get("type").equals("Carrera") || documentSnapshot.get("type").equals("Carrera en cinta") || documentSnapshot.get("type").equals("Elíptica")) {
+                                            partialFormat = " /km";
+                                        } else {
+                                            partialFormat = " km/h";
+                                        }
+                                    } else {
+                                        title_type.setText("Carrera");
+                                    }
+
                                     last_training_distance.setText(documentSnapshot.get("distance").toString() + " kms");
                                     last_training_time.setText(Utils.getFormattedTime(documentSnapshot.get("time").toString()) + " min");
                                     last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date"), getString(R.string.format_date)));
-                                    last_training_partial.setText(documentSnapshot.get("partial").toString() + " /km");
+                                    last_training_partial.setText(documentSnapshot.get("partial").toString() + partialFormat);
 
                                     if (documentSnapshot.get("observes") == null || documentSnapshot.get("observes").equals("")) {
                                         ivIndicadorObserves.setVisibility(View.INVISIBLE);

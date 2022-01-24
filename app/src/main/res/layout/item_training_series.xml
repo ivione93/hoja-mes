@@ -73,16 +73,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/title_training"
+            android:id="@+id/itemTrainingType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
+            tools:text="@string/warm_up"
+            android:textSize="16sp"
+            android:textStyle="italic"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintStart_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            android:text="@string/warm_up" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
         <TextView
             android:id="@+id/title_time"
@@ -91,16 +92,18 @@
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
+            android:text="@string/time_lt"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_training"
-            android:text="@string/time_lt" />
+            app:layout_constraintTop_toBottomOf="@+id/itemTrainingType" />
 
         <TextView
             android:id="@+id/title_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/distance_lt"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.47"
@@ -114,6 +117,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:text="@string/rate_lt"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
@@ -165,7 +169,7 @@
             android:text="Series"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/title_training"
+            app:layout_constraintStart_toStartOf="@+id/itemTrainingType"
             app:layout_constraintTop_toBottomOf="@+id/itemTrainingTime"
             android:visibility="invisible"/>
 
@@ -276,9 +280,9 @@
             android:layout_marginLeft="8dp"
             android:src="@drawable/ic_observes"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/title_training"
-            app:layout_constraintStart_toEndOf="@+id/title_training"
-            app:layout_constraintTop_toTopOf="@+id/title_training"
+            app:layout_constraintBottom_toBottomOf="@+id/itemTrainingType"
+            app:layout_constraintStart_toEndOf="@+id/itemTrainingType"
+            app:layout_constraintTop_toTopOf="@+id/itemTrainingType"
             app:tint="@color/colorPrimary" />
 
         <View
@@ -286,7 +290,7 @@
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="@color/colorText"
-            app:layout_constraintBottom_toTopOf="@+id/title_training"
+            app:layout_constraintBottom_toTopOf="@+id/itemTrainingType"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemTrainingDate" />

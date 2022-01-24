@@ -6,6 +6,7 @@ public class Training {
 
     public String id;
     public String email;
+    public String type;
     public Timestamp date;
     public String distance;
     public String time;

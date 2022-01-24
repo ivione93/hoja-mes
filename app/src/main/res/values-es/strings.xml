@@ -62,8 +62,17 @@
     <string name="title_training">Entrenamiento</string>
     <string name="time_training">Tiempo (hh mm:ss) *</string>
     <string name="distance_training">Distancia (km) *</string>
+    <string name="partial_training">Media</string>
     <string name="observes">Observaciones</string>
     <string name="show_extras">Ver extras</string>
+    <string name="type_training">Tipo de entrenamiento:</string>
+    <string-array name="trainning_types">
+        <item>Carrera</item>
+        <item>Carrera en cinta</item>
+        <item>Elíptica</item>
+        <item>Ciclismo</item>
+        <item>Ciclismo en sala</item>
+    </string-array>
     <!-- DialogAddCuestas -->
     <string name="times_cuestas">Repeticiones *</string>
     <string name="type_cuestas">Tipo *</string>

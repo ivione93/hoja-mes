@@ -18,7 +18,7 @@
     <string name="name">Nombre *</string>
     <string name="surname">Apellidos *</string>
     <string name="birthday">Fecha nacimiento *</string>
-    <string name="statistics">ESTADÍSTICAS</string>
+    <string name="statistics">Estadísticas totales</string>
     <string name="total_trainings">Total de entrenamientos</string>
     <string name="total_km">Total de kilómetros</string>
     <string name="total_competitions">Total de competiciones</string>
@@ -73,6 +73,11 @@
         <item>Ciclismo</item>
         <item>Ciclismo en sala</item>
     </string-array>
+    <string name="type_run">Carrera</string>
+    <string name="type_indoor_run">Carrera en cinta</string>
+    <string name="type_elliptical">Elíptica</string>
+    <string name="type_cycling">Ciclismo</string>
+    <string name="type_indoor_cycling">Ciclismo en sala</string>
     <!-- DialogAddCuestas -->
     <string name="times_cuestas">Repeticiones *</string>
     <string name="type_cuestas">Tipo *</string>
@@ -174,4 +179,5 @@
     <string name="show_profile">Ver perfil</string>
     <string name="add_training">Añadir entrenamiento</string>
     <string name="add_competition">Añadir competición</string>
+    <string name="zero">0</string>
 </resources>

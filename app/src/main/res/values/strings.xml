@@ -18,7 +18,7 @@
     <string name="name">Name *</string>
     <string name="surname">Surname *</string>
     <string name="birthday">Date of birth *</string>
-    <string name="statistics">STATISTICS</string>
+    <string name="statistics">Total stadistics</string>
     <string name="total_trainings">Total trainings</string>
     <string name="total_km">Total kilometers</string>
     <string name="total_competitions">Total competitions</string>
@@ -73,6 +73,11 @@
         <item>Cycling</item>
         <item>Indoor cycling</item>
     </string-array>
+    <string name="type_run">Run</string>
+    <string name="type_indoor_run">Indoor run</string>
+    <string name="type_elliptical">Elliptical</string>
+    <string name="type_cycling">Cycling</string>
+    <string name="type_indoor_cycling">Indoor cycling</string>
     <!-- DialogAddCuestas -->
     <string name="times_cuestas">Times *</string>
     <string name="type_cuestas">Type *</string>
@@ -174,4 +179,5 @@
     <string name="show_profile">Show profile</string>
     <string name="add_training">Add training</string>
     <string name="add_competition">Add competition</string>
+    <string name="zero">0</string>
 </resources>

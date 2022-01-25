@@ -105,10 +105,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:backgroundTint="@color/colorDanger"
             android:drawableLeft="@drawable/ic_warning"
@@ -118,144 +116,518 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            app:layout_constraintTop_toBottomOf="@+id/scroll" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+        <HorizontalScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/btnDeleteUser"
+            android:fillViewport="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/birthEditProfileText">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/card_view_training_border">
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/birthEditProfile">
 
-                <TextView
-                    android:id="@+id/estadisiticasTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:text="@string/statistics"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/entrenamientosTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="@string/total_trainings"
-                    android:textSize="14dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintEnd_toStartOf="@+id/divider5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/estadisiticasTV" />
-
-                <TextView
-                    android:id="@+id/totalEntrenamientosPerfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:text="0"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="22dp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/divider5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/entrenamientosTV" />
-
-                <TextView
-                    android:id="@+id/entrenamientosKmTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="@string/total_km"
-                    android:textSize="14dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintEnd_toStartOf="@+id/divider5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/totalEntrenamientosPerfil" />
-
-                <TextView
-                    android:id="@+id/totalKmEntrenamientosPerfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:text="0.00"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="22dp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/divider5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/entrenamientosKmTV" />
-
-                <TextView
-                    android:id="@+id/competicionesTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="@string/total_competitions"
-                    android:textSize="14dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/divider5"
-                    app:layout_constraintTop_toTopOf="@+id/entrenamientosTV" />
-
-                <TextView
-                    android:id="@+id/totalCompeticionesPerfil"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:text="0"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="22dp"
-                    android:textStyle="bold"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewTotals"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="12dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/divider5"
-                    app:layout_constraintTop_toBottomOf="@+id/competicionesTV" />
-
-                <View
-                    android:id="@+id/divider5"
-                    android:layout_width="1dp"
-                    android:layout_height="100dp"
-                    android:background="@color/colorText"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/entrenamientosTV" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_view_training_border">
+
+                        <TextView
+                            android:id="@+id/estadisiticasTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/statistics"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/entrenamientosTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/total_trainings"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toStartOf="@+id/divider5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/estadisiticasTV" />
+
+                        <TextView
+                            android:id="@+id/totalEntrenamientosPerfil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@+id/divider5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/entrenamientosTV" />
+
+                        <TextView
+                            android:id="@+id/entrenamientosKmTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/total_km"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toStartOf="@+id/divider5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/totalEntrenamientosPerfil" />
+
+                        <TextView
+                            android:id="@+id/totalKmEntrenamientosPerfil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@+id/divider5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/entrenamientosKmTV" />
+
+                        <TextView
+                            android:id="@+id/competicionesTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/total_competitions"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider5"
+                            app:layout_constraintTop_toTopOf="@+id/entrenamientosTV" />
+
+                        <TextView
+                            android:id="@+id/totalCompeticionesPerfil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider5"
+                            app:layout_constraintTop_toBottomOf="@+id/competicionesTV" />
+
+                        <View
+                            android:id="@+id/divider5"
+                            android:layout_width="1dp"
+                            android:layout_height="100dp"
+                            android:background="@color/colorText"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/entrenamientosTV" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewTrainings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintStart_toEndOf="@+id/cardViewTotals"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/card_view_training_border">
+
+                        <TextView
+                            android:id="@+id/estadisiticasTrainingsTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/title_trainings"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/carreraTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/type_run"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toStartOf="@+id/divider6"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/estadisiticasTrainingsTV" />
+
+                        <TextView
+                            android:id="@+id/totalCarrera"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@+id/divider6"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/carreraTV" />
+
+                        <TextView
+                            android:id="@+id/ciclismoTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/type_cycling"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toStartOf="@+id/divider6"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/totalCarrera" />
+
+                        <TextView
+                            android:id="@+id/totalCiclismo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@+id/divider6"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ciclismoTV" />
+
+                        <TextView
+                            android:id="@+id/cintaTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/type_indoor_run"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider6"
+                            app:layout_constraintTop_toTopOf="@+id/carreraTV" />
+
+                        <TextView
+                            android:id="@+id/totalCinta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider6"
+                            app:layout_constraintTop_toBottomOf="@+id/cintaTV" />
+
+                        <TextView
+                            android:id="@+id/elipticaTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/type_elliptical"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider6"
+                            app:layout_constraintTop_toBottomOf="@+id/totalCinta" />
+
+                        <TextView
+                            android:id="@+id/totalEliptica"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider6"
+                            app:layout_constraintTop_toBottomOf="@+id/elipticaTV" />
+
+                        <TextView
+                            android:id="@+id/ciclismoSalaTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/type_indoor_cycling"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider6"
+                            app:layout_constraintTop_toBottomOf="@+id/totalEliptica" />
+
+                        <TextView
+                            android:id="@+id/totalCiclismoSala"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider6"
+                            app:layout_constraintTop_toBottomOf="@+id/ciclismoSalaTV" />
+
+                        <View
+                            android:id="@+id/divider6"
+                            android:layout_width="1dp"
+                            android:layout_height="100dp"
+                            android:background="@color/colorText"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/carreraTV"
+                            app:layout_constraintVertical_bias="1.0" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewCompetitions"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintStart_toEndOf="@+id/cardViewTrainings"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/card_view_training_border">
+
+                        <TextView
+                            android:id="@+id/estadisiticasCompetitionsTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/title_competitions"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/pcTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/type_pc"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toStartOf="@+id/divider7"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/estadisiticasCompetitionsTV" />
+
+                        <TextView
+                            android:id="@+id/totalPC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@+id/divider7"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/pcTV" />
+
+                        <TextView
+                            android:id="@+id/alTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/type_al"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toStartOf="@+id/divider7"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/totalPC" />
+
+                        <TextView
+                            android:id="@+id/totalAL"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@+id/divider7"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/alTV" />
+
+                        <TextView
+                            android:id="@+id/crossTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            android:text="@string/type_cross"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider7"
+                            app:layout_constraintTop_toTopOf="@+id/pcTV" />
+
+                        <TextView
+                            android:id="@+id/totalCross"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider7"
+                            app:layout_constraintTop_toBottomOf="@+id/crossTV" />
+
+                        <TextView
+                            android:id="@+id/rutaTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:text="@string/type_road"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/alTV"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider7"
+                            app:layout_constraintTop_toTopOf="@+id/alTV" />
+
+                        <TextView
+                            android:id="@+id/totalRuta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="sans-serif-smallcaps"
+                            android:text="@string/zero"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/divider7"
+                            app:layout_constraintTop_toBottomOf="@+id/rutaTV" />
+
+
+                        <View
+                            android:id="@+id/divider7"
+                            android:layout_width="1dp"
+                            android:layout_height="100dp"
+                            android:background="@color/colorText"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/pcTV" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+
+
+        </HorizontalScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

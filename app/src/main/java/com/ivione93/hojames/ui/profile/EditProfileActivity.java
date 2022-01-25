@@ -54,6 +54,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
     CircleImageView photoEditProfile;
     TextView emailEditProfile, totalEntrenamientosPerfil, totalCompeticionesPerfil, totalKmEntrenamientosPerfil;
+    TextView totalCarrera, totalCiclismo, totalCinta, totalEliptica, totalCiclismoSala;
+    TextView totalPC, totalAL, totalCross, totalRuta;
     TextInputLayout nameEditProfile, surnameEditProfile;
     EditText birthEditProfile;
     Button btnDeleteUser;
@@ -140,6 +142,17 @@ public class EditProfileActivity extends AppCompatActivity {
         totalEntrenamientosPerfil = findViewById(R.id.totalEntrenamientosPerfil);
         totalCompeticionesPerfil = findViewById(R.id.totalCompeticionesPerfil);
         totalKmEntrenamientosPerfil = findViewById(R.id.totalKmEntrenamientosPerfil);
+
+        totalCarrera = findViewById(R.id.totalCarrera);
+        totalCiclismo = findViewById(R.id.totalCiclismo);
+        totalCinta = findViewById(R.id.totalCinta);
+        totalEliptica = findViewById(R.id.totalEliptica);
+        totalCiclismoSala = findViewById(R.id.totalCiclismoSala);
+
+        totalPC = findViewById(R.id.totalPC);
+        totalAL = findViewById(R.id.totalAL);
+        totalCross = findViewById(R.id.totalCross);
+        totalRuta = findViewById(R.id.totalRuta);
 
         btnDeleteUser = findViewById(R.id.btnDeleteUser);
 
@@ -328,7 +341,8 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                     totalEntrenamientosPerfil.setText(String.valueOf(getTotalTrainings()));
                     totalCompeticionesPerfil.setText(String.valueOf(getTotalCompetitions()));
-                    totalKmEntrenamientosPerfil.setText(String.valueOf(getTotalTrainings()));
+                    //totalKmEntrenamientosPerfil.setText(String.valueOf(getTotalTrainings()));
+                    //totalCarrera.setText(String.valueOf(getTotalTrainings()));
                 } else {
                     progressDialog.dismiss();
                 }
@@ -347,10 +361,23 @@ public class EditProfileActivity extends AppCompatActivity {
     public Integer getTotalTrainings() {
         AtomicReference<Integer> count = new AtomicReference<>(0);
         AtomicReference<Float> countKm = new AtomicReference<>(0.0f);
+        //Entrenamientos
+        AtomicReference<Integer> countCarrera = new AtomicReference<>(0);
+        AtomicReference<Float> countCarreraKm = new AtomicReference<>(0.0f);
+        AtomicReference<Integer> countCiclismo = new AtomicReference<>(0);
+        AtomicReference<Float> countCiclismoKm = new AtomicReference<>(0.0f);
+        AtomicReference<Integer> countCinta = new AtomicReference<>(0);
+        AtomicReference<Float> countCintaKm = new AtomicReference<>(0.0f);
+        AtomicReference<Integer> countEliptica = new AtomicReference<>(0);
+        AtomicReference<Float> countElipticaKm = new AtomicReference<>(0.0f);
+        AtomicReference<Integer> countCiclismoSala = new AtomicReference<>(0);
+        AtomicReference<Float> countCiclismoSalaKm = new AtomicReference<>(0.0f);
         db.collection("trainings").whereEqualTo("email", email).get()
                 .addOnCompleteListener(task -> {
                     count.set(0);
                     countKm.set(0f);
+                    countCarrera.set(0);
+                    countCarreraKm.set(0f);
                     if (task.isSuccessful()) {
                         for (DocumentSnapshot snap : task.getResult()) {
                             Training training = snap.toObject(Training.class);
@@ -358,11 +385,32 @@ public class EditProfileActivity extends AppCompatActivity {
                                 if (training.email.equals(email)) {
                                     count.updateAndGet(v -> v + 1);
                                     countKm.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    if (training.type == null || training.type.equals("Carrera")) {
+                                        countCarrera.updateAndGet(v -> v + 1);
+                                        countCarreraKm.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    } else if (training.type != null && training.type.equals("Ciclismo")) {
+                                        countCiclismo.updateAndGet(v -> v + 1);
+                                        countCiclismoKm.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    } else if (training.type != null && training.type.equals("Carrera en cinta")) {
+                                        countCinta.updateAndGet(v -> v + 1);
+                                        countCintaKm.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    } else if (training.type != null && training.type.equals("Elíptica")) {
+                                        countEliptica.updateAndGet(v -> v + 1);
+                                        countElipticaKm.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    } else if (training.type != null && training.type.equals("Ciclismo en sala")) {
+                                        countCiclismoSala.updateAndGet(v -> v + 1);
+                                        countCiclismoSalaKm.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    }
                                 }
                             }
                         }
                         totalEntrenamientosPerfil.setText(String.valueOf(count.get()));
                         totalKmEntrenamientosPerfil.setText(String.format("%.02f", countKm.get()));
+                        totalCarrera.setText(String.format("%.02f", countCarreraKm.get()) + " (" + countCarrera.get() + ")");
+                        totalCiclismo.setText(String.format("%.02f", countCiclismoKm.get()) + " (" + countCiclismo.get() + ")");
+                        totalCinta.setText(String.format("%.02f", countCintaKm.get()) + " (" + countCinta.get() + ")");
+                        totalEliptica.setText(String.format("%.02f", countElipticaKm.get()) + " (" + countEliptica.get() + ")");
+                        totalCiclismoSala.setText(String.format("%.02f", countCiclismoSalaKm.get()) + " (" + countCiclismoSala.get() + ")");
                     }
                 });
         return count.get();
@@ -371,6 +419,10 @@ public class EditProfileActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public Integer getTotalCompetitions() {
         AtomicReference<Integer> count = new AtomicReference<>(0);
+        AtomicReference<Integer> countPC = new AtomicReference<>(0);
+        AtomicReference<Integer> countAL = new AtomicReference<>(0);
+        AtomicReference<Integer> countCross = new AtomicReference<>(0);
+        AtomicReference<Integer> countRuta = new AtomicReference<>(0);
         db.collection("competitions").whereEqualTo("email", email).get()
                 .addOnCompleteListener(task -> {
                     count.set(0);
@@ -380,10 +432,23 @@ public class EditProfileActivity extends AppCompatActivity {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 if (competition.email.equals(email)) {
                                     count.updateAndGet(v -> v + 1);
+                                    if (competition.type != null && competition.type.equals("PC")) {
+                                        countPC.updateAndGet(v -> v + 1);
+                                    } else if (competition.type != null && competition.type.equals("AL")) {
+                                        countAL.updateAndGet(v -> v + 1);
+                                    } else if (competition.type != null && competition.type.equals("Cross")) {
+                                        countCross.updateAndGet(v -> v + 1);
+                                    } else if (competition.type != null && competition.type.equals("Ruta")) {
+                                        countRuta.updateAndGet(v -> v + 1);
+                                    }
                                 }
                             }
                         }
                         totalCompeticionesPerfil.setText(String.valueOf(count.get()));
+                        totalPC.setText(String.valueOf(countPC.get()));
+                        totalAL.setText(String.valueOf(countAL.get()));
+                        totalCross.setText(String.valueOf(countCross.get()));
+                        totalRuta.setText(String.valueOf(countRuta.get()));
                     }
                 });
         return count.get();

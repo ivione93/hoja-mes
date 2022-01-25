@@ -44,7 +44,7 @@ public class TrainingsFragment extends Fragment {
 
     MaterialCalendarView calendarTrainings;
     RecyclerView rvTrainings;
-    TextView monthlyKms;
+    TextView monthlyKms, monthlyCarrera, monthlyCiclismo, monthlyCinta, monthlyEliptica, monthlyCiclismoSala;
 
     String email;
     String dateSelected;
@@ -121,6 +121,16 @@ public class TrainingsFragment extends Fragment {
 
         monthlyKms = root.findViewById(R.id.monthly_kms);
         monthlyKms.setText(getKms(dateSelected).toString());
+        monthlyCarrera = root.findViewById(R.id.monthlyCarrera);
+        monthlyCarrera.setText(getKms(dateSelected).toString());
+        monthlyCiclismo = root.findViewById(R.id.monthlyCiclismo);
+        monthlyCiclismo.setText(getKms(dateSelected).toString());
+        monthlyCinta = root.findViewById(R.id.monthlyCinta);
+        monthlyCinta.setText(getKms(dateSelected).toString());
+        monthlyEliptica = root.findViewById(R.id.monthlyEliptica);
+        monthlyEliptica.setText(getKms(dateSelected).toString());
+        monthlyCiclismoSala = root.findViewById(R.id.monthlyCiclismoSala);
+        monthlyCiclismoSala.setText(getKms(dateSelected).toString());
         calendarTrainings = root.findViewById(R.id.calendar_trainings);
         calendarTrainings.setDateSelected(Calendar.getInstance().getTime(), true);
 
@@ -134,6 +144,11 @@ public class TrainingsFragment extends Fragment {
         calendarTrainings.setOnMonthChangedListener((widget, date) -> {
             getDateSelected(date);
             monthlyKms.setText(String.format("%.02f", getKms(dateSelected)));
+            monthlyCarrera.setText(String.format("%.02f", getKms(dateSelected)));
+            monthlyCiclismo.setText(String.format("%.02f", getKms(dateSelected)));
+            monthlyCinta.setText(String.format("%.02f", getKms(dateSelected)));
+            monthlyEliptica.setText(String.format("%.02f", getKms(dateSelected)));
+            monthlyCiclismoSala.setText(String.format("%.02f", getKms(dateSelected)));
         });
     }
 
@@ -158,6 +173,11 @@ public class TrainingsFragment extends Fragment {
     public Float getKms(String dateSelected) {
         String month = dateSelected.substring(3,5);
         AtomicReference<Float> count = new AtomicReference<>(0.0f);
+        AtomicReference<Float> countCarrera = new AtomicReference<>(0.0f);
+        AtomicReference<Float> countCiclismo = new AtomicReference<>(0.0f);
+        AtomicReference<Float> countCinta = new AtomicReference<>(0.0f);
+        AtomicReference<Float> countEliptica = new AtomicReference<>(0.0f);
+        AtomicReference<Float> countCiclismoSala = new AtomicReference<>(0.0f);
         db.collection("trainings").whereEqualTo("email", email).get()
                 .addOnCompleteListener(task -> {
                     count.set(0f);
@@ -167,10 +187,26 @@ public class TrainingsFragment extends Fragment {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 if (training.start.substring(5,7).equals(month)) {
                                     count.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    if (training.type == null || training.type.equals("Carrera")) {
+                                        countCarrera.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    } else if (training.type.equals("Ciclismo")) {
+                                        countCiclismo.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    } else if (training.type.equals("Carrera en cinta")) {
+                                        countCinta.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    } else if (training.type.equals("Elíptica")) {
+                                        countEliptica.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    } else if (training.type.equals("Ciclismo en sala")) {
+                                        countCiclismoSala.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    }
                                 }
                             }
                         }
                         monthlyKms.setText(String.format("%.02f", count.get()));
+                        monthlyCarrera.setText(String.format("%.02f", countCarrera.get()));
+                        monthlyCiclismo.setText(String.format("%.02f", countCiclismo.get()));
+                        monthlyCinta.setText(String.format("%.02f", countCinta.get()));
+                        monthlyEliptica.setText(String.format("%.02f", countEliptica.get()));
+                        monthlyCiclismoSala.setText(String.format("%.02f", countCiclismoSala.get()));
                     }
                 });
         return count.get();

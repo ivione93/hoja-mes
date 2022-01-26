@@ -55,6 +55,7 @@
                 android:text="@string/kms_month"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

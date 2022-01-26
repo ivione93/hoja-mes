@@ -1,6 +1,7 @@
 package com.ivione93.hojames.ui.competitions;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -101,20 +102,25 @@ public class NewCompetitionActivity extends AppCompatActivity {
             return true;
         }
         if (item.getItemId() == R.id.menu_share_competition) {
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.setPackage("com.whatsapp");
-            String msg = "*Hoja del mes*\n" +
-                    "_Mira mi competición del " + dateText.getText().toString() + ":_\n\n" +
-                    "*" + competitionNameText.getEditText().getText() + "*\n" +
-                    "- Lugar: " + placeText.getEditText().getText().toString() + "\n" +
-                    "- Prueba: " + trackText.getEditText().getText().toString() + "\n" +
-                    "- Marca: " + resultText.getEditText().getText().toString();
-            sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
-            sendIntent.setType("text/plain");
+            try {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                String msg = "*Hoja del mes*\n" +
+                        "_Mira mi competición del " + dateText.getText().toString() + ":_\n\n" +
+                        "*" + competitionNameText.getEditText().getText() + "*\n" +
+                        "- Lugar: " + placeText.getEditText().getText().toString() + "\n" +
+                        "- Prueba: " + trackText.getEditText().getText().toString() + "\n" +
+                        "- Marca: " + resultText.getEditText().getText().toString();
+                sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
+                sendIntent.setType("text/plain");
 
-            Intent shareIntent = Intent.createChooser(sendIntent, null);
-            startActivity(shareIntent);
+                Intent shareIntent = Intent.createChooser(sendIntent, "Compartir competición");
+                startActivity(shareIntent);
+            } catch (Exception e) {
+                Toast.makeText(this, "Algo ha ido mal, prueba con otra aplicación", Toast.LENGTH_SHORT)
+                        .show();
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }

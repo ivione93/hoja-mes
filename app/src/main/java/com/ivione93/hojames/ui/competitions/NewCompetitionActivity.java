@@ -250,17 +250,8 @@ public class NewCompetitionActivity extends AppCompatActivity {
         String track = trackText.getEditText().getText().toString();
         String result = resultText.getEditText().getText().toString();
         String date = dateText.getText().toString();
-        String typeCompetition = null;
 
-        if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioPC.getId()) {
-            typeCompetition = getString(R.string.bd_pc);
-        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioAL.getId()) {
-            typeCompetition = getString(R.string.bd_al);
-        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioCross.getId()) {
-            typeCompetition = getString(R.string.bd_cross);
-        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioRoad.getId()) {
-            typeCompetition = getString(R.string.bd_road);
-        }
+        String typeCompetition = getTypeCompetition();
 
         if (validateNewCompetition(place, competitionName, track, result, date)) {
             Map<String,Object> competition = new HashMap<>();
@@ -293,6 +284,19 @@ public class NewCompetitionActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(getApplicationContext(), R.string.all_fields_mandatories, Toast.LENGTH_LONG);
             toast.show();
         }
+    }
+
+    private String getTypeCompetition() {
+        if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioPC.getId()) {
+            return getString(R.string.bd_pc);
+        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioAL.getId()) {
+            return getString(R.string.bd_al);
+        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioCross.getId()) {
+            return getString(R.string.bd_cross);
+        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioRoad.getId()) {
+            return getString(R.string.bd_road);
+        }
+        return null;
     }
 
     private void goProfile(String email) {

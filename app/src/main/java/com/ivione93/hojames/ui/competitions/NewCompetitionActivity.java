@@ -103,6 +103,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.menu_share_competition) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.setPackage("com.whatsapp");
             String msg = "*Hoja del mes*\n" +
                     "_Mira mi competición del " + dateText.getText().toString() + ":_\n\n" +
                     "*" + competitionNameText.getEditText().getText() + "*\n" +

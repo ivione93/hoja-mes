@@ -107,7 +107,8 @@
     <string name="track_lc">Prueba</string>
     <!-- TrainingsFragment -->
     <string name="title_trainings">Entrenamientos</string>
-    <string name="kms_month">Kilómetros este mes:\u0020</string>
+    <string name="kms_month">Kilómetros este mes\u0020</string>
+    <string name="totals">Totales</string>
     <!-- CompetitionsFragment -->
     <string name="title_competitions">Competiciones</string>
     <string name="delete_competition">Eliminar competición</string>

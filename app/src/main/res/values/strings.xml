@@ -107,7 +107,8 @@
     <string name="track_lc">Track</string>
     <!-- TrainingsFragment -->
     <string name="title_trainings">Trainings</string>
-    <string name="kms_month">Kms this month:\u0020</string>
+    <string name="kms_month">Kms this month\u0020</string>
+    <string name="totals">Totals</string>
     <!-- CompetitionsFragment -->
     <string name="title_competitions">Competitions</string>
     <string name="delete_competition">Delete competition</string>

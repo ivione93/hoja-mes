@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.chip.Chip;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -44,7 +45,7 @@ public class TrainingsFragment extends Fragment {
 
     MaterialCalendarView calendarTrainings;
     RecyclerView rvTrainings;
-    TextView monthlyKms, monthlyCarrera, monthlyCiclismo, monthlyCinta, monthlyEliptica, monthlyCiclismoSala;
+    Chip chipTotals, chipCarrera, chipCiclismo, chipCinta, chipCiclismoSala, chipEliptica;
 
     String email;
     String dateSelected;
@@ -119,18 +120,18 @@ public class TrainingsFragment extends Fragment {
     private void setup(View root) {
         dateSelected = Utils.initCalendarToString(new Date());
 
-        monthlyKms = root.findViewById(R.id.monthly_kms);
-        monthlyKms.setText(getKms(dateSelected).toString());
-        monthlyCarrera = root.findViewById(R.id.monthlyCarrera);
-        monthlyCarrera.setText(getKms(dateSelected).toString());
-        monthlyCiclismo = root.findViewById(R.id.monthlyCiclismo);
-        monthlyCiclismo.setText(getKms(dateSelected).toString());
-        monthlyCinta = root.findViewById(R.id.monthlyCinta);
-        monthlyCinta.setText(getKms(dateSelected).toString());
-        monthlyEliptica = root.findViewById(R.id.monthlyEliptica);
-        monthlyEliptica.setText(getKms(dateSelected).toString());
-        monthlyCiclismoSala = root.findViewById(R.id.monthlyCiclismoSala);
-        monthlyCiclismoSala.setText(getKms(dateSelected).toString());
+        chipTotals = root.findViewById(R.id.chipTotals);
+        chipTotals.setText(getString(R.string.totals) + " " + getKms(dateSelected).toString());
+        chipCarrera = root.findViewById(R.id.chipCarrera);
+        chipCarrera.setText(getString(R.string.type_run) + " " + getKms(dateSelected).toString());
+        chipCiclismo = root.findViewById(R.id.chipCiclismo);
+        chipCiclismo.setText(getString(R.string.type_cycling) + " " + getKms(dateSelected).toString());
+        chipCinta = root.findViewById(R.id.chipCinta);
+        chipCinta.setText(getString(R.string.type_indoor_run) + " " + getKms(dateSelected).toString());
+        chipCiclismoSala = root.findViewById(R.id.chipCiclismoSala);
+        chipCiclismoSala.setText(getString(R.string.type_indoor_cycling) + " " + getKms(dateSelected).toString());
+        chipEliptica = root.findViewById(R.id.chipEliptica);
+        chipEliptica.setText(getString(R.string.type_elliptical) + " " + getKms(dateSelected).toString());
         calendarTrainings = root.findViewById(R.id.calendar_trainings);
         calendarTrainings.setDateSelected(Calendar.getInstance().getTime(), true);
 
@@ -143,12 +144,12 @@ public class TrainingsFragment extends Fragment {
 
         calendarTrainings.setOnMonthChangedListener((widget, date) -> {
             getDateSelected(date);
-            monthlyKms.setText(String.format("%.02f", getKms(dateSelected)));
-            monthlyCarrera.setText(String.format("%.02f", getKms(dateSelected)));
-            monthlyCiclismo.setText(String.format("%.02f", getKms(dateSelected)));
-            monthlyCinta.setText(String.format("%.02f", getKms(dateSelected)));
-            monthlyEliptica.setText(String.format("%.02f", getKms(dateSelected)));
-            monthlyCiclismoSala.setText(String.format("%.02f", getKms(dateSelected)));
+            chipTotals.setText(getString(R.string.totals) + " " + String.format("%.02f", getKms(dateSelected)));
+            chipCarrera.setText(getString(R.string.type_run) + " " + String.format("%.02f", getKms(dateSelected)));
+            chipCiclismo.setText(getString(R.string.type_cycling) + " " + String.format("%.02f", getKms(dateSelected)));
+            chipCinta.setText(getString(R.string.type_indoor_run) + " " + String.format("%.02f", getKms(dateSelected)));
+            chipCiclismoSala.setText(getString(R.string.type_indoor_cycling) + " " + String.format("%.02f", getKms(dateSelected)));
+            chipEliptica.setText(getString(R.string.type_elliptical) + " " + String.format("%.02f", getKms(dateSelected)));
         });
     }
 
@@ -202,12 +203,12 @@ public class TrainingsFragment extends Fragment {
                                 }
                             }
                         }
-                        monthlyKms.setText(String.format("%.02f", count.get()));
-                        monthlyCarrera.setText(String.format("%.02f", countCarrera.get()));
-                        monthlyCiclismo.setText(String.format("%.02f", countCiclismo.get()));
-                        monthlyCinta.setText(String.format("%.02f", countCinta.get()));
-                        monthlyEliptica.setText(String.format("%.02f", countEliptica.get()));
-                        monthlyCiclismoSala.setText(String.format("%.02f", countCiclismoSala.get()));
+                        chipTotals.setText(getString(R.string.totals) + " " + String.format("%.02f", count.get()));
+                        chipCarrera.setText(getString(R.string.type_run) + " " + String.format("%.02f", countCarrera.get()));
+                        chipCiclismo.setText(getString(R.string.type_cycling) + " " + String.format("%.02f", countCiclismo.get()));
+                        chipCinta.setText(getString(R.string.type_indoor_run) + " " + String.format("%.02f", countCinta.get()));
+                        chipCiclismoSala.setText(getString(R.string.type_indoor_cycling) + " " + String.format("%.02f", countCiclismoSala.get()));
+                        chipEliptica.setText(getString(R.string.type_elliptical) + " " + String.format("%.02f", countEliptica.get()));
                     }
                 });
         return count.get();

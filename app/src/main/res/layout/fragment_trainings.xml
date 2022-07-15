@@ -30,6 +30,19 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.55" />
 
+    <TextView
+        android:id="@+id/tvMonthly_kms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="@string/kms_month"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline5" />
+
     <HorizontalScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
@@ -39,7 +52,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/tvMonthly_kms"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,162 +60,77 @@
             android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline5">
 
-            <TextView
-                android:id="@+id/tvMonthly_kms"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTotals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="@string/kms_month"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Totales 0.00" />
 
-            <TextView
-                android:id="@+id/monthly_kms"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipCarrera"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-smallcaps"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthly_kms"
-                app:layout_constraintStart_toEndOf="@+id/tvMonthly_kms"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthly_kms"
-                tools:text="100.00" />
+                android:layout_marginStart="4dp"
+                tools:text="Carrera 0.00"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/chipTotals"
+                app:layout_constraintStart_toEndOf="@+id/chipTotals"
+                app:layout_constraintTop_toTopOf="@+id/chipTotals" />
 
-            <TextView
-                android:id="@+id/tvMonthlyCarrera"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipCiclismo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="Carrera: "
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthly_kms"
-                app:layout_constraintStart_toEndOf="@+id/monthly_kms"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthly_kms" />
+                android:layout_marginStart="4dp"
+                tools:text="Ciclismo 0.00"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/chipCarrera"
+                app:layout_constraintStart_toEndOf="@+id/chipCarrera"
+                app:layout_constraintTop_toTopOf="@+id/chipCarrera" />
 
-            <TextView
-                android:id="@+id/monthlyCarrera"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipCinta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-smallcaps"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthlyCarrera"
-                app:layout_constraintStart_toEndOf="@+id/tvMonthlyCarrera"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthlyCarrera"
-                tools:text="100.00" />
+                android:layout_marginStart="4dp"
+                tools:text="Carrera en cinta 0.00"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/chipCiclismo"
+                app:layout_constraintStart_toEndOf="@+id/chipCiclismo"
+                app:layout_constraintTop_toTopOf="@+id/chipCiclismo" />
 
-            <TextView
-                android:id="@+id/tvMonthlyCiclismo"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipCiclismoSala"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="Ciclismo: "
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthly_kms"
-                app:layout_constraintStart_toEndOf="@+id/monthlyCarrera"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthly_kms" />
+                android:layout_marginStart="4dp"
+                tools:text="Ciclismo en sala 0.00"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/chipCinta"
+                app:layout_constraintStart_toEndOf="@+id/chipCinta"
+                app:layout_constraintTop_toTopOf="@+id/chipCinta" />
 
-            <TextView
-                android:id="@+id/monthlyCiclismo"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipEliptica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-smallcaps"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthlyCiclismo"
-                app:layout_constraintStart_toEndOf="@+id/tvMonthlyCiclismo"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthlyCiclismo"
-                tools:text="100.00" />
-
-            <TextView
-                android:id="@+id/tvMonthlyCinta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="Carrera en cinta: "
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthly_kms"
-                app:layout_constraintStart_toEndOf="@+id/monthlyCiclismo"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthly_kms" />
-
-            <TextView
-                android:id="@+id/monthlyCinta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-smallcaps"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthlyCinta"
-                app:layout_constraintStart_toEndOf="@+id/tvMonthlyCinta"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthlyCinta"
-                tools:text="100.00" />
-
-            <TextView
-                android:id="@+id/tvMonthlyEliptica"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="Elíptica: "
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthly_kms"
-                app:layout_constraintStart_toEndOf="@+id/monthlyCinta"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthly_kms" />
-
-            <TextView
-                android:id="@+id/monthlyEliptica"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-smallcaps"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthlyEliptica"
-                app:layout_constraintStart_toEndOf="@+id/tvMonthlyEliptica"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthlyEliptica"
-                tools:text="100.00" />
-
-            <TextView
-                android:id="@+id/tvMonthlyCiclismoSala"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:text="Ciclismo en sala: "
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthly_kms"
-                app:layout_constraintStart_toEndOf="@+id/monthlyEliptica"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthly_kms" />
-
-            <TextView
-                android:id="@+id/monthlyCiclismoSala"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="sans-serif-smallcaps"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMonthlyCiclismoSala"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvMonthlyCiclismoSala"
-                app:layout_constraintTop_toTopOf="@+id/tvMonthlyCiclismoSala"
-                tools:text="100.00" />
+                android:layout_marginStart="4dp"
+                tools:text="Elíptica 0.00"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/chipCiclismoSala"
+                app:layout_constraintStart_toEndOf="@+id/chipCiclismoSala"
+                app:layout_constraintTop_toTopOf="@+id/chipCiclismoSala" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>

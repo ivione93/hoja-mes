@@ -172,6 +172,7 @@ public class TrainingsFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public Float getKms(String dateSelected) {
         String month = dateSelected.substring(3,5);
+        String year = dateSelected.substring(6,10);
         AtomicReference<Float> count = new AtomicReference<>(0.0f);
         AtomicReference<Float> countCarrera = new AtomicReference<>(0.0f);
         AtomicReference<Float> countCiclismo = new AtomicReference<>(0.0f);
@@ -185,7 +186,7 @@ public class TrainingsFragment extends Fragment {
                         for (DocumentSnapshot snap : task.getResult()) {
                             Training training = snap.toObject(Training.class);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                if (training.start.substring(5,7).equals(month)) {
+                                if (training.start.substring(5,7).equals(month) && training.start.substring(0,4).equals(year)) {
                                     count.updateAndGet(v -> v + Float.valueOf(training.distance));
                                     if (training.type == null || training.type.equals("Carrera")) {
                                         countCarrera.updateAndGet(v -> v + Float.valueOf(training.distance));

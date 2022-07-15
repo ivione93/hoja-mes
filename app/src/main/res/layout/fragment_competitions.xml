@@ -7,14 +7,108 @@
     android:layout_height="match_parent"
     tools:context=".ui.competitions.CompetitionsFragment">
 
+    <TextView
+        android:id="@+id/typeCompetition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text="Tipo de competición"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/typeCompetition">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTotals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Totales 0"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipPC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Pista cubierta 0"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/chipTotals"
+                app:layout_constraintStart_toEndOf="@+id/chipTotals"
+                app:layout_constraintTop_toTopOf="@+id/chipTotals" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Aire libre 0"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/chipPC"
+                app:layout_constraintStart_toEndOf="@+id/chipPC"
+                app:layout_constraintTop_toTopOf="@+id/chipPC" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipCross"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Cross 0"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/chipAL"
+                app:layout_constraintStart_toEndOf="@+id/chipAL"
+                app:layout_constraintTop_toTopOf="@+id/chipAL" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipRuta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="8dp"
+                android:text="Ruta 0"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/chipCross"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/chipCross"
+                app:layout_constraintTop_toTopOf="@+id/chipCross" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </HorizontalScrollView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCompetitions"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/scroll" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

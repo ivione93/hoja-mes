@@ -105,6 +105,7 @@
     <string name="rate_lt">Rate</string>
     <string name="last_competition">Last competition</string>
     <string name="track_lc">Track</string>
+    <string name="recently">Recently</string>
     <!-- TrainingsFragment -->
     <string name="title_trainings">Trainings</string>
     <string name="kms_month">Kms this month\u0020</string>

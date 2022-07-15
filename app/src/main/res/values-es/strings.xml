@@ -105,6 +105,7 @@
     <string name="rate_lt">Media</string>
     <string name="last_competition">Última competición</string>
     <string name="track_lc">Prueba</string>
+    <string name="recently">Lo más reciente</string>
     <!-- TrainingsFragment -->
     <string name="title_trainings">Entrenamientos</string>
     <string name="kms_month">Kilómetros este mes\u0020</string>

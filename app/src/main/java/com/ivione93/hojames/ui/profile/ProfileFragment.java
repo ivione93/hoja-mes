@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -37,11 +39,14 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
+import com.ivione93.hojames.model.Competition;
+import com.ivione93.hojames.model.Training;
 import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;
 import com.ivione93.hojames.ui.login.AuthActivity;
 import com.ivione93.hojames.ui.trainings.ViewTrainingActivity;
 
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -57,6 +62,7 @@ public class ProfileFragment extends Fragment {
 
     CircleImageView photoProfile;
     TextView emailTextView, nombreEditText, birthEditText;
+    TextView statTotalTrainings, statTotalKms, statTotalCompetitions;
     TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result, last_competition_type;
     TextView title_type, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
     TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
@@ -67,11 +73,12 @@ public class ProfileFragment extends Fragment {
     CardView lastTrainingCV, lastCompetitionCV;
 
     String email;
-    String dateSelected, partialFormat;
+    String dateSelected;
     Uri photoUrl;
 
     private ProgressDialog progressDialog;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -89,6 +96,7 @@ public class ProfileFragment extends Fragment {
         return root;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void loadProfile() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getContext());
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -113,6 +121,10 @@ public class ProfileFragment extends Fragment {
                 if (document.exists()) {
                     nombreEditText.setText(task.getResult().get("name").toString() + " " + task.getResult().get("surname").toString());
                     birthEditText.setText(task.getResult().get("birth").toString());
+
+                    statTotalTrainings.setText(String.valueOf(getTotalTrainings()));
+                    statTotalKms.setText(String.valueOf(getTotalTrainings()));
+                    statTotalCompetitions.setText(String.valueOf(getTotalCompetitions()));
 
                     getLastCompetition(email);
                     getLastTraining(email);
@@ -202,6 +214,10 @@ public class ProfileFragment extends Fragment {
         emailTextView.setText(email);
         nombreEditText = root.findViewById(R.id.nombreEditText);
         birthEditText = root.findViewById(R.id.birthEditText);
+
+        statTotalTrainings = root.findViewById(R.id.statistics_total_trainings_value);
+        statTotalKms = root.findViewById(R.id.statistics_total_kms_value);
+        statTotalCompetitions = root.findViewById(R.id.statistics_total_competitions_value);
 
         last_competition_name = root.findViewById(R.id.last_competition_name);
         last_competition_place = root.findViewById(R.id.last_competition_place);
@@ -407,5 +423,51 @@ public class ProfileFragment extends Fragment {
                         }
                     }
         });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Integer getTotalTrainings() {
+        AtomicReference<Integer> count = new AtomicReference<>(0);
+        AtomicReference<Float> countKm = new AtomicReference<>(0.0f);
+        db.collection("trainings").whereEqualTo("email", email).get()
+                .addOnCompleteListener(task -> {
+                    count.set(0);
+                    countKm.set(0f);
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot snap : task.getResult()) {
+                            Training training = snap.toObject(Training.class);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                if (training.email.equals(email)) {
+                                    count.updateAndGet(v -> v + 1);
+                                    countKm.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                }
+                            }
+                        }
+                        statTotalTrainings.setText(String.valueOf(count.get()));
+                        statTotalKms.setText(String.format("%.02f", countKm.get()));
+                    }
+                });
+        return count.get();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Integer getTotalCompetitions() {
+        AtomicReference<Integer> count = new AtomicReference<>(0);
+        db.collection("competitions").whereEqualTo("email", email).get()
+                .addOnCompleteListener(task -> {
+                    count.set(0);
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot snap : task.getResult()) {
+                            Competition competition = snap.toObject(Competition.class);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                if (competition.email.equals(email)) {
+                                    count.updateAndGet(v -> v + 1);
+                                }
+                            }
+                        }
+                        statTotalCompetitions.setText(String.valueOf(count.get()));
+                    }
+                });
+        return count.get();
     }
 }

@@ -1,5 +1,6 @@
 package com.ivione93.hojames.ui.trainings;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,6 +51,8 @@ public class TrainingsFragment extends Fragment {
     String email;
     String dateSelected;
 
+    private ProgressDialog progressDialog;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +67,11 @@ public class TrainingsFragment extends Fragment {
         email = bundle.getString("email");
 
         listTrainings.clear();
+
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage(getString(R.string.loading_data));
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         db.collection("trainings")
                 .whereEqualTo("email", email)
                 .orderBy("date", Query.Direction.DESCENDING)
@@ -75,6 +83,7 @@ public class TrainingsFragment extends Fragment {
                     setupAdaptadorTrainings(root);
                 }
             } else {
+                progressDialog.dismiss();
                 setupAdaptadorTrainings(root);
             }
         });
@@ -184,6 +193,7 @@ public class TrainingsFragment extends Fragment {
                 .addOnCompleteListener(task -> {
                     count.set(0f);
                     if (task.isSuccessful()) {
+                        progressDialog.dismiss();
                         for (DocumentSnapshot snap : task.getResult()) {
                             Training training = snap.toObject(Training.class);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -209,6 +219,8 @@ public class TrainingsFragment extends Fragment {
                         chipCinta.setText(getString(R.string.type_indoor_run) + " " + String.format("%.02f", countCinta.get()));
                         chipCiclismoSala.setText(getString(R.string.type_indoor_cycling) + " " + String.format("%.02f", countCiclismoSala.get()));
                         chipEliptica.setText(getString(R.string.type_elliptical) + " " + String.format("%.02f", countEliptica.get()));
+                    } else {
+                        progressDialog.dismiss();
                     }
                 });
         return count.get();

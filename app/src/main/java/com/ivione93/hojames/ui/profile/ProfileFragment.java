@@ -1,8 +1,7 @@
 package com.ivione93.hojames.ui.profile;
 
-import android.app.ProgressDialog;
 import android.app.AlertDialog;
-import android.content.ClipData;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,7 +38,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Competition;
@@ -68,11 +66,7 @@ public class ProfileFragment extends Fragment {
     TextView statTotalTrainings, statTotalKms, statTotalCompetitions;
     TextView last_competition_name, last_competition_place, last_competition_date, last_competition_track, last_competition_result, last_competition_type;
     TextView title_type, last_training_date, title_time, title_distance, title_partial, last_training_time, last_training_distance, last_training_partial;
-    TextView tvIndicadorSeries, tvIndicadorCuestas, tvIndicadorFartlek, tvIndicadorGym;
-    TextView last_competition_track_text;
-    ImageView mapImageView, imageTypeCompetition;
-    ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorFartlek, ivIndicadorGym, ivIndicadorObserves;
-
+    ImageView imageTypeCompetition;
     CardView lastTrainingCV, lastCompetitionCV;
 
     String email;
@@ -245,42 +239,25 @@ public class ProfileFragment extends Fragment {
         statTotalKms = root.findViewById(R.id.statistics_total_kms_value);
         statTotalCompetitions = root.findViewById(R.id.statistics_total_competitions_value);
 
-        last_competition_name = root.findViewById(R.id.last_competition_name);
-        last_competition_place = root.findViewById(R.id.last_competition_place);
-        last_competition_date = root.findViewById(R.id.last_competition_date);
-        last_competition_track = root.findViewById(R.id.last_competition_track);
-        last_competition_result = root.findViewById(R.id.last_competition_result);
-        last_competition_type = root.findViewById(R.id.last_competition_type);
-        imageTypeCompetition = root.findViewById(R.id.imageTypeCompetition);
+        last_competition_name = root.findViewById(R.id.lcName);
+        last_competition_place = root.findViewById(R.id.lcPlace);
+        last_competition_date = root.findViewById(R.id.lcDate);
+        last_competition_track = root.findViewById(R.id.lcTitle);
+        last_competition_result = root.findViewById(R.id.lcResult);
+        last_competition_type = root.findViewById(R.id.lcTrackTV);
+        imageTypeCompetition = root.findViewById(R.id.lcBackground);
 
-        title_type = root.findViewById(R.id.title_type);
-        last_training_date = root.findViewById(R.id.last_training_date);
-        title_time = root.findViewById(R.id.title_time);
-        title_distance = root.findViewById(R.id.title_distance);
-        title_partial = root.findViewById(R.id.title_partial);
-        last_training_time = root.findViewById(R.id.last_training_time);
-        last_training_distance = root.findViewById(R.id.last_training_distance);
-        last_training_partial = root.findViewById(R.id.last_training_partial);
+        title_type = root.findViewById(R.id.ltTitle);
+        last_training_date = root.findViewById(R.id.ltDate);
+        title_time = root.findViewById(R.id.ltTimeTV);
+        title_distance = root.findViewById(R.id.ltDistanceTV);
+        title_partial = root.findViewById(R.id.ltPartialTV);
+        last_training_time = root.findViewById(R.id.ltTime);
+        last_training_distance = root.findViewById(R.id.ltDistance);
+        last_training_partial = root.findViewById(R.id.ltPartial);
 
-        last_competition_track_text = root.findViewById(R.id.last_competition_track_text);
-        mapImageView = root.findViewById(R.id.mapImageView);
-
-        tvIndicadorSeries = root.findViewById(R.id.tvIndicadorSeries);
-        ivIndicadorSeries = root.findViewById(R.id.ivIndicadorSeries);
-
-        tvIndicadorCuestas = root.findViewById(R.id.tvIndicadorCuestas);
-        ivIndicadorCuestas = root.findViewById(R.id.ivIndicadorCuestas);
-
-        tvIndicadorFartlek = root.findViewById(R.id.tvIndicadorFartlek);
-        ivIndicadorFartlek = root.findViewById(R.id.ivIndicadorFartlek);
-
-        tvIndicadorGym = root.findViewById(R.id.tvIndicadorGym);
-        ivIndicadorGym = root.findViewById(R.id.ivIndicadorGym);
-
-        ivIndicadorObserves = root.findViewById(R.id.ivIndicadorObserves);
-
-        lastTrainingCV = root.findViewById(R.id.last_training);
-        lastCompetitionCV = root.findViewById(R.id.last_competition);
+        lastTrainingCV = root.findViewById(R.id.cardLastTraining);
+        lastCompetitionCV = root.findViewById(R.id.cardLastCompetition);
 
         photoProfile.setOnClickListener(v -> {
             Intent editProfile = new Intent(getActivity(), EditProfileActivity.class);
@@ -330,17 +307,15 @@ public class ProfileFragment extends Fragment {
                                 }
                             }
                         } else {
-                            last_competition_name.setText(R.string.no_results);
+                            last_competition_track.setText(R.string.no_results);
                         }
                     }
                 } else {
-                    last_competition_name.setText(R.string.no_results);
-                    last_competition_track_text.setVisibility(View.INVISIBLE);
-                    mapImageView.setVisibility(View.INVISIBLE);
+                    last_competition_track.setText(R.string.no_results);
                 }
             } else {
                 progressDialog.dismiss();
-                last_competition_name.setText(R.string.no_results);
+                last_competition_track.setText(R.string.no_results);
             }
         });
     }
@@ -380,72 +355,13 @@ public class ProfileFragment extends Fragment {
                                     last_training_time.setText(Utils.getFormattedTime(documentSnapshot.get("time").toString()) + " min");
                                     last_training_date.setText(Utils.toString((Timestamp) documentSnapshot.get("date"), getString(R.string.format_date)));
                                     last_training_partial.setText(documentSnapshot.get("partial").toString() + partialFormat);
-
-                                    if (documentSnapshot.get("observes") == null || documentSnapshot.get("observes").equals("")) {
-                                        ivIndicadorObserves.setVisibility(View.INVISIBLE);
-                                    } else {
-                                        ivIndicadorObserves.setVisibility(View.VISIBLE);
-                                    }
-
-                                    // check series
-                                    db.collection("series").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
-                                        if (t.isSuccessful()) {
-                                            QuerySnapshot document = t.getResult();
-                                            if (!document.isEmpty()) {
-                                                tvIndicadorSeries.setVisibility(View.VISIBLE);
-                                                ivIndicadorSeries.setVisibility(View.VISIBLE);
-                                            } else {
-                                                tvIndicadorSeries.setVisibility(View.INVISIBLE);
-                                                ivIndicadorSeries.setVisibility(View.INVISIBLE);
-                                            }
-                                        }
-                                    });
-
-                                    // check cuestas
-                                    db.collection("cuestas").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
-                                        if (t.isSuccessful()) {
-                                            QuerySnapshot document = t.getResult();
-                                            if (!document.isEmpty()) {
-                                                tvIndicadorCuestas.setVisibility(View.VISIBLE);
-                                                ivIndicadorCuestas.setVisibility(View.VISIBLE);
-                                            } else {
-                                                tvIndicadorCuestas.setVisibility(View.INVISIBLE);
-                                                ivIndicadorCuestas.setVisibility(View.INVISIBLE);
-                                            }
-                                        }
-                                    });
-
-                                    // check fartlek
-                                    db.collection("fartlek").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
-                                        if (t.isSuccessful()) {
-                                            QuerySnapshot document = t.getResult();
-                                            if (!document.isEmpty()) {
-                                                tvIndicadorFartlek.setVisibility(View.VISIBLE);
-                                                ivIndicadorFartlek.setVisibility(View.VISIBLE);
-                                            } else {
-                                                tvIndicadorFartlek.setVisibility(View.INVISIBLE);
-                                                ivIndicadorFartlek.setVisibility(View.INVISIBLE);
-                                            }
-                                        }
-                                    });
-
-                                    // check gym
-                                    db.collection("gym").whereEqualTo("idTraining", documentSnapshot.get("id").toString()).get().addOnCompleteListener(t -> {
-                                        if (t.isSuccessful()) {
-                                            QuerySnapshot document = t.getResult();
-                                            if (!document.isEmpty()) {
-                                                tvIndicadorGym.setVisibility(View.VISIBLE);
-                                                ivIndicadorGym.setVisibility(View.VISIBLE);
-                                            } else {
-                                                tvIndicadorGym.setVisibility(View.INVISIBLE);
-                                                ivIndicadorGym.setVisibility(View.INVISIBLE);
-                                            }
-                                        }
-                                    });
                                 }
                             }
                         } else {
-                            last_training_time.setText(R.string.no_results);
+                            title_time.setVisibility(View.INVISIBLE);
+                            title_distance.setVisibility(View.INVISIBLE);
+                            title_partial.setVisibility(View.INVISIBLE);
+                            title_type.setText(R.string.no_results);
                         }
                     }
         });

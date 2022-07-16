@@ -13,5 +13,6 @@
     <color name="colorAccent">#F57C00</color>
     <color name="colorDanger">#F44336</color>
     <color name="colorText">#426483</color>
-    <color name="colorCard">#E8EAEF</color>
+    <color name="colorCardTraining">#E8EAEF</color>
+    <color name="colorCardCompetition">#E6EEFF</color>
 </resources>

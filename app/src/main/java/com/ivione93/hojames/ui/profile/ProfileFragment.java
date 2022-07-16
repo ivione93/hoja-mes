@@ -242,12 +242,12 @@ public class ProfileFragment extends Fragment {
         last_competition_name = root.findViewById(R.id.lcName);
         last_competition_place = root.findViewById(R.id.lcPlace);
         last_competition_date = root.findViewById(R.id.lcDate);
-        last_competition_track = root.findViewById(R.id.lcTitle);
+        last_competition_track = root.findViewById(R.id.lcTrack);
         last_competition_result = root.findViewById(R.id.lcResult);
         last_competition_type = root.findViewById(R.id.lcTrackTV);
         imageTypeCompetition = root.findViewById(R.id.lcBackground);
 
-        title_type = root.findViewById(R.id.ltTitle);
+        title_type = root.findViewById(R.id.ltType);
         last_training_date = root.findViewById(R.id.ltDate);
         title_time = root.findViewById(R.id.ltTimeTV);
         title_distance = root.findViewById(R.id.ltDistanceTV);

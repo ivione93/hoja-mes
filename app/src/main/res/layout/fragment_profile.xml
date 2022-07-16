@@ -32,6 +32,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            tools:text="Iván García Gómez"
             android:fontFamily="@font/kdam_font"
             android:lines="1"
             android:maxLines="1"
@@ -42,14 +43,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/photoProfile"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.15"
-            tools:text="Iván García Gómez" />
+            app:layout_constraintVertical_bias="0.15" />
 
         <TextView
-            android:id="@+id/emailTextView"
+            android:id="@+id/birthEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Email"
+            tools:text="birth"
             android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/kdam_font"
             app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
@@ -58,17 +58,20 @@
             app:layout_constraintTop_toTopOf="@+id/photoProfile" />
 
         <TextView
-            android:id="@+id/birthEditText"
-            android:layout_width="wrap_content"
+            android:id="@+id/emailTextView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            tools:text="birthdate"
-            android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/kdam_font"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
-            app:layout_constraintStart_toStartOf="@+id/emailTextView"
+            app:layout_constraintEnd_toEndOf="@+id/birthEditText"
+            app:layout_constraintStart_toStartOf="@+id/birthEditText"
             app:layout_constraintTop_toTopOf="@+id/photoProfile"
-            app:layout_constraintVertical_bias="0.85" />
+            app:layout_constraintVertical_bias="0.85"
+            tools:text="email" />
 
         <TextView
             android:id="@+id/statistics_title"
@@ -83,116 +86,93 @@
             app:layout_constraintStart_toStartOf="@+id/photoProfile"
             app:layout_constraintTop_toBottomOf="@+id/photoProfile" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/statistics"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/statistics_total_trainings"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/statistics_title">
+            android:fontFamily="@font/kdam_font"
+            android:text="Total de entrenamientos"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/statistics_title"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_title" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/statistics_total_trainings_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/kdam_font"
+                tools:text="301"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/statistics_total_trainings"
+                app:layout_constraintEnd_toEndOf="@+id/statistics_total_kms_value"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/statistics_total_trainings"
+                app:layout_constraintTop_toTopOf="@+id/statistics_total_trainings" />
 
-                <TextView
-                    android:id="@+id/statistics_total_trainings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/kdam_font"
-                    android:text="Total de entrenamientos"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/statistics_total_kms"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/kdam_font"
+                android:text="Total de kilómetros"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/statistics_total_trainings"
+                app:layout_constraintStart_toStartOf="@+id/statistics_total_trainings"
+                app:layout_constraintTop_toBottomOf="@+id/statistics_total_trainings" />
 
-                <TextView
-                    android:id="@+id/statistics_total_trainings_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/kdam_font"
-                    tools:text="301"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/statistics_total_trainings"
-                    app:layout_constraintEnd_toEndOf="@+id/statistics_total_kms_value"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/statistics_total_trainings"
-                    app:layout_constraintTop_toTopOf="@+id/statistics_total_trainings" />
+            <TextView
+                android:id="@+id/statistics_total_kms_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/kdam_font"
+                tools:text="2317,53"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/statistics_total_kms"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toEndOf="@+id/statistics_total_kms"
+                app:layout_constraintTop_toTopOf="@+id/statistics_total_kms" />
 
-                <TextView
-                    android:id="@+id/statistics_total_kms"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/kdam_font"
-                    android:text="Total de kilómetros"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/statistics_total_trainings"
-                    app:layout_constraintStart_toStartOf="@+id/statistics_total_trainings"
-                    app:layout_constraintTop_toBottomOf="@+id/statistics_total_trainings" />
+        <TextView
+            android:id="@+id/statistics_total_competitions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/kdam_font"
+            android:text="Total de competiciones"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/statistics_total_kms"
+            app:layout_constraintStart_toStartOf="@+id/statistics_total_kms"
+            app:layout_constraintTop_toBottomOf="@+id/statistics_total_kms" />
 
-                <TextView
-                    android:id="@+id/statistics_total_kms_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:fontFamily="@font/kdam_font"
-                    tools:text="2317,53"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/statistics_total_kms"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.8"
-                    app:layout_constraintStart_toEndOf="@+id/statistics_total_kms"
-                    app:layout_constraintTop_toTopOf="@+id/statistics_total_kms" />
-
-                <TextView
-                    android:id="@+id/statistics_total_competitions"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/kdam_font"
-                    android:text="Total de competiciones"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/statistics_total_kms"
-                    app:layout_constraintStart_toStartOf="@+id/statistics_total_kms"
-                    app:layout_constraintTop_toBottomOf="@+id/statistics_total_kms" />
-
-                <TextView
-                    android:id="@+id/statistics_total_competitions_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/kdam_font"
-                    tools:text="16"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/statistics_total_competitions"
-                    app:layout_constraintEnd_toEndOf="@+id/statistics_total_kms_value"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/statistics_total_competitions"
-                    app:layout_constraintTop_toTopOf="@+id/statistics_total_competitions" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/statistics_total_competitions_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/kdam_font"
+                tools:text="16"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/statistics_total_competitions"
+                app:layout_constraintEnd_toEndOf="@+id/statistics_total_kms_value"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/statistics_total_competitions"
+                app:layout_constraintTop_toTopOf="@+id/statistics_total_competitions" />
 
         <TextView
             android:id="@+id/recent"
@@ -205,7 +185,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/photoProfile"
-            app:layout_constraintTop_toBottomOf="@+id/statistics" />
+            app:layout_constraintTop_toBottomOf="@+id/statistics_total_competitions_value" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardLastTraining"
@@ -237,30 +217,30 @@
                     app:layout_constraintEnd_toEndOf="@+id/ltPartial"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/ltDistanceTV"
-                    app:layout_constraintTop_toTopOf="@+id/ltTitle"
+                    app:layout_constraintTop_toTopOf="@+id/ltDate"
                     app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
-                    android:id="@+id/ltTitle"
+                    android:id="@+id/ltDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/kdam_font"
-                    tools:text="Ciclismo"
+                    tools:text="16 Jul. 2022"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/ltDate"
+                    android:id="@+id/ltType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/kdam_font"
-                    tools:text="16 Jul. 2022"
+                    tools:text="Ciclismo"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -276,8 +256,8 @@
                     android:text="Tiempo"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@+id/ltTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/ltTitle" />
+                    app:layout_constraintStart_toStartOf="@+id/ltDate"
+                    app:layout_constraintTop_toBottomOf="@+id/ltDate" />
 
                 <TextView
                     android:id="@+id/ltTime"
@@ -327,7 +307,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/ltDate"
+                    app:layout_constraintEnd_toEndOf="@+id/ltType"
                     app:layout_constraintTop_toTopOf="@+id/ltTimeTV" />
 
                 <TextView
@@ -372,29 +352,29 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lcTitle" />
+                    app:layout_constraintTop_toBottomOf="@+id/lcTrack" />
 
                 <TextView
-                    android:id="@+id/lcTitle"
+                    android:id="@+id/lcDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/kdam_font"
-                    tools:text="400 ml"
+                    tools:text="17 Jun. 2022"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/lcDate"
+                    android:id="@+id/lcTrack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/kdam_font"
-                    tools:text="17 Jun. 2022"
+                    tools:text="400 ml"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -412,10 +392,10 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="@+id/lcDate"
+                    app:layout_constraintEnd_toEndOf="@+id/lcTrack"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/lcTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/lcTitle" />
+                    app:layout_constraintStart_toStartOf="@+id/lcDate"
+                    app:layout_constraintTop_toBottomOf="@+id/lcDate" />
 
                 <TextView
                     android:id="@+id/lcPlace"
@@ -426,7 +406,7 @@
                     tools:text="Leganés, Madrid"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="@+id/lcDate"
+                    app:layout_constraintEnd_toEndOf="@+id/lcTrack"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/lcName"
                     app:layout_constraintTop_toBottomOf="@+id/lcName" />
@@ -457,7 +437,7 @@
                     android:textSize="30sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/lcTrackTV"
-                    app:layout_constraintEnd_toEndOf="@+id/lcDate"
+                    app:layout_constraintEnd_toEndOf="@+id/lcTrack"
                     app:layout_constraintTop_toBottomOf="@+id/lcName" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

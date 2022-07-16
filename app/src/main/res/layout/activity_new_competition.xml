@@ -18,12 +18,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="@string/date"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dateText"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
@@ -42,12 +44,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="@string/place"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateTextText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextPlace"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -63,12 +67,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="@string/championship"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/placeText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextCompetitionName"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -79,6 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/tv_type_competition"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="@+id/competitionNameText"
@@ -99,6 +106,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="@string/type_pc"
+            android:fontFamily="@font/kdam_font"
             android:textSize="16sp" />
 
         <RadioButton
@@ -106,6 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/type_al"
+            android:fontFamily="@font/kdam_font"
             android:textSize="16sp" />
 
         <RadioButton
@@ -113,6 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/type_cross"
+            android:fontFamily="@font/kdam_font"
             android:textSize="16sp" />
 
         <RadioButton
@@ -120,6 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/type_road"
+            android:fontFamily="@font/kdam_font"
             android:textSize="16sp" />
     </RadioGroup>
 
@@ -132,12 +143,14 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="2dp"
         android:hint="@string/track"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toStartOf="@+id/resultText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupTypeCompetition">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTrack"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -152,12 +165,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="@string/result"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/trackText"
         app:layout_constraintTop_toTopOf="@+id/trackText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextResult"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"

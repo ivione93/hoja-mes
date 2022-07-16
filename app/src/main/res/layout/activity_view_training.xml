@@ -18,12 +18,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="@string/date"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/trainingDateText"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
@@ -37,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/type_training"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/spinnerTypes"
@@ -48,6 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="@+id/trainingDateTextInput"
         app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/trainingDateTextInput"></Spinner>
@@ -60,12 +64,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:hint="@string/time_training"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerTypes">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTrainingTime"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
@@ -82,12 +88,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="4dp"
         android:hint="@string/distance_training"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trainingTimeText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTrainingDistance"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
@@ -102,6 +110,7 @@
         android:layout_marginTop="16dp"
         android:enabled="false"
         android:hint="@string/partial_training"
+        android:fontFamily="@font/kdam_font"
         app:boxStrokeColor="@color/colorPrimary"
         android:textColorHint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="@+id/trainingTimeText"
@@ -110,6 +119,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTrainingPartial"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
@@ -128,12 +138,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:hint="@string/observes"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trainingDistanceText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTrainingObserves"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"/>
@@ -147,6 +159,7 @@
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:text="+ series"
+        android:fontFamily="@font/kdam_font"
         android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/trainingObservesText"
@@ -159,6 +172,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:text="+ cuestas"
+        android:fontFamily="@font/kdam_font"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/trainingObservesText"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -169,6 +183,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="+ fartlek"
+        android:fontFamily="@font/kdam_font"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btnAddSeries"
         app:layout_constraintStart_toStartOf="@+id/btnAddSeries"
@@ -179,6 +194,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="+ gym"
+        android:fontFamily="@font/kdam_font"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btnAddCuestas"
         app:layout_constraintStart_toStartOf="@+id/btnAddCuestas"
@@ -190,6 +206,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="@string/show_extras"
+        android:fontFamily="@font/kdam_font"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btnAddGym"
         app:layout_constraintHorizontal_bias="0.496"
@@ -201,6 +218,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabTextColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/kdam_font"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

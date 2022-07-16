@@ -23,6 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/show_profile"
+            android:fontFamily="@font/kdam_font"
+            android:textSize="16sp"
             android:layout_gravity="center_vertical"
             android:padding="8dp"/>
     </LinearLayout>
@@ -45,6 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_training"
+            android:fontFamily="@font/kdam_font"
+            android:textSize="16sp"
             android:layout_gravity="center_vertical"
             android:padding="8dp"/>
     </LinearLayout>
@@ -67,6 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_competition"
+            android:fontFamily="@font/kdam_font"
+            android:textSize="16sp"
             android:layout_gravity="center_vertical"
             android:padding="8dp"/>
     </LinearLayout>
@@ -89,6 +95,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
+            android:fontFamily="@font/kdam_font"
+            android:textSize="16sp"
             android:layout_gravity="center_vertical"
             android:padding="8dp"/>
     </LinearLayout>

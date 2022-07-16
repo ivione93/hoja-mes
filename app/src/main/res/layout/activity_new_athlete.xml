@@ -18,8 +18,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="50dp"
-            android:fontFamily="sans-serif-smallcaps"
             android:text="@string/registration_details"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +36,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/name"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +46,7 @@
                 android:id="@+id/nombreEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/kdam_font"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,6 +61,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/surname"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +71,7 @@
                 android:id="@+id/apellidosEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/kdam_font"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,6 +86,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/birthday"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:inputType="none"
+                android:fontFamily="@font/kdam_font"
                 android:textIsSelectable="false" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,6 +113,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/email"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,6 +123,7 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/kdam_font"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,6 +138,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/pass"
+            android:fontFamily="@font/kdam_font"
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -139,6 +148,7 @@
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/kdam_font"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -148,6 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/read_and_agree"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintEnd_toEndOf="@+id/passwordText"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/passwordText"
@@ -157,8 +168,8 @@
             android:id="@+id/policiesUrl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-smallcaps"
             android:text="@string/terms_of_use"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/checkPolicies"
@@ -173,8 +184,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:textColor="@color/white"
             android:text="@string/save"
+            android:fontFamily="@font/kdam_font"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/passwordText"
             app:layout_constraintTop_toBottomOf="@+id/checkPolicies" />
 
@@ -185,8 +197,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:backgroundTint="@color/colorPrimary"
-            android:textColor="@color/white"
             android:text="@string/cancel"
+            android:fontFamily="@font/kdam_font"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/btn_save_register"
             app:layout_constraintEnd_toStartOf="@+id/btn_save_register"
             app:layout_constraintTop_toTopOf="@+id/btn_save_register" />

@@ -32,7 +32,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/kdam_font"
             android:text="@string/login_to_continue"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18dp"
@@ -51,6 +51,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/email"
+            android:fontFamily="@font/kdam_font"
             app:startIconDrawable="@drawable/ic_email"
             app:startIconTint="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +62,7 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/kdam_font"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,6 +76,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/pass"
+            android:fontFamily="@font/kdam_font"
             app:startIconDrawable="@drawable/ic_lock"
             app:startIconTint="@color/colorPrimaryDark"
             app:endIconMode="password_toggle"
@@ -86,6 +89,7 @@
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/kdam_font"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,6 +102,7 @@
             android:layout_marginRight="8dp"
             android:clickable="true"
             android:text="@string/recover_pass"
+            android:fontFamily="@font/kdam_font"
             android:textSize="16dp"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="@+id/passwordText"
@@ -113,6 +118,7 @@
             android:backgroundTint="@color/colorPrimary"
             android:padding="12dp"
             android:text="@string/enter"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/btnSignUp"
             app:layout_constraintStart_toStartOf="@+id/passwordText"
@@ -128,6 +134,7 @@
             android:backgroundTint="@color/colorPrimaryDark"
             android:padding="12dp"
             android:text="@string/register"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/passwordText"
             app:layout_constraintStart_toEndOf="@+id/btnSignIn"
@@ -142,6 +149,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintEnd_toEndOf="@+id/btnSignUp"
             app:layout_constraintStart_toStartOf="@+id/btnSignIn"
             app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
@@ -152,8 +160,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
             android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif-smallcaps"
             android:text="@string/developer_by"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -163,8 +171,8 @@
             android:id="@+id/createdBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-smallcaps"
             android:text="@string/ivi"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/guideline3"

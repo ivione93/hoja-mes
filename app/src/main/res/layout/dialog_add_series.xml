@@ -12,6 +12,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:text="@string/distance_series"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/distance_seriesTextInput"
@@ -33,6 +34,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/distance_series"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number" />
@@ -44,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/serie_with_hurdles"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="@+id/tvDistance"
@@ -55,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/serie_with_drags"
+        android:fontFamily="@font/kdam_font"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/distance_seriesTextInput"
@@ -67,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/time_series"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/time_seriesTextInput"
@@ -87,6 +92,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/time_series"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="00h 00:00.00" />
@@ -98,6 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/shoes"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="@+id/time_seriesTextInput"
@@ -120,6 +127,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="@string/normal_shoe"
+            android:fontFamily="@font/kdam_font"
             android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"/>
 
@@ -128,6 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/flying_shoe"
+            android:fontFamily="@font/kdam_font"
             android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"/>
 
@@ -136,6 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spike_shoe"
+            android:fontFamily="@font/kdam_font"
             android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"/>
     </RadioGroup>

@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             tools:text="email@email.com"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/white"
             app:chipBackgroundColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="@+id/photoEditProfile"
@@ -56,12 +57,14 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/name"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailEditProfile">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextName"
+                android:fontFamily="@font/kdam_font"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -77,12 +80,14 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/surname"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nameEditProfile">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editTextTrack"
+                android:fontFamily="@font/kdam_font"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -98,12 +103,14 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="@string/birthday"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/surnameEditProfile">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/birthEditProfile"
+                android:fontFamily="@font/kdam_font"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusable="false"

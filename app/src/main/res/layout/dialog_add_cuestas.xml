@@ -13,6 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="@string/times_cuestas"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/repeticionesCuestasTextInput"
@@ -33,6 +34,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/repeticionesCuestas"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number" />
@@ -43,6 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/type_cuestas"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="@+id/tipoCuestasTextInput"
@@ -63,6 +66,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tipoCuestas"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />

@@ -9,7 +9,7 @@
 
     <item
         android:id="@+id/navigation_trainings"
-        android:icon="@drawable/ic_trainings"
+        android:icon="@drawable/ic_calendar"
         android:enabled="true"
         android:title="@string/title_trainings" />
 

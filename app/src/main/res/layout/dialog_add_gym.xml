@@ -13,6 +13,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/exercise_gym"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +32,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ejercicioGym"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -42,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/times_gym"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="@+id/tvEjercicio"
@@ -60,6 +63,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/repeticionesGym"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -71,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/kilos_gym"
+        android:fontFamily="@font/kdam_font"
         android:textSize="16sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="@+id/tvEjercicio"
@@ -89,6 +94,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/kilosGym"
+            android:fontFamily="@font/kdam_font"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />

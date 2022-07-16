@@ -32,7 +32,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:fontFamily="sans-serif-smallcaps"
+            android:fontFamily="@font/kdam_font"
             android:lines="1"
             android:maxLines="1"
             android:textColor="@color/colorPrimaryDark"
@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:text="Email"
             android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
             app:layout_constraintEnd_toEndOf="@+id/nombreEditText"
             app:layout_constraintStart_toStartOf="@+id/nombreEditText"
@@ -63,6 +64,7 @@
             android:layout_marginTop="12dp"
             tools:text="birthdate"
             android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
             app:layout_constraintStart_toStartOf="@+id/emailTextView"
             app:layout_constraintTop_toTopOf="@+id/photoProfile"
@@ -72,12 +74,12 @@
             android:id="@+id/statistics_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif-smallcaps"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/kdam_font"
             android:text="@string/statistics"
-            android:textStyle="bold"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/photoProfile"
             app:layout_constraintTop_toBottomOf="@+id/photoProfile" />
 
@@ -85,11 +87,11 @@
             android:id="@+id/statistics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@color/colorCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/statistics_title">
@@ -104,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif-smallcaps"
+                    android:fontFamily="@font/kdam_font"
                     android:text="Total de entrenamientos"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
@@ -116,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:fontFamily="sans-serif-smallcaps"
+                    android:fontFamily="@font/kdam_font"
                     android:text="301"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
@@ -132,7 +134,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif-smallcaps"
+                    android:fontFamily="@font/kdam_font"
                     android:text="Total de kilómetros"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
@@ -146,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:fontFamily="sans-serif-smallcaps"
+                    android:fontFamily="@font/kdam_font"
                     android:text="2317,53"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
@@ -163,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
-                    android:fontFamily="sans-serif-smallcaps"
+                    android:fontFamily="@font/kdam_font"
                     android:text="Total de competiciones"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
@@ -177,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:fontFamily="sans-serif-smallcaps"
+                    android:fontFamily="@font/kdam_font"
                     android:text="16"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
@@ -196,14 +198,244 @@
             android:id="@+id/recent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif-smallcaps"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/kdam_font"
             android:text="@string/recently"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/photoProfile"
             app:layout_constraintTop_toBottomOf="@+id/statistics" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLastTraining"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="@color/colorCard"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/ltTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="Ciclismo"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ltDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="16 Jul. 2022"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/ltTimeTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="Tiempo"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/ltTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/ltTitle" />
+
+                <TextView
+                    android:id="@+id/ltTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="1h 37:48 min"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/ltTimeTV"
+                    app:layout_constraintTop_toBottomOf="@+id/ltTimeTV" />
+
+                <TextView
+                    android:id="@+id/ltDistanceTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="Distancia"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/ltTime"
+                    app:layout_constraintTop_toTopOf="@+id/ltTimeTV" />
+
+                <TextView
+                    android:id="@+id/ltDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="30.34 kms"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@+id/ltDistanceTV"
+                    app:layout_constraintTop_toBottomOf="@+id/ltDistanceTV" />
+
+                <TextView
+                    android:id="@+id/ltPartialTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="Media"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/ltDate"
+                    app:layout_constraintTop_toTopOf="@+id/ltTimeTV" />
+
+                <TextView
+                    android:id="@+id/ltPartial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="18.7 /km"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/ltPartialTV"
+                    app:layout_constraintTop_toBottomOf="@+id/ltPartialTV" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardLastCompetition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="@color/colorCard"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardLastTraining">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/lcTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="400 ml"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/lcDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="17 Jun. 2022"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/lcName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:maxLines="1"
+                    android:text="Reunión FAM"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/lcDate"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/lcTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/lcTitle" />
+
+                <TextView
+                    android:id="@+id/lcPlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kdam_font"
+                    android:maxLines="1"
+                    android:text="Leganés, Madrid"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@+id/lcDate"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/lcName"
+                    app:layout_constraintTop_toBottomOf="@+id/lcName" />
+
+                <TextView
+                    android:id="@+id/lcTrackTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:maxLines="1"
+                    android:text="Aire Libre"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/lcPlace"
+                    app:layout_constraintTop_toBottomOf="@+id/lcPlace" />
+
+                <TextView
+                    android:id="@+id/lcResult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/kdam_font"
+                    android:text="54.06"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/lcTrackTV"
+                    app:layout_constraintEnd_toEndOf="@+id/lcDate"
+                    app:layout_constraintTop_toBottomOf="@+id/lcName" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/last_training"
@@ -215,7 +447,7 @@
             app:cardCornerRadius="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recent">
+            app:layout_constraintTop_toBottomOf="@+id/cardLastCompetition">
 
             <FrameLayout
                 android:layout_width="5dp"
@@ -633,7 +865,7 @@
                     android:scaleX="0.7"
                     android:scaleY="0.7"
                     android:src="@drawable/ic_location"
-                    android:tint="@color/colorPrimaryDark"
+                    app:tint="@color/colorPrimaryDark"
                     app:layout_constraintEnd_toStartOf="@+id/last_competition_place"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"

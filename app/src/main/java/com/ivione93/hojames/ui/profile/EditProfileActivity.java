@@ -11,9 +11,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +21,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -34,15 +36,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
-import com.ivione93.hojames.model.Competition;
-import com.ivione93.hojames.model.Training;
 import com.ivione93.hojames.ui.login.AuthActivity;
 
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,12 +52,10 @@ public class EditProfileActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     CircleImageView photoEditProfile;
-    TextView emailEditProfile, totalEntrenamientosPerfil, totalCompeticionesPerfil, totalKmEntrenamientosPerfil;
-    TextView totalCarrera, totalCiclismo, totalCinta, totalEliptica, totalCiclismoSala;
-    TextView totalPC, totalAL, totalCross, totalRuta;
+    Chip emailEditProfile;
     TextInputLayout nameEditProfile, surnameEditProfile;
     EditText birthEditProfile;
-    Button btnDeleteUser;
+    ImageButton btnOptions;
 
     String email;
     Uri photoUrl;
@@ -139,24 +136,24 @@ public class EditProfileActivity extends AppCompatActivity {
         birthEditProfile.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));
         datePicker.addOnPositiveButtonClickListener(selection -> birthEditProfile.setText(datePicker.getHeaderText()));
 
-        totalEntrenamientosPerfil = findViewById(R.id.totalEntrenamientosPerfil);
-        totalCompeticionesPerfil = findViewById(R.id.totalCompeticionesPerfil);
-        totalKmEntrenamientosPerfil = findViewById(R.id.totalKmEntrenamientosPerfil);
+        btnOptions = findViewById(R.id.btnOptions);
 
-        totalCarrera = findViewById(R.id.totalCarrera);
-        totalCiclismo = findViewById(R.id.totalCiclismo);
-        totalCinta = findViewById(R.id.totalCinta);
-        totalEliptica = findViewById(R.id.totalEliptica);
-        totalCiclismoSala = findViewById(R.id.totalCiclismoSala);
+        btnOptions.setOnClickListener(v -> {
+            showBottomSheetDialog();
+        });
+    }
 
-        totalPC = findViewById(R.id.totalPC);
-        totalAL = findViewById(R.id.totalAL);
-        totalCross = findViewById(R.id.totalCross);
-        totalRuta = findViewById(R.id.totalRuta);
+    private void showBottomSheetDialog() {
 
-        btnDeleteUser = findViewById(R.id.btnDeleteUser);
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_edit_profile);
 
-        btnDeleteUser.setOnClickListener(v -> {
+        LinearLayout delete = bottomSheetDialog.findViewById(R.id.deleteLinearLayout);
+        LinearLayout cancel = bottomSheetDialog.findViewById(R.id.cancelLinearLayout);
+
+        bottomSheetDialog.show();
+
+        delete.setOnClickListener(v -> {
             AlertDialog.Builder deleteDataUser = new AlertDialog.Builder(this);
             deleteDataUser.setTitle(R.string.delete_user_data);
             deleteDataUser.setMessage(R.string.delete_user_data_confirm);
@@ -184,9 +181,12 @@ public class EditProfileActivity extends AppCompatActivity {
                 });
                 deleteUser.show();
             });
-            deleteDataUser.setNegativeButton(R.string.cancel, (dialog, which) -> finish());
+            deleteDataUser.setNegativeButton(R.string.cancel, (dialog, which) -> bottomSheetDialog.dismiss());
             deleteDataUser.show();
+
         });
+
+        cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
     }
 
     private void deleteUser() {
@@ -339,10 +339,6 @@ public class EditProfileActivity extends AppCompatActivity {
                     } else {
                         birthEditProfile.setText(task.getResult().get("birth").toString());
                     }
-                    totalEntrenamientosPerfil.setText(String.valueOf(getTotalTrainings()));
-                    totalCompeticionesPerfil.setText(String.valueOf(getTotalCompetitions()));
-                    //totalKmEntrenamientosPerfil.setText(String.valueOf(getTotalTrainings()));
-                    //totalCarrera.setText(String.valueOf(getTotalTrainings()));
                 } else {
                     progressDialog.dismiss();
                 }
@@ -355,103 +351,6 @@ public class EditProfileActivity extends AppCompatActivity {
     public static boolean validateDate(String date) {
         String formatDate = "\\d{2}/\\d{2}/\\d{4}";
         return Pattern.matches(formatDate, date);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public Integer getTotalTrainings() {
-        AtomicReference<Integer> count = new AtomicReference<>(0);
-        AtomicReference<Float> countKm = new AtomicReference<>(0.0f);
-        //Entrenamientos
-        AtomicReference<Integer> countCarrera = new AtomicReference<>(0);
-        AtomicReference<Float> countCarreraKm = new AtomicReference<>(0.0f);
-        AtomicReference<Integer> countCiclismo = new AtomicReference<>(0);
-        AtomicReference<Float> countCiclismoKm = new AtomicReference<>(0.0f);
-        AtomicReference<Integer> countCinta = new AtomicReference<>(0);
-        AtomicReference<Float> countCintaKm = new AtomicReference<>(0.0f);
-        AtomicReference<Integer> countEliptica = new AtomicReference<>(0);
-        AtomicReference<Float> countElipticaKm = new AtomicReference<>(0.0f);
-        AtomicReference<Integer> countCiclismoSala = new AtomicReference<>(0);
-        AtomicReference<Float> countCiclismoSalaKm = new AtomicReference<>(0.0f);
-        db.collection("trainings").whereEqualTo("email", email).get()
-                .addOnCompleteListener(task -> {
-                    count.set(0);
-                    countKm.set(0f);
-                    countCarrera.set(0);
-                    countCarreraKm.set(0f);
-                    if (task.isSuccessful()) {
-                        for (DocumentSnapshot snap : task.getResult()) {
-                            Training training = snap.toObject(Training.class);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                if (training.email.equals(email)) {
-                                    count.updateAndGet(v -> v + 1);
-                                    countKm.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    if (training.type == null || training.type.equals("Carrera")) {
-                                        countCarrera.updateAndGet(v -> v + 1);
-                                        countCarreraKm.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    } else if (training.type != null && training.type.equals("Ciclismo")) {
-                                        countCiclismo.updateAndGet(v -> v + 1);
-                                        countCiclismoKm.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    } else if (training.type != null && training.type.equals("Carrera en cinta")) {
-                                        countCinta.updateAndGet(v -> v + 1);
-                                        countCintaKm.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    } else if (training.type != null && training.type.equals("Elíptica")) {
-                                        countEliptica.updateAndGet(v -> v + 1);
-                                        countElipticaKm.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    } else if (training.type != null && training.type.equals("Ciclismo en sala")) {
-                                        countCiclismoSala.updateAndGet(v -> v + 1);
-                                        countCiclismoSalaKm.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    }
-                                }
-                            }
-                        }
-                        totalEntrenamientosPerfil.setText(String.valueOf(count.get()));
-                        totalKmEntrenamientosPerfil.setText(String.format("%.02f", countKm.get()));
-                        totalCarrera.setText(String.format("%.02f", countCarreraKm.get()) + " (" + countCarrera.get() + ")");
-                        totalCiclismo.setText(String.format("%.02f", countCiclismoKm.get()) + " (" + countCiclismo.get() + ")");
-                        totalCinta.setText(String.format("%.02f", countCintaKm.get()) + " (" + countCinta.get() + ")");
-                        totalEliptica.setText(String.format("%.02f", countElipticaKm.get()) + " (" + countEliptica.get() + ")");
-                        totalCiclismoSala.setText(String.format("%.02f", countCiclismoSalaKm.get()) + " (" + countCiclismoSala.get() + ")");
-                    }
-                });
-        return count.get();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public Integer getTotalCompetitions() {
-        AtomicReference<Integer> count = new AtomicReference<>(0);
-        AtomicReference<Integer> countPC = new AtomicReference<>(0);
-        AtomicReference<Integer> countAL = new AtomicReference<>(0);
-        AtomicReference<Integer> countCross = new AtomicReference<>(0);
-        AtomicReference<Integer> countRuta = new AtomicReference<>(0);
-        db.collection("competitions").whereEqualTo("email", email).get()
-                .addOnCompleteListener(task -> {
-                    count.set(0);
-                    if (task.isSuccessful()) {
-                        for (DocumentSnapshot snap : task.getResult()) {
-                            Competition competition = snap.toObject(Competition.class);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                if (competition.email.equals(email)) {
-                                    count.updateAndGet(v -> v + 1);
-                                    if (competition.type != null && competition.type.equals("PC")) {
-                                        countPC.updateAndGet(v -> v + 1);
-                                    } else if (competition.type != null && competition.type.equals("AL")) {
-                                        countAL.updateAndGet(v -> v + 1);
-                                    } else if (competition.type != null && competition.type.equals("Cross")) {
-                                        countCross.updateAndGet(v -> v + 1);
-                                    } else if (competition.type != null && competition.type.equals("Ruta")) {
-                                        countRuta.updateAndGet(v -> v + 1);
-                                    }
-                                }
-                            }
-                        }
-                        totalCompeticionesPerfil.setText(String.valueOf(count.get()));
-                        totalPC.setText(String.valueOf(countPC.get()));
-                        totalAL.setText(String.valueOf(countAL.get()));
-                        totalCross.setText(String.valueOf(countCross.get()));
-                        totalRuta.setText(String.valueOf(countRuta.get()));
-                    }
-                });
-        return count.get();
     }
 
     private void saveEditProfile() throws ParseException {

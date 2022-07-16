@@ -6,17 +6,7 @@
         android:title="@string/options"
         android:icon="@drawable/ic_apps"
         android:iconTint="@color/white"
-        app:showAsAction="ifRoom" >
-
-        <menu>
-            <item android:id="@+id/menu_edit_profile"
-                android:title="@string/show_profile" />
-            <item android:id="@+id/menu_add_training_profile"
-                android:title="@string/add_training" />
-            <item android:id="@+id/menu_add_competition_profile"
-                android:title="@string/add_competition" />
-        </menu>
-    </item>
+        app:showAsAction="ifRoom|collapseActionView" />
 
     <item android:id="@+id/menu_log_out"
         android:title="@string/log_out"

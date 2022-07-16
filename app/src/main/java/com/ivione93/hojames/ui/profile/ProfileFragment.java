@@ -2,6 +2,7 @@ package com.ivione93.hojames.ui.profile;
 
 import android.app.ProgressDialog;
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.Timestamp;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -152,25 +155,8 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_edit_profile) {
-            Intent editProfile = new Intent(getActivity(), EditProfileActivity.class);
-            editProfile.putExtra("email", email);
-            if (photoUrl != null) {
-                editProfile.putExtra("photoUrl", photoUrl.toString());
-            }
-            getContext().startActivity(editProfile);
-        }
-        if (item.getItemId() == R.id.menu_add_training_profile) {
-            Intent viewTraining = new Intent(getActivity(), ViewTrainingActivity.class);
-            viewTraining.putExtra("email", email);
-            viewTraining.putExtra("dateSelected", dateSelected);
-            getContext().startActivity(viewTraining);
-        }
-        if (item.getItemId() == R.id.menu_add_competition_profile) {
-            Intent newCompetition = new Intent(getActivity(), NewCompetitionActivity.class);
-            newCompetition.putExtra("isNew", true);
-            newCompetition.putExtra("email", email);
-            getContext().startActivity(newCompetition);
+        if (item.getItemId() == R.id.menu_profile_options) {
+            showBottomSheetDialog();
         }
         if (item.getItemId() == R.id.menu_log_out) {
             // Borrado datos inicio de sesion
@@ -200,6 +186,46 @@ public class ProfileFragment extends Fragment {
                     .show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showBottomSheetDialog() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_profile);
+
+        LinearLayout editProfileL = bottomSheetDialog.findViewById(R.id.editProfileL);
+        LinearLayout addTrainingL = bottomSheetDialog.findViewById(R.id.addTrainingL);
+        LinearLayout addCompetitionL = bottomSheetDialog.findViewById(R.id.addCompetitionL);
+        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
+
+        bottomSheetDialog.show();
+
+        editProfileL.setOnClickListener(v -> {
+            Intent editProfile = new Intent(getActivity(), EditProfileActivity.class);
+            editProfile.putExtra("email", email);
+            if (photoUrl != null) {
+                editProfile.putExtra("photoUrl", photoUrl.toString());
+            }
+            bottomSheetDialog.dismiss();
+            getContext().startActivity(editProfile);
+        });
+
+        addTrainingL.setOnClickListener(v -> {
+            Intent viewTraining = new Intent(getActivity(), ViewTrainingActivity.class);
+            viewTraining.putExtra("email", email);
+            viewTraining.putExtra("dateSelected", dateSelected);
+            bottomSheetDialog.dismiss();
+            getContext().startActivity(viewTraining);
+        });
+
+        addCompetitionL.setOnClickListener(v -> {
+            Intent newCompetition = new Intent(getActivity(), NewCompetitionActivity.class);
+            newCompetition.putExtra("isNew", true);
+            newCompetition.putExtra("email", email);
+            bottomSheetDialog.dismiss();
+            getContext().startActivity(newCompetition);
+        });
+
+        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
     }
 
     private void setup(View root, String email) {

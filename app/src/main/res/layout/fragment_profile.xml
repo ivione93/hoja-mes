@@ -200,6 +200,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recent">
 
+            <FrameLayout
+                android:background="@color/colorPrimaryDark"
+                android:layout_width="5dp"
+                android:layout_height="match_parent"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -229,7 +234,7 @@
                     android:fontFamily="@font/kdam_font"
                     tools:text="16 Jul. 2022"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -242,7 +247,7 @@
                     android:fontFamily="@font/kdam_font"
                     tools:text="Ciclismo"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -338,6 +343,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardLastTraining">
 
+            <FrameLayout
+                android:background="@color/colorPrimary"
+                android:layout_width="5dp"
+                android:layout_height="match_parent"/>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -363,7 +373,7 @@
                     android:fontFamily="@font/kdam_font"
                     tools:text="17 Jun. 2022"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -376,7 +386,7 @@
                     android:fontFamily="@font/kdam_font"
                     tools:text="400 ml"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

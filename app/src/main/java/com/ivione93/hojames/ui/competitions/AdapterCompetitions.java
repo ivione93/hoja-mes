@@ -106,7 +106,7 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
             super(itemView);
             name = itemView.findViewById(R.id.competitionNameText);
             place = itemView.findViewById(R.id.placeText);
-            track = itemView.findViewById(R.id.surnameText);
+            track = itemView.findViewById(R.id.cTrackText);
             result = itemView.findViewById(R.id.resultText);
             date = itemView.findViewById(R.id.dateText);
             type = itemView.findViewById(R.id.typeText);

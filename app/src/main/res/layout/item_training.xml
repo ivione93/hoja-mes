@@ -1,72 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cvCompetitions"
+    app:cardBackgroundColor="@color/colorCardTraining"
+    android:id="@+id/cardTraining"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    app:cardCornerRadius="15dp">
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    app:cardCornerRadius="10dp">
 
     <FrameLayout
-        android:background="@color/colorText"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="5dp"
         android:layout_height="match_parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/trainingLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/card_view_training_border">
+        android:layout_height="wrap_content" >
+        <!-- android:background="@drawable/card_view_training_border"-->
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:alpha="0.10"
             android:background="@drawable/bg_training"
-            android:backgroundTint="@color/colorText"
-            android:alpha="0.20"
+            android:backgroundTint="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/title_partial"
-            app:layout_constraintStart_toStartOf="@+id/title_distance"
-            app:layout_constraintTop_toTopOf="@+id/divider3" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
-            app:tint="@color/colorText"
-            android:padding="4dp"
-            android:src="@drawable/ic_trainings"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/itemTrainingDistance"
+            app:layout_constraintTop_toTopOf="@+id/itemTrainingType" />
 
         <TextView
             android:id="@+id/itemTrainingDate"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/kdam_font"
             android:maxLines="1"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:textColor="@color/colorText"
-            android:fontFamily="sans-serif-smallcaps"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3"
-            tools:text="12/12/2020" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="16 jul. 2022" />
 
         <ImageButton
             android:id="@+id/ibOptionsTraining"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@null"
-            app:tint="@color/colorText"
+            app:tint="@color/colorPrimaryDark"
             android:onClick="showPopup"
             android:src="@drawable/ic_menu"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,26 +67,24 @@
             android:id="@+id/itemTrainingType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            tools:text="@string/warm_up"
-            android:textSize="16sp"
-            android:textStyle="italic"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintStart_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/itemTrainingDate"
+            app:layout_constraintEnd_toStartOf="@+id/ibOptionsTraining"
+            app:layout_constraintTop_toTopOf="@+id/itemTrainingDate"
+            tools:text="@string/type_run" />
 
         <TextView
             android:id="@+id/title_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/kdam_font"
             android:text="@string/time_lt"
-            android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/itemTrainingDate"
             app:layout_constraintTop_toBottomOf="@+id/itemTrainingType" />
 
         <TextView
@@ -103,6 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/distance_lt"
+            android:fontFamily="@font/kdam_font"
             android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,24 +104,23 @@
             android:id="@+id/title_partial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/kdam_font"
             android:text="@string/rate_lt"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/ibOptionsTraining"
             app:layout_constraintTop_toTopOf="@+id/title_time" />
 
         <TextView
             android:id="@+id/itemTrainingTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/title_time"
             app:layout_constraintTop_toBottomOf="@+id/title_time"
             tools:text="10h 30:00 min" />
 
@@ -139,7 +128,8 @@
             android:id="@+id/itemTrainingDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10 km"
+            tools:text="10 km"
+            android:fontFamily="@font/kdam_font"
             android:textSize="18sp"
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="@+id/title_distance"
@@ -151,7 +141,8 @@
             android:id="@+id/itemTrainingPartial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4:00 /km"
+            tools:text="4:00 /km"
+            android:fontFamily="@font/kdam_font"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
@@ -167,11 +158,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="Series"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimaryDark"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/itemTrainingType"
-            app:layout_constraintTop_toBottomOf="@+id/itemTrainingTime"
-            android:visibility="invisible"/>
+            app:layout_constraintStart_toStartOf="@+id/itemTrainingDate"
+            app:layout_constraintTop_toBottomOf="@+id/itemTrainingTime" />
 
         <ImageView
             android:id="@+id/ivIndicadorSeries"
@@ -195,6 +187,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="Cuestas"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimaryDark"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -223,6 +216,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="Fartlek"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimaryDark"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -251,6 +245,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="Gym"
+            android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimaryDark"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -276,25 +271,14 @@
             android:id="@+id/ivIndicadorObserves"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
             android:src="@drawable/ic_observes"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/itemTrainingType"
-            app:layout_constraintStart_toEndOf="@+id/itemTrainingType"
+            app:layout_constraintEnd_toStartOf="@+id/itemTrainingType"
             app:layout_constraintTop_toTopOf="@+id/itemTrainingType"
             app:tint="@color/colorPrimary" />
 
-        <View
-            android:id="@+id/divider3"
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:background="@color/colorText"
-            app:layout_constraintBottom_toTopOf="@+id/itemTrainingType"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemTrainingDate" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

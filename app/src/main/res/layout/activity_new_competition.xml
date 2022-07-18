@@ -12,10 +12,10 @@
         style="@style/outlinedTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginRight="8dp"
         android:hint="@string/date"
         android:fontFamily="@font/kdam_font"
@@ -38,11 +38,9 @@
         style="@style/outlinedTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="16dp"
         android:hint="@string/place"
         android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,11 +59,9 @@
         style="@style/outlinedTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="16dp"
         android:hint="@string/championship"
         android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,11 +79,11 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/tv_type_competition"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/kdam_font"
-        android:textSize="16sp"
+        android:text="@string/tv_type_competition"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/competitionNameText"
         app:layout_constraintTop_toBottomOf="@+id/competitionNameText" />
 
@@ -107,7 +103,7 @@
             android:checked="true"
             android:text="@string/type_pc"
             android:fontFamily="@font/kdam_font"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <RadioButton
             android:id="@+id/radio_al"
@@ -115,7 +111,7 @@
             android:layout_height="wrap_content"
             android:text="@string/type_al"
             android:fontFamily="@font/kdam_font"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <RadioButton
             android:id="@+id/radio_cross"
@@ -123,7 +119,7 @@
             android:layout_height="wrap_content"
             android:text="@string/type_cross"
             android:fontFamily="@font/kdam_font"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <RadioButton
             android:id="@+id/radio_road"
@@ -131,7 +127,7 @@
             android:layout_height="wrap_content"
             android:text="@string/type_road"
             android:fontFamily="@font/kdam_font"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -139,9 +135,9 @@
         style="@style/outlinedTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginEnd="8dp"
         android:hint="@string/track"
         android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toStartOf="@+id/resultText"
@@ -160,10 +156,8 @@
         style="@style/outlinedTextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
         android:hint="@string/result"
         android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"

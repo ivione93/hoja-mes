@@ -49,11 +49,11 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
     @Override
     public void onBindViewHolder(@NonNull AdapterTrainings.ViewHolderTraining holder, int position) {
         holder.trainingLayout.setOnClickListener(v -> {
-            Intent newTraining = new Intent(holder.itemView.getContext(), ViewTrainingActivity.class);
-            newTraining.putExtra("isNew", false);
-            newTraining.putExtra("idTraining", listTrainings.get(position).id);
-            newTraining.putExtra("email", listTrainings.get(position).email);
-            holder.itemView.getContext().startActivity(newTraining);
+            Intent training = new Intent(holder.itemView.getContext(), TrainingActivity.class);
+            training.putExtra("isNew", false);
+            training.putExtra("idTraining", listTrainings.get(position).id);
+            training.putExtra("email", listTrainings.get(position).email);
+            holder.itemView.getContext().startActivity(training);
         });
 
         String partialFormat = " /km";

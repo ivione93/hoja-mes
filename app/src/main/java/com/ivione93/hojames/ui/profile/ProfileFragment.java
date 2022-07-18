@@ -45,6 +45,7 @@ import com.ivione93.hojames.model.Training;
 import com.ivione93.hojames.ui.competitions.CompetitionActivity;
 import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;
 import com.ivione93.hojames.ui.login.AuthActivity;
+import com.ivione93.hojames.ui.trainings.TrainingActivity;
 import com.ivione93.hojames.ui.trainings.ViewTrainingActivity;
 
 import java.util.Date;
@@ -333,11 +334,11 @@ public class ProfileFragment extends Fragment {
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                                 if (documentSnapshot.exists()) {
                                     lastTrainingCV.setOnClickListener(v -> {
-                                        Intent newTraining = new Intent(getContext(), ViewTrainingActivity.class);
-                                        newTraining.putExtra("isNew", false);
-                                        newTraining.putExtra("idTraining", documentSnapshot.get("id").toString());
-                                        newTraining.putExtra("email", email);
-                                        startActivity(newTraining);
+                                        Intent training = new Intent(getContext(), TrainingActivity.class);
+                                        training.putExtra("isNew", false);
+                                        training.putExtra("idTraining", documentSnapshot.get("id").toString());
+                                        training.putExtra("email", email);
+                                        startActivity(training);
                                     });
 
                                     String partialFormat = " /km";

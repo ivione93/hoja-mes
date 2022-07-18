@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -54,6 +55,7 @@ public class TrainingActivity extends AppCompatActivity {
     MaterialCardView cardObserves;
     TabLayout tabLayout;
     RecyclerView rvSeries, rvCuestas, rvFartlek, rvGym;
+    ImageView ivIndicadorSeries, ivIndicadorCuestas, ivIndicadorGym, ivIndicadorFartlek;
 
     String email, dateSelected, id;
     Boolean isNew;
@@ -182,6 +184,11 @@ public class TrainingActivity extends AppCompatActivity {
         cardObserves = findViewById(R.id.cardObserves);
         tObserves = findViewById(R.id.tObserves);
 
+        ivIndicadorSeries = findViewById(R.id.ivIndicadorSeries);
+        ivIndicadorCuestas = findViewById(R.id.ivIndicadorCuestas);
+        ivIndicadorGym = findViewById(R.id.ivIndicadorGym);
+        ivIndicadorFartlek = findViewById(R.id.ivIndicadorFartlek);
+
         rvSeries = findViewById(R.id.rvSeries);
         rvCuestas = findViewById(R.id.rvCuestas);
         rvFartlek = findViewById(R.id.rvFartlek);
@@ -270,6 +277,50 @@ public class TrainingActivity extends AppCompatActivity {
                         cardObserves.setVisibility(View.INVISIBLE);
                     }
 
+                }
+            }
+        });
+        // check series
+        db.collection("series").whereEqualTo("idTraining", id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot document = task.getResult();
+                if (document.isEmpty()) {
+                    ivIndicadorSeries.setColorFilter(getResources().getColor(R.color.colorText));
+                } else {
+                    ivIndicadorSeries.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                }
+            }
+        });
+        // check cuestas
+        db.collection("cuestas").whereEqualTo("idTraining", id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot document = task.getResult();
+                if (document.isEmpty()) {
+                    ivIndicadorCuestas.setColorFilter(getResources().getColor(R.color.colorText));
+                } else {
+                    ivIndicadorCuestas.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                }
+            }
+        });
+        // check fartlek
+        db.collection("fartlek").whereEqualTo("idTraining", id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot document = task.getResult();
+                if (document.isEmpty()) {
+                    ivIndicadorFartlek.setColorFilter(getResources().getColor(R.color.colorText));
+                } else {
+                    ivIndicadorFartlek.setColorFilter(getResources().getColor(R.color.colorPrimary));
+                }
+            }
+        });
+        // check gym
+        db.collection("gym").whereEqualTo("idTraining", id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot document = task.getResult();
+                if (document.isEmpty()) {
+                    ivIndicadorGym.setColorFilter(getResources().getColor(R.color.colorText));
+                } else {
+                    ivIndicadorGym.setColorFilter(getResources().getColor(R.color.colorPrimary));
                 }
             }
         });

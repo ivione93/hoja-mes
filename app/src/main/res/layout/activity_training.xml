@@ -20,19 +20,147 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="05 jun. 2022" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardExtras"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="@color/colorCardCompetition"
+        app:layout_constraintBottom_toBottomOf="@+id/tType"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="@+id/tDate">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/seriesTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/kdam_font"
+                android:text="Series"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivIndicadorSeries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_chrono"
+                app:layout_constraintBottom_toBottomOf="@+id/seriesTV"
+                app:layout_constraintEnd_toEndOf="@+id/ivIndicadorCuestas"
+                app:layout_constraintStart_toEndOf="@+id/cuestasTV"
+                app:layout_constraintStart_toStartOf="@+id/ivIndicadorCuestas"
+                app:layout_constraintTop_toTopOf="@+id/seriesTV"
+                app:tint="@color/colorText" />
+
+            <TextView
+                android:id="@+id/cuestasTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/kdam_font"
+                android:text="Cuestas"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/seriesTV"
+                app:layout_constraintTop_toBottomOf="@+id/seriesTV" />
+
+            <ImageView
+                android:id="@+id/ivIndicadorCuestas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_cuestas"
+                app:layout_constraintBottom_toBottomOf="@+id/cuestasTV"
+                app:layout_constraintStart_toEndOf="@+id/cuestasTV"
+                app:layout_constraintTop_toTopOf="@+id/cuestasTV"
+                app:tint="@color/colorText" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/farlekTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/kdam_font"
+                android:text="Fartlek"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/guidelineCard"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivIndicadorFartlek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_fartlek"
+                app:layout_constraintBottom_toBottomOf="@+id/farlekTV"
+                app:layout_constraintStart_toEndOf="@+id/farlekTV"
+                app:layout_constraintTop_toTopOf="@+id/farlekTV"
+                app:tint="@color/colorText" />
+
+            <TextView
+                android:id="@+id/gymTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/kdam_font"
+                android:text="Gym"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/guidelineCard"
+                app:layout_constraintTop_toBottomOf="@+id/farlekTV" />
+
+            <ImageView
+                android:id="@+id/ivIndicadorGym"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_gym"
+                app:layout_constraintBottom_toBottomOf="@+id/gymTV"
+                app:layout_constraintEnd_toEndOf="@+id/ivIndicadorFartlek"
+                app:layout_constraintStart_toStartOf="@+id/ivIndicadorFartlek"
+                app:layout_constraintTop_toTopOf="@+id/gymTV"
+                app:tint="@color/colorText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
     <TextView
         android:id="@+id/tType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/kdam_font"
-        tools:text="Carrera"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tDate" />
+        app:layout_constraintTop_toBottomOf="@+id/tDate"
+        tools:text="Carrera" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardInfo"
@@ -139,7 +267,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/kdam_font"
         android:text="Observaciones"
         android:textColor="@color/colorPrimaryDark"
@@ -187,7 +315,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/kdam_font"
         android:text="Extras"
         android:textColor="@color/colorPrimaryDark"

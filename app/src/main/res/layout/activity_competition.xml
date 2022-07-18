@@ -34,29 +34,31 @@
         android:id="@+id/cTrack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/kdam_font"
-        tools:text="800 ml"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cType" />
+        app:layout_constraintTop_toBottomOf="@+id/cType"
+        tools:text="800 ml" />
 
     <TextView
         android:id="@+id/cResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/kdam_font"
-        tools:text="02:07.13"
         android:textColor="@color/colorPrimary"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cTrack" />
+        app:layout_constraintTop_toBottomOf="@+id/cTrack"
+        tools:text="02:07.13" />
 
     <TextView
         android:id="@+id/cardNameTv"

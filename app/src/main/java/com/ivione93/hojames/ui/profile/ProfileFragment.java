@@ -42,6 +42,7 @@ import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Competition;
 import com.ivione93.hojames.model.Training;
+import com.ivione93.hojames.ui.competitions.CompetitionActivity;
 import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;
 import com.ivione93.hojames.ui.login.AuthActivity;
 import com.ivione93.hojames.ui.trainings.ViewTrainingActivity;
@@ -280,11 +281,11 @@ public class ProfileFragment extends Fragment {
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         if (documentSnapshot.exists()) {
                             lastCompetitionCV.setOnClickListener(v -> {
-                                Intent newCompetition = new Intent(getContext(), NewCompetitionActivity.class);
-                                newCompetition.putExtra("isNew", false);
-                                newCompetition.putExtra("idCompetition", documentSnapshot.get("id").toString());
-                                newCompetition.putExtra("email", email);
-                                startActivity(newCompetition);
+                                Intent competition = new Intent(getContext(), CompetitionActivity.class);
+                                competition.putExtra("isNew", false);
+                                competition.putExtra("idCompetition", documentSnapshot.get("id").toString());
+                                competition.putExtra("email", email);
+                                startActivity(competition);
                             });
                             last_competition_name.setText(documentSnapshot.get("name").toString());
                             last_competition_place.setText(documentSnapshot.get("place").toString());

@@ -54,11 +54,11 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
         }
 
         holder.competitionLayout.setOnClickListener(v -> {
-            Intent newCompetition = new Intent(holder.itemView.getContext(), NewCompetitionActivity.class);
-            newCompetition.putExtra("isNew", false);
-            newCompetition.putExtra("idCompetition", model.id);
-            newCompetition.putExtra("email", model.email);
-            holder.itemView.getContext().startActivity(newCompetition);
+            Intent competition = new Intent(holder.itemView.getContext(), CompetitionActivity.class);
+            competition.putExtra("isNew", false);
+            competition.putExtra("idCompetition", model.id);
+            competition.putExtra("email", model.email);
+            holder.itemView.getContext().startActivity(competition);
         });
 
         holder.ibOptionsCompetition.setOnClickListener(v -> {

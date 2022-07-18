@@ -8,6 +8,12 @@
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" />
 
+    <item android:id="@+id/menu_edit_competition"
+        android:title="@string/options"
+        android:icon="@drawable/ic_edit"
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom" />
+
     <item android:id="@+id/menu_new_competition"
         android:title="@string/save"
         android:icon="@drawable/ic_save"

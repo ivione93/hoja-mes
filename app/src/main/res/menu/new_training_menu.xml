@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom" />-->
 
     <item android:id="@+id/menu_edit_training"
-        android:title="@string/options"
+        android:title="@string/editar"
         android:icon="@drawable/ic_edit"
     android:iconTint="@color/white"
     app:showAsAction="ifRoom" />
@@ -17,6 +17,12 @@
     <item android:id="@+id/menu_new_training"
         android:title="@string/save"
         android:icon="@drawable/ic_save"
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/menu_options_training"
+        android:title="@string/options"
+        android:icon="@drawable/ic_menu"
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" />
 

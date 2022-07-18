@@ -182,4 +182,5 @@
     <string name="add_training">Añadir entrenamiento</string>
     <string name="add_competition">Añadir competición</string>
     <string name="zero">0</string>
+    <string name="editar">Editar</string>
 </resources>

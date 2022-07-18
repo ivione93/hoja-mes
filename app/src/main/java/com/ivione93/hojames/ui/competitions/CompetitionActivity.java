@@ -3,17 +3,21 @@ package com.ivione93.hojames.ui.competitions;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.chip.Chip;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 
@@ -48,6 +52,7 @@ public class CompetitionActivity extends AppCompatActivity {
             menu.findItem(R.id.menu_share_competition).setVisible(false);
         } else {
             menu.findItem(R.id.menu_new_competition).setVisible(false);
+            menu.findItem(R.id.menu_share_competition).setVisible(false);
         }
         return true;
     }
@@ -63,7 +68,11 @@ public class CompetitionActivity extends AppCompatActivity {
             onBackPressed();
             return true;
         }
+        if (item.getItemId() == R.id.menu_options_competition) {
+            showBottomSheetDialog();
+        }
         if (item.getItemId() == R.id.menu_edit_competition) {
+            editCompetition();
             Intent newCompetition = new Intent(this, NewCompetitionActivity.class);
             newCompetition.putExtra("isNew", false);
             newCompetition.putExtra("idCompetition", id);
@@ -71,27 +80,38 @@ public class CompetitionActivity extends AppCompatActivity {
             startActivity(newCompetition);
         }
         if (item.getItemId() == R.id.menu_share_competition) {
-            try {
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                String msg = "*Hoja del mes*\n" +
-                        "_Mira mi competición del " + cDate.getText().toString() + ":_\n\n" +
-                        "*" + cName.getText() + "*\n" +
-                        "- Lugar: " + cPlace.getText().toString() + "\n" +
-                        "- Prueba: " + cTrack.getText().toString() + "\n" +
-                        "- Marca: " + cResult.getText().toString();
-                sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
-                sendIntent.setType("text/plain");
-
-                Intent shareIntent = Intent.createChooser(sendIntent, "Compartir competición");
-                startActivity(shareIntent);
-            } catch (Exception e) {
-                Toast.makeText(this, "Algo ha ido mal, prueba con otra aplicación", Toast.LENGTH_SHORT)
-                        .show();
-            }
-
+            shareCompetition();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showBottomSheetDialog() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_competition);
+
+        LinearLayout editCompetitionL = bottomSheetDialog.findViewById(R.id.editCompetitionL);
+        LinearLayout shareCompetitionL = bottomSheetDialog.findViewById(R.id.shareCompetitionL);
+        LinearLayout deleteCompetitionL = bottomSheetDialog.findViewById(R.id.deleteCompetitionL);
+        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
+
+        bottomSheetDialog.show();
+
+        editCompetitionL.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            editCompetition();
+        });
+
+        shareCompetitionL.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            shareCompetition();
+        });
+
+        deleteCompetitionL.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            deleteCompetition();
+        });
+
+        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
     }
 
     public void setup(boolean isNew) {
@@ -136,6 +156,55 @@ public class CompetitionActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void editCompetition() {
+        Intent newCompetition = new Intent(this, NewCompetitionActivity.class);
+        newCompetition.putExtra("isNew", false);
+        newCompetition.putExtra("idCompetition", id);
+        newCompetition.putExtra("email", email);
+        startActivity(newCompetition);
+    }
+
+    private void shareCompetition() {
+        try {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            String msg = "*Hoja del mes*\n" +
+                    "_Mira mi competición del " + cDate.getText().toString() + ":_\n\n" +
+                    "*" + cName.getText() + "*\n" +
+                    "- Lugar: " + cPlace.getText().toString() + "\n" +
+                    "- Prueba: " + cTrack.getText().toString() + "\n" +
+                    "- Marca: " + cResult.getText().toString();
+            sendIntent.putExtra(Intent.EXTRA_TEXT, msg);
+            sendIntent.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(sendIntent, "Compartir competición");
+            startActivity(shareIntent);
+        } catch (Exception e) {
+            Toast.makeText(this, "Algo ha ido mal, prueba con otra aplicación", Toast.LENGTH_SHORT)
+                    .show();
+        }
+    }
+
+    private void deleteCompetition() {
+        AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(this);
+        deleteConfirm.setTitle(R.string.delete_competition);
+        deleteConfirm.setMessage(R.string.delete_competition_confirm);
+        deleteConfirm.setCancelable(false);
+        deleteConfirm.setPositiveButton(R.string.accept, (dialog, which) -> {
+            db.collection("competitions").document(id).delete();
+            goProfile(email);
+        });
+        deleteConfirm.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.cancel());
+        deleteConfirm.show();
+    }
+
+    private void goProfile(String email) {
+        Intent profileIntent = new Intent(this, MainActivity.class);
+        profileIntent.putExtra("email", email);
+        startActivity(profileIntent);
+        finish();
     }
 
 }

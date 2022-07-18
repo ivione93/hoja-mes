@@ -20,4 +20,10 @@
         android:iconTint="@color/white"
         app:showAsAction="ifRoom" />
 
+    <item android:id="@+id/menu_options_competition"
+        android:title="@string/options"
+        android:icon="@drawable/ic_menu"
+        android:iconTint="@color/white"
+        app:showAsAction="ifRoom" />
+
 </menu>

@@ -67,6 +67,7 @@ public class NewCompetitionActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.new_competition_menu, menu);
         menu.findItem(R.id.menu_share_competition).setVisible(false);
         menu.findItem(R.id.menu_edit_competition).setVisible(false);
+        menu.findItem(R.id.menu_options_competition).setVisible(false);
         return true;
     }
 

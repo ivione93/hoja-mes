@@ -112,6 +112,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.new_training_menu, menu);
         menu.findItem(R.id.menu_edit_training).setVisible(false);
+        menu.findItem(R.id.menu_options_training).setVisible(false);
         //menu.findItem(R.id.menu_share_training).setVisible(false);
         return true;
     }

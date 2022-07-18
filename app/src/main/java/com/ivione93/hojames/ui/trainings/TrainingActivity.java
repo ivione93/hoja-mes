@@ -6,28 +6,35 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.ivione93.hojames.MainActivity;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
 import com.ivione93.hojames.model.Cuestas;
 import com.ivione93.hojames.model.Fartlek;
 import com.ivione93.hojames.model.Gym;
 import com.ivione93.hojames.model.Series;
+import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;
+import com.ivione93.hojames.ui.profile.EditProfileActivity;
 
 import java.text.ParseException;
 
@@ -75,6 +82,7 @@ public class TrainingActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.new_training_menu, menu);
         if (isNew) {
+            menu.findItem(R.id.menu_options_training).setVisible(false);
             menu.findItem(R.id.menu_edit_training).setVisible(false);
         } else {
             menu.findItem(R.id.menu_new_training).setVisible(false);
@@ -94,12 +102,11 @@ public class TrainingActivity extends AppCompatActivity {
             onBackPressed();
             return true;
         }
+        if (item.getItemId() == R.id.menu_options_training) {
+            showBottomSheetDialog();
+        }
         if (item.getItemId() == R.id.menu_edit_training) {
-            Intent newTraining = new Intent(this, ViewTrainingActivity.class);
-            newTraining.putExtra("isNew", false);
-            newTraining.putExtra("idTraining", id);
-            newTraining.putExtra("email", email);
-            startActivity(newTraining);
+            editTraining();
 
             return true;
         }
@@ -122,6 +129,29 @@ public class TrainingActivity extends AppCompatActivity {
             startActivity(shareIntent);
         }*/
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showBottomSheetDialog() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_training);
+
+        LinearLayout editTrainingL = bottomSheetDialog.findViewById(R.id.editTrainingL);
+        LinearLayout deleteTrainingL = bottomSheetDialog.findViewById(R.id.deleteTrainingL);
+        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
+
+        bottomSheetDialog.show();
+
+        editTrainingL.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            editTraining();
+        });
+
+        deleteTrainingL.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            deleteTraining();
+        });
+
+        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
     }
 
     @Override
@@ -315,5 +345,61 @@ public class TrainingActivity extends AppCompatActivity {
         rvGym.setHasFixedSize(true);
         rvGym.setLayoutManager(new LinearLayoutManager(this));
         rvGym.setAdapter(adapterGym);
+    }
+
+    private void editTraining() {
+        Intent newTraining = new Intent(this, ViewTrainingActivity.class);
+        newTraining.putExtra("isNew", false);
+        newTraining.putExtra("idTraining", id);
+        newTraining.putExtra("email", email);
+        startActivity(newTraining);
+    }
+
+    private void deleteTraining() {
+        AlertDialog.Builder deleteConfirm = new AlertDialog.Builder(this);
+        deleteConfirm.setTitle(R.string.delete_training);
+        deleteConfirm.setMessage(R.string.delete_training_confirm);
+        deleteConfirm.setCancelable(false);
+        deleteConfirm.setPositiveButton(R.string.accept, (dialog, which) -> {
+            db.collection("trainings").document(id).delete();
+            db.collection("series").whereEqualTo("idTraining", id).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                        db.collection("series").document(doc.getId()).delete();
+                    }
+                }
+            });
+            db.collection("cuestas").whereEqualTo("idTraining", id).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                        db.collection("cuestas").document(doc.getId()).delete();
+                    }
+                }
+            });
+            db.collection("fartlek").whereEqualTo("idTraining", id).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                        db.collection("fartlek").document(doc.getId()).delete();
+                    }
+                }
+            });
+            db.collection("gym").whereEqualTo("idTraining", id).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful()){
+                    for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                        db.collection("gym").document(doc.getId()).delete();
+                    }
+                }
+            });
+            goProfile(email);
+        });
+        deleteConfirm.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.cancel());
+        deleteConfirm.show();
+    }
+
+    private void goProfile(String email) {
+        Intent profileIntent = new Intent(this, MainActivity.class);
+        profileIntent.putExtra("email", email);
+        startActivity(profileIntent);
+        finish();
     }
 }

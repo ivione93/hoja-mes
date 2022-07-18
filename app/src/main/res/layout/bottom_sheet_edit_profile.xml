@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/titleEditProfileSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Opciones de cuenta"
+            android:fontFamily="@font/kdam_font"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,13 +37,15 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_delete"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            app:tint="@color/colorPrimaryDark" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Eliminar cuenta"
             android:fontFamily="@font/kdam_font"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
             android:layout_gravity="center_vertical"
             android:padding="8dp"/>
@@ -41,13 +63,15 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_cancel"
-            android:layout_margin="8dp"/>
+            android:layout_margin="8dp"
+            app:tint="@color/colorPrimaryDark"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancelar"
             android:fontFamily="@font/kdam_font"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
             android:layout_gravity="center_vertical"
             android:padding="8dp"/>

@@ -294,17 +294,20 @@ public class ProfileFragment extends Fragment {
                             last_competition_track.setText(documentSnapshot.get("track").toString());
                             last_competition_result.setText(Utils.getFormattedResult(documentSnapshot.get("result").toString()));
                             if(documentSnapshot.get("type") != null) {
-                                last_competition_type.setText(documentSnapshot.get("type").toString());
                                 if (documentSnapshot.get("type").toString().equals(getString(R.string.bd_pc))) {
+                                    last_competition_type.setText(getString(R.string.type_pc));
                                     imageTypeCompetition.setBackground(getResources().getDrawable(R.drawable.bg_pista));
                                 }
                                 if (documentSnapshot.get("type").toString().equals(getString(R.string.bd_al))) {
+                                    last_competition_type.setText(getString(R.string.type_al));
                                     imageTypeCompetition.setBackground(getResources().getDrawable(R.drawable.bg_pista));
                                 }
                                 if (documentSnapshot.get("type").toString().equals(getString(R.string.bd_cross))) {
+                                    last_competition_type.setText(getString(R.string.type_cross));
                                     imageTypeCompetition.setBackground(getResources().getDrawable(R.drawable.bg_cross));
                                 }
                                 if (documentSnapshot.get("type").toString().equals(getString(R.string.bd_road))) {
+                                    last_competition_type.setText(getString(R.string.type_road));
                                     imageTypeCompetition.setBackground(getResources().getDrawable(R.drawable.bg_road));
                                 }
                             }

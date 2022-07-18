@@ -115,14 +115,13 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/typeText"
             app:layout_constraintEnd_toEndOf="@+id/imageTypeCompetition"
-            app:layout_constraintTop_toBottomOf="@+id/competitionNameText"
+            app:layout_constraintTop_toTopOf="@+id/competitionNameText"
             tools:text="55.95" />
 
         <TextView
             android:id="@+id/typeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimaryDark"

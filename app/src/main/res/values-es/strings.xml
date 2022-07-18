@@ -49,8 +49,8 @@
     <string name="track">Prueba *</string>
     <string name="result">Marca *</string>
     <string name="tv_type_competition">Tipo de competición:</string>
-    <string name="type_pc">PC</string>
-    <string name="type_al">AL</string>
+    <string name="type_pc">Pista Cubierta</string>
+    <string name="type_al">Aire Libre</string>
     <string name="type_cross">Cross</string>
     <string name="type_road">Ruta</string>
     <string name="bd_pc">PC</string>

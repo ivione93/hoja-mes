@@ -34,7 +34,7 @@
             android:lines="1"
             android:maxLines="1"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/photoProfile"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/kdam_font"
             android:text="@string/statistics"
-            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="18sp"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/photoProfile"
@@ -179,7 +179,7 @@
             android:layout_marginTop="24dp"
             android:fontFamily="@font/kdam_font"
             android:text="@string/recently"
-            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="18sp"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/photoProfile"
@@ -229,27 +229,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/kdam_font"
-                    tools:text="16 Jul. 2022"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="16 Jul. 2022" />
 
                 <TextView
                     android:id="@+id/ltType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/kdam_font"
-                    tools:text="Ciclismo"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Ciclismo" />
 
                 <TextView
                     android:id="@+id/ltTimeTV"
@@ -368,43 +367,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/kdam_font"
-                    tools:text="17 Jun. 2022"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="17 Jun. 2022" />
 
                 <TextView
                     android:id="@+id/lcTrack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/kdam_font"
-                    tools:text="400 ml"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="400 ml" />
 
                 <TextView
                     android:id="@+id/lcName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/kdam_font"
                     android:maxLines="1"
-                    tools:text="Reunión FAM"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/lcTrack"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/lcDate"
-                    app:layout_constraintTop_toBottomOf="@+id/lcDate" />
+                    app:layout_constraintTop_toBottomOf="@+id/lcDate"
+                    tools:text="Reunión FAM" />
 
                 <TextView
                     android:id="@+id/lcPlace"
@@ -424,30 +423,29 @@
                     android:id="@+id/lcTrackTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/kdam_font"
                     android:maxLines="1"
-                    tools:text="Aire Libre"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/lcPlace"
-                    app:layout_constraintTop_toBottomOf="@+id/lcPlace" />
+                    app:layout_constraintTop_toBottomOf="@+id/lcPlace"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="Aire Libre" />
 
                 <TextView
                     android:id="@+id/lcResult"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
                     android:fontFamily="@font/kdam_font"
-                    tools:text="54.06"
                     android:textColor="@color/colorPrimary"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/lcTrackTV"
                     app:layout_constraintEnd_toEndOf="@+id/lcTrack"
-                    app:layout_constraintTop_toBottomOf="@+id/lcName" />
+                    app:layout_constraintTop_toTopOf="@+id/lcName"
+                    tools:text="54.06" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>

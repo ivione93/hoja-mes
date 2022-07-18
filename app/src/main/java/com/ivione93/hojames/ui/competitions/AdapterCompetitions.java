@@ -38,17 +38,20 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
         holder.result.setText(Utils.getFormattedResult(model.result));
         holder.date.setText(Utils.toString(model.date, holder.itemView.getResources().getString(R.string.format_date)));
         if (model.type != null) {
-            holder.type.setText(model.type);
             if(model.type.equals(holder.itemView.getContext().getString(R.string.bd_pc))) {
+                holder.type.setText(R.string.type_pc);
                 holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_pista));
             }
             if(model.type.equals(holder.itemView.getContext().getString(R.string.bd_al))) {
+                holder.type.setText(R.string.type_al);
                 holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_pista));
             }
             if(model.type.equals(holder.itemView.getContext().getString(R.string.bd_cross))) {
+                holder.type.setText(R.string.type_cross);
                 holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_cross));
             }
             if(model.type.equals(holder.itemView.getContext().getString(R.string.bd_road))) {
+                holder.type.setText(R.string.type_road);
                 holder.imageTypeCompetition.setBackground(holder.itemView.getContext().getResources().getDrawable(R.drawable.bg_road));
             }
         }

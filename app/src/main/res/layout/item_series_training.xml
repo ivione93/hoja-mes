@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/showDistanceSerie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/kdam_font"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/distance_lt" />
+
+    <TextView
+        android:id="@+id/hurdlesSerie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ind_hurdles"
+        android:fontFamily="@font/kdam_font"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="@+id/showDistanceSerie"
+        app:layout_constraintStart_toEndOf="@+id/showDistanceSerie"
+        app:layout_constraintTop_toTopOf="@+id/showDistanceSerie" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.27" />
+
+    <TextView
+        android:id="@+id/showTimeSerie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/kdam_font"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/shoeSerie"
+        app:layout_constraintStart_toEndOf="@+id/guideline01"
+        app:layout_constraintTop_toTopOf="@+id/shoeSerie"
+        tools:text="@string/time_lt" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <TextView
+        android:id="@+id/shoeSerie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/kdam_font"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/showDistanceSerie"
+        app:layout_constraintStart_toStartOf="@+id/guideline02"
+        app:layout_constraintTop_toTopOf="@+id/showDistanceSerie"
+        tools:text="@string/spike_shoe" />
+
+    <TextView
+        android:id="@+id/dragsSerie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kdam_font"
+        android:text=", arrastres"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/showDistanceSerie"
+        app:layout_constraintStart_toEndOf="@+id/shoeSerie"
+        app:layout_constraintTop_toTopOf="@+id/showDistanceSerie" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

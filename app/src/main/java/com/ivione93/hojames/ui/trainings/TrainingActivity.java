@@ -1,11 +1,13 @@
 package com.ivione93.hojames.ui.trainings;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
@@ -32,21 +35,23 @@ public class TrainingActivity extends AppCompatActivity {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference series = db.collection("series");
-    private AdapterSeries adapterSeries;
+    private AdapterSeriesTraining adapterSeries;
     private CollectionReference cuestas = db.collection("cuestas");
-    private AdapterCuestas adapterCuestas;
+    private AdapterCuestasTraining adapterCuestas;
     private CollectionReference fartlek = db.collection("fartlek");
-    private AdapterFartlek adapterFartlek;
+    private AdapterFartlekTraining adapterFartlek;
     private CollectionReference gym = db.collection("gym");
-    private AdapterGym adapterGym;
+    private AdapterGymTraining adapterGym;
 
     TextView tDate, tType, tTime, tDistance, tPartial, tObserves;
+    MaterialCardView cardObserves;
     TabLayout tabLayout;
     RecyclerView rvSeries, rvCuestas, rvFartlek, rvGym;
 
     String email, dateSelected, id;
     Boolean isNew;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -137,12 +142,14 @@ public class TrainingActivity extends AppCompatActivity {
         adapterGym.stopListening();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void setup(Boolean isNew) {
         tDate = findViewById(R.id.tDate);
         tType = findViewById(R.id.tType);
         tDistance = findViewById(R.id.tDistance);
         tTime = findViewById(R.id.tTime);
         tPartial = findViewById(R.id.tPartial);
+        cardObserves = findViewById(R.id.cardObserves);
         tObserves = findViewById(R.id.tObserves);
 
         rvSeries = findViewById(R.id.rvSeries);
@@ -200,6 +207,7 @@ public class TrainingActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void loadTraining(String id) {
         db.collection("trainings").whereEqualTo("id", id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -226,7 +234,12 @@ public class TrainingActivity extends AppCompatActivity {
                         partialFormat = " /km";
                     }
                     tPartial.setText(task.getResult().getDocuments().get(0).get("partial").toString() + partialFormat);
-                    tObserves.setText(task.getResult().getDocuments().get(0).get("observes").toString());
+                    if (task.getResult().getDocuments().get(0).get("observes") != null && !task.getResult().getDocuments().get(0).get("observes").equals("")) {
+                        tObserves.setText(task.getResult().getDocuments().get(0).get("observes").toString());
+                    } else {
+                        cardObserves.setVisibility(View.INVISIBLE);
+                    }
+
                 }
             }
         });
@@ -242,7 +255,7 @@ public class TrainingActivity extends AppCompatActivity {
                 .setQuery(query, Series.class)
                 .build();
 
-        adapterSeries = new AdapterSeries(options);
+        adapterSeries = new AdapterSeriesTraining(options);
 
         rvSeries = findViewById(R.id.rvSeries);
         rvSeries.setHasFixedSize(true);
@@ -260,7 +273,7 @@ public class TrainingActivity extends AppCompatActivity {
                 .setQuery(query, Cuestas.class)
                 .build();
 
-        adapterCuestas = new AdapterCuestas(options);
+        adapterCuestas = new AdapterCuestasTraining(options);
 
         rvCuestas = findViewById(R.id.rvCuestas);
         rvCuestas.setHasFixedSize(true);
@@ -278,7 +291,7 @@ public class TrainingActivity extends AppCompatActivity {
                 .setQuery(query, Fartlek.class)
                 .build();
 
-        adapterFartlek = new AdapterFartlek(options);
+        adapterFartlek = new AdapterFartlekTraining(options);
 
         rvFartlek = findViewById(R.id.rvFartlek);
         rvFartlek.setHasFixedSize(true);
@@ -296,7 +309,7 @@ public class TrainingActivity extends AppCompatActivity {
                 .setQuery(query, Gym.class)
                 .build();
 
-        adapterGym = new AdapterGym(options);
+        adapterGym = new AdapterGymTraining(options);
 
         rvGym = findViewById(R.id.rvGym);
         rvGym.setHasFixedSize(true);

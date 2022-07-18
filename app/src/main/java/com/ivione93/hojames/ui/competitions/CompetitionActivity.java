@@ -73,11 +73,6 @@ public class CompetitionActivity extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.menu_edit_competition) {
             editCompetition();
-            Intent newCompetition = new Intent(this, NewCompetitionActivity.class);
-            newCompetition.putExtra("isNew", false);
-            newCompetition.putExtra("idCompetition", id);
-            newCompetition.putExtra("email", email);
-            startActivity(newCompetition);
         }
         if (item.getItemId() == R.id.menu_share_competition) {
             shareCompetition();

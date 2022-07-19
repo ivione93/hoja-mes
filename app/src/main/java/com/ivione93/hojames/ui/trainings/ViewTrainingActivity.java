@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
@@ -38,6 +39,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.Timestamp;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.firestore.CollectionReference;
@@ -544,73 +546,102 @@ public class ViewTrainingActivity extends AppCompatActivity {
     private void showBottomSheetSeriesDialog() {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.bottom_sheet_add_series);
+        bottomSheetDialog.setCanceledOnTouchOutside(false);
+        bottomSheetDialog.setCancelable(false);
 
-        LinearLayout saveSerieL = bottomSheetDialog.findViewById(R.id.saveSerieL);
+        ImageView saveSerieIV = bottomSheetDialog.findViewById(R.id.saveSerieIV);
+        MaterialTextView saveSerieTV = bottomSheetDialog.findViewById(R.id.saveSerieTV);
         EditText timeSeries = bottomSheetDialog.findViewById(R.id.time_series);
         timeSeries.setOnClickListener((View.OnClickListener) v1 -> {
             selectSerieTimePicker(v1).show();
         });
-        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
+        ImageView cancel = bottomSheetDialog.findViewById(R.id.cancel);
 
         bottomSheetDialog.show();
 
-        saveSerieL.setOnClickListener(v -> {
+        saveSerieIV.setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
             addSeries(bottomSheetDialog);
         });
 
-        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        saveSerieTV.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            addSeries(bottomSheetDialog);
+        });
+
+        cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
     }
 
     private void showBottomSheetCuestasDialog() {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.bottom_sheet_add_cuestas);
+        bottomSheetDialog.setCanceledOnTouchOutside(false);
+        bottomSheetDialog.setCancelable(false);
 
-        LinearLayout saveCuestaL = bottomSheetDialog.findViewById(R.id.saveCuestaL);
-        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
+        ImageView saveCuestaIV = bottomSheetDialog.findViewById(R.id.saveCuestaIV);
+        MaterialTextView saveCuestaTV = bottomSheetDialog.findViewById(R.id.saveCuestaTV);
+        ImageView cancel = bottomSheetDialog.findViewById(R.id.cancel);
 
         bottomSheetDialog.show();
 
-        saveCuestaL.setOnClickListener(v -> {
+        saveCuestaIV.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            addCuestas(bottomSheetDialog);
+        });
+        saveCuestaTV.setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
             addCuestas(bottomSheetDialog);
         });
 
-        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
     }
 
     private void showBottomSheetFartlekDialog() {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.bottom_sheet_add_fartlek);
+        bottomSheetDialog.setCanceledOnTouchOutside(false);
+        bottomSheetDialog.setCancelable(false);
 
-        LinearLayout saveFartlekL = bottomSheetDialog.findViewById(R.id.saveFartlekL);
-        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
+        ImageView saveFartlekIV = bottomSheetDialog.findViewById(R.id.saveFartlekIV);
+        MaterialTextView saveFartlekTV = bottomSheetDialog.findViewById(R.id.saveFartlekTV);
+        ImageView cancel = bottomSheetDialog.findViewById(R.id.cancel);
 
         bottomSheetDialog.show();
 
-        saveFartlekL.setOnClickListener(v -> {
+        saveFartlekIV.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            addFartlek(bottomSheetDialog);
+        });
+        saveFartlekTV.setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
             addFartlek(bottomSheetDialog);
         });
 
-        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
     }
 
     private void showBottomSheetGymDialog() {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.bottom_sheet_add_gym);
+        bottomSheetDialog.setCanceledOnTouchOutside(false);
+        bottomSheetDialog.setCancelable(false);
 
-        LinearLayout saveGymL = bottomSheetDialog.findViewById(R.id.saveGymL);
-        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
+        ImageView saveGymIV = bottomSheetDialog.findViewById(R.id.saveGymIV);
+        MaterialTextView saveGymTV = bottomSheetDialog.findViewById(R.id.saveGymTV);
+        ImageView cancel = bottomSheetDialog.findViewById(R.id.cancel);
 
         bottomSheetDialog.show();
 
-        saveGymL.setOnClickListener(v -> {
+        saveGymIV.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            addGym(bottomSheetDialog);
+        });
+        saveGymTV.setOnClickListener(v -> {
             bottomSheetDialog.dismiss();
             addGym(bottomSheetDialog);
         });
 
-        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
     }
 
     private void addSeries(BottomSheetDialog v) {

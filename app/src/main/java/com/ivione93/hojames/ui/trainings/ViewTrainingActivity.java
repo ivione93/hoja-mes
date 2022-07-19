@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -29,6 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -303,10 +305,10 @@ public class ViewTrainingActivity extends AppCompatActivity {
             trainingDateText.setText(dateSelected);
         }
 
-        btnAddSeries.setOnClickListener(v -> createAddSeriesDialog().show());
-        btnAddCuestas.setOnClickListener(v -> createAddCuestasDialog().show());
-        btnAddFartlek.setOnClickListener(v -> createAddFartlekDialog().show());
-        btnAddGym.setOnClickListener(v -> createAddGymDialog().show());
+        btnAddSeries.setOnClickListener(v -> showBottomSheetSeriesDialog());//createAddSeriesDialog().show());
+        btnAddCuestas.setOnClickListener(v -> showBottomSheetCuestasDialog());//createAddCuestasDialog().show());
+        btnAddFartlek.setOnClickListener(v -> showBottomSheetFartlekDialog());//createAddFartlekDialog().show());
+        btnAddGym.setOnClickListener(v -> showBottomSheetGymDialog());//createAddGymDialog().show());
         btnShowExtras.setOnClickListener(v -> createViewExtrasDialog().show());
     }
 
@@ -538,24 +540,75 @@ public class ViewTrainingActivity extends AppCompatActivity {
         finish();
     }
 
-    public AlertDialog createAddSeriesDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.dialog_add_series, null);
+    private void showBottomSheetSeriesDialog() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_add_series);
 
-        builder.setTitle(R.string.add_serie);
-        builder.setView(v)
-                .setPositiveButton(R.string.add, (dialog, which) -> {
-                    addSeries(v);
-                })
-                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+        LinearLayout saveSerieL = bottomSheetDialog.findViewById(R.id.saveSerieL);
+        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
 
-                });
+        bottomSheetDialog.show();
 
-        return builder.create();
+        saveSerieL.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            addSeries(bottomSheetDialog);
+        });
+
+        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
     }
 
-    private void addSeries(View v) {
+    private void showBottomSheetCuestasDialog() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_add_cuestas);
+
+        LinearLayout saveCuestaL = bottomSheetDialog.findViewById(R.id.saveCuestaL);
+        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
+
+        bottomSheetDialog.show();
+
+        saveCuestaL.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            addCuestas(bottomSheetDialog);
+        });
+
+        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+    }
+
+    private void showBottomSheetFartlekDialog() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_add_fartlek);
+
+        LinearLayout saveFartlekL = bottomSheetDialog.findViewById(R.id.saveFartlekL);
+        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
+
+        bottomSheetDialog.show();
+
+        saveFartlekL.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            addFartlek(bottomSheetDialog);
+        });
+
+        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+    }
+
+    private void showBottomSheetGymDialog() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_add_gym);
+
+        LinearLayout saveGymL = bottomSheetDialog.findViewById(R.id.saveGymL);
+        LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
+
+        bottomSheetDialog.show();
+
+        saveGymL.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            addGym(bottomSheetDialog);
+        });
+
+        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+    }
+
+    private void addSeries(BottomSheetDialog v) {
         EditText distanceSeries, timeSeries;
         distanceSeries = v.findViewById(R.id.distance_series);
         timeSeries = v.findViewById(R.id.time_series);
@@ -601,24 +654,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         return Pattern.matches(formatoHora, time);
     }
 
-    public AlertDialog createAddCuestasDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.dialog_add_cuestas, null);
-
-        builder.setTitle(R.string.add_cuestas);
-        builder.setView(v)
-                .setPositiveButton(R.string.add, (dialog, which) -> {
-                    addCuestas(v);
-                })
-                .setNegativeButton(R.string.cancel, (dialog, which) -> {
-
-                });
-
-        return builder.create();
-    }
-
-    private void addCuestas(View v) {
+    private void addCuestas(BottomSheetDialog v) {
         EditText repeticionesCuestas, tipoCuestas;
         tipoCuestas = v.findViewById(R.id.tipoCuestas);
         repeticionesCuestas = v.findViewById(R.id.repeticionesCuestas);
@@ -635,24 +671,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         }
     }
 
-    public AlertDialog createAddFartlekDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.dialog_add_fartlek, null);
-
-        builder.setTitle(R.string.add_fartlek);
-        builder.setView(v)
-                .setPositiveButton(R.string.add, (dialog, which) -> {
-                    addFartlek(v);
-                })
-                .setNegativeButton(R.string.cancel, (dialog, which) -> {
-
-                });
-
-        return builder.create();
-    }
-
-    private void addFartlek(View v) {
+    private void addFartlek(BottomSheetDialog v) {
         EditText fartlekFartlek;
         fartlekFartlek = v.findViewById(R.id.fartlekFartlek);
 
@@ -667,24 +686,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         }
     }
 
-    public AlertDialog createAddGymDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.dialog_add_gym, null);
-
-        builder.setTitle(R.string.add_gym);
-        builder.setView(v)
-                .setPositiveButton(R.string.add, (dialog, which) -> {
-                    addGym(v);
-                })
-                .setNegativeButton(R.string.cancel, (dialog, which) -> {
-
-                });
-
-        return builder.create();
-    }
-
-    private void addGym(View v) {
+    private void addGym(BottomSheetDialog v) {
         EditText ejercicioGym, repeticionesGym, kilosGym;
         ejercicioGym = v.findViewById(R.id.ejercicioGym);
         repeticionesGym = v.findViewById(R.id.repeticionesGym);

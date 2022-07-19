@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/saveSerieL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:padding="4dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_save"
+            app:tint="@color/white"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add"
+            android:fontFamily="@font/kdam_font"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/titleAddSeriesSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/add_serie"
+            android:fontFamily="@font/kdam_font"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addDistanceSerieL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/distance_seriesTextInput"
+            style="@style/outlinedTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint="@string/distance_series"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvDistance"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/distance_series"
+                android:fontFamily="@font/kdam_font"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addTimeSerieL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/time_seriesTextInput"
+            style="@style/outlinedTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:hint="(xxh mm:ss.ms)"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/distance_seriesTextInput"
+            app:layout_constraintTop_toBottomOf="@+id/swHurdles">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/time_series"
+                android:fontFamily="@font/kdam_font"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00h 00:00.00" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hurdlesDragSerieL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <Switch
+            android:id="@+id/swHurdles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/serie_with_hurdles"
+            android:fontFamily="@font/kdam_font"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="@+id/tvDistance"
+            app:layout_constraintTop_toBottomOf="@+id/distance_seriesTextInput" />
+
+        <Switch
+            android:id="@+id/swDrags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/serie_with_drags"
+            android:fontFamily="@font/kdam_font"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/distance_seriesTextInput"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/swHurdles"
+            app:layout_constraintTop_toBottomOf="@+id/distance_seriesTextInput" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/addShoesSerieL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/shoes"
+            android:fontFamily="@font/kdam_font"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupShoes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/time_seriesTextInput"
+            app:layout_constraintStart_toStartOf="@+id/tvShoes"
+            app:layout_constraintTop_toBottomOf="@+id/tvShoes">
+
+            <RadioButton
+                android:id="@+id/radio_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/normal_shoe"
+                android:fontFamily="@font/kdam_font"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <RadioButton
+                android:id="@+id/radio_flying"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/flying_shoe"
+                android:fontFamily="@font/kdam_font"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"/>
+
+            <RadioButton
+                android:id="@+id/radio_spikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/spike_shoe"
+                android:fontFamily="@font/kdam_font"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cancelL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="4dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_cancel"
+            app:tint="@color/colorPrimaryDark"
+            android:layout_margin="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:fontFamily="@font/kdam_font"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+</LinearLayout>

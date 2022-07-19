@@ -38,11 +38,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/type_training"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="2dp"
         android:fontFamily="@font/kdam_font"
-        android:textSize="16sp"
+        android:text="@string/type_training"
         android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerTypes"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/trainingTimeText"
         app:layout_constraintStart_toStartOf="@+id/trainingDateTextInput"
         app:layout_constraintTop_toBottomOf="@+id/trainingDateTextInput" />
 
@@ -50,11 +52,13 @@
         android:id="@+id/spinnerTypes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
+        android:layout_marginStart="16dp"
         android:fontFamily="@font/kdam_font"
-        app:layout_constraintEnd_toEndOf="@+id/trainingDateTextInput"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/trainingDateTextInput"></Spinner>
+        app:layout_constraintTop_toTopOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.57"></Spinner>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/trainingTimeText"

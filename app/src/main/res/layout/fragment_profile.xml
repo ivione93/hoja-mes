@@ -335,6 +335,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="64dp"
             app:cardBackgroundColor="@color/colorCardCompetition"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"

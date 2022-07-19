@@ -126,12 +126,11 @@
                 android:id="@+id/gymTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:fontFamily="@font/kdam_font"
                 android:text="Gym"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@+id/guidelineCard"
+                app:layout_constraintStart_toStartOf="@+id/farlekTV"
                 app:layout_constraintTop_toBottomOf="@+id/farlekTV" />
 
             <ImageView
@@ -182,10 +181,10 @@
                 android:id="@+id/tTimeTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="Tiempo"
                 android:fontFamily="@font/kdam_font"
+                android:text="Tiempo"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -195,15 +194,14 @@
                 android:id="@+id/tTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/kdam_font"
-                tools:text="01h 37:48"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tTimeTV" />
+                app:layout_constraintStart_toStartOf="@+id/tTimeTV"
+                app:layout_constraintTop_toBottomOf="@+id/tTimeTV"
+                tools:text="01h 37:48" />
 
             <TextView
                 android:id="@+id/tDistanceTV"
@@ -236,12 +234,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Media"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/kdam_font"
-                android:textStyle="bold"
+                android:text="Media"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -296,16 +294,16 @@
                 android:id="@+id/tObserves"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/kdam_font"
-                tools:text="Carrera continua"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Carrera continua" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

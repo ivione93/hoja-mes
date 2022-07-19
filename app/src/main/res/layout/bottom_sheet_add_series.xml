@@ -88,24 +88,26 @@
         android:padding="4dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/time_seriesTextInput"
+            android:id="@+id/time_seriesTimeText"
             style="@style/outlinedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:hint="(xxh mm:ss.ms)"
+            android:hint="@string/time_training"
+            android:fontFamily="@font/kdam_font"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/distance_seriesTextInput"
-            app:layout_constraintTop_toBottomOf="@+id/swHurdles">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerTypes">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/time_series"
                 android:fontFamily="@font/kdam_font"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="00h 00:00.00" />
+                android:focusable="false"
+                android:inputType="none"
+                android:textIsSelectable="false" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
@@ -545,6 +546,10 @@ public class ViewTrainingActivity extends AppCompatActivity {
         bottomSheetDialog.setContentView(R.layout.bottom_sheet_add_series);
 
         LinearLayout saveSerieL = bottomSheetDialog.findViewById(R.id.saveSerieL);
+        EditText timeSeries = bottomSheetDialog.findViewById(R.id.time_series);
+        timeSeries.setOnClickListener((View.OnClickListener) v1 -> {
+            selectSerieTimePicker(v1).show();
+        });
         LinearLayout cancelL = bottomSheetDialog.findViewById(R.id.cancelL);
 
         bottomSheetDialog.show();
@@ -917,6 +922,64 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     }
                     trainingTimeText.getEditText().setText(hours + "h " + minutes + ":" + seconds);
 
+                })
+                .setNegativeButton(R.string.cancel, (dialog, which) -> {
+
+                });
+
+        return builder.create();
+    }
+
+    public AlertDialog selectSerieTimePicker(View v1) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View v = inflater.inflate(R.layout.fragment_number_picker, null);
+
+        CheckBox checkAbandono = v.findViewById(R.id.checkAbandono);
+        checkAbandono.setVisibility(View.INVISIBLE);
+
+        NumberPicker horas = v.findViewById(R.id.horas);
+        horas.setMinValue(00);
+        horas.setMaxValue(24);
+
+        NumberPicker minutos = v.findViewById(R.id.minutos);
+        minutos.setMinValue(00);
+        minutos.setMaxValue(59);
+
+        NumberPicker segundos = v.findViewById(R.id.segundos);
+        segundos.setMinValue(00);
+        segundos.setMaxValue(59);
+
+        NumberPicker milisegundos = v.findViewById(R.id.milisegundos);
+        milisegundos.setMinValue(00);
+        milisegundos.setMaxValue(99);
+
+        builder.setTitle(R.string.insert_time);
+        builder.setView(v)
+                .setPositiveButton(R.string.add, (dialog, which) -> {
+                    String hours, minutes, seconds, miliseconds;
+                    if (horas.getValue() < 10) {
+                        hours = "0" + horas.getValue();
+                    } else {
+                        hours = "" + horas.getValue();
+                    }
+                    if (minutos.getValue() < 10) {
+                        minutes = "0" + minutos.getValue();
+                    } else {
+                        minutes = "" + minutos.getValue();
+                    }
+                    if (segundos.getValue() < 10) {
+                        seconds = "0" + segundos.getValue();
+                    } else {
+                        seconds = "" + segundos.getValue();
+                    }
+                    if (milisegundos.getValue() < 10) {
+                        miliseconds = "0" + milisegundos.getValue();
+                    } else {
+                        miliseconds = "" + milisegundos.getValue();
+                    }
+                    EditText timeSeries = v1.findViewById(R.id.time_series);
+                    timeSeries.setText(hours + "h " + minutes + ":" + seconds + "." + miliseconds);
                 })
                 .setNegativeButton(R.string.cancel, (dialog, which) -> {
 

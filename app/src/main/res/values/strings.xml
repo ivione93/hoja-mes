@@ -60,7 +60,7 @@
     <!-- ViewTrainingActivity -->
     <string name="title_activity_new_training">New training</string>
     <string name="title_training">Trainings</string>
-    <string name="time_training">Time (hh mm:ss) *</string>
+    <string name="time_training">Time *</string>
     <string name="distance_training">Distance (km) *</string>
     <string name="partial_training">Partial</string>
     <string name="observes">Observes</string>

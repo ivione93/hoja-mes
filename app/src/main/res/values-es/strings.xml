@@ -65,7 +65,7 @@
     <string name="partial_training">Media</string>
     <string name="observes">Observaciones</string>
     <string name="show_extras">Ver extras</string>
-    <string name="type_training">Actividad:</string>
+    <string name="type_training">Actividad *</string>
     <string-array name="trainning_types">
         <item>Carrera</item>
         <item>Carrera en cinta</item>

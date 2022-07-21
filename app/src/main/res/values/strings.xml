@@ -65,7 +65,7 @@
     <string name="partial_training">Partial</string>
     <string name="observes">Observes</string>
     <string name="show_extras">Show extras</string>
-    <string name="type_training">Activity:</string>
+    <string name="type_training">Activity *</string>
     <string-array name="trainning_types">
         <item>Run</item>
         <item>Indoor run</item>

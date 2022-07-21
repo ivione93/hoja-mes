@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -79,15 +80,14 @@ public class ViewTrainingActivity extends AppCompatActivity {
     private CollectionReference gym = db.collection("gym");
     private AdapterGym adapterGym;
 
-    TextInputLayout trainingTimeText, trainingDistanceText, trainingObservesText, trainingPartialText;
-    TextInputEditText editTextTrainingTime;
+    TextInputLayout trainingTimeText, trainingTypeText, trainingDistanceText, trainingObservesText, trainingPartialText;
+    TextInputEditText editTextTrainingTime, editTextTrainingType;
     EditText trainingDateText;
-    Spinner spinnerTypes;
     Button btnAddSeries, btnAddCuestas, btnAddFartlek, btnAddGym, btnShowExtras;
     RecyclerView rvSeries, rvCuestas, rvFartlek, rvGym;
     TabLayout tabLayout;
 
-    String email, dateSelected, id, typeTrainingSelected;
+    String email, dateSelected, id;
     Boolean isNew;
 
     List<SeriesDto> listSeriesDto;
@@ -209,40 +209,14 @@ public class ViewTrainingActivity extends AppCompatActivity {
         trainingDateText.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));
         datePicker.addOnPositiveButtonClickListener(selection -> trainingDateText.setText(datePicker.getHeaderText()));
         trainingTimeText = findViewById(R.id.trainingTimeText);
+        trainingTypeText = findViewById(R.id.trainingTypeText);
         trainingDistanceText = findViewById(R.id.trainingDistanceText);
         trainingObservesText = findViewById(R.id.trainingObservesText);
         trainingPartialText = findViewById(R.id.trainingPartialText);
         editTextTrainingTime = findViewById(R.id.editTextTrainingTime);
         editTextTrainingTime.setOnClickListener(v -> selectTimePicker().show());
-
-        spinnerTypes = findViewById(R.id.spinnerTypes);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.trainning_types, R.layout.support_simple_spinner_dropdown_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTypes.setAdapter(adapter);
-        spinnerTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    typeTrainingSelected = "Carrera";
-                } else if (position == 1) {
-                    typeTrainingSelected = "Carrera en cinta";
-                }
-                else if (position == 2) {
-                    typeTrainingSelected = "Elíptica";
-                }
-                else if (position == 3) {
-                    typeTrainingSelected = "Ciclismo";
-                }
-                else if (position == 4) {
-                    typeTrainingSelected = "Ciclismo en sala";
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                typeTrainingSelected = "Carrera";
-            }
-        });
+        editTextTrainingType = findViewById(R.id.editTextTrainingType);
+        editTextTrainingType.setOnClickListener(v -> showBottomSheetTypeTraining());
 
         btnAddSeries = findViewById(R.id.btnAddSeries);
         btnAddCuestas = findViewById(R.id.btnAddCuestas);
@@ -391,6 +365,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String date = trainingDateText.getText().toString();
         String time = trainingTimeText.getEditText().getText().toString();
         String distance = trainingDistanceText.getEditText().getText().toString();
+        String typeTrainingSelected = trainingTypeText.getEditText().getText().toString();
 
         String observes = "";
         if (trainingObservesText.getEditText().getText() != null) {
@@ -398,7 +373,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         }
 
         if (validateNewTraining(date, time, distance)) {
-            String partial = "-";
+            String partial;
             if (typeTrainingSelected.equals("Carrera") || typeTrainingSelected.equals("Carrera en cinta") || typeTrainingSelected.equals("Elíptica")) {
                 partial = Utils.calculatePartial(time, distance);
             } else {
@@ -511,23 +486,23 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     String partialFormat = " /km";
                     if (task.getResult().getDocuments().get(0).get("type") != null) {
                         if (task.getResult().getDocuments().get(0).get("type").equals("Carrera")) {
-                            spinnerTypes.setSelection(0);
+                            trainingTypeText.getEditText().setText("Carrera");
                             partialFormat = " /km";
                         } else if (task.getResult().getDocuments().get(0).get("type").equals("Carrera en cinta")) {
-                            spinnerTypes.setSelection(1);
+                            trainingTypeText.getEditText().setText("Carrera en cinta");
                             partialFormat = " /km";
                         } else if (task.getResult().getDocuments().get(0).get("type").equals("Elíptica")) {
-                            spinnerTypes.setSelection(2);
+                            trainingTypeText.getEditText().setText("Elíptica");
                             partialFormat = " km/h";
                         } else if (task.getResult().getDocuments().get(0).get("type").equals("Ciclismo")) {
-                            spinnerTypes.setSelection(3);
+                            trainingTypeText.getEditText().setText("Ciclismo");
                             partialFormat = " km/h";
                         } else if (task.getResult().getDocuments().get(0).get("type").equals("Ciclismo en sala")) {
-                            spinnerTypes.setSelection(4);
+                            trainingTypeText.getEditText().setText("Ciclismo en sala");
                             partialFormat = " km/h";
                         }
                     } else {
-                        spinnerTypes.setSelection(0);
+                        trainingTypeText.getEditText().setText("Carrera");
                         partialFormat = " /km";
                     }
                     trainingPartialText.getEditText().setText(task.getResult().getDocuments().get(0).get("partial").toString() + partialFormat);
@@ -542,6 +517,46 @@ public class ViewTrainingActivity extends AppCompatActivity {
         startActivity(profileIntent);
         finish();
     }
+    private void showBottomSheetTypeTraining() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_type_training);
+        bottomSheetDialog.setCanceledOnTouchOutside(false);
+        bottomSheetDialog.setCancelable(false);
+
+        LinearLayout typeRunSheet = bottomSheetDialog.findViewById(R.id.typeRunSheet);
+        LinearLayout typeIndoorRunSheet = bottomSheetDialog.findViewById(R.id.typeIndoorRunSheet);
+        LinearLayout typeCyclingSheet = bottomSheetDialog.findViewById(R.id.typeCyclingSheet);
+        LinearLayout typeIndoorCyclingSheet = bottomSheetDialog.findViewById(R.id.typeIndoorCyclingSheet);
+        LinearLayout typeEllipticalSheet = bottomSheetDialog.findViewById(R.id.typeEllipticalSheet);
+
+        bottomSheetDialog.show();
+
+        typeRunSheet.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            trainingTypeText.getEditText().setText(getString(R.string.type_run));
+        });
+
+        typeIndoorRunSheet.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            trainingTypeText.getEditText().setText(getString(R.string.type_indoor_run));
+        });
+
+        typeCyclingSheet.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            trainingTypeText.getEditText().setText(getString(R.string.type_cycling));
+        });
+
+        typeIndoorCyclingSheet.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            trainingTypeText.getEditText().setText(getString(R.string.type_indoor_cycling));
+        });
+
+        typeEllipticalSheet.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+            trainingTypeText.getEditText().setText(getString(R.string.type_elliptical));
+        });
+    }
+
 
     private void showBottomSheetSeriesDialog() {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);

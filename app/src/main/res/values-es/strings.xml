@@ -22,7 +22,6 @@
     <string name="total_trainings">Total de entrenamientos</string>
     <string name="total_km">Total de kilómetros</string>
     <string name="total_competitions">Total de competiciones</string>
-    <string name="delete_user">Eliminar usuario</string>
     <!-- ForgotPasswordActivity -->
     <string name="title_forgot_password">Recuperar contraseña</string>
     <string name="enter_your_email">Introduce tu dirección de correo</string>
@@ -43,12 +42,15 @@
     <!-- NewCompetitionActivity -->
     <string name="title_activity_new_competition">Nueva competición</string>
     <string name="title_competition">Competición</string>
+    <string name="title_championship">Campeonato</string>
     <string name="championship">Campeonato *</string>
+    <string name="title_place">Lugar</string>
     <string name="place">Lugar *</string>
     <string name="date">Fecha *</string>
     <string name="track">Prueba *</string>
     <string name="result">Marca *</string>
     <string name="ab">AB</string>
+    <string name="title_type_competition">Tipo de competición</string>
     <string name="type_competition">Tipo de competición *</string>
     <string name="select_competition">Seleccione el tipo de competición</string>
     <string name="type_pc">Pista Cubierta</string>
@@ -74,6 +76,11 @@
     <string name="type_elliptical">Elíptica</string>
     <string name="type_cycling">Ciclismo</string>
     <string name="type_indoor_cycling">Ciclismo en sala</string>
+    <string name="bd_run">Carrera</string>
+    <string name="bd_indoor_run">Carrera en cinta</string>
+    <string name="bd_elliptical">Elíptica</string>
+    <string name="bd_cycling">Ciclismo</string>
+    <string name="bd_indoor_cycling">Ciclismo en sala</string>
     <!-- DialogAddCuestas -->
     <string name="times_cuestas">Repeticiones *</string>
     <string name="type_cuestas">Tipo *</string>
@@ -172,8 +179,11 @@
     <string name="loading_data">Cargando datos...</string>
     <string name="log_out">¿Está seguro que quiere cerrar sesión?</string>
     <!-- Menus -->
+    <string name="account_options">Opciones de cuenta</string>
+    <string name="delete_account">Eliminar cuenta</string>
     <string name="share">Compartir</string>
     <string name="options">Opciones</string>
+    <string name="quick_actions">Acciones rápidas</string>
     <string name="show_profile">Ver perfil</string>
     <string name="add_training">Añadir entrenamiento</string>
     <string name="add_competition">Añadir competición</string>

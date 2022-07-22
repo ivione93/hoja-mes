@@ -86,14 +86,15 @@
 
         <TextView
             android:id="@+id/statistics_total_trainings"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/kdam_font"
-            android:text="Total de entrenamientos"
+            android:text="@string/total_trainings"
             android:textColor="@color/colorText"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="@+id/statistics_title"
             app:layout_constraintTop_toBottomOf="@+id/statistics_title" />
 
@@ -119,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/kdam_font"
-                android:text="Total de kilómetros"
+                android:text="@string/total_km"
                 android:textColor="@color/colorText"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@+id/statistics_total_trainings"
@@ -149,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/kdam_font"
-            android:text="Total de competiciones"
+            android:text="@string/total_competitions"
             android:textColor="@color/colorText"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/statistics_total_kms"
@@ -256,7 +257,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/kdam_font"
-                    android:text="Tiempo"
+                    android:text="@string/time_lt"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/ltDate"
@@ -281,7 +282,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/kdam_font"
-                    android:text="Distancia"
+                    android:text="@string/distance_lt"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/ltTimeTV"
@@ -306,7 +307,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/kdam_font"
-                    android:text="Media"
+                    android:text="@string/rate_lt"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -450,6 +451,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="233dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

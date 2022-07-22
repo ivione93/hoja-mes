@@ -155,7 +155,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 deleteDataUser.setPositiveButton(R.string.accept, (dialog, which) -> {
                     deleteProfileInformation(email);
                     AlertDialog.Builder deleteUser = new AlertDialog.Builder(this);
-                    deleteUser.setTitle(R.string.delete_user);
+                    deleteUser.setTitle(R.string.delete_account);
                     deleteUser.setMessage(R.string.delete_user_confirm);
                     deleteUser.setCancelable(false);
                     deleteUser.setPositiveButton(R.string.delete, (dialog1, which1) -> {

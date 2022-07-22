@@ -198,15 +198,15 @@ public class TrainingsFragment extends Fragment {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 if (training.start.substring(5,7).equals(month) && training.start.substring(0,4).equals(year)) {
                                     count.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    if (training.type == null || training.type.equals("Carrera")) {
+                                    if (training.type == null || training.type.equals(getString(R.string.bd_run))) {
                                         countCarrera.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    } else if (training.type.equals("Ciclismo")) {
+                                    } else if (training.type.equals(getString(R.string.bd_cycling))) {
                                         countCiclismo.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    } else if (training.type.equals("Carrera en cinta")) {
+                                    } else if (training.type.equals(getString(R.string.bd_indoor_run))) {
                                         countCinta.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    } else if (training.type.equals("Elíptica")) {
+                                    } else if (training.type.equals(getString(R.string.bd_elliptical))) {
                                         countEliptica.updateAndGet(v -> v + Float.valueOf(training.distance));
-                                    } else if (training.type.equals("Ciclismo en sala")) {
+                                    } else if (training.type.equals(getString(R.string.bd_indoor_cycling))) {
                                         countCiclismoSala.updateAndGet(v -> v + Float.valueOf(training.distance));
                                     }
                                 }

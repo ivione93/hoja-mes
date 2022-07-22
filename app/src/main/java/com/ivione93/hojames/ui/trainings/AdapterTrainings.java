@@ -58,7 +58,22 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
 
         String partialFormat = " /km";
         if (listTrainings.get(position).type != null) {
-            holder.itemTrainingType.setText(listTrainings.get(position).type);
+            if (listTrainings.get(position).type.equals(holder.itemView.getResources().getString(R.string.bd_run))) {
+                holder.itemTrainingType.setText(holder.itemView.getResources().getString(R.string.type_run));
+            }
+            if (listTrainings.get(position).type.equals(holder.itemView.getResources().getString(R.string.bd_indoor_run))) {
+                holder.itemTrainingType.setText(holder.itemView.getResources().getString(R.string.type_indoor_run));
+            }
+            if (listTrainings.get(position).type.equals(holder.itemView.getResources().getString(R.string.bd_cycling))) {
+                holder.itemTrainingType.setText(holder.itemView.getResources().getString(R.string.type_cycling));
+            }
+            if (listTrainings.get(position).type.equals(holder.itemView.getResources().getString(R.string.bd_indoor_cycling))) {
+                holder.itemTrainingType.setText(holder.itemView.getResources().getString(R.string.type_indoor_cycling));
+            }
+            if (listTrainings.get(position).type.equals(holder.itemView.getResources().getString(R.string.bd_elliptical))) {
+                holder.itemTrainingType.setText(holder.itemView.getResources().getString(R.string.type_elliptical));
+            }
+
             if (listTrainings.get(position).type.equals("Carrera") || listTrainings.get(position).type.equals("Carrera en cinta") || listTrainings.get(position).type.equals("Elíptica")) {
                 partialFormat = " /km";
             } else {

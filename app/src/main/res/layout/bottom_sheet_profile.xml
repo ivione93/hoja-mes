@@ -17,7 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Acciones rápidas"
+            android:text="@string/quick_actions"
             android:fontFamily="@font/kdam_font"
             android:textColor="@color/white"
             android:textSize="16sp"

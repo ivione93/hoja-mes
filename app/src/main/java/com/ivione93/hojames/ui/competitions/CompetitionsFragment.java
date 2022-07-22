@@ -171,7 +171,7 @@ public class CompetitionsFragment extends Fragment {
                                 }
                             }
                         }
-                        chipTotals.setText("Totales " + count.get());
+                        chipTotals.setText(getString(R.string.totals) + " " + count.get());
                         chipPC.setText(getString(R.string.type_pc) + " " + countPC.get());
                         chipAL.setText(getString(R.string.type_al) + " " + countAL.get());
                         chipCross.setText(getString(R.string.type_cross) + " " + countCross.get());

@@ -22,7 +22,6 @@
     <string name="total_trainings">Total trainings</string>
     <string name="total_km">Total kilometers</string>
     <string name="total_competitions">Total competitions</string>
-    <string name="delete_user">Delete user</string>
     <!-- ForgotPasswordActivity -->
     <string name="title_forgot_password">Forgot Password</string>
     <string name="enter_your_email">Enter your email</string>
@@ -43,12 +42,15 @@
     <!-- NewCompetitionActivity -->
     <string name="title_activity_new_competition">New competition</string>
     <string name="title_competition">Competition</string>
+    <string name="title_championship">Championship</string>
     <string name="championship">Championship *</string>
+    <string name="title_place">Place</string>
     <string name="place">Place *</string>
     <string name="date">Date *</string>
     <string name="track">Track *</string>
     <string name="result">Result *</string>
     <string name="ab">AB</string>
+    <string name="title_type_competition">Competition type</string>
     <string name="type_competition">Competition type *</string>
     <string name="select_competition">Select type competition</string>
     <string name="type_pc">Indoor</string>
@@ -74,6 +76,11 @@
     <string name="type_elliptical">Elliptical</string>
     <string name="type_cycling">Cycling</string>
     <string name="type_indoor_cycling">Indoor cycling</string>
+    <string name="bd_run">Carrera</string>
+    <string name="bd_indoor_run">Carrera en cinta</string>
+    <string name="bd_elliptical">Elíptica</string>
+    <string name="bd_cycling">Ciclismo</string>
+    <string name="bd_indoor_cycling">Ciclismo en sala</string>
     <!-- DialogAddCuestas -->
     <string name="times_cuestas">Times *</string>
     <string name="type_cuestas">Type *</string>
@@ -172,11 +179,14 @@
     <string name="loading_data">Loading data...</string>
     <string name="log_out">Are you sure you want to log out?</string>
     <!-- Menus -->
+    <string name="account_options">Account options</string>
+    <string name="delete_account">Delete account</string>
     <string name="share">Share</string>
     <string name="options">Options</string>
+    <string name="quick_actions">Quick actions</string>
     <string name="show_profile">Show profile</string>
     <string name="add_training">Add training</string>
     <string name="add_competition">Add competition</string>
     <string name="zero">0</string>
-    <string name="editar">Editar</string>
+    <string name="editar">Edit</string>
 </resources>

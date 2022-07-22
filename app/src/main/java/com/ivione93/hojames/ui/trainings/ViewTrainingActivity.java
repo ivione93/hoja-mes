@@ -358,7 +358,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String date = trainingDateText.getText().toString();
         String time = trainingTimeText.getEditText().getText().toString();
         String distance = trainingDistanceText.getEditText().getText().toString();
-        String typeTraining = trainingTypeText.getEditText().getText().toString();
+        String typeTraining = getTypeTraining();
 
         String observes = "";
         if (trainingObservesText.getEditText().getText() != null) {
@@ -478,20 +478,20 @@ public class ViewTrainingActivity extends AppCompatActivity {
                     }
                     String partialFormat = " /km";
                     if (task.getResult().getDocuments().get(0).get("type") != null) {
-                        if (task.getResult().getDocuments().get(0).get("type").equals("Carrera")) {
-                            trainingTypeText.getEditText().setText("Carrera");
+                        if (task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_run))) {
+                            trainingTypeText.getEditText().setText(getString(R.string.type_run));
                             partialFormat = " /km";
-                        } else if (task.getResult().getDocuments().get(0).get("type").equals("Carrera en cinta")) {
-                            trainingTypeText.getEditText().setText("Carrera en cinta");
+                        } else if (task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_indoor_run))) {
+                            trainingTypeText.getEditText().setText(getString(R.string.type_indoor_run));
                             partialFormat = " /km";
-                        } else if (task.getResult().getDocuments().get(0).get("type").equals("Elíptica")) {
-                            trainingTypeText.getEditText().setText("Elíptica");
+                        } else if (task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_cycling))) {
+                            trainingTypeText.getEditText().setText(getString(R.string.type_cycling));
                             partialFormat = " km/h";
-                        } else if (task.getResult().getDocuments().get(0).get("type").equals("Ciclismo")) {
-                            trainingTypeText.getEditText().setText("Ciclismo");
+                        } else if (task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_indoor_cycling))) {
+                            trainingTypeText.getEditText().setText(getString(R.string.type_indoor_cycling));
                             partialFormat = " km/h";
-                        } else if (task.getResult().getDocuments().get(0).get("type").equals("Ciclismo en sala")) {
-                            trainingTypeText.getEditText().setText("Ciclismo en sala");
+                        } else if (task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_elliptical))) {
+                            trainingTypeText.getEditText().setText(getString(R.string.type_elliptical));
                             partialFormat = " km/h";
                         }
                     } else {
@@ -502,6 +502,21 @@ public class ViewTrainingActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private String getTypeTraining() {
+        if (trainingTypeText.getEditText().getText().toString().equals(getString(R.string.type_run))) {
+            return getString(R.string.bd_run);
+        } else if (trainingTypeText.getEditText().getText().toString().equals(getString(R.string.type_indoor_run))) {
+            return getString(R.string.bd_indoor_run);
+        } else if (trainingTypeText.getEditText().getText().toString().equals(getString(R.string.type_cycling))) {
+            return getString(R.string.bd_cycling);
+        } else if (trainingTypeText.getEditText().getText().toString().equals(getString(R.string.type_indoor_cycling))) {
+            return getString(R.string.bd_indoor_cycling);
+        } else if (trainingTypeText.getEditText().getText().toString().equals(getString(R.string.type_elliptical))) {
+            return getString(R.string.bd_elliptical);
+        }
+        return null;
     }
 
     private void goProfile(String email) {

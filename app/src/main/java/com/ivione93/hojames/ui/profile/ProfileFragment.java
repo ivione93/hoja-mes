@@ -354,14 +354,29 @@ public class ProfileFragment extends Fragment {
 
                                     String partialFormat = " /km";
                                     if (documentSnapshot.get("type") != null) {
-                                        title_type.setText(documentSnapshot.get("type").toString());
-                                        if (documentSnapshot.get("type").equals("Carrera") || documentSnapshot.get("type").equals("Carrera en cinta") || documentSnapshot.get("type").equals("Elíptica")) {
+                                        if (documentSnapshot.get("type").equals(getString(R.string.bd_run))) {
+                                            title_type.setText(getString(R.string.type_run));
+                                        }
+                                        if (documentSnapshot.get("type").equals(getString(R.string.bd_indoor_run))) {
+                                            title_type.setText(getString(R.string.type_indoor_run));
+                                        }
+                                        if (documentSnapshot.get("type").equals(getString(R.string.bd_cycling))) {
+                                            title_type.setText(getString(R.string.type_cycling));
+                                        }
+                                        if (documentSnapshot.get("type").equals(getString(R.string.bd_indoor_cycling))) {
+                                            title_type.setText(getString(R.string.type_indoor_cycling));
+                                        }
+                                        if (documentSnapshot.get("type").equals(getString(R.string.bd_elliptical))) {
+                                            title_type.setText(getString(R.string.type_elliptical));
+                                        }
+
+                                        if (documentSnapshot.get("type").equals(getString(R.string.bd_run))
+                                                || documentSnapshot.get("type").equals(getString(R.string.bd_indoor_run))
+                                                || documentSnapshot.get("type").equals(getString(R.string.bd_elliptical))) {
                                             partialFormat = " /km";
                                         } else {
                                             partialFormat = " km/h";
                                         }
-                                    } else {
-                                        title_type.setText("Carrera");
                                     }
 
                                     last_training_distance.setText(documentSnapshot.get("distance").toString() + " kms");

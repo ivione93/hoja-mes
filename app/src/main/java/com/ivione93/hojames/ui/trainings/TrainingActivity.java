@@ -256,9 +256,21 @@ public class TrainingActivity extends AppCompatActivity {
                 if (!document.isEmpty()) {
                     tDate.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date"), getString(R.string.format_date)));
                     if (task.getResult().getDocuments().get(0).get("type") != null) {
-                        tType.setText(task.getResult().getDocuments().get(0).get("type").toString());
-                    } else {
-                        tType.setText(getString(R.string.type_run));
+                        if (task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_run))) {
+                            tType.setText(getString(R.string.type_run));
+                        }
+                        if (task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_indoor_run))) {
+                            tType.setText(getString(R.string.type_indoor_run));
+                        }
+                        if (task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_cycling))) {
+                            tType.setText(getString(R.string.type_cycling));
+                        }
+                        if (task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_indoor_cycling))) {
+                            tType.setText(getString(R.string.type_indoor_cycling));
+                        }
+                        if (task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_elliptical))) {
+                            tType.setText(getString(R.string.type_elliptical));
+                        }
                     }
                     tTime.setText(Utils.getFormattedTime(task.getResult().getDocuments().get(0).get("time").toString()).concat(" min"));
                     tDistance.setText(task.getResult().getDocuments().get(0).get("distance").toString().concat(" kms"));

@@ -43,7 +43,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar"
+            android:text="@string/editar"
             android:fontFamily="@font/kdam_font"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"

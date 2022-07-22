@@ -78,60 +78,32 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/competitionTypeText"
+        style="@style/outlinedTextInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/kdam_font"
-        android:text="@string/tv_type_competition"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/type_competition"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_arrow_down"
+        app:endIconTint="@color/colorText"
         app:layout_constraintStart_toStartOf="@+id/competitionNameText"
-        app:layout_constraintTop_toBottomOf="@+id/competitionNameText" />
+        app:layout_constraintTop_toBottomOf="@+id/competitionNameText">
 
-    <RadioGroup
-        android:id="@+id/radioGroupTypeCompetition"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/competitionNameText"
-        app:layout_constraintStart_toStartOf="@+id/competitionNameText"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
-
-        <RadioButton
-            android:id="@+id/radio_pc"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextCompetitionType"
+            android:fontFamily="@font/kdam_font"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:focusable="false"
+            android:inputType="none"
             android:text="@string/type_pc"
-            android:fontFamily="@font/kdam_font"
-            android:textSize="14sp" />
-
-        <RadioButton
-            android:id="@+id/radio_al"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/type_al"
-            android:fontFamily="@font/kdam_font"
-            android:textSize="14sp" />
-
-        <RadioButton
-            android:id="@+id/radio_cross"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/type_cross"
-            android:fontFamily="@font/kdam_font"
-            android:textSize="14sp" />
-
-        <RadioButton
-            android:id="@+id/radio_road"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/type_road"
-            android:fontFamily="@font/kdam_font"
-            android:textSize="14sp" />
-    </RadioGroup>
+            android:textIsSelectable="false"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/trackText"
@@ -139,13 +111,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:hint="@string/track"
         android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toStartOf="@+id/resultText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupTypeCompetition">
+        app:layout_constraintTop_toBottomOf="@+id/competitionTypeText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextTrack"

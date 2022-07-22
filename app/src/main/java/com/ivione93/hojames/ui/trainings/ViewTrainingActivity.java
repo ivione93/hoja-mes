@@ -510,6 +510,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         startActivity(profileIntent);
         finish();
     }
+
     private void showBottomSheetTypeTraining() {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
         bottomSheetDialog.setContentView(R.layout.bottom_sheet_type_training);
@@ -559,7 +560,6 @@ public class ViewTrainingActivity extends AppCompatActivity {
             });
         }
     }
-
 
     private void showBottomSheetSeriesDialog() {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);

@@ -8,15 +8,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointBackward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -40,11 +40,9 @@ public class NewCompetitionActivity extends AppCompatActivity {
     private FirebaseAnalytics mFirebaseAnalytics;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    TextInputLayout placeText, competitionNameText, trackText, resultText;
-    TextInputEditText editTextResult;
+    TextInputLayout placeText, competitionNameText, competitionTypeText, trackText, resultText;
+    TextInputEditText editTextCompetitionType, editTextResult;
     EditText dateText;
-    RadioGroup radioGroupTypeCompetition;
-    RadioButton radioPC, radioAL, radioCross, radioRoad;
 
     String email, id;
     Boolean isNew;
@@ -104,10 +102,11 @@ public class NewCompetitionActivity extends AppCompatActivity {
 
         placeText = findViewById(R.id.placeText);
         competitionNameText = findViewById(R.id.competitionNameText);
+        placeText = findViewById(R.id.placeText);
+        competitionTypeText = findViewById(R.id.competitionTypeText);
         trackText = findViewById(R.id.trackText);
         resultText = findViewById(R.id.resultText);
         editTextResult = findViewById(R.id.editTextResult);
-        placeText = findViewById(R.id.placeText);
         // Material Date Picker
         CalendarConstraints.Builder constraints = new CalendarConstraints.Builder();
         constraints.setValidator(DateValidatorPointBackward.now());
@@ -118,7 +117,8 @@ public class NewCompetitionActivity extends AppCompatActivity {
         dateText = findViewById(R.id.dateText);
         dateText.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "DATE_PICKER"));
         datePicker.addOnPositiveButtonClickListener(selection -> dateText.setText(datePicker.getHeaderText()));
-
+        editTextCompetitionType = findViewById(R.id.editTextCompetitionType);
+        editTextCompetitionType.setOnClickListener(v -> showBottomSheetTypeCompetition());
         editTextResult.setOnClickListener(v -> selectTimePicker().show());
 
         if (!isNew) {
@@ -128,12 +128,48 @@ public class NewCompetitionActivity extends AppCompatActivity {
         } else {
             getSupportActionBar().setTitle(R.string.title_activity_new_competition);
         }
+    }
 
-        radioGroupTypeCompetition = findViewById(R.id.radioGroupTypeCompetition);
-        radioPC = findViewById(R.id.radio_pc);
-        radioAL = findViewById(R.id.radio_al);
-        radioCross = findViewById(R.id.radio_cross);
-        radioRoad = findViewById(R.id.radio_road);
+    private void showBottomSheetTypeCompetition() {
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(R.layout.bottom_sheet_type_competition);
+        bottomSheetDialog.setCanceledOnTouchOutside(false);
+        bottomSheetDialog.setCancelable(false);
+
+        LinearLayout typePCSheet = bottomSheetDialog.findViewById(R.id.typePCSheet);
+        LinearLayout typeALSheet = bottomSheetDialog.findViewById(R.id.typeALSheet);
+        LinearLayout typeCrossSheet = bottomSheetDialog.findViewById(R.id.typeCrossSheet);
+        LinearLayout typeRoadSheet = bottomSheetDialog.findViewById(R.id.typeRoadSheet);
+
+        bottomSheetDialog.show();
+
+        if (typePCSheet != null) {
+            typePCSheet.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                competitionTypeText.getEditText().setText(getString(R.string.type_pc));
+            });
+        }
+
+        if (typeALSheet != null) {
+            typeALSheet.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                competitionTypeText.getEditText().setText(getString(R.string.type_al));
+            });
+        }
+
+        if (typeCrossSheet != null) {
+            typeCrossSheet.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                competitionTypeText.getEditText().setText(getString(R.string.type_cross));
+            });
+        }
+
+        if (typeRoadSheet != null) {
+            typeRoadSheet.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                competitionTypeText.getEditText().setText(getString(R.string.type_road));
+            });
+        }
     }
 
     public AlertDialog selectTimePicker() {
@@ -218,16 +254,16 @@ public class NewCompetitionActivity extends AppCompatActivity {
                     dateText.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date"), getString(R.string.format_date)));
                     if(task.getResult().getDocuments().get(0).get("type") != null) {
                         if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_pc))) {
-                            radioPC.setChecked(true);
+                            competitionTypeText.getEditText().setText(getString(R.string.type_pc));
                         }
                         if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_al))) {
-                            radioAL.setChecked(true);
+                            competitionTypeText.getEditText().setText(getString(R.string.type_al));
                         }
                         if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_cross))) {
-                            radioCross.setChecked(true);
+                            competitionTypeText.getEditText().setText(getString(R.string.type_cross));
                         }
                         if(task.getResult().getDocuments().get(0).get("type").equals(getString(R.string.bd_road))) {
-                            radioRoad.setChecked(true);
+                            competitionTypeText.getEditText().setText(getString(R.string.type_road));
                         }
                     }
                 }
@@ -241,13 +277,13 @@ public class NewCompetitionActivity extends AppCompatActivity {
         String track = trackText.getEditText().getText().toString();
         String result = resultText.getEditText().getText().toString();
         String date = dateText.getText().toString();
-
         String typeCompetition = getTypeCompetition();
 
         if (validateNewCompetition(place, competitionName, track, result, date)) {
             Map<String,Object> competition = new HashMap<>();
             if (isNew) {
-                id = UUID.randomUUID().toString();//Evento nueva competicion Analytics
+                id = UUID.randomUUID().toString();
+                //Evento nueva competicion Analytics
                 Bundle bundle = new Bundle();
                 bundle.putString("message", "Nueva competicion");
                 bundle.putString("user", email);
@@ -278,13 +314,13 @@ public class NewCompetitionActivity extends AppCompatActivity {
     }
 
     private String getTypeCompetition() {
-        if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioPC.getId()) {
+        if (competitionTypeText.getEditText().getText().toString().equals(getString(R.string.type_pc))) {
             return getString(R.string.bd_pc);
-        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioAL.getId()) {
+        } else if (competitionTypeText.getEditText().getText().toString().equals(getString(R.string.type_al))) {
             return getString(R.string.bd_al);
-        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioCross.getId()) {
+        } else if (competitionTypeText.getEditText().getText().toString().equals(getString(R.string.type_cross))) {
             return getString(R.string.bd_cross);
-        } else if (radioGroupTypeCompetition.getCheckedRadioButtonId() == radioRoad.getId()) {
+        } else if (competitionTypeText.getEditText().getText().toString().equals(getString(R.string.type_road))) {
             return getString(R.string.bd_road);
         }
         return null;

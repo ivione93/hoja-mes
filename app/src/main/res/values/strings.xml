@@ -49,7 +49,8 @@
     <string name="track">Track *</string>
     <string name="result">Result *</string>
     <string name="ab">AB</string>
-    <string name="tv_type_competition">Type of competition:</string>
+    <string name="type_competition">Competition type *</string>
+    <string name="select_competition">Select type competition</string>
     <string name="type_pc">Indoor</string>
     <string name="type_al">Outdoor</string>
     <string name="type_cross">Cross country</string>

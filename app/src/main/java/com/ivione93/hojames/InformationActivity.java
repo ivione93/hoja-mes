@@ -12,6 +12,8 @@ import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.ivione93.hojames.ui.login.AuthActivity;
 
+import java.util.Objects;
+
 public class InformationActivity extends AppCompatActivity {
 
     ConstraintLayout informationLayout;
@@ -23,7 +25,7 @@ public class InformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         setup();
         session();

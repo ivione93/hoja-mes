@@ -23,7 +23,7 @@ import com.ivione93.hojames.Utils;
 
 public class CompetitionActivity extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     TextView cDate, cTrack, cResult, cName, cPlace;
     Chip cType;
@@ -49,11 +49,10 @@ public class CompetitionActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.new_competition_menu, menu);
         if (isNew) {
             menu.findItem(R.id.menu_edit_competition).setVisible(false);
-            menu.findItem(R.id.menu_share_competition).setVisible(false);
         } else {
             menu.findItem(R.id.menu_new_competition).setVisible(false);
-            menu.findItem(R.id.menu_share_competition).setVisible(false);
         }
+        menu.findItem(R.id.menu_share_competition).setVisible(false);
         return true;
     }
     @Override
@@ -91,22 +90,30 @@ public class CompetitionActivity extends AppCompatActivity {
 
         bottomSheetDialog.show();
 
-        editCompetitionL.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            editCompetition();
-        });
+        if (editCompetitionL != null) {
+            editCompetitionL.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                editCompetition();
+            });
+        }
 
-        shareCompetitionL.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            shareCompetition();
-        });
+        if (shareCompetitionL != null) {
+            shareCompetitionL.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                shareCompetition();
+            });
+        }
 
-        deleteCompetitionL.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            deleteCompetition();
-        });
+        if (deleteCompetitionL != null) {
+            deleteCompetitionL.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                deleteCompetition();
+            });
+        }
 
-        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        if (cancelL != null) {
+            cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        }
     }
 
     public void setup(boolean isNew) {

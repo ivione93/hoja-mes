@@ -36,9 +36,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailRecuEditText);
         btnRecuperar = findViewById(R.id.btnRecuperar);
 
-        btnRecuperar.setOnClickListener(v -> {
-            validate();
-        });
+        btnRecuperar.setOnClickListener(v -> validate());
     }
 
     public void validate() {

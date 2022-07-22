@@ -35,7 +35,7 @@ public class AuthActivity extends AppCompatActivity {
 
     SharedPreferences.Editor prefs;
 
-    private static int GOOGLE_SIGN_IN = 100;
+    private static final int GOOGLE_SIGN_IN = 100;
     private FirebaseAnalytics mFirebaseAnalytics;
 
     ConstraintLayout loginLayout;

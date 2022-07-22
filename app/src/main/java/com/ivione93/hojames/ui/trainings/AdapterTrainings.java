@@ -29,7 +29,7 @@ import java.util.List;
 
 public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.ViewHolderTraining> implements Filterable {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     List<Training> listTrainings;
     List<Training> listTrainingsFull;
@@ -65,7 +65,7 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
                 partialFormat = " km/h";
             }
         } else {
-            holder.itemTrainingType.setText("Carrera");
+            holder.itemTrainingType.setText(holder.itemView.getResources().getString(R.string.type_run));
         }
 
         holder.itemTrainingDate.setText(Utils.toString(listTrainings.get(position).date, holder.itemView.getResources().getString(R.string.format_date)));
@@ -231,7 +231,7 @@ public class AdapterTrainings extends RecyclerView.Adapter<AdapterTrainings.View
         }
     };
 
-    class ViewHolderTraining extends RecyclerView.ViewHolder {
+    static class ViewHolderTraining extends RecyclerView.ViewHolder {
 
         TextView itemTrainingType, itemTrainingDate, itemTrainingTime, itemTrainingDistance, itemTrainingPartial;
         ImageButton ibOptionsTraining;

@@ -18,6 +18,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:hint="@string/date"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_calendar"
+        app:endIconTint="@color/colorText"
         android:fontFamily="@font/kdam_font"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +48,7 @@
         android:hint="@string/type_training"
         app:endIconMode="custom"
         app:endIconDrawable="@drawable/ic_arrow_down"
+        app:endIconTint="@color/colorText"
         app:layout_constraintBottom_toTopOf="@+id/trainingTimeText"
         app:layout_constraintEnd_toEndOf="@+id/trainingDateTextInput"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,36 +61,9 @@
             android:layout_height="wrap_content"
             android:focusable="false"
             android:inputType="none"
+            android:text="@string/type_run"
             android:textIsSelectable="false"/>
-
     </com.google.android.material.textfield.TextInputLayout>
-
-    <!--<TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="2dp"
-        android:fontFamily="@font/kdam_font"
-        android:text="@string/type_training"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/trainingTimeText"
-        app:layout_constraintStart_toStartOf="@+id/trainingDateTextInput"
-        app:layout_constraintTop_toBottomOf="@+id/trainingDateTextInput" />
-
-    <Spinner
-        android:id="@+id/spinnerTypes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/kdam_font"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/textView5"
-        app:layout_constraintVertical_bias="0.57"></Spinner>>-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/trainingTimeText"
@@ -98,6 +75,9 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/kdam_font"
         android:hint="@string/time_training"
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_chrono"
+        app:endIconTint="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trainingTypeText">

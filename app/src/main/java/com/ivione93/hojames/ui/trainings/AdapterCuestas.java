@@ -18,7 +18,7 @@ import com.ivione93.hojames.model.Cuestas;
 
 public class AdapterCuestas extends FirestoreRecyclerAdapter<Cuestas, AdapterCuestas.CuestasViewHolder> {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public AdapterCuestas(@NonNull FirestoreRecyclerOptions<Cuestas> options) {
         super(options);
@@ -48,10 +48,10 @@ public class AdapterCuestas extends FirestoreRecyclerAdapter<Cuestas, AdapterCue
     @Override
     public CuestasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cuestas, parent, false);
-        return new AdapterCuestas.CuestasViewHolder(view);
+        return new CuestasViewHolder(view);
     }
 
-    class CuestasViewHolder extends RecyclerView.ViewHolder {
+    static class CuestasViewHolder extends RecyclerView.ViewHolder {
 
         TextView showTypeCuestas, showTimesCuestas;
         ImageButton ibDeleteCuesta;

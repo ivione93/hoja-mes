@@ -38,7 +38,7 @@ import java.util.UUID;
 public class NewCompetitionActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     TextInputLayout placeText, competitionNameText, trackText, resultText;
     TextInputEditText editTextResult;
@@ -76,12 +76,8 @@ public class NewCompetitionActivity extends AppCompatActivity {
         android.app.AlertDialog.Builder cancelCompetition = new android.app.AlertDialog.Builder(this);
         cancelCompetition.setTitle(R.string.exit_title);
         cancelCompetition.setMessage(R.string.exit_message);
-        cancelCompetition.setPositiveButton(R.string.exit, (dialog, which) -> {
-            super.onBackPressed();
-        });
-        cancelCompetition.setNegativeButton(R.string.cancel, (dialog, which) -> {
-            dialog.dismiss();
-        });
+        cancelCompetition.setPositiveButton(R.string.exit, (dialog, which) -> super.onBackPressed());
+        cancelCompetition.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss());
         cancelCompetition.show();
     }
 
@@ -146,29 +142,39 @@ public class NewCompetitionActivity extends AppCompatActivity {
         View v = inflater.inflate(R.layout.fragment_number_picker, null);
 
         NumberPicker horas = v.findViewById(R.id.horas);
-        horas.setMinValue(00);
+        horas.setMinValue(0);
         horas.setMaxValue(24);
 
         NumberPicker minutos = v.findViewById(R.id.minutos);
-        minutos.setMinValue(00);
+        minutos.setMinValue(0);
         minutos.setMaxValue(59);
 
         NumberPicker segundos = v.findViewById(R.id.segundos);
-        segundos.setMinValue(00);
+        segundos.setMinValue(0);
         segundos.setMaxValue(59);
 
         NumberPicker milisegundos = v.findViewById(R.id.milisegundos);
-        milisegundos.setMinValue(00);
+        milisegundos.setMinValue(0);
         milisegundos.setMaxValue(99);
+
+        CheckBox checkAbandono = v.findViewById(R.id.checkAbandono);
+
+        if (resultText.getEditText().getText().toString().equals("AB")) {
+            checkAbandono.setChecked(true);
+        } else if (!resultText.getEditText().getText().toString().equals("")) {
+            horas.setValue(Integer.parseInt(resultText.getEditText().getText().toString().substring(0,2)));
+            minutos.setValue(Integer.parseInt(resultText.getEditText().getText().toString().substring(4,6)));
+            segundos.setValue(Integer.parseInt(resultText.getEditText().getText().toString().substring(7,9)));
+            milisegundos.setValue(Integer.parseInt(resultText.getEditText().getText().toString().substring(10,12)));
+        }
 
         builder.setTitle(R.string.insert_result);
         builder.setView(v)
                 .setPositiveButton(R.string.add, (dialog, which) -> {
                     String hours, minutes, seconds, miliseconds;
-                    CheckBox checkAbandono = v.findViewById(R.id.checkAbandono);
 
                     if (checkAbandono.isChecked()) {
-                        resultText.getEditText().setText("AB");
+                        resultText.getEditText().setText(getString(R.string.ab));
                     } else {
                         if (horas.getValue() < 10) {
                             hours = "0" + horas.getValue();

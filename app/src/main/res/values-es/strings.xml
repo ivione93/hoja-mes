@@ -48,6 +48,7 @@
     <string name="date">Fecha *</string>
     <string name="track">Prueba *</string>
     <string name="result">Marca *</string>
+    <string name="ab">AB</string>
     <string name="tv_type_competition">Tipo de competición:</string>
     <string name="type_pc">Pista Cubierta</string>
     <string name="type_al">Aire Libre</string>
@@ -66,13 +67,7 @@
     <string name="observes">Observaciones</string>
     <string name="show_extras">Ver extras</string>
     <string name="type_training">Actividad *</string>
-    <string-array name="trainning_types">
-        <item>Carrera</item>
-        <item>Carrera en cinta</item>
-        <item>Elíptica</item>
-        <item>Ciclismo</item>
-        <item>Ciclismo en sala</item>
-    </string-array>
+    <string name="select_training">Seleccione el tipo de actividad</string>
     <string name="type_run">Carrera</string>
     <string name="type_indoor_run">Carrera en cinta</string>
     <string name="type_elliptical">Elíptica</string>

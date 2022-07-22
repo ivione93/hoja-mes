@@ -1,8 +1,6 @@
 package com.ivione93.hojames.ui.trainings;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +23,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.Utils;
-import com.ivione93.hojames.dto.SeriesDto;
 import com.ivione93.hojames.model.Series;
 
 import java.util.HashMap;
@@ -34,7 +31,7 @@ import java.util.regex.Pattern;
 
 public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSeries.SeriesViewHolder> {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public AdapterSeries(@NonNull FirestoreRecyclerOptions<Series> options) {
         super(options);
@@ -146,10 +143,10 @@ public class AdapterSeries extends FirestoreRecyclerAdapter<Series, AdapterSerie
     @Override
     public SeriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_series, parent, false);
-        return new AdapterSeries.SeriesViewHolder(view);
+        return new SeriesViewHolder(view);
     }
 
-    class SeriesViewHolder extends RecyclerView.ViewHolder {
+    static class SeriesViewHolder extends RecyclerView.ViewHolder {
 
         CardView cvSeries;
         TextView showDistanceSerie, showTimeSerie, shoeSerie, hurdlesSerie, dragsSerie;

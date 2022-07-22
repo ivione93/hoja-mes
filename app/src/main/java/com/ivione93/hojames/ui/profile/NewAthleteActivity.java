@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class NewAthleteActivity extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAnalytics mFirebaseAnalytics;
 
     ConstraintLayout newAthleteLayout;

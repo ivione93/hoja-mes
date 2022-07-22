@@ -18,7 +18,7 @@ import com.ivione93.hojames.model.Gym;
 
 public class AdapterGym extends FirestoreRecyclerAdapter<Gym, AdapterGym.GymViewHolder> {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public AdapterGym(@NonNull FirestoreRecyclerOptions<Gym> options) {
         super(options);
@@ -53,10 +53,10 @@ public class AdapterGym extends FirestoreRecyclerAdapter<Gym, AdapterGym.GymView
     @Override
     public GymViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gym, parent, false);
-        return new AdapterGym.GymViewHolder(view);
+        return new GymViewHolder(view);
     }
 
-    class GymViewHolder extends RecyclerView.ViewHolder {
+    static class GymViewHolder extends RecyclerView.ViewHolder {
 
         TextView showExerciseGym, showTimesGym, showKilosGym;
         ImageButton ibDeleteGym;

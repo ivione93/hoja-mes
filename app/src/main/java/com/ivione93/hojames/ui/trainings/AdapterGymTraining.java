@@ -1,10 +1,8 @@
 package com.ivione93.hojames.ui.trainings;
 
-import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,13 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.ivione93.hojames.R;
 import com.ivione93.hojames.model.Gym;
 
 public class AdapterGymTraining extends FirestoreRecyclerAdapter<Gym, AdapterGymTraining.GymViewHolder> {
-
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public AdapterGymTraining(@NonNull FirestoreRecyclerOptions<Gym> options) {
         super(options);
@@ -39,10 +34,10 @@ public class AdapterGymTraining extends FirestoreRecyclerAdapter<Gym, AdapterGym
     @Override
     public GymViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_gym_training, parent, false);
-        return new AdapterGymTraining.GymViewHolder(view);
+        return new GymViewHolder(view);
     }
 
-    class GymViewHolder extends RecyclerView.ViewHolder {
+    static class GymViewHolder extends RecyclerView.ViewHolder {
 
         TextView showExerciseGym, showTimesGym, showKilosGym;
 

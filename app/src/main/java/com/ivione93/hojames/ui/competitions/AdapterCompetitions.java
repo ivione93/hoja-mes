@@ -1,8 +1,8 @@
 package com.ivione93.hojames.ui.competitions;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,8 +25,9 @@ import com.ivione93.hojames.model.Competition;
 
 public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, AdapterCompetitions.CompetitionViewHolder> {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public AdapterCompetitions(@NonNull FirestoreRecyclerOptions<Competition> options) {
         super(options);
     }
@@ -95,6 +97,11 @@ public class AdapterCompetitions extends FirestoreRecyclerAdapter<Competition, A
     public CompetitionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_competition, parent, false);
         return new CompetitionViewHolder(view);
+    }
+
+    @Override
+    public void updateOptions(@NonNull FirestoreRecyclerOptions<Competition> options) {
+        super.updateOptions(options);
     }
 
     class CompetitionViewHolder extends RecyclerView.ViewHolder {

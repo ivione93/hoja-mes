@@ -49,7 +49,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditProfileActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     CircleImageView photoEditProfile;
     Chip emailEditProfile;
@@ -90,12 +90,8 @@ public class EditProfileActivity extends AppCompatActivity {
         android.app.AlertDialog.Builder cancelEditProfile = new android.app.AlertDialog.Builder(this);
         cancelEditProfile.setTitle(R.string.exit_title);
         cancelEditProfile.setMessage(R.string.exit_message);
-        cancelEditProfile.setPositiveButton(R.string.exit, (dialog, which) -> {
-            super.onBackPressed();
-        });
-        cancelEditProfile.setNegativeButton(R.string.cancel, (dialog, which) -> {
-            dialog.dismiss();
-        });
+        cancelEditProfile.setPositiveButton(R.string.exit, (dialog, which) -> super.onBackPressed());
+        cancelEditProfile.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss());
         cancelEditProfile.show();
     }
 
@@ -137,10 +133,7 @@ public class EditProfileActivity extends AppCompatActivity {
         datePicker.addOnPositiveButtonClickListener(selection -> birthEditProfile.setText(datePicker.getHeaderText()));
 
         btnOptions = findViewById(R.id.btnOptions);
-
-        btnOptions.setOnClickListener(v -> {
-            showBottomSheetDialog();
-        });
+        btnOptions.setOnClickListener(v -> showBottomSheetDialog());
     }
 
     private void showBottomSheetDialog() {
@@ -153,40 +146,44 @@ public class EditProfileActivity extends AppCompatActivity {
 
         bottomSheetDialog.show();
 
-        delete.setOnClickListener(v -> {
-            AlertDialog.Builder deleteDataUser = new AlertDialog.Builder(this);
-            deleteDataUser.setTitle(R.string.delete_user_data);
-            deleteDataUser.setMessage(R.string.delete_user_data_confirm);
-            deleteDataUser.setCancelable(false);
-            deleteDataUser.setPositiveButton(R.string.accept, (dialog, which) -> {
-                deleteProfileInformation(email);
-                AlertDialog.Builder deleteUser = new AlertDialog.Builder(this);
-                deleteUser.setTitle(R.string.delete_user);
-                deleteUser.setMessage(R.string.delete_user_confirm);
-                deleteUser.setCancelable(false);
-                deleteUser.setPositiveButton(R.string.delete, (dialog1, which1) -> {
-                    try {
-                        Thread.sleep(15000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    deleteUser();
-                    //Evento eliminacion usuario Analytics
-                    Bundle bundle = new Bundle();
-                    bundle.putString("message", "Eliminación cuenta de usuario");
-                    bundle.putString("user", email);
-                    mFirebaseAnalytics.logEvent("delete_user", bundle);
-                    Intent auth = new Intent(this, AuthActivity.class);
-                    startActivity(auth);
+        if (delete != null) {
+            delete.setOnClickListener(v -> {
+                AlertDialog.Builder deleteDataUser = new AlertDialog.Builder(this);
+                deleteDataUser.setTitle(R.string.delete_user_data);
+                deleteDataUser.setMessage(R.string.delete_user_data_confirm);
+                deleteDataUser.setCancelable(false);
+                deleteDataUser.setPositiveButton(R.string.accept, (dialog, which) -> {
+                    deleteProfileInformation(email);
+                    AlertDialog.Builder deleteUser = new AlertDialog.Builder(this);
+                    deleteUser.setTitle(R.string.delete_user);
+                    deleteUser.setMessage(R.string.delete_user_confirm);
+                    deleteUser.setCancelable(false);
+                    deleteUser.setPositiveButton(R.string.delete, (dialog1, which1) -> {
+                        try {
+                            Thread.sleep(15000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        deleteUser();
+                        //Evento eliminacion usuario Analytics
+                        Bundle bundle = new Bundle();
+                        bundle.putString("message", "Eliminación cuenta de usuario");
+                        bundle.putString("user", email);
+                        mFirebaseAnalytics.logEvent("delete_user", bundle);
+                        Intent auth = new Intent(this, AuthActivity.class);
+                        startActivity(auth);
+                    });
+                    deleteUser.show();
                 });
-                deleteUser.show();
+                deleteDataUser.setNegativeButton(R.string.cancel, (dialog, which) -> bottomSheetDialog.dismiss());
+                deleteDataUser.show();
+
             });
-            deleteDataUser.setNegativeButton(R.string.cancel, (dialog, which) -> bottomSheetDialog.dismiss());
-            deleteDataUser.show();
+        }
 
-        });
-
-        cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        if (cancel != null) {
+            cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        }
     }
 
     private void deleteUser() {
@@ -310,12 +307,14 @@ public class EditProfileActivity extends AppCompatActivity {
     private void deleteProfileAuthentication() {
         // Eliminar cuenta autenticada
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        user.delete().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Log.d("DEL", "Cuenta de usuario eliminada");
-                Toast.makeText(EditProfileActivity.this, "Usuario eliminado", Toast.LENGTH_LONG).show();
-            }
-        });
+        if (user != null) {
+            user.delete().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Log.d("DEL", "Cuenta de usuario eliminada");
+                    Toast.makeText(EditProfileActivity.this, "Usuario eliminado", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
         FirebaseAuth.getInstance().signOut();
     }
 

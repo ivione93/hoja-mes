@@ -1,11 +1,5 @@
 package com.ivione93.hojames.ui.trainings;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -16,6 +10,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -34,21 +34,19 @@ import com.ivione93.hojames.model.Cuestas;
 import com.ivione93.hojames.model.Fartlek;
 import com.ivione93.hojames.model.Gym;
 import com.ivione93.hojames.model.Series;
-import com.ivione93.hojames.ui.competitions.NewCompetitionActivity;
-import com.ivione93.hojames.ui.profile.EditProfileActivity;
 
-import java.text.ParseException;
+import java.util.Objects;
 
 public class TrainingActivity extends AppCompatActivity {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference series = db.collection("series");
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final CollectionReference series = db.collection("series");
     private AdapterSeriesTraining adapterSeries;
-    private CollectionReference cuestas = db.collection("cuestas");
+    private final CollectionReference cuestas = db.collection("cuestas");
     private AdapterCuestasTraining adapterCuestas;
-    private CollectionReference fartlek = db.collection("fartlek");
+    private final CollectionReference fartlek = db.collection("fartlek");
     private AdapterFartlekTraining adapterFartlek;
-    private CollectionReference gym = db.collection("gym");
+    private final CollectionReference gym = db.collection("gym");
     private AdapterGymTraining adapterGym;
 
     TextView tDate, tType, tTime, tDistance, tPartial, tObserves;
@@ -66,7 +64,7 @@ public class TrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         email = getIntent().getStringExtra("email");
         dateSelected = getIntent().getStringExtra("dateSelected");
@@ -143,17 +141,23 @@ public class TrainingActivity extends AppCompatActivity {
 
         bottomSheetDialog.show();
 
-        editTrainingL.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            editTraining();
-        });
+        if (editTrainingL != null) {
+            editTrainingL.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                editTraining();
+            });
+        }
 
-        deleteTrainingL.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            deleteTraining();
-        });
+        if (deleteTrainingL != null) {
+            deleteTrainingL.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                deleteTraining();
+            });
+        }
 
-        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        if (cancelL != null) {
+            cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        }
     }
 
     @Override
@@ -238,7 +242,7 @@ public class TrainingActivity extends AppCompatActivity {
         });
 
         if (!isNew) {
-            getSupportActionBar().setTitle(getString(R.string.title_training));
+            Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.title_training));
             id = getIntent().getStringExtra("idTraining");
             loadTraining(id);
         }
@@ -251,7 +255,11 @@ public class TrainingActivity extends AppCompatActivity {
                 QuerySnapshot document = task.getResult();
                 if (!document.isEmpty()) {
                     tDate.setText(Utils.toString((Timestamp) task.getResult().getDocuments().get(0).get("date"), getString(R.string.format_date)));
-                    tType.setText(task.getResult().getDocuments().get(0).get("type").toString());
+                    if (task.getResult().getDocuments().get(0).get("type") != null) {
+                        tType.setText(task.getResult().getDocuments().get(0).get("type").toString());
+                    } else {
+                        tType.setText(getString(R.string.type_run));
+                    }
                     tTime.setText(Utils.getFormattedTime(task.getResult().getDocuments().get(0).get("time").toString()).concat(" min"));
                     tDistance.setText(task.getResult().getDocuments().get(0).get("distance").toString().concat(" kms"));
                     String partialFormat = " /km";

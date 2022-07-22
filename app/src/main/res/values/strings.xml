@@ -48,6 +48,7 @@
     <string name="date">Date *</string>
     <string name="track">Track *</string>
     <string name="result">Result *</string>
+    <string name="ab">AB</string>
     <string name="tv_type_competition">Type of competition:</string>
     <string name="type_pc">Indoor</string>
     <string name="type_al">Outdoor</string>
@@ -66,13 +67,7 @@
     <string name="observes">Observes</string>
     <string name="show_extras">Show extras</string>
     <string name="type_training">Activity *</string>
-    <string-array name="trainning_types">
-        <item>Run</item>
-        <item>Indoor run</item>
-        <item>Elliptical</item>
-        <item>Cycling</item>
-        <item>Indoor cycling</item>
-    </string-array>
+    <string name="select_training">Select type activity</string>
     <string name="type_run">Run</string>
     <string name="type_indoor_run">Indoor run</string>
     <string name="type_elliptical">Elliptical</string>

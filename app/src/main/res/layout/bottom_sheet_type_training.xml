@@ -17,7 +17,7 @@
             android:id="@+id/saveCuestaTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/type_training"
+            android:text="@string/select_training"
             android:fontFamily="@font/kdam_font"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -45,12 +45,6 @@
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
     <LinearLayout
         android:id="@+id/typeIndoorRunSheet"
         android:layout_width="match_parent"
@@ -69,12 +63,6 @@
             android:textSize="16sp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
 
     <LinearLayout
         android:id="@+id/typeCyclingSheet"
@@ -95,12 +83,6 @@
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
     <LinearLayout
         android:id="@+id/typeIndoorCyclingSheet"
         android:layout_width="match_parent"
@@ -119,12 +101,6 @@
             android:textSize="16sp"
             android:layout_gravity="center_vertical"/>
     </LinearLayout>
-
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="?android:attr/listDivider" />
 
     <LinearLayout
         android:id="@+id/typeEllipticalSheet"

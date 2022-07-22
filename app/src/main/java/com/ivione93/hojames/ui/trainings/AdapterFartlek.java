@@ -18,7 +18,7 @@ import com.ivione93.hojames.model.Fartlek;
 
 public class AdapterFartlek extends FirestoreRecyclerAdapter<Fartlek, AdapterFartlek.FartlekViewHolder> {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public AdapterFartlek(@NonNull FirestoreRecyclerOptions<Fartlek> options) {
         super(options);
@@ -47,10 +47,10 @@ public class AdapterFartlek extends FirestoreRecyclerAdapter<Fartlek, AdapterFar
     @Override
     public FartlekViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fartlek, parent, false);
-        return new AdapterFartlek.FartlekViewHolder(view);
+        return new FartlekViewHolder(view);
     }
 
-    class FartlekViewHolder extends RecyclerView.ViewHolder {
+    static class FartlekViewHolder extends RecyclerView.ViewHolder {
 
         TextView showFartlek;
         ImageButton ibDeleteFartlek;

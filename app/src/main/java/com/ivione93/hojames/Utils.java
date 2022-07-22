@@ -19,14 +19,12 @@ public class Utils {
 
     public static String toString(Timestamp timestamp, String format) {
         Date date = timestamp.toDate();
-        String formatted = new SimpleDateFormat(format).format(date);
-        return formatted;
+        return new SimpleDateFormat(format).format(date);
     }
 
     public static String toStringCalendar(Timestamp timestamp) {
         Date date = timestamp.toDate();
-        String formatted = new SimpleDateFormat("yyyy-MM-dd").format(date);
-        return formatted;
+        return new SimpleDateFormat("yyyy-MM-dd").format(date);
     }
 
     public static String toString(Date date, String format) {

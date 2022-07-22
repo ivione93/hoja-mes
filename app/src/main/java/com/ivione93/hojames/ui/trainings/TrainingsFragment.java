@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -39,10 +38,10 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class TrainingsFragment extends Fragment {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private AdapterTrainings adapterTrainings;
 
-    private List<Training> listTrainings = new ArrayList<>();
+    private final List<Training> listTrainings = new ArrayList<>();
 
     MaterialCalendarView calendarTrainings;
     RecyclerView rvTrainings;

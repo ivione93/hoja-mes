@@ -58,8 +58,8 @@ public class ProfileFragment extends Fragment {
     SharedPreferences.Editor prefs;
 
     private FirebaseAnalytics mFirebaseAnalytics;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference competitions = db.collection("competitions");
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final CollectionReference competitions = db.collection("competitions");
 
     GoogleSignInClient mGoogleSignInClient;
 
@@ -195,33 +195,41 @@ public class ProfileFragment extends Fragment {
 
         bottomSheetDialog.show();
 
-        editProfileL.setOnClickListener(v -> {
-            Intent editProfile = new Intent(getActivity(), EditProfileActivity.class);
-            editProfile.putExtra("email", email);
-            if (photoUrl != null) {
-                editProfile.putExtra("photoUrl", photoUrl.toString());
-            }
-            bottomSheetDialog.dismiss();
-            getContext().startActivity(editProfile);
-        });
+        if (editProfileL != null) {
+            editProfileL.setOnClickListener(v -> {
+                Intent editProfile = new Intent(getActivity(), EditProfileActivity.class);
+                editProfile.putExtra("email", email);
+                if (photoUrl != null) {
+                    editProfile.putExtra("photoUrl", photoUrl.toString());
+                }
+                bottomSheetDialog.dismiss();
+                getContext().startActivity(editProfile);
+            });
+        }
 
-        addTrainingL.setOnClickListener(v -> {
-            Intent viewTraining = new Intent(getActivity(), ViewTrainingActivity.class);
-            viewTraining.putExtra("email", email);
-            viewTraining.putExtra("dateSelected", dateSelected);
-            bottomSheetDialog.dismiss();
-            getContext().startActivity(viewTraining);
-        });
+        if (addTrainingL != null) {
+            addTrainingL.setOnClickListener(v -> {
+                Intent viewTraining = new Intent(getActivity(), ViewTrainingActivity.class);
+                viewTraining.putExtra("email", email);
+                viewTraining.putExtra("dateSelected", dateSelected);
+                bottomSheetDialog.dismiss();
+                getContext().startActivity(viewTraining);
+            });
+        }
 
-        addCompetitionL.setOnClickListener(v -> {
-            Intent newCompetition = new Intent(getActivity(), NewCompetitionActivity.class);
-            newCompetition.putExtra("isNew", true);
-            newCompetition.putExtra("email", email);
-            bottomSheetDialog.dismiss();
-            getContext().startActivity(newCompetition);
-        });
+        if (addCompetitionL != null) {
+            addCompetitionL.setOnClickListener(v -> {
+                Intent newCompetition = new Intent(getActivity(), NewCompetitionActivity.class);
+                newCompetition.putExtra("isNew", true);
+                newCompetition.putExtra("email", email);
+                bottomSheetDialog.dismiss();
+                getContext().startActivity(newCompetition);
+            });
+        }
 
-        cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        if (cancelL != null) {
+            cancelL.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        }
     }
 
     private void setup(View root, String email) {
@@ -384,9 +392,9 @@ public class ProfileFragment extends Fragment {
                         for (DocumentSnapshot snap : task.getResult()) {
                             Training training = snap.toObject(Training.class);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                if (training.email.equals(email)) {
+                                if (training != null && training.email.equals(email)) {
                                     count.updateAndGet(v -> v + 1);
-                                    countKm.updateAndGet(v -> v + Float.valueOf(training.distance));
+                                    countKm.updateAndGet(v -> v + Float.parseFloat(training.distance));
                                 }
                             }
                         }
@@ -407,7 +415,7 @@ public class ProfileFragment extends Fragment {
                         for (DocumentSnapshot snap : task.getResult()) {
                             Competition competition = snap.toObject(Competition.class);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                if (competition.email.equals(email)) {
+                                if (competition != null && competition.email.equals(email)) {
                                     count.updateAndGet(v -> v + 1);
                                 }
                             }

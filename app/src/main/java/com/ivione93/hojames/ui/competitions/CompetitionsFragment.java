@@ -29,8 +29,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class CompetitionsFragment extends Fragment {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference competitions = db.collection("competitions");
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final CollectionReference competitions = db.collection("competitions");
     private AdapterCompetitions adapterCompetitions;
 
     String email;
@@ -58,6 +58,7 @@ public class CompetitionsFragment extends Fragment {
         return root;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void setupRecyclerView(View root) {
         // Query
         Query query = competitions.whereEqualTo("email", email)
@@ -74,6 +75,26 @@ public class CompetitionsFragment extends Fragment {
         rvCompetitions.setHasFixedSize(true);
         rvCompetitions.setLayoutManager(new LinearLayoutManager(root.getContext()));
         rvCompetitions.setAdapter(adapterCompetitions);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void updateRecyclerView(String type) {
+        Query query;
+        if (type.equals("All")) {
+            query = competitions.whereEqualTo("email", email)
+                    .orderBy("date", Query.Direction.DESCENDING);
+        } else {
+            query = competitions.whereEqualTo("email", email).whereEqualTo("type", type)
+                    .orderBy("date", Query.Direction.DESCENDING);
+        }
+
+        // Recycler options
+        FirestoreRecyclerOptions<Competition> options = new FirestoreRecyclerOptions.Builder<Competition>()
+                .setQuery(query, Competition.class)
+                .build();
+
+        adapterCompetitions.updateOptions(options);
+        adapterCompetitions.onDataChanged();
     }
 
     @Override
@@ -115,6 +136,11 @@ public class CompetitionsFragment extends Fragment {
 
         // Actualiza todos los totales
         chipTotals.setText(String.valueOf(getTotalCompetitions()));
+        chipTotals.setOnClickListener(v -> updateRecyclerView("All"));
+        chipPC.setOnClickListener(v -> updateRecyclerView(getString(R.string.bd_pc)));
+        chipAL.setOnClickListener(v -> updateRecyclerView(getString(R.string.bd_al)));
+        chipCross.setOnClickListener(v -> updateRecyclerView(getString(R.string.bd_cross)));
+        chipRuta.setOnClickListener(v -> updateRecyclerView(getString(R.string.bd_road)));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -145,11 +171,11 @@ public class CompetitionsFragment extends Fragment {
                                 }
                             }
                         }
-                        chipTotals.setText("Totales " +  String.valueOf(count.get()));
-                        chipPC.setText("Pista cubierta " + String.valueOf(countPC.get()));
-                        chipAL.setText("Aire libre " + String.valueOf(countAL.get()));
-                        chipCross.setText("Cross " + String.valueOf(countCross.get()));
-                        chipRuta.setText("Ruta " + String.valueOf(countRuta.get()));
+                        chipTotals.setText("Totales " + count.get());
+                        chipPC.setText(getString(R.string.type_pc) + " " + countPC.get());
+                        chipAL.setText(getString(R.string.type_al) + " " + countAL.get());
+                        chipCross.setText(getString(R.string.type_cross) + " " + countCross.get());
+                        chipRuta.setText(getString(R.string.type_road) + " " + countRuta.get());
                     }
                 });
         return count.get();

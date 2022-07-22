@@ -8,9 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -19,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -64,20 +60,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class ViewTrainingActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference series = db.collection("series");
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final CollectionReference series = db.collection("series");
     private AdapterSeries adapterSeries;
-    private CollectionReference cuestas = db.collection("cuestas");
+    private final CollectionReference cuestas = db.collection("cuestas");
     private AdapterCuestas adapterCuestas;
-    private CollectionReference fartlek = db.collection("fartlek");
+    private final CollectionReference fartlek = db.collection("fartlek");
     private AdapterFartlek adapterFartlek;
-    private CollectionReference gym = db.collection("gym");
+    private final CollectionReference gym = db.collection("gym");
     private AdapterGym adapterGym;
 
     TextInputLayout trainingTimeText, trainingTypeText, trainingDistanceText, trainingObservesText, trainingPartialText;
@@ -100,7 +97,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_training);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         email = getIntent().getStringExtra("email");
         dateSelected = getIntent().getStringExtra("dateSelected");
@@ -127,12 +124,8 @@ public class ViewTrainingActivity extends AppCompatActivity {
         android.app.AlertDialog.Builder cancelTraining = new android.app.AlertDialog.Builder(this);
         cancelTraining.setTitle(R.string.exit_title);
         cancelTraining.setMessage(R.string.exit_message);
-        cancelTraining.setPositiveButton(R.string.exit, (dialog, which) -> {
-            super.onBackPressed();
-        });
-        cancelTraining.setNegativeButton(R.string.cancel, (dialog, which) -> {
-            dialog.dismiss();
-        });
+        cancelTraining.setPositiveButton(R.string.exit, (dialog, which) -> super.onBackPressed());
+        cancelTraining.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss());
         cancelTraining.show();
     }
 
@@ -274,11 +267,11 @@ public class ViewTrainingActivity extends AppCompatActivity {
         });
 
         if (!isNew) {
-            getSupportActionBar().setTitle(getString(R.string.title_training));
+            Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.title_training));
             id = getIntent().getStringExtra("idTraining");
             loadTraining(id);
         } else {
-            getSupportActionBar().setTitle(getString(R.string.title_activity_new_training));
+            Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.title_activity_new_training));
             trainingDateText.setText(dateSelected);
         }
 
@@ -365,7 +358,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
         String date = trainingDateText.getText().toString();
         String time = trainingTimeText.getEditText().getText().toString();
         String distance = trainingDistanceText.getEditText().getText().toString();
-        String typeTrainingSelected = trainingTypeText.getEditText().getText().toString();
+        String typeTraining = trainingTypeText.getEditText().getText().toString();
 
         String observes = "";
         if (trainingObservesText.getEditText().getText() != null) {
@@ -374,7 +367,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         if (validateNewTraining(date, time, distance)) {
             String partial;
-            if (typeTrainingSelected.equals("Carrera") || typeTrainingSelected.equals("Carrera en cinta") || typeTrainingSelected.equals("Elíptica")) {
+            if (typeTraining.equals("Carrera") || typeTraining.equals("Carrera en cinta") || typeTraining.equals("Elíptica")) {
                 partial = Utils.calculatePartial(time, distance);
             } else {
                 partial = Utils.calculatePartialCycling(time, distance);
@@ -393,7 +386,7 @@ public class ViewTrainingActivity extends AppCompatActivity {
             training.put("id", id);
             training.put("email", email);
             training.put("date", Utils.toTimestamp(date, getString(R.string.format_date)));
-            training.put("type", typeTrainingSelected);
+            training.put("type", typeTraining);
             training.put("time", time);
             training.put("distance", distance);
             training.put("partial", partial);
@@ -531,30 +524,40 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         bottomSheetDialog.show();
 
-        typeRunSheet.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            trainingTypeText.getEditText().setText(getString(R.string.type_run));
-        });
+        if (typeRunSheet != null) {
+            typeRunSheet.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                trainingTypeText.getEditText().setText(getString(R.string.type_run));
+            });
+        }
 
-        typeIndoorRunSheet.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            trainingTypeText.getEditText().setText(getString(R.string.type_indoor_run));
-        });
+        if (typeIndoorRunSheet != null) {
+            typeIndoorRunSheet.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                trainingTypeText.getEditText().setText(getString(R.string.type_indoor_run));
+            });
+        }
 
-        typeCyclingSheet.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            trainingTypeText.getEditText().setText(getString(R.string.type_cycling));
-        });
+        if (typeCyclingSheet != null) {
+            typeCyclingSheet.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                trainingTypeText.getEditText().setText(getString(R.string.type_cycling));
+            });
+        }
 
-        typeIndoorCyclingSheet.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            trainingTypeText.getEditText().setText(getString(R.string.type_indoor_cycling));
-        });
+        if (typeIndoorCyclingSheet != null) {
+            typeIndoorCyclingSheet.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                trainingTypeText.getEditText().setText(getString(R.string.type_indoor_cycling));
+            });
+        }
 
-        typeEllipticalSheet.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            trainingTypeText.getEditText().setText(getString(R.string.type_elliptical));
-        });
+        if (typeEllipticalSheet != null) {
+            typeEllipticalSheet.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                trainingTypeText.getEditText().setText(getString(R.string.type_elliptical));
+            });
+        }
     }
 
 
@@ -567,24 +570,28 @@ public class ViewTrainingActivity extends AppCompatActivity {
         ImageView saveSerieIV = bottomSheetDialog.findViewById(R.id.saveSerieIV);
         MaterialTextView saveSerieTV = bottomSheetDialog.findViewById(R.id.saveSerieTV);
         EditText timeSeries = bottomSheetDialog.findViewById(R.id.time_series);
-        timeSeries.setOnClickListener((View.OnClickListener) v1 -> {
-            selectSerieTimePicker(v1).show();
-        });
+        timeSeries.setOnClickListener((View.OnClickListener) v1 -> selectSerieTimePicker(v1).show());
         ImageView cancel = bottomSheetDialog.findViewById(R.id.cancel);
 
         bottomSheetDialog.show();
 
-        saveSerieIV.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            addSeries(bottomSheetDialog);
-        });
+        if (saveSerieIV != null) {
+            saveSerieIV.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                addSeries(bottomSheetDialog);
+            });
+        }
 
-        saveSerieTV.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            addSeries(bottomSheetDialog);
-        });
+        if (saveSerieTV != null) {
+            saveSerieTV.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                addSeries(bottomSheetDialog);
+            });
+        }
 
-        cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        if (cancel != null) {
+            cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        }
     }
 
     private void showBottomSheetCuestasDialog() {
@@ -599,16 +606,22 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         bottomSheetDialog.show();
 
-        saveCuestaIV.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            addCuestas(bottomSheetDialog);
-        });
-        saveCuestaTV.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            addCuestas(bottomSheetDialog);
-        });
+        if (saveCuestaIV != null) {
+            saveCuestaIV.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                addCuestas(bottomSheetDialog);
+            });
+        }
+        if (saveCuestaTV != null) {
+            saveCuestaTV.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                addCuestas(bottomSheetDialog);
+            });
+        }
 
-        cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        if (cancel != null) {
+            cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        }
     }
 
     private void showBottomSheetFartlekDialog() {
@@ -623,16 +636,22 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         bottomSheetDialog.show();
 
-        saveFartlekIV.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            addFartlek(bottomSheetDialog);
-        });
-        saveFartlekTV.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            addFartlek(bottomSheetDialog);
-        });
+        if (saveFartlekIV != null) {
+            saveFartlekIV.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                addFartlek(bottomSheetDialog);
+            });
+        }
+        if (saveFartlekTV != null) {
+            saveFartlekTV.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                addFartlek(bottomSheetDialog);
+            });
+        }
 
-        cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        if (cancel != null) {
+            cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        }
     }
 
     private void showBottomSheetGymDialog() {
@@ -647,16 +666,22 @@ public class ViewTrainingActivity extends AppCompatActivity {
 
         bottomSheetDialog.show();
 
-        saveGymIV.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            addGym(bottomSheetDialog);
-        });
-        saveGymTV.setOnClickListener(v -> {
-            bottomSheetDialog.dismiss();
-            addGym(bottomSheetDialog);
-        });
+        if (saveGymIV != null) {
+            saveGymIV.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                addGym(bottomSheetDialog);
+            });
+        }
+        if (saveGymTV != null) {
+            saveGymTV.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                addGym(bottomSheetDialog);
+            });
+        }
 
-        cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        if (cancel != null) {
+            cancel.setOnClickListener(v -> bottomSheetDialog.dismiss());
+        }
     }
 
     private void addSeries(BottomSheetDialog v) {
@@ -946,6 +971,12 @@ public class ViewTrainingActivity extends AppCompatActivity {
         NumberPicker segundos = v.findViewById(R.id.segundos);
         segundos.setMinValue(00);
         segundos.setMaxValue(59);
+
+        if (!trainingTimeText.getEditText().getText().toString().equals("")) {
+            horas.setValue(Integer.valueOf(trainingTimeText.getEditText().getText().toString().substring(0,2)));
+            minutos.setValue(Integer.valueOf(trainingTimeText.getEditText().getText().toString().substring(4,6)));
+            segundos.setValue(Integer.valueOf(trainingTimeText.getEditText().getText().toString().substring(7,9)));
+        }
 
         builder.setTitle(R.string.insert_time);
         builder.setView(v)

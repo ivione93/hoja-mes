@@ -8,8 +8,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp">
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,7 +25,6 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/kdam_font"
             android:textSize="16sp"
-            android:textStyle="bold"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
